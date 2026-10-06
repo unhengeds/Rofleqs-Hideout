@@ -1,470 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GameHub</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --bg: #090b10;
-    --sidebar: #0d1017;
-    --panel: #11151e;
-    --panel2: #171c27;
-    --text: #f3f5f8;
-    --muted: #8d96a8;
-    --accent: #6c5ce7;
-    --accent2: #8b7cff;
-    --border: rgba(255,255,255,.07);
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.app {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar {
-    width: 235px;
-    min-height: 100vh;
-    background: var(--sidebar);
-    border-right: 1px solid var(--border);
-    padding: 24px 15px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 10;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 0 10px 30px;
-    font-size: 21px;
-    font-weight: 800;
-    letter-spacing: -.5px;
-}
-
-.logo-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent), #a18aff);
-    display: grid;
-    place-items: center;
-    font-size: 18px;
-    box-shadow: 0 8px 25px rgba(108,92,231,.3);
-}
-
-.nav-title {
-    color: #596274;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 0 12px 9px;
-}
-
-.nav {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.nav button {
-    width: 100%;
-    border: 0;
-    background: transparent;
-    color: var(--muted);
-    padding: 12px;
-    border-radius: 9px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    cursor: pointer;
-    text-align: left;
-    transition: .2s;
-}
-
-.nav button:hover {
-    background: rgba(255,255,255,.05);
-    color: white;
-    transform: translateX(2px);
-}
-
-.nav button.active {
-    background: rgba(108,92,231,.15);
-    color: #fff;
-}
-
-.nav-icon {
-    width: 20px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.sidebar-bottom {
-    position: absolute;
-    left: 15px;
-    right: 15px;
-    bottom: 20px;
-}
-
-.version {
-    color: #4d5564;
-    font-size: 11px;
-    text-align: center;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-    margin-left: 235px;
-    width: calc(100% - 235px);
-    min-height: 100vh;
-}
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar {
-    height: 72px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 35px;
-    border-bottom: 1px solid var(--border);
-    background: rgba(9,11,16,.85);
-    backdrop-filter: blur(14px);
-    position: sticky;
-    top: 0;
-    z-index: 8;
-}
-
-.top-title {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.top-actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.top-button {
-    width: 40px;
-    height: 40px;
-    border-radius: 9px;
-    border: 1px solid var(--border);
-    background: #121620;
-    color: #aab2c0;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.top-button:hover {
-    color: white;
-    background: #1a1f2b;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 8px;
-}
-
-.avatar {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #7060e9, #3c8df5);
-    display: grid;
-    place-items: center;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content {
-    padding: 30px 35px 60px;
-}
-
-/* =========================
-   WELCOME
-========================= */
-
-.welcome {
-    margin-bottom: 28px;
-}
-
-.welcome h1 {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-.welcome p {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-/* =========================
-   GAME GRID
-========================= */
-
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0,1fr));
-    gap: 18px;
-}
-
-/* =========================
-   GAME CARD
-========================= */
-
-.game-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        background .25s ease;
-}
-
-.game-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(139,124,255,.4);
-    background: #151a24;
-}
-
-.game-image {
-    height: 190px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 18px;
-}
-
-.game-image::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at 70% 20%,
-            rgba(255,255,255,.22),
-            transparent 25%
-        ),
-        linear-gradient(
-            135deg,
-            #5b8c3a,
-            #273c1c 50%,
-            #10160d
-        );
-
-    transition: transform .4s;
-}
-
-.game-card:hover .game-image::before {
-    transform: scale(1.08);
-}
-
-.game-image::after {
-    content: "⛏";
-    position: absolute;
-    right: 25px;
-    bottom: 18px;
-    font-size: 70px;
-    opacity: .8;
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,.5));
-}
-
-.game-number {
-    position: relative;
-    z-index: 1;
-    font-size: 42px;
-    font-weight: 900;
-    opacity: .8;
-    text-shadow: 0 4px 15px rgba(0,0,0,.5);
-}
-
-.game-info {
-    padding: 16px;
-}
-
-.game-title {
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-.game-meta {
-    color: var(--muted);
-    font-size: 13px;
-}
-
-.play-small {
-    margin-top: 14px;
-    width: 100%;
-    border: 0;
-    border-radius: 7px;
-    background: #202635;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: .2s;
-}
-
-.play-small:hover {
-    background: var(--accent);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1050px) {
-    .games-grid {
-        grid-template-columns: repeat(3, minmax(0,1fr));
-    }
-}
-
-@media (max-width: 800px) {
-
-    .sidebar {
-        width: 70px;
-        padding: 18px 10px;
-    }
-
-    .logo {
-        justify-content: center;
-        padding: 0 0 25px;
-    }
-
-    .logo-text,
-    .nav-title,
-    .nav button span,
-    .version {
-        display: none;
-    }
-
-    .nav button {
-        justify-content: center;
-        padding: 13px 5px;
-    }
-
-    .sidebar-bottom {
-        display: none;
-    }
-
-    .main {
-        margin-left: 70px;
-        width: calc(100% - 70px);
-    }
-
-    .topbar {
-        padding: 0 20px;
-    }
-
-    .content {
-        padding: 25px 20px 50px;
-    }
-
-    .games-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-    }
-}
-
-@media (max-width: 560px) {
-
-    .profile {
-        display: none;
-    }
-
-    .top-button {
-        display: none;
-    }
-
-    .welcome h1 {
-        font-size: 27px;
-    }
-
-    .games-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .game-image {
-        height: 210px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rofleq's Hideout</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #050806;
+            --sidebar: #080d09;
+            --panel: #0b120d;
+            --panel2: #101a12;
+
+            --text: #f1fff3;
+            --muted: #849889;
+
+            --green: #21c45b;
+            --green2: #39ff78;
+
+            --red: #e3262e;
+            --red2: #ff4048;
+
+            --border: rgba(42, 255, 102, 0.12);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            padding: 28px 18px;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 10px;
+            margin-bottom: 45px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                var(--green),
+                var(--red)
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(33, 196, 91, 0.25);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logo-text span {
+            color: var(--green2);
+        }
+
+        .nav-title {
+            color: #536257;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0 12px;
+            margin-bottom: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 9px;
+            color: var(--muted);
+            text-decoration: none;
+            margin-bottom: 5px;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+
+        .nav-item:hover {
+            color: white;
+            background: rgba(33, 196, 91, 0.08);
+        }
+
+        .nav-item.active {
+            color: white;
+            background: rgba(33, 196, 91, 0.13);
+            border-left: 3px solid var(--green);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px 10px 5px;
+            color: #48564b;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 240px;
+            min-height: 100vh;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(5, 8, 6, 0.92);
+        }
+
+        .topbar-title {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .topbar-title strong {
+            color: var(--green2);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7d8e81;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 45px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .welcome {
+            margin-bottom: 35px;
+        }
+
+        .welcome h1 {
+            font-size: 38px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .welcome h1 span {
+            color: var(--green2);
+        }
+
+        .welcome p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* SECTION */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .section-line {
+            height: 1px;
+            flex: 1;
+            background: var(--border);
+            margin-left: 20px;
+        }
+
+        /* GAME GRID */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        /* GAME CARD */
+        .game-card {
+            position: relative;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            overflow: hidden;
+            cursor: pointer;
+            transition:
+                transform 0.2s,
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(57, 255, 120, 0.45);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        /* GAME IMAGE */
+        .game-image {
+            height: 145px;
+            background:
+                radial-gradient(
+                    circle at 30% 30%,
+                    rgba(57, 255, 120, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 70% 70%,
+                    rgba(227, 38, 46, 0.16),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #07140b,
+                    #111111
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .game-image::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent 49%,
+                    rgba(255,255,255,0.025) 50%,
+                    transparent 51%
+                ),
+                linear-gradient(
+                    0deg,
+                    transparent 49%,
+                    rgba(255,255,255,0.025) 50%,
+                    transparent 51%
+                );
+            background-size: 32px 32px;
+        }
+
+        .minecraft-logo {
+            position: relative;
+            z-index: 1;
+            font-size: 30px;
+            font-weight: 900;
+            color: white;
+            text-shadow:
+                3px 3px 0 #111,
+                0 0 18px rgba(57, 255, 120, 0.25);
+            letter-spacing: -1px;
+        }
+
+        .minecraft-logo span {
+            color: var(--green2);
+        }
+
+        /* CARD INFO */
+        .game-info {
+            padding: 17px;
+        }
+
+        .game-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .game-meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .play-small {
+            width: 100%;
+            border: none;
+            border-radius: 7px;
+            padding: 10px;
+            background: var(--green);
+            color: #031007;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .play-small:hover {
+            background: var(--green2);
+            box-shadow: 0 0 18px rgba(57, 255, 120, 0.25);
+        }
+
+        /* RED ACCENT */
+        .red-accent {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 7px;
+            height: 7px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--red);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 55px;
+            padding: 25px 0;
+            color: #465349;
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        footer span {
+            color: var(--red2);
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 18px;
+            }
+
+            .logo {
+                margin-bottom: 18px;
+            }
+
+            .nav-title {
+                display: none;
+            }
+
+            .nav-item {
+                display: none;
+            }
+
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .topbar {
+                padding: 0 20px;
+            }
+
+            .content {
+                padding: 28px 20px;
+            }
+
+            .welcome h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-<div class="app">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="logo">
-            <div class="logo-icon">🎮</div>
-            <div class="logo-text">GameHub</div>
+            <div class="logo-icon">R</div>
+
+            <div class="logo-text">
+                Rofleq's <span>Hideout</span>
+            </div>
         </div>
 
-        <div class="nav-title">Library</div>
+        <div class="nav-title">
+            Menu
+        </div>
 
-        <nav class="nav">
-
-            <button class="active">
-                <span class="nav-icon">⌂</span>
-                <span>Home</span>
-            </button>
-
-        </nav>
+        <a href="#" class="nav-item active">
+            <div class="nav-icon">⌂</div>
+            Home
+        </a>
 
         <div class="sidebar-bottom">
-            <div class="version">
-                GAMEHUB v1.0
-            </div>
+            Rofleq's Hideout<br>
+            <span style="color:#21c45b;">Game Hub</span>
         </div>
 
     </aside>
@@ -473,27 +451,16 @@ body {
     <!-- MAIN -->
     <main class="main">
 
-        <!-- TOP BAR -->
+        <!-- TOPBAR -->
         <header class="topbar">
 
-            <div class="top-title">
-                Game Library
+            <div class="topbar-title">
+                Welcome to <strong>Rofleq's Hideout</strong>
             </div>
 
-            <div class="top-actions">
-
-                <button class="top-button" title="Notifications">
-                    ♢
-                </button>
-
-                <button class="top-button" title="Settings">
-                    ⚙
-                </button>
-
-                <div class="profile">
-                    <div class="avatar">G</div>
-                </div>
-
+            <div class="status">
+                <div class="status-dot"></div>
+                Online
             </div>
 
         </header>
@@ -502,61 +469,91 @@ body {
         <!-- CONTENT -->
         <div class="content">
 
-            <div class="welcome">
-                <h1>Games</h1>
-                <p>Choose a game from your library.</p>
-            </div>
+            <section class="welcome">
+
+                <h1>
+                    Welcome to
+                    <span>Rofleq's Hideout</span>
+                </h1>
+
+                <p>
+                    Your collection of games, all in one place.
+                </p>
+
+            </section>
 
 
-            <!-- GAME -->
-            <div class="games-grid">
+            <!-- GAMES -->
+            <section>
 
-                <article
-                    class="game-card"
-                    onclick="launchGame('eaglercraft-1.9.4/index.html')">
+                <div class="section-header">
 
-                    <div class="game-image">
-                        <div class="game-number">01</div>
+                    <div class="section-title">
+                        Games
                     </div>
 
-                    <div class="game-info">
+                    <div class="section-line"></div>
 
-                        <div class="game-title">
-                            Minecraft
+                </div>
+
+
+                <div class="game-grid">
+
+                    <!-- MINECRAFT -->
+                    <article
+                        class="game-card"
+                        onclick="launchGame('games/eaglercraft-1.9.4/index.html')">
+
+                        <div class="game-image">
+
+                            <div class="red-accent"></div>
+
+                            <div class="minecraft-logo">
+                                MINE<span>CRAFT</span>
+                            </div>
+
                         </div>
 
-                        <div class="game-meta">
-                            1.9.4
+
+                        <div class="game-info">
+
+                            <div class="game-title">
+                                Minecraft
+                            </div>
+
+                            <div class="game-meta">
+                                1.9.4
+                            </div>
+
+                            <button
+                                class="play-small"
+                                onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')">
+                                ▶ PLAY
+                            </button>
+
                         </div>
 
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('eaglercraft-1.9.4/index.html')">
+                    </article>
 
-                            ▶ PLAY
+                </div>
 
-                        </button>
+            </section>
 
-                    </div>
 
-                </article>
-
-            </div>
+            <footer>
+                Rofleq's Hideout <span>•</span> More games coming soon.
+            </footer>
 
         </div>
 
     </main>
 
-</div>
 
-
-<script>
-
-function launchGame(path) {
-    window.location.href = path;
-}
-
-</script>
+    <script>
+        function launchGame(path) {
+            window.location.href = path;
+        }
+    </script>
 
 </body>
 </html>
