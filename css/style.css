@@ -71,33 +71,29 @@ body {
 ===================================================== */
 
 body::before {
-
     content: "";
 
     position: fixed;
-
     inset: -100px;
 
     z-index: -2;
-
     pointer-events: none;
 
     background:
-
         linear-gradient(
             45deg,
-            rgba(255,255,255,var(--checker-opacity)) 25%,
+            rgba(227, 38, 46, var(--checker-opacity)) 25%,
             transparent 25%,
             transparent 75%,
-            rgba(255,255,255,var(--checker-opacity)) 75%
+            rgba(227, 38, 46, var(--checker-opacity)) 75%
         ),
 
         linear-gradient(
             45deg,
-            rgba(255,255,255,var(--checker-opacity)) 25%,
+            rgba(227, 38, 46, var(--checker-opacity)) 25%,
             transparent 25%,
             transparent 75%,
-            rgba(255,255,255,var(--checker-opacity)) 75%
+            rgba(227, 38, 46, var(--checker-opacity)) 75%
         );
 
     background-size:
