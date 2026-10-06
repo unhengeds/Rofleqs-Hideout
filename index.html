@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Rofleq's Hideout</title>
 
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
+
 <body>
+
 
     <!-- =====================================================
          SIDEBAR
@@ -17,37 +26,171 @@
 
     <aside class="sidebar">
 
+
+        <!-- LOGO -->
+
         <div class="logo">
+
             <img
                 src="assets/logo.png"
                 alt="Rofleq's Hideout"
                 class="logo-image"
             >
+
         </div>
+
+
+        <!-- VERSION -->
 
         <div class="version-text">
+
             Github Version
+
         </div>
+
+
+        <!-- NAV TITLE -->
 
         <div class="nav-title">
+
             Menu
+
         </div>
 
-        <a href="#" class="nav-item active">
-            <span class="nav-icon">⌂</span>
-            <span>Home</span>
+
+        <!-- FAVORITES -->
+
+        <a
+            href="#favorites"
+            class="nav-item"
+            id="favoritesNav"
+        >
+
+            <div class="nav-icon">
+                ★
+            </div>
+
+            <span>
+                Favorites
+            </span>
+
+            <span
+                class="favorite-count"
+                id="favoriteCount"
+            >
+                0
+            </span>
+
         </a>
 
+
+        <!-- GAMES -->
+
+        <a
+            href="#games"
+            class="nav-item active"
+            id="gamesNav"
+        >
+
+            <div class="nav-icon">
+                🎮
+            </div>
+
+            <span>
+                Games
+            </span>
+
+        </a>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
         <div class="sidebar-bottom">
-            <div>
-                <span class="red-text">Rofleq's</span> Hideout
-            </div>
-            <div>
+
+            Rofleq's Hideout
+
+            <br>
+
+            <span class="red-text">
                 Game Hub
-            </div>
+            </span>
+
         </div>
 
+
     </aside>
+
+
+
+    <!-- =====================================================
+         COMMENTS
+    ===================================================== -->
+
+    <button
+        type="button"
+        class="comments-button"
+        id="commentsButton"
+        aria-label="Open comments and suggestions"
+    >
+        💬 Comments
+    </button>
+
+
+    <div
+        class="comments-panel"
+        id="commentsPanel"
+    >
+
+        <div class="comments-header">
+
+            <div class="comments-title">
+
+                <span class="green">
+                    Suggestions
+                </span>
+
+                <span class="red">
+                    & Comments
+                </span>
+
+            </div>
+
+            <button
+                type="button"
+                class="comments-close"
+                id="commentsClose"
+                aria-label="Close comments"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="comments-subtitle">
+
+            Have an idea for Rofleq's Hideout? Leave a suggestion,
+            report a problem, or tell me what you would like to see next.
+
+        </div>
+
+
+        <div class="comments-note">
+
+            <strong>
+                Suggestions are handled through GitHub Discussions.
+            </strong>
+
+            You can post with your GitHub account, and only repository
+            maintainers can moderate or remove comments.
+
+        </div>
+
+
+        <div class="giscus"></div>
+
+    </div>
+
 
 
     <!-- =====================================================
@@ -56,11 +199,13 @@
 
     <main class="main">
 
+
         <!-- =================================================
              TOPBAR
         ================================================= -->
 
         <header class="topbar">
+
 
             <!-- TITLE -->
 
@@ -80,6 +225,7 @@
             <!-- RIGHT SIDE -->
 
             <div class="topbar-right">
+
 
                 <!-- ONLINE -->
 
@@ -107,21 +253,29 @@
                 </button>
 
 
-                <!-- SETTINGS PANEL -->
+                <!-- =========================================
+                     SETTINGS PANEL
+                ========================================== -->
 
                 <div
                     class="settings-panel"
                     id="settingsPanel"
                 >
 
+
                     <div class="settings-panel-title">
+
                         Settings
+
                     </div>
 
+
                     <div class="settings-panel-subtitle">
+
                         Customize how Rofleq's Hideout
                         works. Hover over a setting to
                         learn more.
+
                     </div>
 
 
@@ -134,17 +288,22 @@
                             <div class="setting-text">
 
                                 <div class="setting-name">
+
                                     Open games in about:blank
+
                                 </div>
 
                                 <div
                                     class="setting-hint"
                                     id="blankHint"
                                 >
+
                                     Currently enabled
+
                                 </div>
 
                             </div>
+
 
                             <label class="toggle">
 
@@ -160,13 +319,16 @@
 
                         </div>
 
+
                         <div class="setting-description">
+
                             When enabled, games open inside
                             a new about:blank tab instead of
                             replacing the Hideout page.
                             This can be useful when you want
                             the game separated from the
                             launcher.
+
                         </div>
 
                     </div>
@@ -181,17 +343,22 @@
                             <div class="setting-text">
 
                                 <div class="setting-name">
+
                                     Animated Background
+
                                 </div>
 
                                 <div
                                     class="setting-hint"
                                     id="backgroundHint"
                                 >
+
                                     Currently enabled
+
                                 </div>
 
                             </div>
+
 
                             <label class="toggle">
 
@@ -207,10 +374,13 @@
 
                         </div>
 
+
                         <div class="setting-description">
+
                             Turns the moving checkerboard background
                             on or off. When enabled, extra controls
                             let you change its speed and transparency.
+
                         </div>
 
                     </div>
@@ -228,14 +398,19 @@
                             <div class="setting-text">
 
                                 <div class="setting-name">
+
                                     Background Speed
+
                                 </div>
 
                                 <div class="setting-hint">
+
                                     Change how quickly the background moves.
+
                                 </div>
 
                             </div>
+
 
                             <div
                                 class="range-value"
@@ -245,6 +420,7 @@
                             </div>
 
                         </div>
+
 
                         <input
                             type="range"
@@ -270,40 +446,49 @@
                             <div class="setting-text">
 
                                 <div class="setting-name">
+
                                     Background Transparency
+
                                 </div>
 
                                 <div class="setting-hint">
+
                                     Change how visible the checkerboard is.
+
                                 </div>
 
                             </div>
+
 
                             <div
                                 class="range-value"
                                 id="transparencyValue"
                             >
-                                1.8%
+                                8%
                             </div>
 
                         </div>
+
 
                         <input
                             type="range"
                             id="transparencySlider"
                             min="0"
                             max="100"
-                            value="1.8"
+                            value="8"
                             step="0.1"
                         >
 
                     </div>
 
+
                 </div>
+
 
             </div>
 
         </header>
+
 
 
         <!-- =================================================
@@ -311,6 +496,7 @@
         ================================================= -->
 
         <div class="content">
+
 
             <!-- WELCOME -->
 
@@ -328,21 +514,33 @@
 
                 </h1>
 
-                <p>
+
+                <p id="pageDescription">
+
                     Presented to you by Rofleq
+
                 </p>
 
             </section>
 
 
-            <!-- GAMES -->
 
-            <section>
+            <!-- =================================================
+                 FAVORITES SECTION
+            ================================================= -->
+
+            <section
+                id="favoritesSection"
+                class="game-section hidden-section"
+            >
+
 
                 <div class="section-header">
 
                     <div class="section-title">
-                        Games
+
+                        Favorites
+
                     </div>
 
                     <div class="section-line"></div>
@@ -350,28 +548,122 @@
                 </div>
 
 
-                <!-- GAME GRID -->
+                <div
+                    class="game-grid"
+                    id="favoritesGrid"
+                >
+                </div>
 
-                <div class="game-grid">
 
-                    <!-- MINECRAFT -->
+                <!-- EMPTY FAVORITES -->
+
+                <div
+                    class="empty-favorites"
+                    id="emptyFavorites"
+                >
+
+                    <div class="empty-star">
+                        ☆
+                    </div>
+
+                    <div class="empty-title">
+                        No favorites yet
+                    </div>
+
+                    <div class="empty-description">
+
+                        Click the ★ on a game to add it
+                        to your favorites.
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 GAMES SECTION
+            ================================================= -->
+
+            <section
+                id="gamesSection"
+                class="game-section"
+            >
+
+
+                <div class="section-header">
+
+                    <div class="section-title">
+
+                        Games
+
+                    </div>
+
+                    <div class="section-line"></div>
+
+                </div>
+
+
+                <div
+                    class="game-grid"
+                    id="gamesGrid"
+                >
+
+
+                    <!-- =========================================
+                         MINECRAFT
+                    ========================================== -->
 
                     <article
                         class="game-card"
-                        onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
+                        data-game-id="minecraft-1.9.4"
+                        data-game-name="Minecraft"
+                        data-game-version="1.9.4"
+                        data-game-url="games/eaglercraft-1.9.4/index.html"
+                        onclick="
+                            launchGame(
+                                'games/eaglercraft-1.9.4/index.html'
+                            )
+                        "
                     >
+
 
                         <!-- GAME IMAGE -->
 
                         <div class="game-image">
 
-                            <img
-                                src="assets/minecraft1.9.4"
-                                alt="Minecraft 1.9.4"
-                                class="minecraft-thumbnail"
+
+                            <!-- FAVORITE STAR -->
+
+                            <button
+                                type="button"
+                                class="favorite-button"
+                                aria-label="Add Minecraft to favorites"
+                                title="Add to favorites"
+                                onclick="
+                                    event.stopPropagation();
+                                    toggleFavorite('minecraft-1.9.4');
+                                "
                             >
+                                ☆
+                            </button>
+
+
+                            <!-- RED ACCENT -->
 
                             <div class="red-accent"></div>
+
+
+                            <!-- MINECRAFT LOGO -->
+
+                            <div class="minecraft-logo">
+
+                                MINE<span>CRAFT</span>
+
+                            </div>
 
                         </div>
 
@@ -380,13 +672,22 @@
 
                         <div class="game-info">
 
+
                             <div class="game-title">
+
                                 Minecraft
+
                             </div>
 
+
                             <div class="game-meta">
+
                                 1.9.4
+
                             </div>
+
+
+                            <!-- PLAY -->
 
                             <button
                                 type="button"
@@ -398,19 +699,28 @@
                                     );
                                 "
                             >
+
                                 ▶ PLAY
+
                             </button>
+
 
                         </div>
 
+
                     </article>
 
+
                 </div>
+
 
             </section>
 
 
-            <!-- FOOTER -->
+
+            <!-- =================================================
+                 FOOTER
+            ================================================= -->
 
             <footer>
 
@@ -424,12 +734,45 @@
 
             </footer>
 
+
         </div>
+
 
     </main>
 
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
     <script src="js/settings.js"></script>
 
+
+
+    <!-- =====================================================
+         GISCUS COMMENTS
+    ===================================================== -->
+
+    <script
+        src="https://giscus.app/client.js"
+        data-repo="[YOUR GITHUB REPOSITORY]"
+        data-repo-id="[YOUR REPOSITORY ID]"
+        data-category="[YOUR DISCUSSION CATEGORY]"
+        data-category-id="[YOUR CATEGORY ID]"
+        data-mapping="specific"
+        data-term="Rofleq's Hideout Suggestions"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark_dimmed"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+
 </body>
+
 </html>
