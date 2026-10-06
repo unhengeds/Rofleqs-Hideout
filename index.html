@@ -63,6 +63,7 @@
                 );
 
             background-size: 80px 80px;
+
             background-position:
                 0 0,
                 40px 40px;
@@ -102,45 +103,58 @@
             position: fixed;
             left: 0;
             top: 0;
+
             width: 240px;
             height: 100vh;
+
             background: rgba(8, 8, 8, 0.94);
+
             border-right: 1px solid var(--red);
+
             padding: 28px 18px;
+
             display: flex;
             flex-direction: column;
+
             z-index: 10;
         }
 
         .logo {
             display: flex;
             align-items: center;
+
             gap: 12px;
+
             padding: 0 10px;
+
             margin-bottom: 45px;
         }
 
         .logo-icon {
             width: 40px;
             height: 40px;
+
             border-radius: 10px;
 
-            background: linear-gradient(
-                135deg,
-                #ff4048,
-                #a50008
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4048,
+                    #a50008
+                );
 
             display: flex;
             align-items: center;
             justify-content: center;
 
             color: white;
+
             font-weight: 900;
             font-size: 18px;
 
             box-shadow:
-                0 0 20px rgba(227, 38, 46, 0.35);
+                0 0 20px
+                rgba(227, 38, 46, 0.35);
         }
 
         .logo-text {
@@ -150,25 +164,36 @@
 
         .version-text {
             font-size: 9px;
+
             color: #666;
+
             font-weight: 600;
+
             letter-spacing: 0.5px;
+
             margin-top: 3px;
         }
 
         .nav-title {
             color: #6d3033;
+
             font-size: 11px;
+
             font-weight: bold;
+
             letter-spacing: 1.5px;
+
             text-transform: uppercase;
+
             padding: 0 12px;
+
             margin-bottom: 10px;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
+
             gap: 12px;
 
             padding: 12px;
@@ -176,34 +201,240 @@
             border-radius: 9px;
 
             color: var(--muted);
+
             text-decoration: none;
 
             margin-bottom: 5px;
 
             transition: 0.2s;
+
             font-size: 14px;
         }
 
         .nav-item:hover {
             color: white;
-            background: rgba(227, 38, 46, 0.10);
+
+            background:
+                rgba(227, 38, 46, 0.10);
         }
 
         .nav-item.active {
             color: white;
-            background: rgba(227, 38, 46, 0.14);
-            border-left: 3px solid var(--red);
+
+            background:
+                rgba(227, 38, 46, 0.14);
+
+            border-left:
+                3px solid var(--red);
         }
 
         .nav-icon {
             width: 20px;
+
             text-align: center;
+
             font-size: 17px;
         }
 
-        /* SETTINGS */
-        .settings {
-            margin-top: 25px;
+        /* SIDEBAR BOTTOM */
+        .sidebar-bottom {
+            margin-top: auto;
+
+            padding:
+                15px 10px 5px;
+
+            color: #555;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 240px;
+
+            min-height: 100vh;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 35px;
+
+            border-bottom:
+                1px solid var(--red);
+
+            background:
+                rgba(5, 5, 5, 0.92);
+
+            position: relative;
+        }
+
+        .topbar-title {
+            font-size: 14px;
+
+            color: var(--muted);
+        }
+
+        .topbar-title .red {
+            color: var(--red2);
+        }
+
+        .topbar-title .green {
+            color: var(--green2);
+        }
+
+        /* RIGHT SIDE OF TOPBAR */
+        .topbar-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            position: relative;
+        }
+
+        /* STATUS */
+        .status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #7d7d7d;
+
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            background: var(--green);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px var(--green);
+        }
+
+        /* SETTINGS BUTTON */
+        .settings-button {
+            width: 34px;
+            height: 34px;
+
+            border: 1px solid
+                rgba(227, 38, 46, 0.35);
+
+            border-radius: 8px;
+
+            background:
+                rgba(227, 38, 46, 0.08);
+
+            color: #aaa;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            transition:
+                0.2s;
+        }
+
+        .settings-button:hover {
+            color: white;
+
+            background:
+                rgba(227, 38, 46, 0.18);
+
+            border-color:
+                var(--red2);
+
+            box-shadow:
+                0 0 15px
+                rgba(227, 38, 46, 0.15);
+        }
+
+        /* SETTINGS PANEL */
+        .settings-panel {
+            position: absolute;
+
+            top: 53px;
+            right: 0;
+
+            width: 280px;
+
+            padding: 16px;
+
+            background:
+                rgba(13, 13, 13, 0.98);
+
+            border:
+                1px solid
+                rgba(227, 38, 46, 0.45);
+
+            border-radius: 11px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.55),
+
+                0 0 20px
+                rgba(227, 38, 46, 0.08);
+
+            z-index: 100;
+
+            opacity: 0;
+
+            transform:
+                translateY(-8px);
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.18s,
+                transform 0.18s;
+        }
+
+        .settings-panel.open {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+            pointer-events: auto;
+        }
+
+        .settings-panel-title {
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            margin-bottom: 14px;
+
+            padding-bottom: 10px;
+
+            border-bottom:
+                1px solid
+                rgba(227, 38, 46, 0.2);
         }
 
         .setting-box {
@@ -211,52 +442,68 @@
 
             border-radius: 9px;
 
-            background: rgba(227, 38, 46, 0.06);
+            background:
+                rgba(227, 38, 46, 0.06);
 
-            border: 1px solid rgba(227, 38, 46, 0.15);
+            border:
+                1px solid
+                rgba(227, 38, 46, 0.15);
         }
 
         .setting-name {
             color: #aaa;
+
             font-size: 12px;
+
             margin-bottom: 10px;
         }
 
         .setting-row {
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             gap: 10px;
         }
 
         .setting-description {
             color: #666;
+
             font-size: 10px;
+
             line-height: 1.35;
         }
 
         /* TOGGLE */
         .toggle {
             position: relative;
+
             width: 40px;
             height: 22px;
+
             flex-shrink: 0;
         }
 
         .toggle input {
             opacity: 0;
+
             width: 0;
             height: 0;
         }
 
         .slider {
             position: absolute;
+
             cursor: pointer;
+
             inset: 0;
 
             background: #252525;
 
-            border: 1px solid #444;
+            border:
+                1px solid #444;
 
             border-radius: 20px;
 
@@ -283,77 +530,17 @@
 
         .toggle input:checked + .slider {
             background: var(--green);
-            border-color: var(--green);
+
+            border-color:
+                var(--green);
         }
 
         .toggle input:checked + .slider::before {
-            transform: translateX(18px);
-            background: #06100a;
-        }
+            transform:
+                translateX(18px);
 
-        .sidebar-bottom {
-            margin-top: auto;
-
-            padding: 15px 10px 5px;
-
-            color: #555;
-
-            font-size: 11px;
-
-            line-height: 1.5;
-        }
-
-        /* MAIN */
-        .main {
-            margin-left: 240px;
-            min-height: 100vh;
-        }
-
-        /* TOPBAR */
-        .topbar {
-            height: 75px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 35px;
-
-            border-bottom: 1px solid var(--red);
-
-            background: rgba(5, 5, 5, 0.92);
-        }
-
-        .topbar-title {
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        .topbar-title strong {
-            color: var(--red2);
-        }
-
-        .status {
-            display: flex;
-            align-items: center;
-
-            gap: 8px;
-
-            color: #7d7d7d;
-
-            font-size: 12px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-
-            background: var(--green);
-
-            border-radius: 50%;
-
-            box-shadow:
-                0 0 10px var(--green);
+            background:
+                #06100a;
         }
 
         /* CONTENT */
@@ -371,8 +558,14 @@
 
         .welcome h1 {
             font-size: 38px;
+
             line-height: 1.1;
+
             margin-bottom: 10px;
+        }
+
+        .welcome h1 .red {
+            color: var(--red2);
         }
 
         .welcome h1 .green {
@@ -381,13 +574,16 @@
 
         .welcome p {
             color: var(--muted);
+
             font-size: 15px;
         }
 
         /* SECTION */
         .section-header {
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             margin-bottom: 18px;
@@ -395,6 +591,7 @@
 
         .section-title {
             font-size: 20px;
+
             font-weight: 800;
         }
 
@@ -408,7 +605,8 @@
             margin-left: 20px;
 
             box-shadow:
-                0 0 8px rgba(227, 38, 46, 0.25);
+                0 0 8px
+                rgba(227, 38, 46, 0.25);
         }
 
         /* GAME GRID */
@@ -428,7 +626,8 @@
         .game-card {
             position: relative;
 
-            background: rgba(13, 13, 13, 0.94);
+            background:
+                rgba(13, 13, 13, 0.94);
 
             border:
                 1px solid
@@ -447,13 +646,18 @@
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
+            transform:
+                translateY(-5px);
 
-            border-color: var(--red2);
+            border-color:
+                var(--red2);
 
             box-shadow:
-                0 12px 35px rgba(0, 0, 0, 0.35),
-                0 0 20px rgba(227, 38, 46, 0.12);
+                0 12px 35px
+                rgba(0, 0, 0, 0.35),
+
+                0 0 20px
+                rgba(227, 38, 46, 0.12);
         }
 
         /* GAME IMAGE */
@@ -480,6 +684,7 @@
                 );
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -524,7 +729,8 @@
 
             text-shadow:
                 3px 3px 0 #111,
-                0 0 18px rgba(255, 64, 72, 0.25);
+                0 0 18px
+                rgba(255, 64, 72, 0.25);
 
             letter-spacing: -1px;
         }
@@ -609,7 +815,8 @@
 
             color: #555;
 
-            border-top: 1px solid var(--red);
+            border-top:
+                1px solid var(--red);
 
             font-size: 12px;
         }
@@ -647,10 +854,6 @@
                 display: none;
             }
 
-            .settings {
-                margin-top: 10px;
-            }
-
             .sidebar-bottom {
                 display: none;
             }
@@ -663,12 +866,20 @@
                 padding: 0 20px;
             }
 
+            .topbar-title {
+                font-size: 12px;
+            }
+
             .content {
                 padding: 28px 20px;
             }
 
             .welcome h1 {
                 font-size: 30px;
+            }
+
+            .settings-panel {
+                right: -5px;
             }
         }
     </style>
@@ -688,8 +899,13 @@
             <div>
 
                 <div class="logo-text">
-                    <span style="color: #e3262e;">Rofleq's</span>
-                    <span style="color: #39ff78;">Hideout</span>
+                    <span style="color: #e3262e;">
+                        Rofleq's
+                    </span>
+
+                    <span style="color: #39ff78;">
+                        Hideout
+                    </span>
                 </div>
 
                 <div class="version-text">
@@ -717,44 +933,6 @@
         </a>
 
 
-        <!-- SETTINGS -->
-        <div class="settings">
-
-            <div class="nav-title">
-                Settings
-            </div>
-
-            <div class="setting-box">
-
-                <div class="setting-name">
-                    Open games in about:blank
-                </div>
-
-                <div class="setting-row">
-
-                    <div class="setting-description">
-                        Opens games in a separate<br>
-                        blank-page tab.
-                    </div>
-
-                    <label class="toggle">
-
-                        <input
-                            type="checkbox"
-                            id="blankToggle"
-                        >
-
-                        <span class="slider"></span>
-
-                    </label>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
         <div class="sidebar-bottom">
 
             Rofleq's Hideout<br>
@@ -776,16 +954,82 @@
 
             <div class="topbar-title">
 
-                <strong>Rofleq's Hideout</strong>
+                <span class="red">
+                    Rofleq's
+                </span>
+
+                <span class="green">
+                    Hideout
+                </span>
 
             </div>
 
 
-            <div class="status">
+            <div class="topbar-right">
 
-                <div class="status-dot"></div>
+                <div class="status">
 
-                Online
+                    <div class="status-dot"></div>
+
+                    Online
+
+                </div>
+
+
+                <!-- SETTINGS BUTTON -->
+                <button
+                    class="settings-button"
+                    id="settingsButton"
+                    title="Settings"
+                    aria-label="Settings"
+                >
+                    ⚙
+                </button>
+
+
+                <!-- SETTINGS PANEL -->
+                <div
+                    class="settings-panel"
+                    id="settingsPanel"
+                >
+
+                    <div class="settings-panel-title">
+                        Settings
+                    </div>
+
+
+                    <div class="setting-box">
+
+                        <div class="setting-name">
+                            Open games in about:blank
+                        </div>
+
+
+                        <div class="setting-row">
+
+                            <div class="setting-description">
+                                Opens games in a separate<br>
+                                blank-page tab.
+                            </div>
+
+
+                            <label class="toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="blankToggle"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -798,9 +1042,17 @@
             <section class="welcome">
 
                 <h1>
-                    Rofleq's
-                    <span class="green">Hideout</span>
+
+                    <span class="red">
+                        Rofleq's
+                    </span>
+
+                    <span class="green">
+                        Hideout
+                    </span>
+
                 </h1>
+
 
                 <p>
                     Presented to you by Rofleq
@@ -848,6 +1100,7 @@
                                 Minecraft
                             </div>
 
+
                             <div class="game-meta">
                                 1.9.4
                             </div>
@@ -855,7 +1108,12 @@
 
                             <button
                                 class="play-small"
-                                onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')"
+                                onclick="
+                                    event.stopPropagation();
+                                    launchGame(
+                                        'games/eaglercraft-1.9.4/index.html'
+                                    )
+                                "
                             >
                                 ▶ PLAY
                             </button>
@@ -872,7 +1130,11 @@
             <footer>
 
                 Rofleq's Hideout
-                <span>•</span>
+
+                <span>
+                    •
+                </span>
+
                 More games coming soon.
 
             </footer>
@@ -884,22 +1146,94 @@
 
     <script>
 
-        /* LOAD SAVED SETTING */
+        /* SETTINGS ELEMENTS */
+        const settingsButton =
+            document.getElementById(
+                "settingsButton"
+            );
+
+        const settingsPanel =
+            document.getElementById(
+                "settingsPanel"
+            );
+
         const blankToggle =
-            document.getElementById("blankToggle");
+            document.getElementById(
+                "blankToggle"
+            );
 
+
+        /* LOAD SAVED SETTING */
         const savedBlankSetting =
-            localStorage.getItem("openInBlank");
+            localStorage.getItem(
+                "openInBlank"
+            );
 
-        if (savedBlankSetting === "true") {
+
+        /*
+            ABOUT:BLANK IS ON BY DEFAULT.
+
+            If the user has never changed it,
+            it stays enabled.
+        */
+        if (
+            savedBlankSetting === null
+            ||
+            savedBlankSetting === "true"
+        ) {
+
             blankToggle.checked = true;
+
+        } else {
+
+            blankToggle.checked = false;
+
         }
+
+
+        /* OPEN/CLOSE SETTINGS */
+        settingsButton.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                settingsPanel.classList.toggle(
+                    "open"
+                );
+
+            }
+        );
+
+
+        /* PREVENT PANEL CLICK FROM CLOSING IT */
+        settingsPanel.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+        /* CLOSE SETTINGS WHEN CLICKING ELSEWHERE */
+        document.addEventListener(
+            "click",
+            function() {
+
+                settingsPanel.classList.remove(
+                    "open"
+                );
+
+            }
+        );
 
 
         /* SAVE SETTING */
         blankToggle.addEventListener(
             "change",
-            function () {
+            function() {
 
                 localStorage.setItem(
                     "openInBlank",
@@ -917,15 +1251,18 @@
                 blankToggle.checked;
 
 
+            /* NORMAL MODE */
             if (!useBlank) {
 
-                window.location.href = path;
+                window.location.href =
+                    path;
 
                 return;
 
             }
 
 
+            /* ABOUT:BLANK MODE */
             const gameWindow =
                 window.open(
                     "about:blank",
@@ -933,6 +1270,7 @@
                 );
 
 
+            /* POPUP BLOCKED */
             if (!gameWindow) {
 
                 alert(
@@ -944,7 +1282,9 @@
             }
 
 
+            /* CREATE ABOUT:BLANK PAGE */
             gameWindow.document.open();
+
 
             gameWindow.document.write(`
 
@@ -962,23 +1302,36 @@
 
                         html,
                         body {
+
                             margin: 0;
+
                             width: 100%;
+
                             height: 100%;
+
                             overflow: hidden;
+
                             background: black;
+
                         }
 
+
                         iframe {
+
                             width: 100%;
+
                             height: 100%;
+
                             border: 0;
+
                             display: block;
+
                         }
 
                     </style>
 
                 </head>
+
 
                 <body>
 
@@ -992,6 +1345,7 @@
                 </html>
 
             `);
+
 
             gameWindow.document.close();
 
