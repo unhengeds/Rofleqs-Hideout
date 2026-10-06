@@ -1,64 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Rofleq's Hideout</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
 
+
 <body>
+
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="sidebar-top">
 
-            <button
-                type="button"
-                class="logo-button"
-                id="siteLogo"
-                title="Change theme"
-            >
-                <span class="logo-rofleq">Rofleq's</span>
-                <span class="logo-hideout">Hideout</span>
-            </button>
+            <div class="logo-container">
 
-            <nav class="navigation">
+                <img
+                    src="assets/logo.png"
+                    alt="Rofleq's Hideout"
+                    class="logo"
+                    id="siteLogo"
+                    title="Click to change theme"
+                >
+
+            </div>
+
+
+            <div class="version">
+                Github Version
+            </div>
+
+
+            <nav class="sidebar-nav">
 
                 <a
                     href="#favorites"
                     class="nav-item"
                     id="favoritesNav"
                 >
-                    <span class="nav-icon">★</span>
-                    <span>Favorites</span>
+
+                    <div class="nav-icon">
+                        ★
+                    </div>
+
+                    <span>
+                        Favorites
+                    </span>
+
+                    <span
+                        class="favorite-count"
+                        id="favoriteCount"
+                    >
+                        0
+                    </span>
+
                 </a>
+
 
                 <a
                     href="#games"
                     class="nav-item active"
                     id="gamesNav"
                 >
-                    <span class="nav-icon">🎮</span>
-                    <span>Games</span>
+
+                    <div class="nav-icon">
+                        🎮
+                    </div>
+
+                    <span>
+                        Games
+                    </span>
+
                 </a>
 
             </nav>
 
         </div>
 
-        <button
-            type="button"
-            class="settings-button"
-            id="settingsButton"
-        >
-            <span class="settings-icon">⚙</span>
-            <span>Settings</span>
-        </button>
+
+        <div class="sidebar-footer">
+
+            <span class="brand-green">
+                Rofleq's
+            </span>
+
+            <span class="brand-red">
+                Hideout
+            </span>
+
+        </div>
 
     </aside>
+
+
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+        <div class="topbar-title">
+
+            <span class="brand-green">
+                Rofleq's
+            </span>
+
+            <span class="brand-red">
+                Hideout
+            </span>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="online-status">
+
+                <span class="online-dot"></span>
+
+                Online
+
+            </div>
+
+
+            <button
+                type="button"
+                class="settings-button"
+                id="settingsButton"
+                aria-label="Open settings"
+            >
+                ⚙
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- THEME NOTIFICATION -->
+    <div
+        class="theme-notification"
+        id="themeNotification"
+    >
+
+        <div class="theme-notification-icon">
+            ✓
+        </div>
+
+        <div>
+
+            <strong>
+                Theme changes now unlocked!
+            </strong>
+
+            <span>
+                Check the Theme Color option in Settings.
+            </span>
+
+        </div>
+
+    </div>
+
 
 
     <!-- SETTINGS PANEL -->
@@ -70,19 +186,22 @@
         <div class="settings-header">
 
             <div>
-                <div class="settings-title">
-                    Settings
+
+                <div class="settings-kicker">
+                    OPTIONS
                 </div>
 
-                <div class="settings-subtitle">
-                    Customize Rofleq's Hideout
-                </div>
+                <h2>
+                    Settings
+                </h2>
+
             </div>
+
 
             <button
                 type="button"
                 class="settings-close"
-                id="settingsClose"
+                id="closeSettings"
             >
                 ×
             </button>
@@ -90,37 +209,42 @@
         </div>
 
 
-        <div class="settings-content">
 
-            <!-- OPEN IN NEW TAB -->
-            <div class="setting-box">
+        <!-- ABOUT BLANK -->
+        <div class="setting-box">
 
-                <button
-                    type="button"
-                    class="setting-reset"
-                    data-setting-reset="openInBlank"
-                    title="Reset"
-                >
-                    ↶
-                </button>
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="openInBlank"
+                title="Reset to default"
+                aria-label="Reset Open games in about blank to default"
+            >
+                ↶
+            </button>
 
-                <div class="setting-info">
 
-                    <div class="setting-name">
-                        Open games in new tab
-                    </div>
+            <div class="setting-row">
 
-                    <div class="setting-description">
-                        Open games inside a new about:blank tab.
-                    </div>
+                <div class="setting-text">
+
+                    <strong>
+                        Open games in about:blank
+                    </strong>
+
+                    <span id="aboutBlankHint">
+                        Games open in a new
+                        about:blank window.
+                    </span>
 
                 </div>
+
 
                 <label class="switch">
 
                     <input
                         type="checkbox"
-                        id="openInBlank"
+                        id="openInBlankToggle"
                     >
 
                     <span class="slider"></span>
@@ -129,36 +253,45 @@
 
             </div>
 
+        </div>
 
-            <!-- ANIMATED BACKGROUND -->
-            <div class="setting-box">
 
-                <button
-                    type="button"
-                    class="setting-reset"
-                    data-setting-reset="animatedBackground"
-                    title="Reset"
-                >
-                    ↶
-                </button>
 
-                <div class="setting-info">
+        <!-- ANIMATED BACKGROUND -->
+        <div class="setting-box">
 
-                    <div class="setting-name">
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="animatedBackground"
+                title="Reset to default"
+                aria-label="Reset animated background to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-row">
+
+                <div class="setting-text">
+
+                    <strong>
                         Animated background
-                    </div>
+                    </strong>
 
-                    <div class="setting-description">
-                        Enable the moving background effect.
-                    </div>
+                    <span>
+                        Show the moving
+                        theme-colored checkerboard.
+                    </span>
 
                 </div>
+
 
                 <label class="switch">
 
                     <input
                         type="checkbox"
-                        id="animatedBackground"
+                        id="animatedBackgroundToggle"
                     >
 
                     <span class="slider"></span>
@@ -167,149 +300,196 @@
 
             </div>
 
+        </div>
 
-            <!-- BACKGROUND SPEED -->
-            <div class="setting-box slider-setting">
 
-                <button
-                    type="button"
-                    class="setting-reset"
-                    data-setting-reset="backgroundSpeed"
-                    title="Reset"
-                >
-                    ↶
-                </button>
 
-                <div class="setting-info">
+        <!-- BACKGROUND SPEED -->
+        <div
+            class="setting-box"
+            id="backgroundSpeedBox"
+        >
 
-                    <div class="setting-name">
-                        Background speed
-                    </div>
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="backgroundSpeed"
+                title="Reset to default"
+                aria-label="Reset background speed to default"
+            >
+                ↶
+            </button>
 
-                    <div class="setting-description">
-                        Control how quickly the background moves.
-                    </div>
 
-                </div>
+            <div class="setting-heading">
 
-                <input
-                    type="range"
-                    id="backgroundSpeed"
-                    min="0"
-                    max="3"
-                    step="0.1"
-                    value="1"
-                    class="range-slider"
-                >
+                <strong>
+                    Background speed
+                </strong>
+
+                <span id="backgroundSpeedValue">
+                    6
+                </span>
 
             </div>
 
 
-            <!-- BACKGROUND TRANSPARENCY -->
-            <div class="setting-box slider-setting">
+            <input
+                type="range"
+                id="backgroundSpeed"
+                min="0"
+                max="20"
+                value="6"
+                step="1"
+            >
 
-                <button
-                    type="button"
-                    class="setting-reset"
-                    data-setting-reset="backgroundTransparency"
-                    title="Reset"
-                >
-                    ↶
-                </button>
+        </div>
 
-                <div class="setting-info">
 
-                    <div class="setting-name">
-                        Background transparency
-                    </div>
 
-                    <div class="setting-description">
-                        Adjust the intensity of the background.
-                    </div>
+        <!-- TRANSPARENCY -->
+        <div
+            class="setting-box"
+            id="backgroundTransparencyBox"
+        >
 
-                </div>
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="backgroundTransparency"
+                title="Reset to default"
+                aria-label="Reset background transparency to default"
+            >
+                ↶
+            </button>
 
-                <input
-                    type="range"
-                    id="backgroundTransparency"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value="1"
-                    class="range-slider"
-                >
+
+            <div class="setting-heading">
+
+                <strong>
+                    Background transparency
+                </strong>
+
+                <span id="backgroundTransparencyValue">
+                    8%
+                </span>
 
             </div>
 
 
-            <!-- THEME -->
-            <div class="setting-box theme-setting">
+            <input
+                type="range"
+                id="backgroundTransparency"
+                min="0"
+                max="100"
+                value="8"
+                step="0.1"
+            >
+
+        </div>
+
+
+
+        <!-- THEME COLOR -->
+        <div class="setting-box theme-setting">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="theme"
+                title="Reset theme to default"
+                aria-label="Reset theme to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-heading">
+
+                <strong>
+                    Theme Color
+                </strong>
+
+                <span id="themeName">
+                    Red
+                </span>
+
+            </div>
+
+
+            <div class="theme-options">
 
                 <button
                     type="button"
-                    class="setting-reset"
-                    data-setting-reset="theme"
-                    title="Reset theme"
+                    class="theme-option theme-red"
+                    data-theme-index="0"
+                    title="Red"
+                    aria-label="Red theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-green"
+                    data-theme-index="1"
+                    title="Green"
+                    aria-label="Green theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-purple"
+                    data-theme-index="2"
+                    title="Purple"
+                    aria-label="Purple theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-blue"
+                    data-theme-index="3"
+                    title="Blue"
+                    aria-label="Blue theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-orange"
+                    data-theme-index="4"
+                    title="Orange"
+                    aria-label="Orange theme"
+                ></button>
+
+
+                <!-- CUSTOM COLOR -->
+                <label
+                    class="custom-color-option"
+                    title="Custom color"
                 >
-                    ↶
-                </button>
 
-                <div class="setting-info">
+                    <input
+                        type="color"
+                        id="customThemeColor"
+                        value="#e3262e"
+                    >
 
-                    <div class="setting-name">
-                        Theme color
-                    </div>
+                    <span>
+                        🎨
+                    </span>
 
-                    <div class="setting-description">
-                        Choose a color theme for the site.
-                    </div>
+                </label>
 
-                </div>
+            </div>
 
-                <div class="theme-swatches">
 
-                    <button
-                        type="button"
-                        class="theme-swatch theme-red"
-                        data-theme-index="0"
-                        aria-label="Red theme"
-                        title="Red"
-                    ></button>
-
-                    <button
-                        type="button"
-                        class="theme-swatch theme-green"
-                        data-theme-index="1"
-                        aria-label="Green theme"
-                        title="Green"
-                    ></button>
-
-                    <button
-                        type="button"
-                        class="theme-swatch theme-purple"
-                        data-theme-index="2"
-                        aria-label="Purple theme"
-                        title="Purple"
-                    ></button>
-
-                    <button
-                        type="button"
-                        class="theme-swatch theme-blue"
-                        data-theme-index="3"
-                        aria-label="Blue theme"
-                        title="Blue"
-                    ></button>
-
-                    <button
-                        type="button"
-                        class="theme-swatch theme-orange"
-                        data-theme-index="4"
-                        aria-label="Orange theme"
-                        title="Orange"
-                    ></button>
-
-                </div>
-
+            <div
+                class="custom-color-label"
+                id="customColorLabel"
+            >
+                Custom color
             </div>
 
         </div>
@@ -317,40 +497,38 @@
     </div>
 
 
-    <!-- MAIN CONTENT -->
+
+    <!-- MAIN PAGE -->
     <main class="main-content">
 
 
         <!-- WELCOME -->
-        <section
-            class="welcome-section"
-            id="welcome"
-        >
+        <section class="welcome-section">
 
-            <div class="welcome-content">
+            <h1>
 
-                <div class="welcome-label">
-                    WELCOME
-                </div>
+                <span class="brand-green">
+                    Rofleq's
+                </span>
 
-                <h1>
-                    Welcome to
-                    <span class="welcome-green">Rofleq's</span>
-                    <span class="welcome-red">Hideout</span>
-                </h1>
+                <span class="brand-red">
+                    Hideout
+                </span>
 
-                <p>
-                    Your collection of games, all in one place.
-                </p>
+            </h1>
 
-            </div>
+
+            <p>
+                Presented to you by Rofleq.
+            </p>
 
         </section>
 
 
+
         <!-- FAVORITES -->
         <section
-            class="games-section"
+            class="game-section"
             id="favorites"
         >
 
@@ -358,8 +536,8 @@
 
                 <div>
 
-                    <div class="section-label">
-                        YOUR COLLECTION
+                    <div class="section-kicker">
+                        YOUR PICKS
                     </div>
 
                     <h2>
@@ -370,26 +548,30 @@
 
             </div>
 
-            <div
-                class="game-grid"
-                id="favoritesGrid"
-            ></div>
 
             <div
-                class="empty-favorites"
-                id="emptyFavorites"
+                class="games-grid"
+                id="favoritesGrid"
             >
 
-                <div class="empty-favorites-icon">
-                    ☆
-                </div>
+                <div
+                    class="empty-favorites"
+                    id="emptyFavorites"
+                >
 
-                <div class="empty-favorites-title">
-                    No favorites yet
-                </div>
+                    <div class="empty-favorites-icon">
+                        ☆
+                    </div>
 
-                <div class="empty-favorites-text">
-                    Click the star on a game to add it here.
+                    <h3>
+                        No favorites yet
+                    </h3>
+
+                    <p>
+                        Click the star on a game
+                        to add it here.
+                    </p>
+
                 </div>
 
             </div>
@@ -397,9 +579,10 @@
         </section>
 
 
+
         <!-- GAMES -->
         <section
-            class="games-section"
+            class="game-section"
             id="games"
         >
 
@@ -407,8 +590,8 @@
 
                 <div>
 
-                    <div class="section-label">
-                        GAME LIBRARY
+                    <div class="section-kicker">
+                        LIBRARY
                     </div>
 
                     <h2>
@@ -421,7 +604,7 @@
 
 
             <div
-                class="game-grid"
+                class="games-grid"
                 id="gamesGrid"
             >
 
@@ -432,6 +615,7 @@
                     data-game-name="Minecraft"
                     data-game-version="1.9.4"
                     data-game-url="games/eaglercraft-1.9.4/index.html"
+                    onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
                 >
 
                     <div class="game-image">
@@ -439,21 +623,30 @@
                         <img
                             src="assets/minecraft1.9.4"
                             alt="Minecraft 1.9.4"
-                            class="game-thumbnail"
+                            class="minecraft-thumbnail"
                         >
+
 
                         <button
                             type="button"
                             class="favorite-button"
                             aria-label="Add Minecraft to favorites"
                             title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'minecraft-1.9.4'
+                                );
+                            "
                         >
                             ☆
                         </button>
 
+
                         <div class="red-accent"></div>
 
                     </div>
+
 
                     <div class="game-info">
 
@@ -461,13 +654,21 @@
                             Minecraft
                         </div>
 
+
                         <div class="game-meta">
                             1.9.4
                         </div>
 
+
                         <button
                             type="button"
                             class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/eaglercraft-1.9.4/index.html'
+                                );
+                            "
                         >
                             ▶ PLAY
                         </button>
@@ -475,74 +676,96 @@
                     </div>
 
                 </article>
-
 
                 <!-- RETROBOWL -->
-                <article
-                    class="game-card"
-                    data-game-id="retrobowl"
-                    data-game-name="retrobowl"
-                    data-game-version=""
-                    data-game-url="games/retrobowl/index.html"
-                >
+<article
+    class="game-card"
+    data-game-id="retrobowl"
+    data-game-name="retrobowl"
+    data-game-version=""
+    data-game-url="games/retrobowl/index.html"
+    onclick="launchGame('games/retrobowl/index.html')"
+>
 
-                    <div class="game-image">
+    <div class="game-image">
 
-                        <img
-                            src="assets/retrobowl"
-                            alt="retrobowl"
-                            class="game-thumbnail"
-                        >
+        <img
+            src="assets/retrobowl"
+            alt="retrobowl"
+            class="minecraft-thumbnail"
+        >
 
-                        <button
-                            type="button"
-                            class="favorite-button"
-                            aria-label="Add retrobowl to favorites"
-                            title="Add to favorites"
-                        >
-                            ☆
-                        </button>
 
-                        <div class="red-accent"></div>
+        <button
+            type="button"
+            class="favorite-button"
+            aria-label="Add retrobowl to favorites"
+            title="Add to favorites"
+            onclick="
+                event.stopPropagation();
+                toggleFavorite('retrobowl');
+            "
+        >
+            ☆
+        </button>
 
-                    </div>
 
-                    <div class="game-info">
+        <div class="red-accent"></div>
 
-                        <div class="game-title">
-                            Retrobowl
-                        </div>
+    </div>
 
-                        <div class="game-meta">
-                            &nbsp;
-                        </div>
 
-                        <button
-                            type="button"
-                            class="play-small"
-                        >
-                            ▶ PLAY
-                        </button>
+    <div class="game-info">
 
-                    </div>
+        <div class="game-title">
+            retrobowl
+        </div>
 
-                </article>
+
+        <div class="game-meta">
+            &nbsp;
+        </div>
+
+
+        <button
+            type="button"
+            class="play-small"
+            onclick="
+                event.stopPropagation();
+                launchGame('games/retrobowl/index.html');
+            "
+        >
+            ▶ PLAY
+        </button>
+
+    </div>
+
+</article>
 
             </div>
 
         </section>
 
 
-        <!-- FOOTER -->
-        <footer class="site-footer">
 
-            <div class="footer-brand">
-                <span class="logo-rofleq">Rofleq's</span>
-                <span class="logo-hideout">Hideout</span>
+        <!-- FOOTER -->
+        <footer class="main-footer">
+
+            <div>
+
+                <span class="brand-green">
+                    Rofleq's
+                </span>
+
+                <span class="brand-red">
+                    Hideout
+                </span>
+
             </div>
 
-            <div class="footer-text">
-                Game launcher &amp; hub
+
+            <div>
+                Doug the GOAT
             </div>
 
         </footer>
@@ -550,7 +773,9 @@
     </main>
 
 
+
     <script src="js/settings.js"></script>
 
 </body>
+
 </html>
