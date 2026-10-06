@@ -1,76 +1,80 @@
 const settingsButton =
-document.getElementById(
-"settingsButton"
-);
+    document.getElementById(
+        "settingsButton"
+    );
 
 const settingsPanel =
-document.getElementById(
-"settingsPanel"
-);
+    document.getElementById(
+        "settingsPanel"
+    );
 
 const blankToggle =
-document.getElementById(
-"blankToggle"
-);
+    document.getElementById(
+        "blankToggle"
+    );
 
 const blankHint =
-document.getElementById(
-"blankHint"
-);
+    document.getElementById(
+        "blankHint"
+    );
 
 const backgroundToggle =
-document.getElementById(
-"backgroundToggle"
-);
+    document.getElementById(
+        "backgroundToggle"
+    );
 
 const backgroundHint =
-document.getElementById(
-"backgroundHint"
-);
+    document.getElementById(
+        "backgroundHint"
+    );
 
 const speedSlider =
-document.getElementById(
-"speedSlider"
-);
+    document.getElementById(
+        "speedSlider"
+    );
 
 const speedValue =
-document.getElementById(
-"speedValue"
-);
+    document.getElementById(
+        "speedValue"
+    );
 
 const transparencySlider =
-document.getElementById(
-"transparencySlider"
-);
+    document.getElementById(
+        "transparencySlider"
+    );
 
 const transparencyValue =
-document.getElementById(
-"transparencyValue"
-);
+    document.getElementById(
+        "transparencyValue"
+    );
 
 const speedSetting =
-document.getElementById(
-"speedSetting"
-);
+    document.getElementById(
+        "speedSetting"
+    );
 
 const transparencySetting =
-document.getElementById(
-"transparencySetting"
-);
+    document.getElementById(
+        "transparencySetting"
+    );
 
+
+/* =====================================================
+   ABOUT:BLANK SETTING
+===================================================== */
 
 const savedBlankSetting =
-localStorage.getItem(
-"openInBlank"
-);
+    localStorage.getItem(
+        "openInBlank"
+    );
 
 
 if (
-savedBlankSetting === null
+    savedBlankSetting === null
 ) {
 
     blankToggle.checked =
-    true;
+        true;
 
     localStorage.setItem(
         "openInBlank",
@@ -82,7 +86,7 @@ savedBlankSetting === null
 else {
 
     blankToggle.checked =
-    savedBlankSetting === "true";
+        savedBlankSetting === "true";
 
 }
 
@@ -94,14 +98,14 @@ function updateBlankHint() {
     ) {
 
         blankHint.textContent =
-        "Currently enabled";
+            "Currently enabled";
 
     }
 
     else {
 
         blankHint.textContent =
-        "Currently disabled";
+            "Currently disabled";
 
     }
 
@@ -111,18 +115,22 @@ function updateBlankHint() {
 updateBlankHint();
 
 
+/* =====================================================
+   BACKGROUND SETTING
+===================================================== */
+
 const savedBackground =
-localStorage.getItem(
-"animatedBackground"
-);
+    localStorage.getItem(
+        "animatedBackground"
+    );
 
 
 if (
-savedBackground === null
+    savedBackground === null
 ) {
 
     backgroundToggle.checked =
-    true;
+        true;
 
     localStorage.setItem(
         "animatedBackground",
@@ -134,81 +142,93 @@ savedBackground === null
 else {
 
     backgroundToggle.checked =
-    savedBackground === "true";
+        savedBackground === "true";
 
 }
 
+
+/* =====================================================
+   SPEED
+===================================================== */
 
 const savedSpeed =
-localStorage.getItem(
-"backgroundSpeed"
-);
+    localStorage.getItem(
+        "backgroundSpeed"
+    );
 
 
 if (
-savedSpeed === null
+    savedSpeed === null
 ) {
 
     speedSlider.value =
-    6;
+        6;
 
 }
 
 else {
 
     speedSlider.value =
-    savedSpeed;
+        savedSpeed;
 
 }
 
+
+/* =====================================================
+   TRANSPARENCY
+===================================================== */
 
 const savedTransparency =
-localStorage.getItem(
-"backgroundTransparency"
-);
+    localStorage.getItem(
+        "backgroundTransparency"
+    );
 
 
 if (
-savedTransparency === null
+    savedTransparency === null
 ) {
 
     transparencySlider.value =
-    1.8;
+        15.5;
 
 }
 
 else {
 
     transparencySlider.value =
-    savedTransparency;
+        savedTransparency;
 
 }
 
+
+/* =====================================================
+   UPDATE BACKGROUND
+===================================================== */
 
 function updateBackground() {
 
     const enabled =
-    backgroundToggle.checked;
+        backgroundToggle.checked;
 
     const speed =
-    Number(
-        speedSlider.value
-    );
+        Number(
+            speedSlider.value
+        );
 
     const transparency =
-    Number(
-        transparencySlider.value
-    );
+        Number(
+            transparencySlider.value
+        );
 
 
     backgroundHint.textContent =
-    enabled
-        ? "Currently enabled"
-        : "Currently disabled";
+        enabled
+            ? "Currently enabled"
+            : "Currently disabled";
 
 
     const opacity =
-    transparency * 0.01;
+        transparency * 0.01;
 
 
     document.documentElement.style.setProperty(
@@ -231,7 +251,7 @@ function updateBackground() {
     else {
 
         const duration =
-        36 / speed;
+            36 / speed;
 
         document.documentElement.style.setProperty(
             "--checker-speed",
@@ -242,10 +262,11 @@ function updateBackground() {
 
 
     speedValue.textContent =
-    speed;
+        speed;
+
 
     transparencyValue.textContent =
-    transparency + "%";
+        transparency + "%";
 
 
     if (
@@ -288,67 +309,123 @@ function updateBackground() {
 updateBackground();
 
 
+/* =====================================================
+   BACKGROUND TOGGLE
+===================================================== */
+
 backgroundToggle.addEventListener(
-"change",
-function() {
+    "change",
+    function() {
 
-    localStorage.setItem(
-        "animatedBackground",
-        backgroundToggle.checked
-    );
+        localStorage.setItem(
+            "animatedBackground",
+            backgroundToggle.checked
+        );
 
-    updateBackground();
+        updateBackground();
 
-}
+    }
 );
 
+
+/* =====================================================
+   SPEED SLIDER
+===================================================== */
 
 speedSlider.addEventListener(
-"input",
-function() {
+    "input",
+    function() {
 
-    localStorage.setItem(
-        "backgroundSpeed",
-        speedSlider.value
-    );
+        localStorage.setItem(
+            "backgroundSpeed",
+            speedSlider.value
+        );
 
-    updateBackground();
+        updateBackground();
 
-}
+    }
 );
 
+
+/* =====================================================
+   TRANSPARENCY SLIDER
+===================================================== */
 
 transparencySlider.addEventListener(
-"input",
-function() {
+    "input",
+    function() {
 
-    localStorage.setItem(
-        "backgroundTransparency",
-        transparencySlider.value
-    );
+        localStorage.setItem(
+            "backgroundTransparency",
+            transparencySlider.value
+        );
 
-    updateBackground();
+        updateBackground();
 
-}
+    }
 );
 
 
+/* =====================================================
+   SETTINGS OPEN / CLOSE
+===================================================== */
+
 settingsButton.addEventListener(
-"click",
-function(event) {
+    "click",
+    function(event) {
 
-    event.stopPropagation();
-
-
-    const isOpen =
-    settingsPanel.classList.contains(
-        "open"
-    );
+        event.stopPropagation();
 
 
-    if (
-        isOpen
-    ) {
+        const isOpen =
+            settingsPanel.classList.contains(
+                "open"
+            );
+
+
+        if (
+            isOpen
+        ) {
+
+            settingsPanel.classList.remove(
+                "open"
+            );
+
+            settingsButton.classList.remove(
+                "open"
+            );
+
+        }
+
+        else {
+
+            settingsPanel.classList.add(
+                "open"
+            );
+
+            settingsButton.classList.add(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+settingsPanel.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function() {
 
         settingsPanel.classList.remove(
             "open"
@@ -359,69 +436,37 @@ function(event) {
         );
 
     }
-
-    else {
-
-        settingsPanel.classList.add(
-            "open"
-        );
-
-        settingsButton.classList.add(
-            "open"
-        );
-
-    }
-
-}
 );
 
 
-settingsPanel.addEventListener(
-"click",
-function(event) {
-
-    event.stopPropagation();
-
-}
-);
-
-
-document.addEventListener(
-"click",
-function() {
-
-    settingsPanel.classList.remove(
-        "open"
-    );
-
-    settingsButton.classList.remove(
-        "open"
-    );
-
-}
-);
-
+/* =====================================================
+   ABOUT:BLANK TOGGLE
+===================================================== */
 
 blankToggle.addEventListener(
-"change",
-function() {
+    "change",
+    function() {
 
-    localStorage.setItem(
-        "openInBlank",
-        blankToggle.checked
-    );
+        localStorage.setItem(
+            "openInBlank",
+            blankToggle.checked
+        );
 
-    updateBlankHint();
+        updateBlankHint();
 
-}
+    }
 );
 
+
+/* =====================================================
+   LAUNCH GAME
+===================================================== */
 
 function launchGame(path) {
 
 
     const useBlank =
-    blankToggle.checked;
+        blankToggle.checked;
 
 
     if (
@@ -429,7 +474,7 @@ function launchGame(path) {
     ) {
 
         window.location.href =
-        path;
+            path;
 
         return;
 
@@ -437,10 +482,10 @@ function launchGame(path) {
 
 
     const gameWindow =
-    window.open(
-        "about:blank",
-        "_blank"
-    );
+        window.open(
+            "about:blank",
+            "_blank"
+        );
 
 
     if (
