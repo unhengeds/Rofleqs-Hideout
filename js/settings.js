@@ -32,18 +32,22 @@ const FAVORITES_KEY =
     "rofleqHideoutFavorites";
 
 
-/* =========================
-   WHOLE SITE THEMES
-========================= */
-
 const THEME_KEY =
     "rofleqHideoutTheme";
 
 
+const CUSTOM_THEME_KEY =
+    "rofleqHideoutCustomTheme";
+
+
+/* =========================
+   THEMES
+========================= */
+
 const THEMES = [
 
     {
-        name: "red",
+        name: "Red",
 
         color: "#e3262e",
 
@@ -61,7 +65,7 @@ const THEMES = [
 
 
     {
-        name: "green",
+        name: "Green",
 
         color: "#20d65a",
 
@@ -79,7 +83,7 @@ const THEMES = [
 
 
     {
-        name: "purple",
+        name: "Purple",
 
         color: "#a855f7",
 
@@ -97,7 +101,7 @@ const THEMES = [
 
 
     {
-        name: "blue",
+        name: "Blue",
 
         color: "#3b82f6",
 
@@ -115,7 +119,7 @@ const THEMES = [
 
 
     {
-        name: "orange",
+        name: "Orange",
 
         color: "#f97316",
 
@@ -140,9 +144,121 @@ const siteLogo =
     );
 
 
+const themeNotification =
+    document.getElementById(
+        "themeNotification"
+    );
+
+
+const themeName =
+    document.getElementById(
+        "themeName"
+    );
+
+
+const customThemeColor =
+    document.getElementById(
+        "customThemeColor"
+    );
+
+
+const customColorLabel =
+    document.getElementById(
+        "customColorLabel"
+    );
+
+
 /* =========================
-   THEME FUNCTIONS
+   THEME HELPERS
 ========================= */
+
+function hexToRgba(
+    hex,
+    alpha
+) {
+
+    hex =
+        hex.replace(
+            "#",
+            ""
+        );
+
+
+    if (
+        hex.length === 3
+    ) {
+
+        hex =
+            hex
+                .split("")
+                .map(
+                    char =>
+                        char + char
+                )
+                .join("");
+
+    }
+
+
+    const number =
+        parseInt(
+            hex,
+            16
+        );
+
+
+    const r =
+        (number >> 16) & 255;
+
+    const g =
+        (number >> 8) & 255;
+
+    const b =
+        number & 255;
+
+
+    return `rgba(${r},${g},${b},${alpha})`;
+
+}
+
+
+function createCustomTheme(
+    color
+) {
+
+    return {
+
+        name:
+            "Custom",
+
+        color:
+            color,
+
+        color2:
+            color,
+
+        soft:
+            hexToRgba(
+                color,
+                0.12
+            ),
+
+        border:
+            hexToRgba(
+                color,
+                0.42
+            ),
+
+        glow:
+            hexToRgba(
+                color,
+                0.18
+            )
+
+    };
+
+}
+
 
 function getThemeIndex() {
 
@@ -156,7 +272,9 @@ function getThemeIndex() {
 
     if (
 
-        Number.isInteger(saved) &&
+        Number.isInteger(
+            saved
+        ) &&
 
         saved >= 0 &&
 
@@ -170,10 +288,43 @@ function getThemeIndex() {
 
 
     return 0;
+
 }
 
 
-function applyTheme(index) {
+function getCustomTheme() {
+
+    const saved =
+        localStorage.getItem(
+            CUSTOM_THEME_KEY
+        );
+
+
+    if (
+        saved &&
+        /^#[0-9a-fA-F]{6}$/.test(
+            saved
+        )
+    ) {
+
+        return saved;
+
+    }
+
+
+    return "#e3262e";
+
+}
+
+
+/* =========================
+   APPLY THEME
+========================= */
+
+function applyTheme(
+    index,
+    save = true
+) {
 
     const theme =
         THEMES[index];
@@ -183,6 +334,33 @@ function applyTheme(index) {
         return;
     }
 
+
+    applyThemeObject(
+        theme,
+        save
+    );
+
+
+    if (themeName) {
+
+        themeName.textContent =
+            theme.name;
+
+    }
+
+
+    updateThemeButtons(
+        index,
+        false
+    );
+
+}
+
+
+function applyThemeObject(
+    theme,
+    save = true
+) {
 
     const root =
         document.documentElement;
@@ -217,8 +395,127 @@ function applyTheme(index) {
         theme.glow
     );
 
+
+    if (save) {
+
+        localStorage.setItem(
+            THEME_KEY,
+            theme.name === "Custom"
+                ? "custom"
+                : getThemeIndex()
+        );
+
+    }
+
 }
 
+
+function applyCustomTheme(
+    color,
+    save = true
+) {
+
+    const theme =
+        createCustomTheme(
+            color
+        );
+
+
+    applyThemeObject(
+        theme,
+        false
+    );
+
+
+    if (save) {
+
+        localStorage.setItem(
+            THEME_KEY,
+            "custom"
+        );
+
+        localStorage.setItem(
+            CUSTOM_THEME_KEY,
+            color
+        );
+
+    }
+
+
+    if (themeName) {
+
+        themeName.textContent =
+            "Custom";
+
+    }
+
+
+    updateThemeButtons(
+        null,
+        true
+    );
+
+    if (customColorLabel) {
+
+        customColorLabel.textContent =
+            color.toUpperCase();
+
+    }
+
+}
+
+
+function updateThemeButtons(
+    selectedIndex,
+    customSelected
+) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".theme-option"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            const index =
+                Number(
+                    button.dataset.themeIndex
+                );
+
+
+            button.classList.toggle(
+                "selected",
+                !customSelected &&
+                index === selectedIndex
+            );
+
+        }
+    );
+
+
+    const customOption =
+        document.querySelector(
+            ".custom-color-option"
+        );
+
+
+    if (customOption) {
+
+        customOption.classList.toggle(
+            "selected",
+            customSelected
+        );
+
+    }
+
+}
+
+
+/* =========================
+   LOGO THEME CYCLE
+========================= */
 
 function cycleTheme() {
 
@@ -229,11 +526,25 @@ function cycleTheme() {
     index++;
 
 
+    /*
+        After Orange, return
+        to Red.
+    */
+
     if (
         index >= THEMES.length
     ) {
 
         index = 0;
+
+
+        /*
+            This is the moment the
+            full theme cycle has
+            completed.
+        */
+
+        showThemeUnlockedNotification();
 
     }
 
@@ -244,7 +555,50 @@ function cycleTheme() {
     );
 
 
-    applyTheme(index);
+    applyTheme(
+        index,
+        false
+    );
+
+}
+
+
+/* =========================
+   THEME NOTIFICATION
+========================= */
+
+let notificationTimer =
+    null;
+
+
+function showThemeUnlockedNotification() {
+
+    if (!themeNotification) {
+        return;
+    }
+
+
+    themeNotification.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        notificationTimer
+    );
+
+
+    notificationTimer =
+        setTimeout(
+            () => {
+
+                themeNotification.classList.remove(
+                    "show"
+                );
+
+            },
+            4500
+        );
 
 }
 
@@ -385,7 +739,9 @@ function getSetting(
 ) {
 
     const saved =
-        localStorage.getItem(key);
+        localStorage.getItem(
+            key
+        );
 
 
     if (
@@ -419,7 +775,9 @@ function setSetting(
 
     localStorage.setItem(
         key,
-        JSON.stringify(value)
+        JSON.stringify(
+            value
+        )
     );
 
 }
@@ -467,11 +825,9 @@ if (settingsButton) {
 
 
             if (
-
                 settingsPanel.classList.contains(
                     "open"
                 )
-
             ) {
 
                 closeSettingsPanel();
@@ -793,6 +1149,203 @@ if (backgroundTransparency) {
     );
 
 }
+
+
+/* =========================
+   THEME BUTTONS
+========================= */
+
+document
+    .querySelectorAll(
+        ".theme-option"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const index =
+                        Number(
+                            button.dataset.themeIndex
+                        );
+
+
+                    localStorage.setItem(
+                        THEME_KEY,
+                        index
+                    );
+
+
+                    applyTheme(
+                        index,
+                        false
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================
+   CUSTOM COLOR
+========================= */
+
+if (customThemeColor) {
+
+    customThemeColor.addEventListener(
+        "input",
+        () => {
+
+            const color =
+                customThemeColor.value;
+
+
+            applyCustomTheme(
+                color,
+                true
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   RESET BUTTONS
+========================= */
+
+document
+    .querySelectorAll(
+        ".setting-reset"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+
+                    const setting =
+                        button.dataset.reset;
+
+
+                    if (
+                        setting ===
+                        "openInBlank"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.openInBlank,
+                            defaultSettings.openInBlank
+                        );
+
+
+                        applyOpenInBlank(
+                            defaultSettings.openInBlank
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "animatedBackground"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.animatedBackground,
+                            defaultSettings.animatedBackground
+                        );
+
+
+                        applyAnimatedBackground(
+                            defaultSettings.animatedBackground
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "backgroundSpeed"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.backgroundSpeed,
+                            defaultSettings.backgroundSpeed
+                        );
+
+
+                        applyBackgroundSpeed(
+                            defaultSettings.backgroundSpeed
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "backgroundTransparency"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.backgroundTransparency,
+                            defaultSettings.backgroundTransparency
+                        );
+
+
+                        applyBackgroundTransparency(
+                            defaultSettings.backgroundTransparency
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "theme"
+                    ) {
+
+                        localStorage.setItem(
+                            THEME_KEY,
+                            0
+                        );
+
+
+                        localStorage.setItem(
+                            CUSTOM_THEME_KEY,
+                            "#e3262e"
+                        );
+
+
+                        if (customThemeColor) {
+
+                            customThemeColor.value =
+                                "#e3262e";
+
+                        }
+
+
+                        applyTheme(
+                            0,
+                            false
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
 
 
 /* =========================
@@ -1140,13 +1693,23 @@ function setActiveNav(
     sectionId
 ) {
 
+    /*
+        INTENTIONALLY SWAPPED.
+
+        Favorites section
+        -> Games navigation active.
+
+        Games section
+        -> Favorites navigation active.
+    */
+
     if (favoritesNav) {
 
         favoritesNav.classList.toggle(
             "active",
 
             sectionId ===
-                "favorites"
+                "games"
         );
 
     }
@@ -1158,7 +1721,7 @@ function setActiveNav(
             "active",
 
             sectionId ===
-                "games"
+                "favorites"
         );
 
     }
@@ -1252,15 +1815,6 @@ if (gamesNav) {
    SCROLL DETECTION
 ========================= */
 
-/*
-    Instead of IntersectionObserver,
-    use the actual scroll position.
-
-    This prevents both sections from
-    being considered active at the
-    same time.
-*/
-
 const sections = [
 
     document.getElementById(
@@ -1276,10 +1830,6 @@ const sections = [
 
 function updateNavigationFromScroll() {
 
-    /*
-        Account for the fixed top bar.
-    */
-
     const scrollPosition =
         window.scrollY + 140;
 
@@ -1287,11 +1837,6 @@ function updateNavigationFromScroll() {
     let currentSection =
         null;
 
-
-    /*
-        Find the last section whose
-        top has already been passed.
-    */
 
     sections.forEach(
         section => {
@@ -1310,12 +1855,13 @@ function updateNavigationFromScroll() {
     );
 
 
-    /*
-        At the very top of the page,
-        keep Games selected.
-    */
-
     if (!currentSection) {
+
+        /*
+            The welcome area is before
+            Favorites, so treat it like
+            the Games area.
+        */
 
         currentSection =
             "games";
@@ -1330,10 +1876,6 @@ function updateNavigationFromScroll() {
 }
 
 
-/*
-    Update while scrolling.
-*/
-
 window.addEventListener(
     "scroll",
     updateNavigationFromScroll,
@@ -1342,11 +1884,6 @@ window.addEventListener(
     }
 );
 
-
-/*
-    Update after everything has
-    finished loading.
-*/
 
 window.addEventListener(
     "load",
@@ -1376,11 +1913,8 @@ function launchGame(
 
         const gameWindow =
             window.open(
-
                 "about:blank",
-
                 "_blank"
-
             );
 
 
@@ -1408,7 +1942,6 @@ function launchGame(
                 <title>
                     Rofleq's Hideout
                 </title>
-
 
                 <style>
 
@@ -1548,9 +2081,59 @@ function initializeFavorites() {
 
 function initializeTheme() {
 
+    const saved =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+
+    /*
+        Custom theme
+    */
+
+    if (
+        saved === "custom"
+    ) {
+
+        const color =
+            getCustomTheme();
+
+
+        if (customThemeColor) {
+
+            customThemeColor.value =
+                color;
+
+        }
+
+
+        applyCustomTheme(
+            color,
+            false
+        );
+
+
+        return;
+
+    }
+
+
+    const index =
+        getThemeIndex();
+
+
     applyTheme(
-        getThemeIndex()
+        index,
+        false
     );
+
+
+    if (customThemeColor) {
+
+        customThemeColor.value =
+            getCustomTheme();
+
+    }
 
 }
 
@@ -1569,11 +2152,6 @@ document.addEventListener(
 
         initializeTheme();
 
-
-        /*
-            Make sure the navigation
-            starts on the correct section.
-        */
 
         updateNavigationFromScroll();
 
