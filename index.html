@@ -54,6 +54,9 @@
 
             --border:
                 rgba(227, 38, 46, 0.28);
+
+            --checker-opacity: 0.018;
+            --checker-speed: 6s;
         }
 
 
@@ -107,18 +110,18 @@
 
                 linear-gradient(
                     45deg,
-                    rgba(255,255,255,0.018) 25%,
+                    rgba(255,255,255,var(--checker-opacity)) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255,255,255,0.018) 75%
+                    rgba(255,255,255,var(--checker-opacity)) 75%
                 ),
 
                 linear-gradient(
                     45deg,
-                    rgba(255,255,255,0.018) 25%,
+                    rgba(255,255,255,var(--checker-opacity)) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255,255,255,0.018) 75%
+                    rgba(255,255,255,var(--checker-opacity)) 75%
                 );
 
             background-size:
@@ -129,7 +132,7 @@
                 40px 40px;
 
             animation:
-                checkerMove 6s linear infinite;
+                checkerMove var(--checker-speed) linear infinite;
         }
 
 
@@ -158,6 +161,11 @@
                 ),
 
                 rgba(5,5,5,0.72);
+        }
+
+
+        body.background-disabled::before {
+            display: none;
         }
 
 
@@ -978,6 +986,34 @@
 
             background:
                 #06100a;
+        }
+
+
+        /* =====================================================
+           BACKGROUND RANGE SETTINGS
+        ===================================================== */
+
+        .background-extra {
+            display: none;
+        }
+
+        .background-extra.visible {
+            display: block;
+        }
+
+        .range-value {
+            color: var(--green2);
+            font-size: 12px;
+            font-weight: 800;
+            min-width: 30px;
+            text-align: right;
+        }
+
+        .background-extra input[type="range"] {
+            width: 100%;
+            margin-top: 14px;
+            accent-color: var(--green);
+            cursor: pointer;
         }
 
 
@@ -1816,6 +1852,140 @@
                     </div>
 
 
+                    <!-- =====================================
+                         ANIMATED BACKGROUND SETTING
+                    ====================================== -->
+
+                    <div class="setting-box">
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <div class="setting-name">
+                                    Animated Background
+                                </div>
+
+                                <div
+                                    class="setting-hint"
+                                    id="backgroundHint"
+                                >
+                                    Currently enabled
+                                </div>
+
+                            </div>
+
+                            <label class="toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="backgroundToggle"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-description">
+                            Turns the moving checkerboard background
+                            on or off. When enabled, extra controls
+                            let you change its speed and transparency.
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         BACKGROUND SPEED
+                    ====================================== -->
+
+                    <div
+                        class="setting-box background-extra"
+                        id="speedSetting"
+                    >
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <div class="setting-name">
+                                    Background Speed
+                                </div>
+
+                                <div class="setting-hint">
+                                    Change how quickly the background moves.
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="range-value"
+                                id="speedValue"
+                            >
+                                6
+                            </div>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="speedSlider"
+                            min="0"
+                            max="20"
+                            value="6"
+                            step="1"
+                        >
+
+                    </div>
+
+
+                    <!-- =====================================
+                         BACKGROUND TRANSPARENCY
+                    ====================================== -->
+
+                    <div
+                        class="setting-box background-extra"
+                        id="transparencySetting"
+                    >
+
+                        <div class="setting-row">
+
+                            <div class="setting-text">
+
+                                <div class="setting-name">
+                                    Background Transparency
+                                </div>
+
+                                <div class="setting-hint">
+                                    Change how visible the checkerboard is.
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="range-value"
+                                id="transparencyValue"
+                            >
+                                12%
+                            </div>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="transparencySlider"
+                            min="0"
+                            max="100"
+                            value="1.8"
+                            step="0.1"
+                        >
+
+                    </div>
+
+
                 </div>
 
 
@@ -2039,6 +2209,54 @@
             );
 
 
+        const backgroundToggle =
+            document.getElementById(
+                "backgroundToggle"
+            );
+
+
+        const backgroundHint =
+            document.getElementById(
+                "backgroundHint"
+            );
+
+
+        const speedSlider =
+            document.getElementById(
+                "speedSlider"
+            );
+
+
+        const speedValue =
+            document.getElementById(
+                "speedValue"
+            );
+
+
+        const transparencySlider =
+            document.getElementById(
+                "transparencySlider"
+            );
+
+
+        const transparencyValue =
+            document.getElementById(
+                "transparencyValue"
+            );
+
+
+        const speedSetting =
+            document.getElementById(
+                "speedSetting"
+            );
+
+
+        const transparencySetting =
+            document.getElementById(
+                "transparencySetting"
+            );
+
+
 
         /* =====================================================
            LOAD ABOUT:BLANK SETTING
@@ -2102,6 +2320,242 @@
 
 
         updateBlankHint();
+
+
+        /* =====================================================
+           LOAD BACKGROUND SETTINGS
+           ON BY DEFAULT
+        ===================================================== */
+
+        const savedBackground =
+            localStorage.getItem(
+                "animatedBackground"
+            );
+
+
+        if (savedBackground === null) {
+
+            backgroundToggle.checked =
+                true;
+
+            localStorage.setItem(
+                "animatedBackground",
+                "true"
+            );
+
+        }
+
+        else {
+
+            backgroundToggle.checked =
+                savedBackground === "true";
+
+        }
+
+
+        const savedSpeed =
+            localStorage.getItem(
+                "backgroundSpeed"
+            );
+
+
+        if (savedSpeed === null) {
+
+            speedSlider.value =
+                6;
+
+        }
+
+        else {
+
+            speedSlider.value =
+                savedSpeed;
+
+        }
+
+
+        const savedTransparency =
+            localStorage.getItem(
+                "backgroundTransparency"
+            );
+
+
+        /*
+         * The original background uses 0.018 opacity.
+         * 1.8% on this slider maps to that original value.
+         */
+
+        if (savedTransparency === null) {
+
+            transparencySlider.value =
+                1.8;
+
+        }
+
+        else {
+
+            transparencySlider.value =
+                savedTransparency;
+
+        }
+
+
+        function updateBackground() {
+
+            const enabled =
+                backgroundToggle.checked;
+
+
+            const speed =
+                Number(
+                    speedSlider.value
+                );
+
+
+            const transparency =
+                Number(
+                    transparencySlider.value
+                );
+
+
+            backgroundHint.textContent =
+                enabled
+                    ? "Currently enabled"
+                    : "Currently disabled";
+
+
+            /*
+             * 1.8% is the original 0.018 checker opacity.
+             * 100% gives a much stronger checkerboard.
+             */
+
+            const opacity =
+                transparency * 0.01;
+
+
+            document.documentElement.style.setProperty(
+                "--checker-opacity",
+                opacity
+            );
+
+
+            /*
+             * Speed 0 stops the movement.
+             * Speed 6 is the original 6 second animation.
+             * Higher values move faster.
+             */
+
+            if (speed === 0) {
+
+                document.documentElement.style.setProperty(
+                    "--checker-speed",
+                    "999999s"
+                );
+
+            }
+
+            else {
+
+                const duration =
+                    36 / speed;
+
+                document.documentElement.style.setProperty(
+                    "--checker-speed",
+                    duration + "s"
+                );
+
+            }
+
+
+            speedValue.textContent =
+                speed;
+
+
+            transparencyValue.textContent =
+                transparency + "%";
+
+
+            if (enabled) {
+
+                document.body.classList.remove(
+                    "background-disabled"
+                );
+
+                speedSetting.classList.add(
+                    "visible"
+                );
+
+                transparencySetting.classList.add(
+                    "visible"
+                );
+
+            }
+
+            else {
+
+                document.body.classList.add(
+                    "background-disabled"
+                );
+
+                speedSetting.classList.remove(
+                    "visible"
+                );
+
+                transparencySetting.classList.remove(
+                    "visible"
+                );
+
+            }
+
+        }
+
+
+        updateBackground();
+
+
+        backgroundToggle.addEventListener(
+            "change",
+            function() {
+
+                localStorage.setItem(
+                    "animatedBackground",
+                    backgroundToggle.checked
+                );
+
+                updateBackground();
+
+            }
+        );
+
+
+        speedSlider.addEventListener(
+            "input",
+            function() {
+
+                localStorage.setItem(
+                    "backgroundSpeed",
+                    speedSlider.value
+                );
+
+                updateBackground();
+
+            }
+        );
+
+
+        transparencySlider.addEventListener(
+            "input",
+            function() {
+
+                localStorage.setItem(
+                    "backgroundTransparency",
+                    transparencySlider.value
+                );
+
+                updateBackground();
+
+            }
+        );
 
 
 
