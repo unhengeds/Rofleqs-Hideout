@@ -11,10 +11,9 @@
 
 <body>
 
-    <!-- Animated Background -->
     <div class="background"></div>
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="sidebar-logo">
@@ -33,7 +32,11 @@
                 <span>Home</span>
             </a>
 
-            <a href="https://github.com/" target="_blank" class="nav-item">
+            <a
+                href="https://github.com/"
+                target="_blank"
+                class="nav-item"
+            >
                 <span class="nav-icon">◈</span>
                 <span>Github Version</span>
             </a>
@@ -51,10 +54,10 @@
     </aside>
 
 
-    <!-- Main -->
+    <!-- MAIN -->
     <main class="main">
 
-        <!-- Top Bar -->
+        <!-- TOPBAR -->
         <header class="topbar">
 
             <div class="topbar-left">
@@ -68,7 +71,11 @@
                     Online
                 </div>
 
-                <button class="settings-button" id="settingsButton" aria-label="Settings">
+                <button
+                    class="settings-button"
+                    id="settingsButton"
+                    aria-label="Settings"
+                >
                     ⚙
                 </button>
 
@@ -77,70 +84,109 @@
         </header>
 
 
-        <!-- Settings Panel -->
-        <section class="settings-panel" id="settingsPanel">
+        <!-- SETTINGS -->
+        <section
+            class="settings-panel"
+            id="settingsPanel"
+        >
 
             <div class="settings-header">
+
                 <div>
                     <h2>Settings</h2>
-                    <p>Customize your Hideout experience.</p>
+
+                    <p>
+                        Customize your Hideout experience.
+                    </p>
                 </div>
 
-                <button class="close-settings" id="closeSettings">
+                <button
+                    class="close-settings"
+                    id="closeSettings"
+                >
                     ×
                 </button>
+
             </div>
 
 
-            <!-- About Blank -->
+            <!-- ABOUT BLANK -->
             <div class="setting">
 
                 <div class="setting-info">
-                    <h3>Open games in about:blank</h3>
+
+                    <h3>
+                        Open games in about:blank
+                    </h3>
+
                     <p>
-                        Opens games inside a blank page instead of directly
-                        navigating away from the Hideout.
+                        Opens games inside a blank page instead of
+                        directly navigating away from the Hideout.
                     </p>
+
                 </div>
 
                 <label class="switch">
-                    <input type="checkbox" id="openBlankToggle">
+
+                    <input
+                        type="checkbox"
+                        id="openBlankToggle"
+                    >
+
                     <span class="slider"></span>
+
                 </label>
 
             </div>
 
 
-            <!-- Animated Background -->
+            <!-- ANIMATED BACKGROUND -->
             <div class="setting">
 
                 <div class="setting-info">
-                    <h3>Animated background</h3>
+
+                    <h3>
+                        Animated background
+                    </h3>
+
                     <p>
-                        Makes the red checkerboard background move slowly
-                        across the page.
+                        Makes the red checkerboard background move
+                        slowly across the page.
                     </p>
+
                 </div>
 
                 <label class="switch">
-                    <input type="checkbox" id="animatedBackgroundToggle">
+
+                    <input
+                        type="checkbox"
+                        id="animatedBackgroundToggle"
+                    >
+
                     <span class="slider"></span>
+
                 </label>
 
             </div>
 
 
-            <!-- Background Speed -->
+            <!-- BACKGROUND SPEED -->
             <div class="setting">
 
                 <div class="setting-info">
-                    <h3>Background speed</h3>
+
+                    <h3>
+                        Background speed
+                    </h3>
+
                     <p>
                         Controls how quickly the checkerboard moves.
                     </p>
+
                 </div>
 
                 <div class="range-container">
+
                     <input
                         type="range"
                         id="backgroundSpeed"
@@ -152,22 +198,29 @@
                     <span id="backgroundSpeedValue">
                         6s
                     </span>
+
                 </div>
 
             </div>
 
 
-            <!-- Transparency -->
+            <!-- TRANSPARENCY -->
             <div class="setting">
 
                 <div class="setting-info">
-                    <h3>Background transparency</h3>
+
+                    <h3>
+                        Background transparency
+                    </h3>
+
                     <p>
                         Controls how visible the red checkerboard is.
                     </p>
+
                 </div>
 
                 <div class="range-container">
+
                     <input
                         type="range"
                         id="backgroundTransparency"
@@ -180,6 +233,7 @@
                     <span id="backgroundTransparencyValue">
                         15.5%
                     </span>
+
                 </div>
 
             </div>
@@ -187,10 +241,11 @@
         </section>
 
 
-        <!-- Content -->
+        <!-- CONTENT -->
         <div class="content">
 
-            <!-- Welcome -->
+
+            <!-- WELCOME -->
             <section class="welcome">
 
                 <div class="welcome-decoration"></div>
@@ -216,12 +271,13 @@
             </section>
 
 
-            <!-- Games -->
+            <!-- GAMES -->
             <section class="games-section">
 
                 <div class="section-heading">
 
                     <div>
+
                         <p class="section-label">
                             GAME LIBRARY
                         </p>
@@ -229,6 +285,7 @@
                         <h2>
                             Available Games
                         </h2>
+
                     </div>
 
                     <div class="section-line"></div>
@@ -236,7 +293,7 @@
                 </div>
 
 
-                <!-- Minecraft -->
+                <!-- MINECRAFT -->
                 <div
                     class="game-card"
                     onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
@@ -245,7 +302,7 @@
                     <div class="game-image">
 
                         <img
-                            src="assets/minecraft1.9.4.png"
+                            src="assets/minecraft1.9.4"
                             alt="Minecraft 1.9.4"
                             class="game-thumbnail"
                         >
@@ -258,11 +315,15 @@
                         <div class="game-title-row">
 
                             <div>
-                                <h3>Minecraft</h3>
+
+                                <h3>
+                                    Minecraft
+                                </h3>
 
                                 <p>
                                     Eaglercraft 1.9.4
                                 </p>
+
                             </div>
 
                             <span class="version">
@@ -280,7 +341,12 @@
 
                         <button
                             class="play-button"
-                            onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/eaglercraft-1.9.4/index.html'
+                                );
+                            "
                         >
                             ▶ PLAY
                         </button>
@@ -292,7 +358,7 @@
             </section>
 
 
-            <!-- Footer -->
+            <!-- FOOTER -->
             <footer class="footer">
 
                 <div class="footer-line"></div>
