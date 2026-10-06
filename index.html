@@ -1,941 +1,1707 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Rofleq's Hideout</title>
 
+
     <style>
-        :root {
-            --bg: #050505;
-            --sidebar: #080808;
-            --panel: #0d0d0d;
-            --panel2: #121212;
-            --text: #ffffff;
-            --muted: #8d8d8d;
 
-            --green: #20d65a;
-            --green2: #39ff78;
-
-            --red: #e3262e;
-            --red2: #ff4048;
-
-            --background-opacity: 0.12;
-            --background-speed: 6s;
-        }
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             box-sizing: border-box;
-        }
-
-        html,
-        body {
             margin: 0;
             padding: 0;
-            min-height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--bg);
-            color: var(--text);
         }
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+
+            --bg: #050505;
+
+            --sidebar: #080808;
+
+            --panel: #0d0d0d;
+
+            --panel2: #121212;
+
+            --text: #ffffff;
+
+            --muted: #8d8d8d;
+
+            --green: #20d65a;
+
+            --green2: #39ff78;
+
+            --red: #e3262e;
+
+            --red2: #ff4048;
+
+            --border:
+                rgba(227, 38, 46, 0.28);
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        html {
+            min-height: 100%;
+        }
+
 
         body {
-            overflow-x: hidden;
-            position: relative;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                var(--bg);
+
+            color:
+                var(--text);
+
+            min-height:
+                100vh;
+
+            overflow-x:
+                hidden;
         }
 
-        /* =========================================================
-           ANIMATED BACKGROUND
-           ========================================================= */
+
+        /* =====================================================
+           MOVING CHECKERBOARD
+        ===================================================== */
 
         body::before {
+
             content: "";
+
             position: fixed;
-            inset: -80px;
+
+            inset: -100px;
+
             z-index: -2;
+
             pointer-events: none;
 
             background:
+
                 linear-gradient(
                     45deg,
-                    rgba(255, 255, 255, var(--background-opacity)) 25%,
+                    rgba(255,255,255,0.018) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255, 255, 255, var(--background-opacity)) 75%
+                    rgba(255,255,255,0.018) 75%
                 ),
+
                 linear-gradient(
                     45deg,
-                    rgba(255, 255, 255, var(--background-opacity)) 25%,
+                    rgba(255,255,255,0.018) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255, 255, 255, var(--background-opacity)) 75%
+                    rgba(255,255,255,0.018) 75%
                 );
+
+            background-size:
+                80px 80px;
 
             background-position:
                 0 0,
                 40px 40px;
 
-            background-size:
-                80px 80px,
-                80px 80px;
-
-            animation: backgroundMove var(--background-speed) linear infinite;
-            transition: opacity 0.3s ease;
+            animation:
+                checkerMove 6s linear infinite;
         }
+
+
+        /* =====================================================
+           DARK OVERLAY
+        ===================================================== */
 
         body::after {
+
             content: "";
+
             position: fixed;
+
             inset: 0;
+
             z-index: -1;
+
             pointer-events: none;
-            background: rgba(0, 0, 0, 0.72);
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(227,38,46,0.025),
+                    transparent 45%
+                ),
+
+                rgba(5,5,5,0.72);
         }
 
-        body.background-disabled::before {
-            display: none;
-        }
 
-        @keyframes backgroundMove {
+        @keyframes checkerMove {
+
             from {
-                transform: translate(0, 0);
+                transform:
+                    translate(0, 0);
             }
 
             to {
-                transform: translate(80px, 80px);
+                transform:
+                    translate(80px, 80px);
             }
+
         }
 
-        /* =========================================================
-           GENERAL
-           ========================================================= */
 
-        button,
-        a {
-            font-family: inherit;
-        }
-
-        .rofl-green {
-            color: var(--green2);
-        }
-
-        .hideout-red {
-            color: var(--red2);
-        }
-
-        /* =========================================================
+        /* =====================================================
            SIDEBAR
-           ========================================================= */
+        ===================================================== */
 
         .sidebar {
+
             position: fixed;
+
             left: 0;
+
             top: 0;
-            bottom: 0;
+
             width: 240px;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(10, 10, 10, 0.98),
-                    rgba(5, 5, 5, 0.98)
-                );
+            height: 100vh;
 
-            border-right: 1px solid rgba(255, 255, 255, 0.07);
+            background:
+                rgba(8,8,8,0.95);
+
+            border-right:
+                1px solid var(--red);
+
+            padding:
+                25px 18px;
 
             display: flex;
+
             flex-direction: column;
 
             z-index: 50;
         }
 
-        .sidebar-top {
-            padding: 28px 20px 22px;
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
+            width: 100%;
+
+            padding:
+                5px 0;
+
+            margin-bottom:
+                5px;
         }
+
 
         .logo-image {
-            width: 125px;
-            height: auto;
-            display: block;
-            object-fit: contain;
+
+            width:
+                170px;
+
+            height:
+                auto;
+
+            max-height:
+                155px;
+
+            object-fit:
+                contain;
+
+            display:
+                block;
+
+            filter:
+                drop-shadow(
+                    0 0 12px
+                    rgba(227,38,46,0.15)
+                );
         }
 
-        .sidebar-nav {
-            padding: 8px 14px;
+
+        .version-text {
+
+            text-align:
+                center;
+
+            color:
+                #666;
+
+            font-size:
+                9px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                0.5px;
+
+            margin-bottom:
+                32px;
         }
 
-        .nav-label {
-            color: #555;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin: 10px 12px;
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .nav-title {
+
+            color:
+                #6d3033;
+
+            font-size:
+                11px;
+
+            font-weight:
+                bold;
+
+            letter-spacing:
+                1.5px;
+
+            text-transform:
+                uppercase;
+
+            padding:
+                0 12px;
+
+            margin-bottom:
+                10px;
         }
+
 
         .nav-item {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 12px;
 
-            padding: 12px 13px;
-            margin-bottom: 5px;
+            display:
+                flex;
 
-            border-radius: 7px;
+            align-items:
+                center;
 
-            color: #aaa;
-            text-decoration: none;
+            gap:
+                12px;
 
-            font-size: 14px;
-            font-weight: 600;
+            padding:
+                12px;
+
+            border-radius:
+                9px;
+
+            color:
+                var(--muted);
+
+            text-decoration:
+                none;
+
+            margin-bottom:
+                5px;
+
+            font-size:
+                14px;
 
             transition:
-                background 0.2s ease,
-                color 0.2s ease,
-                transform 0.2s ease;
+                0.2s;
         }
+
 
         .nav-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            transform: translateX(2px);
+
+            color:
+                white;
+
+            background:
+                rgba(227,38,46,0.10);
         }
+
 
         .nav-item.active {
-            background: rgba(32, 214, 90, 0.08);
-            color: var(--green2);
-            border-left: 2px solid var(--green);
+
+            color:
+                white;
+
+            background:
+                rgba(227,38,46,0.14);
+
+            border-left:
+                3px solid var(--red);
         }
+
 
         .nav-icon {
-            width: 18px;
-            text-align: center;
-            font-size: 15px;
+
+            width:
+                20px;
+
+            text-align:
+                center;
+
+            font-size:
+                17px;
         }
+
+
+        /* =====================================================
+           SIDEBAR FOOTER
+        ===================================================== */
 
         .sidebar-bottom {
-            margin-top: auto;
-            padding: 18px;
-            color: #444;
-            font-size: 11px;
-            line-height: 1.5;
+
+            margin-top:
+                auto;
+
+            padding:
+                15px 10px 5px;
+
+            color:
+                #555;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
         }
 
-        /* =========================================================
+
+        .sidebar-bottom .red-text {
+
+            color:
+                var(--red2);
+        }
+
+
+        /* =====================================================
            MAIN
-           ========================================================= */
+        ===================================================== */
 
         .main {
-            margin-left: 240px;
-            min-height: 100vh;
+
+            margin-left:
+                240px;
+
+            min-height:
+                100vh;
         }
 
-        /* =========================================================
+
+        /* =====================================================
            TOPBAR
-           ========================================================= */
+        ===================================================== */
 
         .topbar {
-            height: 75px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            height:
+                75px;
 
-            padding: 0 28px;
+            display:
+                flex;
 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            align-items:
+                center;
 
-            background: rgba(5, 5, 5, 0.82);
-            backdrop-filter: blur(12px);
+            justify-content:
+                space-between;
 
-            position: relative;
-            z-index: 40;
+            padding:
+                0 35px;
+
+            border-bottom:
+                1px solid var(--red);
+
+            background:
+                rgba(5,5,5,0.92);
+
+            position:
+                relative;
+
+            z-index:
+                40;
         }
+
 
         .topbar-title {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
         }
+
+
+        .topbar-title .red {
+
+            color:
+                var(--red2);
+        }
+
+
+        .topbar-title .green {
+
+            color:
+                var(--green2);
+        }
+
+
+        /* =====================================================
+           TOP RIGHT
+        ===================================================== */
 
         .topbar-right {
-            display: flex;
-            align-items: center;
-            gap: 14px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
+
+            position:
+                relative;
         }
 
-        .online-status {
-            display: flex;
-            align-items: center;
-            gap: 7px;
 
-            color: #777;
-            font-size: 12px;
+        /* =====================================================
+           ONLINE STATUS
+        ===================================================== */
+
+        .status {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                #777;
+
+            font-size:
+                12px;
         }
 
-        .online-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 9px rgba(32, 214, 90, 0.7);
+
+        .status-dot {
+
+            width:
+                8px;
+
+            height:
+                8px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 10px var(--green);
         }
 
-        /* =========================================================
+
+        /* =====================================================
            SETTINGS BUTTON
-           ========================================================= */
+        ===================================================== */
 
         .settings-button {
-            width: 38px;
-            height: 38px;
 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            width:
+                38px;
 
-            background: rgba(255, 255, 255, 0.035);
-            color: #aaa;
+            height:
+                38px;
 
-            font-size: 19px;
-            cursor: pointer;
+            border:
+                1px solid
+                rgba(227,38,46,0.35);
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius:
+                9px;
+
+            background:
+                rgba(227,38,46,0.08);
+
+            color:
+                #aaa;
+
+            font-size:
+                20px;
+
+            cursor:
+                pointer;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
 
             transition:
-                background 0.2s ease,
-                color 0.2s ease,
-                transform 0.3s ease;
+                0.2s;
         }
+
 
         .settings-button:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.08);
+
+            color:
+                white;
+
+            background:
+                rgba(227,38,46,0.18);
+
+            border-color:
+                var(--red2);
+
+            box-shadow:
+                0 0 16px
+                rgba(227,38,46,0.16);
         }
+
 
         .settings-button.open {
-            color: var(--green2);
-            transform: rotate(45deg);
+
+            color:
+                white;
+
+            background:
+                rgba(227,38,46,0.18);
+
+            border-color:
+                var(--red2);
         }
 
-        /* =========================================================
+
+        /* =====================================================
            SETTINGS PANEL
-           ========================================================= */
+        ===================================================== */
 
         .settings-panel {
-            position: absolute;
-            top: 67px;
-            right: 22px;
 
-            width: 410px;
+            position:
+                absolute;
+
+            top:
+                52px;
+
+            right:
+                0;
+
+            width:
+                410px;
+
+            padding:
+                22px;
 
             background:
-                linear-gradient(
-                    180deg,
-                    rgba(16, 16, 16, 0.98),
-                    rgba(8, 8, 8, 0.98)
-                );
+                rgba(13,13,13,0.99);
 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border:
+                1px solid
+                rgba(227,38,46,0.45);
 
-            padding: 20px;
+            border-radius:
+                14px;
 
             box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(0, 0, 0, 0.4);
 
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px) scale(0.98);
+                0 20px 50px
+                rgba(0,0,0,0.65),
+
+                0 0 25px
+                rgba(227,38,46,0.08);
+
+            opacity:
+                0;
+
+            transform:
+                translateY(-8px);
+
+            pointer-events:
+                none;
 
             transition:
-                opacity 0.2s ease,
-                visibility 0.2s ease,
-                transform 0.2s ease;
-
-            z-index: 100;
+                opacity 0.18s ease,
+                transform 0.18s ease;
         }
+
 
         .settings-panel.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
+
+            opacity:
+                1;
+
+            transform:
+                translateY(0);
+
+            pointer-events:
+                auto;
         }
 
-        .settings-title {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 5px;
+
+        /* =====================================================
+           SETTINGS HEADER
+        ===================================================== */
+
+        .settings-panel-title {
+
+            color:
+                white;
+
+            font-size:
+                19px;
+
+            font-weight:
+                800;
+
+            margin-bottom:
+                5px;
         }
 
-        .settings-subtitle {
-            color: #777;
-            font-size: 12px;
-            line-height: 1.5;
-            margin-bottom: 18px;
+
+        .settings-panel-subtitle {
+
+            color:
+                #666;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.4;
+
+            margin-bottom:
+                20px;
         }
 
-        .setting-card {
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 9px;
 
-            padding: 14px;
+        /* =====================================================
+           SETTING CARD
+        ===================================================== */
 
-            margin-bottom: 9px;
+        .setting-box {
 
-            transition:
-                border-color 0.2s ease,
-                background 0.2s ease;
-        }
+            position:
+                relative;
 
-        .setting-card:hover {
-            background: rgba(255, 255, 255, 0.055);
-            border-color: rgba(255, 255, 255, 0.12);
-        }
+            padding:
+                17px;
 
-        .setting-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
+            border:
+                1px solid
+                rgba(227,38,46,0.16);
 
-        .setting-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: #eee;
-        }
-
-        .setting-hint {
-            font-size: 10px;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        .setting-description {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-
-            color: #777;
-            font-size: 11px;
-            line-height: 1.5;
-
-            margin-top: 0;
-
-            transition:
-                max-height 0.25s ease,
-                opacity 0.25s ease,
-                margin-top 0.25s ease;
-        }
-
-        .setting-card:hover .setting-description {
-            max-height: 100px;
-            opacity: 1;
-            margin-top: 10px;
-        }
-
-        /* =========================================================
-           TOGGLE
-           ========================================================= */
-
-        .toggle {
-            position: relative;
-            width: 43px;
-            height: 23px;
-            flex-shrink: 0;
-        }
-
-        .toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            inset: 0;
-
-            cursor: pointer;
-
-            background: #292929;
-            border: 1px solid #3a3a3a;
-            border-radius: 30px;
-
-            transition: 0.2s;
-        }
-
-        .toggle-slider::before {
-            content: "";
-
-            position: absolute;
-
-            width: 17px;
-            height: 17px;
-
-            left: 2px;
-            top: 2px;
-
-            border-radius: 50%;
-            background: #888;
-
-            transition: 0.2s;
-        }
-
-        .toggle input:checked + .toggle-slider {
-            background: rgba(32, 214, 90, 0.2);
-            border-color: var(--green);
-        }
-
-        .toggle input:checked + .toggle-slider::before {
-            transform: translateX(19px);
-            background: var(--green2);
-            box-shadow: 0 0 8px rgba(57, 255, 120, 0.45);
-        }
-
-        /* =========================================================
-           SLIDERS
-           ========================================================= */
-
-        .range-setting {
-            display: none;
-        }
-
-        .range-setting.visible {
-            display: block;
-        }
-
-        .range-control {
-            margin-top: 12px;
-        }
-
-        .range-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            font-size: 10px;
-            color: #666;
-        }
-
-        .range-value {
-            color: var(--green2);
-            font-weight: bold;
-            font-size: 11px;
-        }
-
-        input[type="range"] {
-            appearance: none;
-            width: 100%;
-            height: 4px;
-
-            margin: 10px 0 2px;
-
-            border-radius: 10px;
-            background: #292929;
-
-            outline: none;
-            cursor: pointer;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            appearance: none;
-
-            width: 15px;
-            height: 15px;
-
-            border-radius: 50%;
-            border: 0;
-
-            background: var(--green2);
-            box-shadow: 0 0 8px rgba(57, 255, 120, 0.3);
-
-            cursor: pointer;
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 15px;
-            height: 15px;
-
-            border-radius: 50%;
-            border: 0;
-
-            background: var(--green2);
-            box-shadow: 0 0 8px rgba(57, 255, 120, 0.3);
-
-            cursor: pointer;
-        }
-
-        /* =========================================================
-           CONTENT
-           ========================================================= */
-
-        .content {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 48px 42px 30px;
-        }
-
-        .welcome {
-            margin-bottom: 38px;
-        }
-
-        .welcome h1 {
-            margin: 0 0 8px;
-
-            font-size: clamp(30px, 4vw, 48px);
-            line-height: 1.05;
-
-            letter-spacing: -1.5px;
-            font-weight: 900;
-        }
-
-        .welcome p {
-            margin: 0;
-
-            color: #777;
-            font-size: 14px;
-        }
-
-        .section-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-size: 12px;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: bold;
-        }
-
-        /* =========================================================
-           GAME CARD
-           ========================================================= */
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
-        }
-
-        .game-card {
-            position: relative;
-
-            min-height: 220px;
-
-            border-radius: 12px;
+            border-radius:
+                11px;
 
             background:
-                linear-gradient(
-                    145deg,
-                    rgba(20, 20, 20, 0.96),
-                    rgba(8, 8, 8, 0.96)
-                );
+                rgba(227,38,46,0.045);
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
-
-            overflow: hidden;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .game-card::before {
-            content: "";
-
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-
-            height: 2px;
-
-            background: linear-gradient(
-                90deg,
-                var(--green),
-                var(--red)
-            );
-
-            opacity: 0.8;
-        }
-
-        .game-card:hover {
-            transform: translateY(-4px);
-
-            border-color: rgba(57, 255, 120, 0.22);
-
-            box-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.45),
-                0 0 30px rgba(32, 214, 90, 0.04);
-        }
-
-        .game-card-content {
-            padding: 24px;
-            height: 100%;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        .game-version {
-            color: #666;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .minecraft-title {
-            margin-top: 22px;
-
-            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-
-            font-size: 42px;
-            line-height: 0.9;
-
-            letter-spacing: -1px;
-
-            color: #eee;
-
-            text-shadow:
-                2px 2px 0 #000,
-                -1px -1px 0 #000;
-        }
-
-        .minecraft-title span {
-            color: var(--red2);
-        }
-
-        .game-bottom {
-            margin-top: auto;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .game-description {
-            color: #666;
-            font-size: 11px;
-        }
-
-        .play-button {
-            border: 0;
-            border-radius: 7px;
-
-            background: var(--green);
-            color: #020602;
-
-            padding: 10px 15px;
-
-            font-size: 11px;
-            font-weight: 900;
-
-            cursor: pointer;
-
-            white-space: nowrap;
+            overflow:
+                hidden;
 
             transition:
                 background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .setting-box:hover {
+
+            background:
+                rgba(227,38,46,0.09);
+
+            border-color:
+                rgba(227,38,46,0.36);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .setting-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+        }
+
+
+        .setting-name {
+
+            color:
+                #ddd;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            margin-bottom:
+                5px;
+        }
+
+
+        .setting-hint {
+
+            color:
+                #666;
+
+            font-size:
+                10px;
+        }
+
+
+        /* =====================================================
+           SETTING DESCRIPTION
+           APPEARS WHEN HOVERING
+        ===================================================== */
+
+        .setting-description {
+
+            color:
+                #999;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+
+            max-height:
+                0;
+
+            opacity:
+                0;
+
+            overflow:
+                hidden;
+
+            margin-top:
+                0;
+
+            transform:
+                translateY(-5px);
+
+            transition:
+
+                max-height 0.28s ease,
+
+                opacity 0.2s ease,
+
+                margin-top 0.28s ease,
+
+                transform 0.28s ease;
+        }
+
+
+        .setting-box:hover
+        .setting-description {
+
+            max-height:
+                100px;
+
+            opacity:
+                1;
+
+            margin-top:
+                13px;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           TOGGLE
+        ===================================================== */
+
+        .toggle {
+
+            position:
+                relative;
+
+            width:
+                48px;
+
+            height:
+                26px;
+
+            flex-shrink:
+                0;
+        }
+
+
+        .toggle input {
+
+            opacity:
+                0;
+
+            width:
+                0;
+
+            height:
+                0;
+        }
+
+
+        .slider {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            cursor:
+                pointer;
+
+            background:
+                #252525;
+
+            border:
+                1px solid #444;
+
+            border-radius:
+                20px;
+
+            transition:
+                0.2s;
+        }
+
+
+        .slider::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                18px;
+
+            height:
+                18px;
+
+            left:
+                3px;
+
+            top:
+                3px;
+
+            border-radius:
+                50%;
+
+            background:
+                #777;
+
+            transition:
+                0.2s;
+        }
+
+
+        .toggle input:checked + .slider {
+
+            background:
+                var(--green);
+
+            border-color:
+                var(--green);
+
+            box-shadow:
+                0 0 10px
+                rgba(32,214,90,0.15);
+        }
+
+
+        .toggle input:checked
+        + .slider::before {
+
+            transform:
+                translateX(22px);
+
+            background:
+                #06100a;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+
+            padding:
+                45px;
+
+            max-width:
+                1400px;
+
+            margin:
+                auto;
+        }
+
+
+        /* =====================================================
+           WELCOME
+        ===================================================== */
+
+        .welcome {
+
+            margin-bottom:
+                35px;
+        }
+
+
+        .welcome h1 {
+
+            font-size:
+                38px;
+
+            line-height:
+                1.1;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .welcome h1 .red {
+
+            color:
+                var(--red2);
+        }
+
+
+        .welcome h1 .green {
+
+            color:
+                var(--green2);
+        }
+
+
+        .welcome p {
+
+            color:
+                var(--muted);
+
+            font-size:
+                15px;
+        }
+
+
+        /* =====================================================
+           SECTION HEADER
+        ===================================================== */
+
+        .section-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .section-title {
+
+            font-size:
+                20px;
+
+            font-weight:
+                800;
+        }
+
+
+        .section-line {
+
+            height:
+                1px;
+
+            flex:
+                1;
+
+            background:
+                var(--red);
+
+            margin-left:
+                20px;
+
+            box-shadow:
+                0 0 8px
+                rgba(227,38,46,0.25);
+        }
+
+
+        /* =====================================================
+           GAME GRID
+        ===================================================== */
+
+        .game-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(230px,1fr)
+                );
+
+            gap:
+                20px;
+        }
+
+
+        /* =====================================================
+           GAME CARD
+        ===================================================== */
+
+        .game-card {
+
+            position:
+                relative;
+
+            background:
+                rgba(13,13,13,0.94);
+
+            border:
+                1px solid
+                rgba(227,38,46,0.35);
+
+            border-radius:
+                13px;
+
+            overflow:
+                hidden;
+
+            cursor:
+                pointer;
+
+            transition:
+
                 transform 0.2s ease,
+
+                border-color 0.2s ease,
+
                 box-shadow 0.2s ease;
         }
 
-        .play-button:hover {
-            background: var(--green2);
 
-            transform: translateY(-1px);
+        .game-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                var(--red2);
 
             box-shadow:
-                0 6px 20px rgba(32, 214, 90, 0.22);
+
+                0 12px 35px
+                rgba(0,0,0,0.35),
+
+                0 0 20px
+                rgba(227,38,46,0.12);
         }
 
-        /* =========================================================
+
+        /* =====================================================
+           GAME IMAGE
+        ===================================================== */
+
+        .game-image {
+
+            height:
+                145px;
+
+            background:
+
+                radial-gradient(
+                    circle at 30% 30%,
+                    rgba(255,64,72,0.20),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at 70% 70%,
+                    rgba(180,0,10,0.18),
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #180608,
+                    #0a0a0a
+                );
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            position:
+                relative;
+        }
+
+
+        .game-image::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent 49%,
+                    rgba(227,38,46,0.08) 50%,
+                    transparent 51%
+                ),
+
+                linear-gradient(
+                    0deg,
+                    transparent 49%,
+                    rgba(227,38,46,0.08) 50%,
+                    transparent 51%
+                );
+
+            background-size:
+                32px 32px;
+        }
+
+
+        /* =====================================================
+           MINECRAFT LOGO
+        ===================================================== */
+
+        .minecraft-logo {
+
+            position:
+                relative;
+
+            z-index:
+                1;
+
+            font-size:
+                30px;
+
+            font-weight:
+                900;
+
+            color:
+                white;
+
+            letter-spacing:
+                -1px;
+
+            text-shadow:
+
+                3px 3px 0 #111,
+
+                0 0 18px
+                rgba(255,64,72,0.25);
+        }
+
+
+        .minecraft-logo span {
+
+            color:
+                var(--red2);
+        }
+
+
+        /* =====================================================
+           RED CARD ACCENT
+        ===================================================== */
+
+        .red-accent {
+
+            position:
+                absolute;
+
+            top:
+                12px;
+
+            right:
+                12px;
+
+            width:
+                7px;
+
+            height:
+                7px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--red);
+
+            box-shadow:
+                0 0 10px
+                var(--red);
+        }
+
+
+        /* =====================================================
+           GAME INFO
+        ===================================================== */
+
+        .game-info {
+
+            padding:
+                17px;
+        }
+
+
+        .game-title {
+
+            font-size:
+                18px;
+
+            font-weight:
+                800;
+
+            margin-bottom:
+                7px;
+        }
+
+
+        .game-meta {
+
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        /* =====================================================
+           PLAY BUTTON
+        ===================================================== */
+
+        .play-small {
+
+            width:
+                100%;
+
+            border:
+                none;
+
+            border-radius:
+                7px;
+
+            padding:
+                10px;
+
+            background:
+                var(--green);
+
+            color:
+                #031007;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
+        }
+
+
+        .play-small:hover {
+
+            background:
+                var(--green2);
+
+            box-shadow:
+                0 0 18px
+                rgba(57,255,120,0.35);
+        }
+
+
+        /* =====================================================
            FOOTER
-           ========================================================= */
+        ===================================================== */
 
         footer {
-            margin-top: 55px;
-            padding: 22px 0;
 
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top:
+                55px;
 
-            color: #444;
-            font-size: 11px;
+            padding:
+                25px 0;
+
+            color:
+                #555;
+
+            border-top:
+                1px solid var(--red);
+
+            font-size:
+                12px;
         }
 
-        /* =========================================================
+
+        footer span {
+
+            color:
+                var(--red2);
+        }
+
+
+        /* =====================================================
            MOBILE
-           ========================================================= */
+        ===================================================== */
 
         @media (max-width: 800px) {
+
             .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                min-height: auto;
 
-                border-right: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+                position:
+                    relative;
+
+                width:
+                    100%;
+
+                height:
+                    auto;
+
+                padding:
+                    18px;
+
+                border-right:
+                    none;
+
+                border-bottom:
+                    1px solid var(--red);
             }
 
-            .sidebar-top {
-                padding: 16px;
-            }
 
             .logo-image {
-                width: 105px;
+
+                width:
+                    145px;
             }
 
-            .sidebar-nav {
-                display: flex;
-                padding: 0 12px 12px;
-                gap: 6px;
+
+            .version-text {
+
+                margin-bottom:
+                    18px;
             }
 
-            .nav-label {
-                display: none;
+
+            .nav-title {
+
+                display:
+                    none;
             }
+
 
             .nav-item {
-                margin: 0;
-                justify-content: center;
+
+                display:
+                    none;
             }
+
 
             .sidebar-bottom {
-                display: none;
+
+                display:
+                    none;
             }
+
 
             .main {
-                margin-left: 0;
+
+                margin-left:
+                    0;
             }
+
 
             .topbar {
-                height: 65px;
-                padding: 0 17px;
+
+                padding:
+                    0 20px;
             }
+
 
             .topbar-title {
-                font-size: 15px;
+
+                font-size:
+                    12px;
             }
 
-            .online-status {
-                display: none;
-            }
-
-            .settings-panel {
-                position: fixed;
-                top: 72px;
-                left: 12px;
-                right: 12px;
-
-                width: auto;
-            }
 
             .content {
-                padding: 34px 18px 25px;
+
+                padding:
+                    28px 20px;
             }
 
-            .welcome {
-                margin-bottom: 30px;
-            }
 
             .welcome h1 {
-                font-size: 34px;
+
+                font-size:
+                    30px;
             }
 
-            .games-grid {
-                grid-template-columns: 1fr;
+
+            .settings-panel {
+
+                width:
+                    min(410px, calc(100vw - 30px));
+
+                right:
+                    -5px;
             }
+
         }
+
+
+        @media (max-width: 500px) {
+
+            .status {
+
+                display:
+                    none;
+            }
+
+
+            .settings-panel {
+
+                position:
+                    fixed;
+
+                top:
+                    70px;
+
+                right:
+                    15px;
+
+                left:
+                    15px;
+
+                width:
+                    auto;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- =========================================================
+
+    <!-- =====================================================
          SIDEBAR
-         ========================================================= -->
+    ===================================================== -->
 
     <aside class="sidebar">
 
-        <div class="sidebar-top">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
             <img
                 src="assets/logo.png"
                 alt="Rofleq's Hideout"
                 class="logo-image"
             >
+
         </div>
 
-        <nav class="sidebar-nav">
 
-            <div class="nav-label">
-                Navigation
+        <!-- VERSION -->
+
+        <div class="version-text">
+
+            Github Version
+
+        </div>
+
+
+        <!-- NAV TITLE -->
+
+        <div class="nav-title">
+
+            Menu
+
+        </div>
+
+
+        <!-- HOME -->
+
+        <a
+            href="#"
+            class="nav-item active"
+        >
+
+            <div class="nav-icon">
+                ⌂
             </div>
 
-            <a href="#" class="nav-item active">
-                <span class="nav-icon">⌂</span>
-                <span>Home</span>
-            </a>
+            <span>
+                Home
+            </span>
 
-            <a
-                href="https://github.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="nav-item"
-            >
-                <span class="nav-icon">◈</span>
-                <span>Github Version</span>
-            </a>
+        </a>
 
-        </nav>
+
+        <!-- SIDEBAR BOTTOM -->
 
         <div class="sidebar-bottom">
-            <span class="rofl-green">Rofleq's</span>
-            <span class="hideout-red">Hideout</span>
+
+            Rofleq's Hideout
+
             <br>
-            Game launcher
+
+            <span class="red-text">
+                Game Hub
+            </span>
+
         </div>
+
 
     </aside>
 
 
-    <!-- =========================================================
+
+    <!-- =====================================================
          MAIN
-         ========================================================= -->
+    ===================================================== -->
 
     <main class="main">
 
-        <!-- TOPBAR -->
+
+        <!-- =================================================
+             TOPBAR
+        ================================================= -->
 
         <header class="topbar">
 
+
+            <!-- TITLE -->
+
             <div class="topbar-title">
-                <span class="rofl-green">Rofleq's</span>
-                <span class="hideout-red">Hideout</span>
+
+                <span class="red">
+                    Rofleq's
+                </span>
+
+                <span class="green">
+                    Hideout
+                </span>
+
             </div>
+
+
+
+            <!-- RIGHT SIDE -->
 
             <div class="topbar-right">
 
-                <div class="online-status">
-                    <span class="online-dot"></span>
-                    Online
+
+                <!-- ONLINE -->
+
+                <div class="status">
+
+                    <div class="status-dot"></div>
+
+                    <span>
+                        Online
+                    </span>
+
                 </div>
+
+
+
+                <!-- SETTINGS BUTTON -->
 
                 <button
                     type="button"
@@ -944,363 +1710,364 @@
                     title="Settings"
                     aria-label="Settings"
                 >
+
                     ⚙
+
                 </button>
 
-            </div>
 
 
-            <!-- SETTINGS PANEL -->
-
-            <div class="settings-panel" id="settingsPanel">
-
-                <div class="settings-title">
-                    Settings
-                </div>
-
-                <div class="settings-subtitle">
-                    Customize how
-                    <span class="rofl-green">Rofleq's</span>
-                    <span class="hideout-red">Hideout</span>
-                    works.
-                    Hover over a setting to learn more.
-                </div>
-
-
-                <!-- ABOUT BLANK -->
-
-                <div class="setting-card">
-
-                    <div class="setting-row">
-
-                        <div>
-                            <div class="setting-name">
-                                Open games in about:blank
-                            </div>
-
-                            <div
-                                class="setting-hint"
-                                id="blankHint"
-                            >
-                                Currently enabled
-                            </div>
-                        </div>
-
-                        <label class="toggle">
-                            <input
-                                type="checkbox"
-                                id="blankToggle"
-                            >
-
-                            <span class="toggle-slider"></span>
-                        </label>
-
-                    </div>
-
-                    <div class="setting-description">
-                        Opens games inside a new about:blank tab instead
-                        of navigating away from Rofleq's Hideout.
-                    </div>
-
-                </div>
-
-
-                <!-- ANIMATED BACKGROUND -->
-
-                <div class="setting-card">
-
-                    <div class="setting-row">
-
-                        <div>
-                            <div class="setting-name">
-                                Animated Background
-                            </div>
-
-                            <div
-                                class="setting-hint"
-                                id="backgroundHint"
-                            >
-                                Currently enabled
-                            </div>
-                        </div>
-
-                        <label class="toggle">
-
-                            <input
-                                type="checkbox"
-                                id="backgroundToggle"
-                            >
-
-                            <span class="toggle-slider"></span>
-
-                        </label>
-
-                    </div>
-
-                    <div class="setting-description">
-                        Enables the moving checkerboard background
-                        behind the launcher.
-                    </div>
-
-                </div>
-
-
-                <!-- BACKGROUND SPEED -->
+                <!-- =========================================
+                     SETTINGS PANEL
+                ========================================== -->
 
                 <div
-                    class="setting-card range-setting"
-                    id="speedSetting"
+                    class="settings-panel"
+                    id="settingsPanel"
                 >
 
-                    <div class="setting-row">
 
-                        <div>
-                            <div class="setting-name">
-                                Background Speed
-                            </div>
+                    <!-- HEADER -->
 
-                            <div class="setting-hint">
-                                Controls how quickly the background moves.
-                            </div>
-                        </div>
+                    <div class="settings-panel-title">
 
-                        <div
-                            class="range-value"
-                            id="speedValue"
-                        >
-                            6
-                        </div>
+                        Settings
 
                     </div>
 
-                    <div class="range-control">
 
-                        <input
-                            type="range"
-                            id="speedSlider"
-                            min="0"
-                            max="20"
-                            value="6"
-                            step="1"
-                        >
+                    <div class="settings-panel-subtitle">
 
-                        <div class="range-top">
-                            <span>0</span>
-                            <span>20</span>
-                        </div>
+                        Customize how Rofleq's Hideout
+                        works. Hover over a setting to
+                        learn more.
 
                     </div>
+
+
+
+                    <!-- =====================================
+                         ABOUT:BLANK SETTING
+                    ====================================== -->
+
+                    <div class="setting-box">
+
+
+                        <div class="setting-row">
+
+
+                            <div class="setting-text">
+
+
+                                <div class="setting-name">
+
+                                    Open games in about:blank
+
+                                </div>
+
+
+                                <div
+                                    class="setting-hint"
+                                    id="blankHint"
+                                >
+
+                                    Currently enabled
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- TOGGLE -->
+
+                            <label class="toggle">
+
+                                <input
+                                    type="checkbox"
+                                    id="blankToggle"
+                                    checked
+                                >
+
+                                <span class="slider"></span>
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <!-- HOVER DESCRIPTION -->
+
+                        <div class="setting-description">
+
+                            When enabled, games open inside
+                            a new about:blank tab instead of
+                            replacing the Hideout page.
+                            This can be useful when you want
+                            the game separated from the
+                            launcher.
+
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
-
-                <!-- BACKGROUND TRANSPARENCY -->
-
-                <div
-                    class="setting-card range-setting"
-                    id="transparencySetting"
-                >
-
-                    <div class="setting-row">
-
-                        <div>
-                            <div class="setting-name">
-                                Background Transparency
-                            </div>
-
-                            <div class="setting-hint">
-                                Controls how visible the checkerboard is.
-                            </div>
-                        </div>
-
-                        <div
-                            class="range-value"
-                            id="transparencyValue"
-                        >
-                            12%
-                        </div>
-
-                    </div>
-
-                    <div class="range-control">
-
-                        <input
-                            type="range"
-                            id="transparencySlider"
-                            min="0"
-                            max="100"
-                            value="12"
-                            step="1"
-                        >
-
-                        <div class="range-top">
-                            <span>0%</span>
-                            <span>100%</span>
-                        </div>
-
-                    </div>
-
-                </div>
 
             </div>
+
 
         </header>
 
 
-        <!-- CONTENT -->
 
-        <section class="content">
+        <!-- =================================================
+             CONTENT
+        ================================================= -->
 
-            <div class="welcome">
+        <div class="content">
+
+
+            <!-- WELCOME -->
+
+            <section class="welcome">
+
 
                 <h1>
-                    Welcome to
-                    <span class="rofl-green">Rofleq's</span>
-                    <span class="hideout-red">Hideout</span>
+
+                    <span class="red">
+                        Rofleq's
+                    </span>
+
+                    <span class="green">
+                        Hideout
+                    </span>
+
                 </h1>
 
+
                 <p>
-                    Presented to you by
-                    <span class="rofl-green">Rofleq</span>
+
+                    Presented to you by Rofleq
+
                 </p>
 
-            </div>
+
+            </section>
 
 
-            <div class="section-heading">
 
-                <div class="section-title">
-                    Games
-                </div>
+            <!-- =================================================
+                 GAMES
+            ================================================= -->
 
-            </div>
+            <section>
 
 
-            <div class="games-grid">
+                <!-- SECTION HEADER -->
 
-                <!-- MINECRAFT -->
+                <div class="section-header">
 
-                <div
-                    class="game-card"
-                    onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
-                >
 
-                    <div class="game-card-content">
+                    <div class="section-title">
 
-                        <div class="game-version">
-                            VERSION 1.9.4
-                        </div>
-
-                        <div class="minecraft-title">
-                            MINE<span>CRAFT</span>
-                        </div>
-
-                        <div class="game-bottom">
-
-                            <div class="game-description">
-                                Minecraft 1.9.4
-                            </div>
-
-                            <button
-                                type="button"
-                                class="play-button"
-                                onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')"
-                            >
-                                ▶ PLAY
-                            </button>
-
-                        </div>
+                        Games
 
                     </div>
 
+
+                    <div class="section-line"></div>
+
+
                 </div>
 
-            </div>
 
+
+                <!-- GAME GRID -->
+
+                <div class="game-grid">
+
+
+                    <!-- =========================================
+                         MINECRAFT
+                    ========================================== -->
+
+                    <article
+                        class="game-card"
+                        onclick="
+                            launchGame(
+                                'games/eaglercraft-1.9.4/index.html'
+                            )
+                        "
+                    >
+
+
+                        <!-- GAME IMAGE -->
+
+                        <div class="game-image">
+
+
+                            <!-- RED DOT -->
+
+                            <div class="red-accent"></div>
+
+
+                            <!-- MINECRAFT LOGO -->
+
+                            <div class="minecraft-logo">
+
+                                MINE<span>CRAFT</span>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- GAME INFO -->
+
+                        <div class="game-info">
+
+
+                            <div class="game-title">
+
+                                Minecraft
+
+                            </div>
+
+
+                            <div class="game-meta">
+
+                                1.9.4
+
+                            </div>
+
+
+                            <!-- PLAY -->
+
+                            <button
+                                type="button"
+                                class="play-small"
+                                onclick="
+                                    event.stopPropagation();
+                                    launchGame(
+                                        'games/eaglercraft-1.9.4/index.html'
+                                    );
+                                "
+                            >
+
+                                ▶ PLAY
+
+                            </button>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================= -->
 
             <footer>
-                <span class="rofl-green">Rofleq's</span>
-                <span class="hideout-red">Hideout</span>
-                • More games coming soon.
+
+                Rofleq's Hideout
+
+                <span>
+                    •
+                </span>
+
+                More games coming soon.
+
             </footer>
 
-        </section>
+
+        </div>
+
 
     </main>
 
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
     <script>
-        /* =========================================================
-           SETTINGS
-           ========================================================= */
+
+
+        /* =====================================================
+           GET ELEMENTS
+        ===================================================== */
 
         const settingsButton =
-            document.getElementById("settingsButton");
+            document.getElementById(
+                "settingsButton"
+            );
+
 
         const settingsPanel =
-            document.getElementById("settingsPanel");
+            document.getElementById(
+                "settingsPanel"
+            );
+
 
         const blankToggle =
-            document.getElementById("blankToggle");
+            document.getElementById(
+                "blankToggle"
+            );
+
 
         const blankHint =
-            document.getElementById("blankHint");
-
-        const backgroundToggle =
-            document.getElementById("backgroundToggle");
-
-        const backgroundHint =
-            document.getElementById("backgroundHint");
-
-        const speedSlider =
-            document.getElementById("speedSlider");
-
-        const speedValue =
-            document.getElementById("speedValue");
-
-        const transparencySlider =
-            document.getElementById("transparencySlider");
-
-        const transparencyValue =
-            document.getElementById("transparencyValue");
-
-        const speedSetting =
-            document.getElementById("speedSetting");
-
-        const transparencySetting =
-            document.getElementById("transparencySetting");
+            document.getElementById(
+                "blankHint"
+            );
 
 
-        /* =========================================================
-           DEFAULT SETTINGS
-           ========================================================= */
 
-        const DEFAULT_BACKGROUND_SPEED = 6;
-
-        /*
-         * This is the same transparency used by the original
-         * checkerboard background.
-         */
-        const DEFAULT_BACKGROUND_TRANSPARENCY = 12;
-
-
-        /* =========================================================
-           ABOUT:BLANK
-           ========================================================= */
+        /* =====================================================
+           LOAD ABOUT:BLANK SETTING
+           
+           ON BY DEFAULT
+        ===================================================== */
 
         const savedBlankSetting =
-            localStorage.getItem("openInBlank");
+            localStorage.getItem(
+                "openInBlank"
+            );
 
-        if (savedBlankSetting === null) {
 
-            blankToggle.checked = true;
+        if (
+            savedBlankSetting === null
+        ) {
+
+            blankToggle.checked =
+                true;
 
             localStorage.setItem(
                 "openInBlank",
                 "true"
             );
 
-        } else {
+        }
+
+
+        else {
 
             blankToggle.checked =
                 savedBlankSetting === "true";
@@ -1308,300 +2075,73 @@
         }
 
 
+
+        /* =====================================================
+           UPDATE SETTING TEXT
+        ===================================================== */
+
         function updateBlankHint() {
 
-            blankHint.textContent =
+            if (
                 blankToggle.checked
-                    ? "Currently enabled"
-                    : "Currently disabled";
+            ) {
+
+                blankHint.textContent =
+                    "Currently enabled";
+
+            }
+
+            else {
+
+                blankHint.textContent =
+                    "Currently disabled";
+
+            }
 
         }
+
 
         updateBlankHint();
 
 
-        blankToggle.addEventListener(
-            "change",
-            function () {
 
-                localStorage.setItem(
-                    "openInBlank",
-                    blankToggle.checked
-                );
-
-                updateBlankHint();
-
-            }
-        );
-
-
-        /* =========================================================
-           ANIMATED BACKGROUND
-           ========================================================= */
-
-        const savedBackground =
-            localStorage.getItem("animatedBackground");
-
-        if (savedBackground === null) {
-
-            backgroundToggle.checked = true;
-
-            localStorage.setItem(
-                "animatedBackground",
-                "true"
-            );
-
-        } else {
-
-            backgroundToggle.checked =
-                savedBackground === "true";
-
-        }
-
-
-        /* =========================================================
-           BACKGROUND SPEED
-           ========================================================= */
-
-        const savedSpeed =
-            localStorage.getItem("backgroundSpeed");
-
-        if (savedSpeed === null) {
-
-            speedSlider.value =
-                DEFAULT_BACKGROUND_SPEED;
-
-        } else {
-
-            speedSlider.value =
-                savedSpeed;
-
-        }
-
-
-        /* =========================================================
-           BACKGROUND TRANSPARENCY
-           ========================================================= */
-
-        const savedTransparency =
-            localStorage.getItem("backgroundTransparency");
-
-        if (savedTransparency === null) {
-
-            transparencySlider.value =
-                DEFAULT_BACKGROUND_TRANSPARENCY;
-
-        } else {
-
-            transparencySlider.value =
-                savedTransparency;
-
-        }
-
-
-        /* =========================================================
-           APPLY BACKGROUND
-           ========================================================= */
-
-        function applyBackgroundSettings() {
-
-            const enabled =
-                backgroundToggle.checked;
-
-            const speed =
-                Number(speedSlider.value);
-
-            const transparency =
-                Number(transparencySlider.value);
-
-
-            /* Enable/disable background */
-
-            if (enabled) {
-
-                document.body.classList.remove(
-                    "background-disabled"
-                );
-
-            } else {
-
-                document.body.classList.add(
-                    "background-disabled"
-                );
-
-            }
-
-
-            /* Speed */
-
-            /*
-             * 0 means effectively stopped.
-             *
-             * We use a very large animation duration rather
-             * than 0s because CSS animations with 0s duration
-             * would simply stop behaving normally.
-             */
-
-            if (speed === 0) {
-
-                document.documentElement.style.setProperty(
-                    "--background-speed",
-                    "999999s"
-                );
-
-            } else {
-
-                /*
-                 * The original setting of 6 uses 6 seconds.
-                 * Higher numbers are faster.
-                 *
-                 * 1 = 20 seconds
-                 * 6 = 6 seconds
-                 * 20 = 0.6 seconds
-                 */
-
-                const duration =
-                    Math.max(0.25, 36 / speed);
-
-                document.documentElement.style.setProperty(
-                    "--background-speed",
-                    duration + "s"
-                );
-
-            }
-
-
-            /* Transparency */
-
-            /*
-             * 0% = invisible
-             * 100% = maximum checkerboard opacity
-             */
-
-            const opacity =
-                transparency / 100 * 0.5;
-
-            document.documentElement.style.setProperty(
-                "--background-opacity",
-                opacity
-            );
-
-
-            /* Text */
-
-            speedValue.textContent =
-                speed;
-
-            transparencyValue.textContent =
-                transparency + "%";
-
-            backgroundHint.textContent =
-                enabled
-                    ? "Currently enabled"
-                    : "Currently disabled";
-
-
-            /*
-             * Only show speed and transparency when the
-             * animated background is enabled.
-             */
-
-            if (enabled) {
-
-                speedSetting.classList.add("visible");
-                transparencySetting.classList.add("visible");
-
-            } else {
-
-                speedSetting.classList.remove("visible");
-                transparencySetting.classList.remove("visible");
-
-            }
-
-        }
-
-        applyBackgroundSettings();
-
-
-        /* =========================================================
-           BACKGROUND TOGGLE
-           ========================================================= */
-
-        backgroundToggle.addEventListener(
-            "change",
-            function () {
-
-                localStorage.setItem(
-                    "animatedBackground",
-                    backgroundToggle.checked
-                );
-
-                applyBackgroundSettings();
-
-            }
-        );
-
-
-        /* =========================================================
-           SPEED SLIDER
-           ========================================================= */
-
-        speedSlider.addEventListener(
-            "input",
-            function () {
-
-                localStorage.setItem(
-                    "backgroundSpeed",
-                    speedSlider.value
-                );
-
-                applyBackgroundSettings();
-
-            }
-        );
-
-
-        /* =========================================================
-           TRANSPARENCY SLIDER
-           ========================================================= */
-
-        transparencySlider.addEventListener(
-            "input",
-            function () {
-
-                localStorage.setItem(
-                    "backgroundTransparency",
-                    transparencySlider.value
-                );
-
-                applyBackgroundSettings();
-
-            }
-        );
-
-
-        /* =========================================================
-           SETTINGS PANEL
-           ========================================================= */
+        /* =====================================================
+           OPEN / CLOSE SETTINGS
+        ===================================================== */
 
         settingsButton.addEventListener(
             "click",
-            function (event) {
+            function(event) {
 
                 event.stopPropagation();
 
                 const isOpen =
-                    settingsPanel.classList.contains("open");
+                    settingsPanel.classList.contains(
+                        "open"
+                    );
+
 
                 if (isOpen) {
 
-                    settingsPanel.classList.remove("open");
-                    settingsButton.classList.remove("open");
+                    settingsPanel.classList.remove(
+                        "open"
+                    );
 
-                } else {
+                    settingsButton.classList.remove(
+                        "open"
+                    );
 
-                    settingsPanel.classList.add("open");
-                    settingsButton.classList.add("open");
+                }
+
+                else {
+
+                    settingsPanel.classList.add(
+                        "open"
+                    );
+
+                    settingsButton.classList.add(
+                        "open"
+                    );
 
                 }
 
@@ -1609,9 +2149,14 @@
         );
 
 
+
+        /* =====================================================
+           DON'T CLOSE WHEN CLICKING PANEL
+        ===================================================== */
+
         settingsPanel.addEventListener(
             "click",
-            function (event) {
+            function(event) {
 
                 event.stopPropagation();
 
@@ -1619,43 +2164,79 @@
         );
 
 
+
+        /* =====================================================
+           CLOSE WHEN CLICKING OUTSIDE
+        ===================================================== */
+
         document.addEventListener(
             "click",
-            function () {
+            function() {
 
-                settingsPanel.classList.remove("open");
-                settingsButton.classList.remove("open");
+                settingsPanel.classList.remove(
+                    "open"
+                );
+
+                settingsButton.classList.remove(
+                    "open"
+                );
 
             }
         );
 
 
-        /* =========================================================
-           GAME LAUNCHER
-           ========================================================= */
+
+        /* =====================================================
+           SAVE ABOUT:BLANK SETTING
+        ===================================================== */
+
+        blankToggle.addEventListener(
+            "change",
+            function() {
+
+                localStorage.setItem(
+                    "openInBlank",
+                    blankToggle.checked
+                );
+
+
+                updateBlankHint();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           LAUNCH GAME
+        ===================================================== */
 
         function launchGame(path) {
 
-            /*
-             * Default is ON.
-             *
-             * Only an explicit "false" turns it off.
-             */
+
             const useBlank =
-                localStorage.getItem("openInBlank") !== "false";
+                blankToggle.checked;
 
 
-            /* Normal launch */
+
+            /* ===============================================
+               NORMAL LAUNCH
+            ================================================ */
 
             if (!useBlank) {
 
-                window.location.href = path;
+                window.location.href =
+                    path;
+
                 return;
 
             }
 
 
-            /* about:blank launch */
+
+            /* ===============================================
+               ABOUT:BLANK LAUNCH
+            ================================================ */
 
             const gameWindow =
                 window.open(
@@ -1664,11 +2245,13 @@
                 );
 
 
+
+            /* POPUP BLOCKED */
+
             if (!gameWindow) {
 
                 alert(
-                    "The new tab was blocked by your browser. " +
-                    "Please allow popups for this site."
+                    "The new tab was blocked by your browser. Please allow popups for this site."
                 );
 
                 return;
@@ -1676,9 +2259,16 @@
             }
 
 
+
+            /* ===============================================
+               CREATE GAME PAGE
+            ================================================ */
+
             gameWindow.document.open();
 
+
             gameWindow.document.write(`
+
                 <!DOCTYPE html>
 
                 <html lang="en">
@@ -1692,52 +2282,71 @@
                         content="width=device-width, initial-scale=1.0"
                     >
 
-                    <title>Rofleq's Hideout</title>
+                    <title>
+                        Rofleq's Hideout
+                    </title>
+
 
                     <style>
 
                         html,
                         body {
+
                             margin: 0;
+
                             padding: 0;
 
                             width: 100%;
+
                             height: 100%;
 
                             overflow: hidden;
 
                             background: #000;
+
                         }
 
+
                         iframe {
+
                             width: 100%;
+
                             height: 100%;
 
                             border: 0;
 
                             display: block;
+
                         }
 
                     </style>
 
                 </head>
 
+
                 <body>
+
 
                     <iframe
                         src="${path}"
                         allowfullscreen
                     ></iframe>
 
+
                 </body>
 
                 </html>
+
             `);
+
 
             gameWindow.document.close();
 
         }
+
     </script>
 
+
 </body>
+
 </html>
