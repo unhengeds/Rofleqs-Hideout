@@ -55,8 +55,12 @@
             --border:
                 rgba(227, 38, 46, 0.28);
 
-            --checker-opacity: 0.018;
+            /* NEW DEFAULTS */
+
+            --checker-opacity: 0.155;
+
             --checker-speed: 6s;
+
         }
 
 
@@ -87,11 +91,12 @@
 
             overflow-x:
                 hidden;
+
         }
 
 
         /* =====================================================
-           MOVING CHECKERBOARD
+           MOVING RED CHECKERBOARD
         ===================================================== */
 
         body::before {
@@ -110,18 +115,38 @@
 
                 linear-gradient(
                     45deg,
-                    rgba(255,255,255,var(--checker-opacity)) 25%,
+                    rgba(
+                        255,
+                        0,
+                        0,
+                        var(--checker-opacity)
+                    ) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255,255,255,var(--checker-opacity)) 75%
+                    rgba(
+                        255,
+                        0,
+                        0,
+                        var(--checker-opacity)
+                    ) 75%
                 ),
 
                 linear-gradient(
                     45deg,
-                    rgba(255,255,255,var(--checker-opacity)) 25%,
+                    rgba(
+                        255,
+                        0,
+                        0,
+                        var(--checker-opacity)
+                    ) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255,255,255,var(--checker-opacity)) 75%
+                    rgba(
+                        255,
+                        0,
+                        0,
+                        var(--checker-opacity)
+                    ) 75%
                 );
 
             background-size:
@@ -132,7 +157,11 @@
                 40px 40px;
 
             animation:
-                checkerMove var(--checker-speed) linear infinite;
+                checkerMove
+                var(--checker-speed)
+                linear
+                infinite;
+
         }
 
 
@@ -156,11 +185,22 @@
 
                 radial-gradient(
                     circle at 50% 20%,
-                    rgba(227,38,46,0.025),
+                    rgba(
+                        227,
+                        38,
+                        46,
+                        0.025
+                    ),
                     transparent 45%
                 ),
 
-                rgba(5,5,5,0.72);
+                rgba(
+                    5,
+                    5,
+                    5,
+                    0.72
+                );
+
         }
 
 
@@ -172,13 +212,23 @@
         @keyframes checkerMove {
 
             from {
+
                 transform:
-                    translate(0, 0);
+                    translate(
+                        0,
+                        0
+                    );
+
             }
 
             to {
+
                 transform:
-                    translate(80px, 80px);
+                    translate(
+                        80px,
+                        80px
+                    );
+
             }
 
         }
@@ -201,19 +251,29 @@
             height: 100vh;
 
             background:
-                rgba(8,8,8,0.95);
+                rgba(
+                    8,
+                    8,
+                    8,
+                    0.95
+                );
 
             border-right:
-                1px solid var(--red);
+                1px solid
+                var(--red);
 
             padding:
                 25px 18px;
 
-            display: flex;
+            display:
+                flex;
 
-            flex-direction: column;
+            flex-direction:
+                column;
 
-            z-index: 50;
+            z-index:
+                50;
+
         }
 
 
@@ -223,19 +283,24 @@
 
         .logo {
 
-            display: flex;
+            display:
+                flex;
 
-            justify-content: center;
+            justify-content:
+                center;
 
-            align-items: center;
+            align-items:
+                center;
 
-            width: 100%;
+            width:
+                100%;
 
             padding:
                 5px 0;
 
             margin-bottom:
                 5px;
+
         }
 
 
@@ -259,8 +324,14 @@
             filter:
                 drop-shadow(
                     0 0 12px
-                    rgba(227,38,46,0.15)
+                    rgba(
+                        227,
+                        38,
+                        46,
+                        0.15
+                    )
                 );
+
         }
 
 
@@ -283,6 +354,7 @@
 
             margin-bottom:
                 32px;
+
         }
 
 
@@ -312,6 +384,7 @@
 
             margin-bottom:
                 10px;
+
         }
 
 
@@ -346,6 +419,7 @@
 
             transition:
                 0.2s;
+
         }
 
 
@@ -355,7 +429,13 @@
                 white;
 
             background:
-                rgba(227,38,46,0.10);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.10
+                );
+
         }
 
 
@@ -365,10 +445,17 @@
                 white;
 
             background:
-                rgba(227,38,46,0.14);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.14
+                );
 
             border-left:
-                3px solid var(--red);
+                3px solid
+                var(--red);
+
         }
 
 
@@ -382,6 +469,7 @@
 
             font-size:
                 17px;
+
         }
 
 
@@ -405,6 +493,7 @@
 
             line-height:
                 1.5;
+
         }
 
 
@@ -412,6 +501,7 @@
 
             color:
                 var(--red2);
+
         }
 
 
@@ -426,6 +516,7 @@
 
             min-height:
                 100vh;
+
         }
 
 
@@ -451,16 +542,23 @@
                 0 35px;
 
             border-bottom:
-                1px solid var(--red);
+                1px solid
+                var(--red);
 
             background:
-                rgba(5,5,5,0.92);
+                rgba(
+                    5,
+                    5,
+                    5,
+                    0.92
+                );
 
             position:
                 relative;
 
             z-index:
                 40;
+
         }
 
 
@@ -471,6 +569,7 @@
 
             font-weight:
                 700;
+
         }
 
 
@@ -478,6 +577,7 @@
 
             color:
                 var(--red2);
+
         }
 
 
@@ -485,6 +585,7 @@
 
             color:
                 var(--green2);
+
         }
 
 
@@ -505,6 +606,7 @@
 
             position:
                 relative;
+
         }
 
 
@@ -528,6 +630,7 @@
 
             font-size:
                 12px;
+
         }
 
 
@@ -546,7 +649,9 @@
                 var(--green);
 
             box-shadow:
-                0 0 10px var(--green);
+                0 0 10px
+                var(--green);
+
         }
 
 
@@ -564,13 +669,23 @@
 
             border:
                 1px solid
-                rgba(227,38,46,0.35);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.35
+                );
 
             border-radius:
                 9px;
 
             background:
-                rgba(227,38,46,0.08);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.08
+                );
 
             color:
                 #aaa;
@@ -592,6 +707,7 @@
 
             transition:
                 0.2s;
+
         }
 
 
@@ -601,14 +717,25 @@
                 white;
 
             background:
-                rgba(227,38,46,0.18);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.18
+                );
 
             border-color:
                 var(--red2);
 
             box-shadow:
                 0 0 16px
-                rgba(227,38,46,0.16);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.16
+                );
+
         }
 
 
@@ -618,10 +745,16 @@
                 white;
 
             background:
-                rgba(227,38,46,0.18);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.18
+                );
 
             border-color:
                 var(--red2);
+
         }
 
 
@@ -647,11 +780,21 @@
                 22px;
 
             background:
-                rgba(13,13,13,0.99);
+                rgba(
+                    13,
+                    13,
+                    13,
+                    0.99
+                );
 
             border:
                 1px solid
-                rgba(227,38,46,0.45);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.45
+                );
 
             border-radius:
                 14px;
@@ -659,10 +802,20 @@
             box-shadow:
 
                 0 20px 50px
-                rgba(0,0,0,0.65),
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.65
+                ),
 
                 0 0 25px
-                rgba(227,38,46,0.08);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.08
+                );
 
             opacity:
                 0;
@@ -674,8 +827,15 @@
                 none;
 
             transition:
-                opacity 0.18s ease,
-                transform 0.18s ease;
+
+                opacity
+                0.18s
+                ease,
+
+                transform
+                0.18s
+                ease;
+
         }
 
 
@@ -689,6 +849,7 @@
 
             pointer-events:
                 auto;
+
         }
 
 
@@ -709,6 +870,7 @@
 
             margin-bottom:
                 5px;
+
         }
 
 
@@ -725,6 +887,7 @@
 
             margin-bottom:
                 20px;
+
         }
 
 
@@ -742,34 +905,68 @@
 
             border:
                 1px solid
-                rgba(227,38,46,0.16);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.16
+                );
 
             border-radius:
                 11px;
 
             background:
-                rgba(227,38,46,0.045);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.045
+                );
 
             overflow:
                 hidden;
 
             transition:
-                background 0.2s ease,
-                border-color 0.2s ease,
-                transform 0.2s ease;
+
+                background
+                0.2s
+                ease,
+
+                border-color
+                0.2s
+                ease,
+
+                transform
+                0.2s
+                ease;
+
+            margin-bottom:
+                10px;
+
         }
 
 
         .setting-box:hover {
 
             background:
-                rgba(227,38,46,0.09);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.09
+                );
 
             border-color:
-                rgba(227,38,46,0.36);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.36
+                );
 
             transform:
                 translateY(-1px);
+
         }
 
 
@@ -786,6 +983,7 @@
 
             gap:
                 15px;
+
         }
 
 
@@ -802,6 +1000,7 @@
 
             margin-bottom:
                 5px;
+
         }
 
 
@@ -812,12 +1011,12 @@
 
             font-size:
                 10px;
+
         }
 
 
         /* =====================================================
            SETTING DESCRIPTION
-           APPEARS WHEN HOVERING
         ===================================================== */
 
         .setting-description {
@@ -848,13 +1047,22 @@
 
             transition:
 
-                max-height 0.28s ease,
+                max-height
+                0.28s
+                ease,
 
-                opacity 0.2s ease,
+                opacity
+                0.2s
+                ease,
 
-                margin-top 0.28s ease,
+                margin-top
+                0.28s
+                ease,
 
-                transform 0.28s ease;
+                transform
+                0.28s
+                ease;
+
         }
 
 
@@ -872,6 +1080,7 @@
 
             transform:
                 translateY(0);
+
         }
 
 
@@ -892,6 +1101,7 @@
 
             flex-shrink:
                 0;
+
         }
 
 
@@ -905,6 +1115,7 @@
 
             height:
                 0;
+
         }
 
 
@@ -923,13 +1134,15 @@
                 #252525;
 
             border:
-                1px solid #444;
+                1px solid
+                #444;
 
             border-radius:
                 20px;
 
             transition:
                 0.2s;
+
         }
 
 
@@ -961,10 +1174,12 @@
 
             transition:
                 0.2s;
+
         }
 
 
-        .toggle input:checked + .slider {
+        .toggle input:checked
+        + .slider {
 
             background:
                 var(--green);
@@ -974,7 +1189,13 @@
 
             box-shadow:
                 0 0 10px
-                rgba(32,214,90,0.15);
+                rgba(
+                    32,
+                    214,
+                    90,
+                    0.15
+                );
+
         }
 
 
@@ -986,6 +1207,7 @@
 
             background:
                 #06100a;
+
         }
 
 
@@ -994,26 +1216,56 @@
         ===================================================== */
 
         .background-extra {
-            display: none;
+
+            display:
+                none;
+
         }
+
 
         .background-extra.visible {
-            display: block;
+
+            display:
+                block;
+
         }
+
 
         .range-value {
-            color: var(--green2);
-            font-size: 12px;
-            font-weight: 800;
-            min-width: 30px;
-            text-align: right;
+
+            color:
+                var(--green2);
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            min-width:
+                45px;
+
+            text-align:
+                right;
+
         }
 
-        .background-extra input[type="range"] {
-            width: 100%;
-            margin-top: 14px;
-            accent-color: var(--green);
-            cursor: pointer;
+
+        .background-extra
+        input[type="range"] {
+
+            width:
+                100%;
+
+            margin-top:
+                14px;
+
+            accent-color:
+                var(--green);
+
+            cursor:
+                pointer;
+
         }
 
 
@@ -1031,6 +1283,7 @@
 
             margin:
                 auto;
+
         }
 
 
@@ -1042,6 +1295,7 @@
 
             margin-bottom:
                 35px;
+
         }
 
 
@@ -1055,6 +1309,7 @@
 
             margin-bottom:
                 10px;
+
         }
 
 
@@ -1062,6 +1317,7 @@
 
             color:
                 var(--red2);
+
         }
 
 
@@ -1069,6 +1325,7 @@
 
             color:
                 var(--green2);
+
         }
 
 
@@ -1079,6 +1336,7 @@
 
             font-size:
                 15px;
+
         }
 
 
@@ -1099,6 +1357,7 @@
 
             margin-bottom:
                 18px;
+
         }
 
 
@@ -1109,6 +1368,7 @@
 
             font-weight:
                 800;
+
         }
 
 
@@ -1128,7 +1388,13 @@
 
             box-shadow:
                 0 0 8px
-                rgba(227,38,46,0.25);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.25
+                );
+
         }
 
 
@@ -1144,11 +1410,15 @@
             grid-template-columns:
                 repeat(
                     auto-fill,
-                    minmax(230px,1fr)
+                    minmax(
+                        230px,
+                        1fr
+                    )
                 );
 
             gap:
                 20px;
+
         }
 
 
@@ -1162,11 +1432,21 @@
                 relative;
 
             background:
-                rgba(13,13,13,0.94);
+                rgba(
+                    13,
+                    13,
+                    13,
+                    0.94
+                );
 
             border:
                 1px solid
-                rgba(227,38,46,0.35);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.35
+                );
 
             border-radius:
                 13px;
@@ -1179,11 +1459,18 @@
 
             transition:
 
-                transform 0.2s ease,
+                transform
+                0.2s
+                ease,
 
-                border-color 0.2s ease,
+                border-color
+                0.2s
+                ease,
 
-                box-shadow 0.2s ease;
+                box-shadow
+                0.2s
+                ease;
+
         }
 
 
@@ -1198,10 +1485,21 @@
             box-shadow:
 
                 0 12px 35px
-                rgba(0,0,0,0.35),
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                ),
 
                 0 0 20px
-                rgba(227,38,46,0.12);
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.12
+                );
+
         }
 
 
@@ -1218,13 +1516,23 @@
 
                 radial-gradient(
                     circle at 30% 30%,
-                    rgba(255,64,72,0.20),
+                    rgba(
+                        255,
+                        64,
+                        72,
+                        0.20
+                    ),
                     transparent 35%
                 ),
 
                 radial-gradient(
                     circle at 70% 70%,
-                    rgba(180,0,10,0.18),
+                    rgba(
+                        180,
+                        0,
+                        10,
+                        0.18
+                    ),
                     transparent 35%
                 ),
 
@@ -1245,6 +1553,7 @@
 
             position:
                 relative;
+
         }
 
 
@@ -1264,19 +1573,30 @@
                 linear-gradient(
                     90deg,
                     transparent 49%,
-                    rgba(227,38,46,0.08) 50%,
+                    rgba(
+                        227,
+                        38,
+                        46,
+                        0.08
+                    ) 50%,
                     transparent 51%
                 ),
 
                 linear-gradient(
                     0deg,
                     transparent 49%,
-                    rgba(227,38,46,0.08) 50%,
+                    rgba(
+                        227,
+                        38,
+                        46,
+                        0.08
+                    ) 50%,
                     transparent 51%
                 );
 
             background-size:
                 32px 32px;
+
         }
 
 
@@ -1309,7 +1629,13 @@
                 3px 3px 0 #111,
 
                 0 0 18px
-                rgba(255,64,72,0.25);
+                rgba(
+                    255,
+                    64,
+                    72,
+                    0.25
+                );
+
         }
 
 
@@ -1317,6 +1643,7 @@
 
             color:
                 var(--red2);
+
         }
 
 
@@ -1350,6 +1677,7 @@
             box-shadow:
                 0 0 10px
                 var(--red);
+
         }
 
 
@@ -1361,6 +1689,7 @@
 
             padding:
                 17px;
+
         }
 
 
@@ -1374,6 +1703,7 @@
 
             margin-bottom:
                 7px;
+
         }
 
 
@@ -1387,6 +1717,7 @@
 
             margin-bottom:
                 15px;
+
         }
 
 
@@ -1422,6 +1753,7 @@
 
             transition:
                 0.2s;
+
         }
 
 
@@ -1432,7 +1764,13 @@
 
             box-shadow:
                 0 0 18px
-                rgba(57,255,120,0.35);
+                rgba(
+                    57,
+                    255,
+                    120,
+                    0.35
+                );
+
         }
 
 
@@ -1452,10 +1790,12 @@
                 #555;
 
             border-top:
-                1px solid var(--red);
+                1px solid
+                var(--red);
 
             font-size:
                 12px;
+
         }
 
 
@@ -1463,6 +1803,7 @@
 
             color:
                 var(--red2);
+
         }
 
 
@@ -1490,7 +1831,9 @@
                     none;
 
                 border-bottom:
-                    1px solid var(--red);
+                    1px solid
+                    var(--red);
+
             }
 
 
@@ -1498,6 +1841,7 @@
 
                 width:
                     145px;
+
             }
 
 
@@ -1505,6 +1849,7 @@
 
                 margin-bottom:
                     18px;
+
             }
 
 
@@ -1512,6 +1857,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1519,6 +1865,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1526,6 +1873,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1533,6 +1881,7 @@
 
                 margin-left:
                     0;
+
             }
 
 
@@ -1540,6 +1889,7 @@
 
                 padding:
                     0 20px;
+
             }
 
 
@@ -1547,6 +1897,7 @@
 
                 font-size:
                     12px;
+
             }
 
 
@@ -1554,6 +1905,7 @@
 
                 padding:
                     28px 20px;
+
             }
 
 
@@ -1561,16 +1913,23 @@
 
                 font-size:
                     30px;
+
             }
 
 
             .settings-panel {
 
                 width:
-                    min(410px, calc(100vw - 30px));
+                    min(
+                        410px,
+                        calc(
+                            100vw - 30px
+                        )
+                    );
 
                 right:
                     -5px;
+
             }
 
         }
@@ -1582,6 +1941,7 @@
 
                 display:
                     none;
+
             }
 
 
@@ -1601,6 +1961,7 @@
 
                 width:
                     auto;
+
             }
 
         }
@@ -1620,8 +1981,6 @@
     <aside class="sidebar">
 
 
-        <!-- LOGO -->
-
         <div class="logo">
 
             <img
@@ -1633,8 +1992,6 @@
         </div>
 
 
-        <!-- VERSION -->
-
         <div class="version-text">
 
             Github Version
@@ -1642,16 +1999,12 @@
         </div>
 
 
-        <!-- NAV TITLE -->
-
         <div class="nav-title">
 
             Menu
 
         </div>
 
-
-        <!-- HOME -->
 
         <a
             href="#"
@@ -1668,8 +2021,6 @@
 
         </a>
 
-
-        <!-- SIDEBAR BOTTOM -->
 
         <div class="sidebar-bottom">
 
@@ -1695,14 +2046,8 @@
     <main class="main">
 
 
-        <!-- =================================================
-             TOPBAR
-        ================================================= -->
-
         <header class="topbar">
 
-
-            <!-- TITLE -->
 
             <div class="topbar-title">
 
@@ -1717,13 +2062,8 @@
             </div>
 
 
-
-            <!-- RIGHT SIDE -->
-
             <div class="topbar-right">
 
-
-                <!-- ONLINE -->
 
                 <div class="status">
 
@@ -1735,9 +2075,6 @@
 
                 </div>
 
-
-
-                <!-- SETTINGS BUTTON -->
 
                 <button
                     type="button"
@@ -1752,18 +2089,11 @@
                 </button>
 
 
-
-                <!-- =========================================
-                     SETTINGS PANEL
-                ========================================== -->
-
                 <div
                     class="settings-panel"
                     id="settingsPanel"
                 >
 
-
-                    <!-- HEADER -->
 
                     <div class="settings-panel-title">
 
@@ -1781,10 +2111,9 @@
                     </div>
 
 
-
-                    <!-- =====================================
-                         ABOUT:BLANK SETTING
-                    ====================================== -->
+                    <!-- =================================================
+                         ABOUT:BLANK
+                    ================================================== -->
 
                     <div class="setting-box">
 
@@ -1815,9 +2144,6 @@
                             </div>
 
 
-
-                            <!-- TOGGLE -->
-
                             <label class="toggle">
 
                                 <input
@@ -1834,9 +2160,6 @@
                         </div>
 
 
-
-                        <!-- HOVER DESCRIPTION -->
-
                         <div class="setting-description">
 
                             When enabled, games open inside
@@ -1852,28 +2175,38 @@
                     </div>
 
 
-                    <!-- =====================================
-                         ANIMATED BACKGROUND SETTING
-                    ====================================== -->
+                    <!-- =================================================
+                         ANIMATED BACKGROUND
+                    ================================================== -->
 
                     <div class="setting-box">
 
+
                         <div class="setting-row">
+
 
                             <div class="setting-text">
 
+
                                 <div class="setting-name">
+
                                     Animated Background
+
                                 </div>
+
 
                                 <div
                                     class="setting-hint"
                                     id="backgroundHint"
                                 >
+
                                     Currently enabled
+
                                 </div>
 
+
                             </div>
+
 
                             <label class="toggle">
 
@@ -1887,48 +2220,69 @@
 
                             </label>
 
+
                         </div>
 
+
                         <div class="setting-description">
-                            Turns the moving checkerboard background
-                            on or off. When enabled, extra controls
-                            let you change its speed and transparency.
+
+                            Turns the moving red checkerboard
+                            background on or off. When enabled,
+                            extra controls let you change its
+                            speed and transparency.
+
                         </div>
+
 
                     </div>
 
 
-                    <!-- =====================================
+                    <!-- =================================================
                          BACKGROUND SPEED
-                    ====================================== -->
+                    ================================================== -->
 
                     <div
                         class="setting-box background-extra"
                         id="speedSetting"
                     >
 
+
                         <div class="setting-row">
+
 
                             <div class="setting-text">
 
+
                                 <div class="setting-name">
+
                                     Background Speed
+
                                 </div>
+
 
                                 <div class="setting-hint">
-                                    Change how quickly the background moves.
+
+                                    Change how quickly the
+                                    background moves.
+
                                 </div>
 
+
                             </div>
+
 
                             <div
                                 class="range-value"
                                 id="speedValue"
                             >
+
                                 6
+
                             </div>
 
+
                         </div>
+
 
                         <input
                             type="range"
@@ -1939,49 +2293,66 @@
                             step="1"
                         >
 
+
                     </div>
 
 
-                    <!-- =====================================
+                    <!-- =================================================
                          BACKGROUND TRANSPARENCY
-                    ====================================== -->
+                    ================================================== -->
 
                     <div
                         class="setting-box background-extra"
                         id="transparencySetting"
                     >
 
+
                         <div class="setting-row">
+
 
                             <div class="setting-text">
 
+
                                 <div class="setting-name">
+
                                     Background Transparency
+
                                 </div>
+
 
                                 <div class="setting-hint">
-                                    Change how visible the checkerboard is.
+
+                                    Change how visible the
+                                    red checkerboard is.
+
                                 </div>
 
+
                             </div>
+
 
                             <div
                                 class="range-value"
                                 id="transparencyValue"
                             >
-                                12%
+
+                                15.5%
+
                             </div>
 
+
                         </div>
+
 
                         <input
                             type="range"
                             id="transparencySlider"
                             min="0"
                             max="100"
-                            value="1.8"
+                            value="15.5"
                             step="0.1"
                         >
+
 
                     </div>
 
@@ -2002,8 +2373,6 @@
 
         <div class="content">
 
-
-            <!-- WELCOME -->
 
             <section class="welcome">
 
@@ -2032,14 +2401,8 @@
 
 
 
-            <!-- =================================================
-                 GAMES
-            ================================================= -->
-
             <section>
 
-
-                <!-- SECTION HEADER -->
 
                 <div class="section-header">
 
@@ -2057,15 +2420,8 @@
                 </div>
 
 
-
-                <!-- GAME GRID -->
-
                 <div class="game-grid">
 
-
-                    <!-- =========================================
-                         MINECRAFT
-                    ========================================== -->
 
                     <article
                         class="game-card"
@@ -2077,17 +2433,11 @@
                     >
 
 
-                        <!-- GAME IMAGE -->
-
                         <div class="game-image">
 
 
-                            <!-- RED DOT -->
-
                             <div class="red-accent"></div>
 
-
-                            <!-- MINECRAFT LOGO -->
 
                             <div class="minecraft-logo">
 
@@ -2098,9 +2448,6 @@
 
                         </div>
 
-
-
-                        <!-- GAME INFO -->
 
                         <div class="game-info">
 
@@ -2118,8 +2465,6 @@
 
                             </div>
 
-
-                            <!-- PLAY -->
 
                             <button
                                 type="button"
@@ -2150,10 +2495,6 @@
 
 
 
-            <!-- =================================================
-                 FOOTER
-            ================================================= -->
-
             <footer>
 
                 Rofleq's Hideout
@@ -2182,7 +2523,7 @@
 
 
         /* =====================================================
-           GET ELEMENTS
+           ELEMENTS
         ===================================================== */
 
         const settingsButton =
@@ -2257,11 +2598,9 @@
             );
 
 
-
         /* =====================================================
-           LOAD ABOUT:BLANK SETTING
-           
-           ON BY DEFAULT
+           ABOUT:BLANK
+           DEFAULT = ON
         ===================================================== */
 
         const savedBlankSetting =
@@ -2284,7 +2623,6 @@
 
         }
 
-
         else {
 
             blankToggle.checked =
@@ -2293,28 +2631,12 @@
         }
 
 
-
-        /* =====================================================
-           UPDATE SETTING TEXT
-        ===================================================== */
-
         function updateBlankHint() {
 
-            if (
+            blankHint.textContent =
                 blankToggle.checked
-            ) {
-
-                blankHint.textContent =
-                    "Currently enabled";
-
-            }
-
-            else {
-
-                blankHint.textContent =
-                    "Currently disabled";
-
-            }
+                    ? "Currently enabled"
+                    : "Currently disabled";
 
         }
 
@@ -2323,8 +2645,8 @@
 
 
         /* =====================================================
-           LOAD BACKGROUND SETTINGS
-           ON BY DEFAULT
+           BACKGROUND
+           DEFAULT = ON
         ===================================================== */
 
         const savedBackground =
@@ -2333,7 +2655,9 @@
             );
 
 
-        if (savedBackground === null) {
+        if (
+            savedBackground === null
+        ) {
 
             backgroundToggle.checked =
                 true;
@@ -2353,13 +2677,20 @@
         }
 
 
+        /* =====================================================
+           BACKGROUND SPEED
+           DEFAULT = 6
+        ===================================================== */
+
         const savedSpeed =
             localStorage.getItem(
                 "backgroundSpeed"
             );
 
 
-        if (savedSpeed === null) {
+        if (
+            savedSpeed === null
+        ) {
 
             speedSlider.value =
                 6;
@@ -2374,21 +2705,23 @@
         }
 
 
+        /* =====================================================
+           BACKGROUND TRANSPARENCY
+           DEFAULT = 15.5%
+        ===================================================== */
+
         const savedTransparency =
             localStorage.getItem(
                 "backgroundTransparency"
             );
 
 
-        /*
-         * The original background uses 0.018 opacity.
-         * 1.8% on this slider maps to that original value.
-         */
-
-        if (savedTransparency === null) {
+        if (
+            savedTransparency === null
+        ) {
 
             transparencySlider.value =
-                1.8;
+                15.5;
 
         }
 
@@ -2399,6 +2732,10 @@
 
         }
 
+
+        /* =====================================================
+           UPDATE BACKGROUND
+        ===================================================== */
 
         function updateBackground() {
 
@@ -2425,12 +2762,12 @@
 
 
             /*
-             * 1.8% is the original 0.018 checker opacity.
-             * 100% gives a much stronger checkerboard.
+             * Convert the slider percentage
+             * into CSS opacity.
              */
 
             const opacity =
-                transparency * 0.01;
+                transparency / 100;
 
 
             document.documentElement.style.setProperty(
@@ -2440,12 +2777,16 @@
 
 
             /*
-             * Speed 0 stops the movement.
-             * Speed 6 is the original 6 second animation.
-             * Higher values move faster.
+             * Speed 0 = stopped.
+             *
+             * Speed 6 = 6 seconds.
+             *
+             * Higher number = faster.
              */
 
-            if (speed === 0) {
+            if (
+                speed === 0
+            ) {
 
                 document.documentElement.style.setProperty(
                     "--checker-speed",
@@ -2513,6 +2854,10 @@
         updateBackground();
 
 
+        /* =====================================================
+           BACKGROUND TOGGLE
+        ===================================================== */
+
         backgroundToggle.addEventListener(
             "change",
             function() {
@@ -2527,6 +2872,10 @@
             }
         );
 
+
+        /* =====================================================
+           SPEED
+        ===================================================== */
 
         speedSlider.addEventListener(
             "input",
@@ -2543,6 +2892,10 @@
         );
 
 
+        /* =====================================================
+           TRANSPARENCY
+        ===================================================== */
+
         transparencySlider.addEventListener(
             "input",
             function() {
@@ -2558,9 +2911,8 @@
         );
 
 
-
         /* =====================================================
-           OPEN / CLOSE SETTINGS
+           SETTINGS OPEN/CLOSE
         ===================================================== */
 
         settingsButton.addEventListener(
@@ -2603,9 +2955,8 @@
         );
 
 
-
         /* =====================================================
-           DON'T CLOSE WHEN CLICKING PANEL
+           DON'T CLOSE PANEL WHEN CLICKED
         ===================================================== */
 
         settingsPanel.addEventListener(
@@ -2618,9 +2969,8 @@
         );
 
 
-
         /* =====================================================
-           CLOSE WHEN CLICKING OUTSIDE
+           CLOSE OUTSIDE
         ===================================================== */
 
         document.addEventListener(
@@ -2639,9 +2989,8 @@
         );
 
 
-
         /* =====================================================
-           SAVE ABOUT:BLANK SETTING
+           SAVE ABOUT:BLANK
         ===================================================== */
 
         blankToggle.addEventListener(
@@ -2653,12 +3002,10 @@
                     blankToggle.checked
                 );
 
-
                 updateBlankHint();
 
             }
         );
-
 
 
         /* =====================================================
@@ -2667,15 +3014,13 @@
 
         function launchGame(path) {
 
-
             const useBlank =
                 blankToggle.checked;
 
 
-
-            /* ===============================================
-               NORMAL LAUNCH
-            ================================================ */
+            /*
+             * NORMAL LAUNCH
+             */
 
             if (!useBlank) {
 
@@ -2687,10 +3032,9 @@
             }
 
 
-
-            /* ===============================================
-               ABOUT:BLANK LAUNCH
-            ================================================ */
+            /*
+             * ABOUT:BLANK LAUNCH
+             */
 
             const gameWindow =
                 window.open(
@@ -2698,9 +3042,6 @@
                     "_blank"
                 );
 
-
-
-            /* POPUP BLOCKED */
 
             if (!gameWindow) {
 
@@ -2713,10 +3054,9 @@
             }
 
 
-
-            /* ===============================================
-               CREATE GAME PAGE
-            ================================================ */
+            /*
+             * CREATE GAME PAGE
+             */
 
             gameWindow.document.open();
 
@@ -2746,30 +3086,40 @@
                         html,
                         body {
 
-                            margin: 0;
+                            margin:
+                                0;
 
-                            padding: 0;
+                            padding:
+                                0;
 
-                            width: 100%;
+                            width:
+                                100%;
 
-                            height: 100%;
+                            height:
+                                100%;
 
-                            overflow: hidden;
+                            overflow:
+                                hidden;
 
-                            background: #000;
+                            background:
+                                #000;
 
                         }
 
 
                         iframe {
 
-                            width: 100%;
+                            width:
+                                100%;
 
-                            height: 100%;
+                            height:
+                                100%;
 
-                            border: 0;
+                            border:
+                                0;
 
-                            display: block;
+                            display:
+                                block;
 
                         }
 
