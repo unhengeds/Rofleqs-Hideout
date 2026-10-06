@@ -64,21 +64,17 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
-
-            /* RED GRADIENT */
             background: linear-gradient(
                 135deg,
                 #ff4048,
                 #a50008
             );
-
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 900;
             font-size: 18px;
-
             box-shadow: 0 0 20px rgba(227, 38, 46, 0.35);
         }
 
@@ -90,6 +86,14 @@
 
         .logo-text span {
             color: var(--green2);
+        }
+
+        .version-text {
+            font-size: 9px;
+            color: #666;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
         }
 
         .nav-title {
@@ -153,10 +157,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 35px;
-
-            /* RED LINE */
             border-bottom: 1px solid var(--red);
-
             background: rgba(5, 5, 5, 0.92);
         }
 
@@ -202,7 +203,6 @@
             margin-bottom: 10px;
         }
 
-        /* RED "Rofleq's" */
         .welcome h1 span {
             color: var(--red2);
         }
@@ -225,7 +225,6 @@
             font-weight: 800;
         }
 
-        /* RED SECTION LINE */
         .section-line {
             height: 1px;
             flex: 1;
@@ -245,14 +244,10 @@
         .game-card {
             position: relative;
             background: var(--panel);
-
-            /* RED BORDER */
             border: 1px solid rgba(227, 38, 46, 0.35);
-
             border-radius: 13px;
             overflow: hidden;
             cursor: pointer;
-
             transition:
                 transform 0.2s,
                 border-color 0.2s,
@@ -271,7 +266,6 @@
         .game-image {
             height: 145px;
 
-            /* RED GRADIENT */
             background:
                 radial-gradient(
                     circle at 30% 30%,
@@ -300,7 +294,6 @@
             position: absolute;
             inset: 0;
 
-            /* RED GRID LINES */
             background:
                 linear-gradient(
                     90deg,
@@ -359,10 +352,8 @@
             border: none;
             border-radius: 7px;
             padding: 10px;
-
             background: var(--green);
             color: #031007;
-
             font-weight: 900;
             cursor: pointer;
             transition: 0.2s;
@@ -389,12 +380,8 @@
         footer {
             margin-top: 55px;
             padding: 25px 0;
-
             color: #555;
-
-            /* RED LINE */
             border-top: 1px solid var(--red);
-
             font-size: 12px;
         }
 
@@ -460,8 +447,15 @@
                 R
             </div>
 
-            <div class="logo-text">
-                <span>Rofleq's</span> <span style="color: #39ff78;">Hideout</span>
+            <div>
+                <div class="logo-text">
+                    <span style="color: #e3262e;">Rofleq's</span>
+                    <span style="color: #39ff78;">Hideout</span>
+                </div>
+
+                <div class="version-text">
+                    Github Version
+                </div>
             </div>
 
         </div>
