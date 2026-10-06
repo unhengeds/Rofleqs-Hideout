@@ -1,1 +1,1867 @@
-*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#050505;--sidebar:#080808;--panel:#0d0d0d;--panel2:#121212;--text:#ffffff;--muted:#8d8d8d;--green:#20d65a;--green2:#39ff78;--red:#e3262e;--red2:#ff4048;--border:rgba(227,38,46,0.28);--checker-opacity:0.018;--checker-speed:6s}html{min-height:100%}body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}body::before{content:"";position:fixed;inset:-100px;z-index:-2;pointer-events:none;background:linear-gradient(45deg,rgba(255,255,255,var(--checker-opacity)) 25%,transparent 25%,transparent 75%,rgba(255,255,255,var(--checker-opacity)) 75%),linear-gradient(45deg,rgba(255,255,255,var(--checker-opacity)) 25%,transparent 25%,transparent 75%,rgba(255,255,255,var(--checker-opacity)) 75%);background-size:80px 80px;background-position:0 0,40px 40px;animation:checkerMove var(--checker-speed) linear infinite}body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 20%,rgba(227,38,46,0.025),transparent 45%),rgba(5,5,5,0.72)}body.background-disabled::before{display:none}@keyframes checkerMove{from{transform:translate(0,0)}to{transform:translate(80px,80px)}}.sidebar{position:fixed;left:0;top:0;width:240px;height:100vh;background:rgba(8,8,8,0.95);border-right:1px solid var(--red);padding:25px 18px;display:flex;flex-direction:column;z-index:50}.logo{display:flex;justify-content:center;align-items:center;width:100%;padding:5px 0;margin-bottom:5px}.logo-image{width:170px;height:auto;max-height:155px;object-fit:contain;display:block;filter:drop-shadow(0 0 12px rgba(227,38,46,0.15))}.version-text{text-align:center;color:#666;font-size:9px;font-weight:600;letter-spacing:.5px;margin-bottom:32px}.nav-title{color:#6d3033;font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;margin-bottom:10px}.nav-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:9px;color:var(--muted);text-decoration:none;margin-bottom:5px;font-size:14px;transition:.2s}.nav-item:hover{color:#fff;background:rgba(227,38,46,.1)}.nav-item.active{color:#fff;background:rgba(227,38,46,.14);border-left:3px solid var(--red)}.nav-icon{width:20px;text-align:center;font-size:17px}.sidebar-bottom{margin-top:auto;padding:15px 10px 5px;color:#555;font-size:11px;line-height:1.5}.sidebar-bottom .red-text{color:var(--red2)}.main{margin-left:240px;min-height:100vh}.topbar{height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 35px;border-bottom:1px solid var(--red);background:rgba(5,5,5,.92);position:relative;z-index:40}.topbar-title{font-size:14px;font-weight:700}.topbar-title .red{color:var(--red2)}.topbar-title .green{color:var(--green2)}.topbar-right{display:flex;align-items:center;gap:14px;position:relative}.status{display:flex;align-items:center;gap:8px;color:#777;font-size:12px}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}.settings-button{width:38px;height:38px;border:1px solid rgba(227,38,46,.35);border-radius:9px;background:rgba(227,38,46,.08);color:#aaa;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}.settings-button:hover{color:#fff;background:rgba(227,38,46,.18);border-color:var(--red2);box-shadow:0 0 16px rgba(227,38,46,.16)}.settings-button.open{color:#fff;background:rgba(227,38,46,.18);border-color:var(--red2)}.settings-panel{position:absolute;top:52px;right:0;width:410px;padding:22px;background:rgba(13,13,13,.99);border:1px solid rgba(227,38,46,.45);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.65),0 0 25px rgba(227,38,46,.08);opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}.settings-panel.open{opacity:1;transform:translateY(0);pointer-events:auto}.settings-panel-title{color:#fff;font-size:19px;font-weight:800;margin-bottom:5px}.settings-panel-subtitle{color:#666;font-size:11px;line-height:1.4;margin-bottom:20px}.setting-box{position:relative;padding:17px;border:1px solid rgba(227,38,46,.16);border-radius:11px;background:rgba(227,38,46,.045);overflow:hidden;transition:background .2s ease,border-color .2s ease,transform .2s ease}.setting-box:hover{background:rgba(227,38,46,.09);border-color:rgba(227,38,46,.36);transform:translateY(-1px)}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:15px}.setting-name{color:#ddd;font-size:14px;font-weight:700;margin-bottom:5px}.setting-hint{color:#666;font-size:10px}.setting-description{color:#999;font-size:11px;line-height:1.5;max-height:0;opacity:0;overflow:hidden;margin-top:0;transform:translateY(-5px);transition:max-height .28s ease,opacity .2s ease,margin-top .28s ease,transform .28s ease}.setting-box:hover .setting-description{max-height:100px;opacity:1;margin-top:13px;transform:translateY(0)}.toggle{position:relative;width:48px;height:26px;flex-shrink:0}.toggle input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;cursor:pointer;background:#252525;border:1px solid #444;border-radius:20px;transition:.2s}.slider::before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:#777;transition:.2s}.toggle input:checked+.slider{background:var(--green);border-color:var(--green);box-shadow:0 0 10px rgba(32,214,90,.15)}.toggle input:checked+.slider::before{transform:translateX(22px);background:#06100a}.background-extra{display:none}.background-extra.visible{display:block}.range-value{color:var(--green2);font-size:12px;font-weight:800;min-width:30px;text-align:right}.background-extra input[type=range]{width:100%;margin-top:14px;accent-color:var(--green);cursor:pointer}.content{padding:45px;max-width:1400px;margin:auto}.welcome{margin-bottom:35px}.welcome h1{font-size:38px;line-height:1.1;margin-bottom:10px}.welcome h1 .red{color:var(--red2)}.welcome h1 .green{color:var(--green2)}.welcome p{color:var(--muted);font-size:15px}.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.section-title{font-size:20px;font-weight:800}.section-line{height:1px;flex:1;background:var(--red);margin-left:20px;box-shadow:0 0 8px rgba(227,38,46,.25)}.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}.game-card{position:relative;background:rgba(13,13,13,.94);border:1px solid rgba(227,38,46,.35);border-radius:13px;overflow:hidden;cursor:pointer;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.game-card:hover{transform:translateY(-5px);border-color:var(--red2);box-shadow:0 12px 35px rgba(0,0,0,.35),0 0 20px rgba(227,38,46,.12)}.game-image{height:145px;background:radial-gradient(circle at 30% 30%,rgba(255,64,72,.2),transparent 35%),radial-gradient(circle at 70% 70%,rgba(180,0,10,.18),transparent 35%),linear-gradient(135deg,#180608,#0a0a0a);display:flex;align-items:center;justify-content:center;position:relative}.game-image::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49%,rgba(227,38,46,.08) 50%,transparent 51%),linear-gradient(0deg,transparent 49%,rgba(227,38,46,.08) 50%,transparent 51%);background-size:32px 32px}.minecraft-logo{position:relative;z-index:1;font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;text-shadow:3px 3px 0 #111,0 0 18px rgba(255,64,72,.25)}.minecraft-logo span{color:var(--red2)}.red-accent{position:absolute;top:12px;right:12px;width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}.game-info{padding:17px}.game-title{font-size:18px;font-weight:800;margin-bottom:7px}.game-meta{color:var(--muted);font-size:13px;margin-bottom:15px}.play-small{width:100%;border:none;border-radius:7px;padding:10px;background:var(--green);color:#031007;font-weight:900;cursor:pointer;transition:.2s}.play-small:hover{background:var(--green2);box-shadow:0 0 18px rgba(57,255,120,.35)}footer{margin-top:55px;padding:25px 0;color:#555;border-top:1px solid var(--red);font-size:12px}footer span{color:var(--red2)}@media(max-width:800px){.sidebar{position:relative;width:100%;height:auto;padding:18px;border-right:none;border-bottom:1px solid var(--red)}.logo-image{width:145px}.version-text{margin-bottom:18px}.nav-title{display:none}.nav-item{display:none}.sidebar-bottom{display:none}.main{margin-left:0}.topbar{padding:0 20px}.topbar-title{font-size:12px}.content{padding:28px 20px}.welcome h1{font-size:30px}.settings-panel{width:min(410px,calc(100vw - 30px));right:-5px}}@media(max-width:500px){.status{display:none}.settings-panel{position:fixed;top:70px;right:15px;left:15px;width:auto}}
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --bg: #050505;
+
+    --sidebar: #080808;
+
+    --panel: #0d0d0d;
+
+    --panel2: #121212;
+
+    --text: #ffffff;
+
+    --muted: #8d8d8d;
+
+    --green: #20d65a;
+
+    --green2: #39ff78;
+
+    --red: #e3262e;
+
+    --red2: #ff4048;
+
+    --border:
+        rgba(227, 38, 46, 0.28);
+
+    /* RED CHECKERBOARD */
+    --checker-opacity: 0.155;
+
+    --checker-speed: 6s;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+html {
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
+    min-height:
+        100vh;
+
+    overflow-x:
+        hidden;
+}
+
+
+/* =====================================================
+   RED MOVING CHECKERBOARD
+===================================================== */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: -100px;
+
+    z-index: -2;
+
+    pointer-events: none;
+
+
+    background:
+
+        linear-gradient(
+            45deg,
+
+            rgba(
+                227,
+                38,
+                46,
+                var(--checker-opacity)
+            )
+            25%,
+
+            transparent
+            25%,
+
+            transparent
+            75%,
+
+            rgba(
+                227,
+                38,
+                46,
+                var(--checker-opacity)
+            )
+            75%
+        ),
+
+
+        linear-gradient(
+            45deg,
+
+            rgba(
+                227,
+                38,
+                46,
+                var(--checker-opacity)
+            )
+            25%,
+
+            transparent
+            25%,
+
+            transparent
+            75%,
+
+            rgba(
+                227,
+                38,
+                46,
+                var(--checker-opacity)
+            )
+            75%
+        );
+
+
+    background-size:
+        80px 80px;
+
+
+    background-position:
+        0 0,
+        40px 40px;
+
+
+    animation:
+        checkerMove
+        var(--checker-speed)
+        linear
+        infinite;
+}
+
+
+/* =====================================================
+   DARK OVERLAY
+===================================================== */
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(
+                227,
+                38,
+                46,
+                0.025
+            ),
+            transparent 45%
+        ),
+
+        rgba(
+            5,
+            5,
+            5,
+            0.72
+        );
+}
+
+
+body.background-disabled::before {
+    display: none;
+}
+
+
+/* =====================================================
+   CHECKER ANIMATION
+===================================================== */
+
+@keyframes checkerMove {
+
+    from {
+
+        transform:
+            translate(
+                0,
+                0
+            );
+
+    }
+
+
+    to {
+
+        transform:
+            translate(
+                80px,
+                80px
+            );
+
+    }
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    width: 240px;
+
+    height: 100vh;
+
+    background:
+        rgba(
+            8,
+            8,
+            8,
+            0.95
+        );
+
+    border-right:
+        1px solid
+        var(--red);
+
+    padding:
+        25px 18px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    z-index:
+        50;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    width:
+        100%;
+
+    padding:
+        5px 0;
+
+    margin-bottom:
+        5px;
+}
+
+
+.logo-image {
+
+    width:
+        170px;
+
+    height:
+        auto;
+
+    max-height:
+        155px;
+
+    object-fit:
+        contain;
+
+    display:
+        block;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(
+                227,
+                38,
+                46,
+                0.15
+            )
+        );
+}
+
+
+.version-text {
+
+    text-align:
+        center;
+
+    color:
+        #666;
+
+    font-size:
+        9px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.5px;
+
+    margin-bottom:
+        32px;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.nav-title {
+
+    color:
+        #6d3033;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    letter-spacing:
+        1.5px;
+
+    text-transform:
+        uppercase;
+
+    padding:
+        0 12px;
+
+    margin-bottom:
+        10px;
+}
+
+
+.nav-item {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    padding:
+        12px;
+
+    border-radius:
+        9px;
+
+    color:
+        var(--muted);
+
+    text-decoration:
+        none;
+
+    margin-bottom:
+        5px;
+
+    font-size:
+        14px;
+
+    transition:
+        0.2s;
+}
+
+
+.nav-item:hover {
+
+    color:
+        white;
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.10
+        );
+}
+
+
+.nav-item.active {
+
+    color:
+        white;
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.14
+        );
+
+    border-left:
+        3px solid
+        var(--red);
+}
+
+
+.nav-icon {
+
+    width:
+        20px;
+
+    text-align:
+        center;
+
+    font-size:
+        17px;
+}
+
+
+/* =====================================================
+   SIDEBAR FOOTER
+===================================================== */
+
+.sidebar-bottom {
+
+    margin-top:
+        auto;
+
+    padding:
+        15px 10px 5px;
+
+    color:
+        #555;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+}
+
+
+.sidebar-bottom .red-text {
+
+    color:
+        var(--red2);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    margin-left:
+        240px;
+
+    min-height:
+        100vh;
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+
+    height:
+        75px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        0 35px;
+
+    border-bottom:
+        1px solid
+        var(--red);
+
+    background:
+        rgba(
+            5,
+            5,
+            5,
+            0.92
+        );
+
+    position:
+        relative;
+
+    z-index:
+        40;
+}
+
+
+.topbar-title {
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+}
+
+
+.topbar-title .red {
+    color:
+        var(--red2);
+}
+
+
+.topbar-title .green {
+    color:
+        var(--green2);
+}
+
+
+/* =====================================================
+   TOP RIGHT
+===================================================== */
+
+.topbar-right {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    position:
+        relative;
+}
+
+
+/* =====================================================
+   ONLINE
+===================================================== */
+
+.status {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    color:
+        #777;
+
+    font-size:
+        12px;
+}
+
+
+.status-dot {
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 10px
+        var(--green);
+}
+
+
+/* =====================================================
+   SETTINGS BUTTON
+===================================================== */
+
+.settings-button {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border:
+        1px solid
+        rgba(
+            227,
+            38,
+            46,
+            0.35
+        );
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.08
+        );
+
+    color:
+        #aaa;
+
+    font-size:
+        20px;
+
+    cursor:
+        pointer;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    transition:
+        0.2s;
+}
+
+
+.settings-button:hover {
+
+    color:
+        white;
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.18
+        );
+
+    border-color:
+        var(--red2);
+
+    box-shadow:
+        0 0 16px
+        rgba(
+            227,
+            38,
+            46,
+            0.16
+        );
+}
+
+
+.settings-button.open {
+
+    color:
+        white;
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.18
+        );
+
+    border-color:
+        var(--red2);
+}
+
+
+/* =====================================================
+   SETTINGS PANEL
+===================================================== */
+
+.settings-panel {
+
+    position:
+        absolute;
+
+    top:
+        52px;
+
+    right:
+        0;
+
+    width:
+        410px;
+
+    padding:
+        22px;
+
+    background:
+        rgba(
+            13,
+            13,
+            13,
+            0.99
+        );
+
+    border:
+        1px solid
+        rgba(
+            227,
+            38,
+            46,
+            0.45
+        );
+
+    border-radius:
+        14px;
+
+    box-shadow:
+
+        0 20px 50px
+        rgba(
+            0,
+            0,
+            0,
+            0.65
+        ),
+
+        0 0 25px
+        rgba(
+            227,
+            38,
+            46,
+            0.08
+        );
+
+    opacity:
+        0;
+
+    transform:
+        translateY(-8px);
+
+    pointer-events:
+        none;
+
+    transition:
+
+        opacity
+        0.18s
+        ease,
+
+        transform
+        0.18s
+        ease;
+}
+
+
+.settings-panel.open {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
+    pointer-events:
+        auto;
+}
+
+
+/* =====================================================
+   SETTINGS HEADER
+===================================================== */
+
+.settings-panel-title {
+
+    color:
+        white;
+
+    font-size:
+        19px;
+
+    font-weight:
+        800;
+
+    margin-bottom:
+        5px;
+}
+
+
+.settings-panel-subtitle {
+
+    color:
+        #666;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.4;
+
+    margin-bottom:
+        20px;
+}
+
+
+/* =====================================================
+   SETTING BOX
+===================================================== */
+
+.setting-box {
+
+    position:
+        relative;
+
+    padding:
+        17px;
+
+    border:
+        1px solid
+        rgba(
+            227,
+            38,
+            46,
+            0.16
+        );
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.045
+        );
+
+    overflow:
+        hidden;
+
+    transition:
+
+        background
+        0.2s
+        ease,
+
+        border-color
+        0.2s
+        ease,
+
+        transform
+        0.2s
+        ease;
+
+    margin-bottom:
+        12px;
+}
+
+
+.setting-box:hover {
+
+    background:
+        rgba(
+            227,
+            38,
+            46,
+            0.09
+        );
+
+    border-color:
+        rgba(
+            227,
+            38,
+            46,
+            0.36
+        );
+
+    transform:
+        translateY(-1px);
+}
+
+
+.setting-row {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+}
+
+
+.setting-name {
+
+    color:
+        #ddd;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        5px;
+}
+
+
+.setting-hint {
+
+    color:
+        #666;
+
+    font-size:
+        10px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.setting-description {
+
+    color:
+        #999;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+    max-height:
+        0;
+
+    opacity:
+        0;
+
+    overflow:
+        hidden;
+
+    margin-top:
+        0;
+
+    transform:
+        translateY(-5px);
+
+    transition:
+
+        max-height
+        0.28s
+        ease,
+
+        opacity
+        0.2s
+        ease,
+
+        margin-top
+        0.28s
+        ease,
+
+        transform
+        0.28s
+        ease;
+}
+
+
+.setting-box:hover
+.setting-description {
+
+    max-height:
+        100px;
+
+    opacity:
+        1;
+
+    margin-top:
+        13px;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+.toggle {
+
+    position:
+        relative;
+
+    width:
+        48px;
+
+    height:
+        26px;
+
+    flex-shrink:
+        0;
+}
+
+
+.toggle input {
+
+    opacity:
+        0;
+
+    width:
+        0;
+
+    height:
+        0;
+}
+
+
+.slider {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    cursor:
+        pointer;
+
+    background:
+        #252525;
+
+    border:
+        1px solid
+        #444;
+
+    border-radius:
+        20px;
+
+    transition:
+        0.2s;
+}
+
+
+.slider::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        18px;
+
+    height:
+        18px;
+
+    left:
+        3px;
+
+    top:
+        3px;
+
+    border-radius:
+        50%;
+
+    background:
+        #777;
+
+    transition:
+        0.2s;
+}
+
+
+.toggle input:checked
++ .slider {
+
+    background:
+        var(--green);
+
+    border-color:
+        var(--green);
+
+    box-shadow:
+        0 0 10px
+        rgba(
+            32,
+            214,
+            90,
+            0.15
+        );
+}
+
+
+.toggle input:checked
++ .slider::before {
+
+    transform:
+        translateX(22px);
+
+    background:
+        #06100a;
+}
+
+
+/* =====================================================
+   BACKGROUND SETTINGS
+===================================================== */
+
+.background-extra {
+    display: none;
+}
+
+
+.background-extra.visible {
+    display: block;
+}
+
+
+/* =====================================================
+   RANGE VALUE
+===================================================== */
+
+.range-value {
+
+    color:
+        var(--green2);
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    min-width:
+        40px;
+
+    text-align:
+        right;
+}
+
+
+.background-extra
+input[type="range"] {
+
+    width:
+        100%;
+
+    margin-top:
+        14px;
+
+    accent-color:
+        var(--red);
+
+    cursor:
+        pointer;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    padding:
+        45px;
+
+    max-width:
+        1400px;
+
+    margin:
+        auto;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome {
+
+    margin-bottom:
+        35px;
+}
+
+
+.welcome h1 {
+
+    font-size:
+        38px;
+
+    line-height:
+        1.1;
+
+    margin-bottom:
+        10px;
+}
+
+
+.welcome h1 .red {
+    color:
+        var(--red2);
+}
+
+
+.welcome h1 .green {
+    color:
+        var(--green2);
+}
+
+
+.welcome p {
+
+    color:
+        var(--muted);
+
+    font-size:
+        15px;
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        18px;
+}
+
+
+.section-title {
+
+    font-size:
+        20px;
+
+    font-weight:
+        800;
+}
+
+
+.section-line {
+
+    height:
+        1px;
+
+    flex:
+        1;
+
+    background:
+        var(--red);
+
+    margin-left:
+        20px;
+
+    box-shadow:
+        0 0 8px
+        rgba(
+            227,
+            38,
+            46,
+            0.25
+        );
+}
+
+
+/* =====================================================
+   GAME GRID
+===================================================== */
+
+.game-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(
+                230px,
+                1fr
+            )
+        );
+
+    gap:
+        20px;
+}
+
+
+/* =====================================================
+   GAME CARD
+===================================================== */
+
+.game-card {
+
+    position:
+        relative;
+
+    background:
+        rgba(
+            13,
+            13,
+            13,
+            0.94
+        );
+
+    border:
+        1px solid
+        rgba(
+            227,
+            38,
+            46,
+            0.35
+        );
+
+    border-radius:
+        13px;
+
+    overflow:
+        hidden;
+
+    cursor:
+        pointer;
+
+    transition:
+
+        transform
+        0.2s
+        ease,
+
+        border-color
+        0.2s
+        ease,
+
+        box-shadow
+        0.2s
+        ease;
+}
+
+
+.game-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--red2);
+
+    box-shadow:
+
+        0 12px 35px
+        rgba(
+            0,
+            0,
+            0,
+            0.35
+        ),
+
+        0 0 20px
+        rgba(
+            227,
+            38,
+            46,
+            0.12
+        );
+}
+
+
+/* =====================================================
+   GAME IMAGE
+===================================================== */
+
+.game-image {
+
+    height:
+        145px;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 30%,
+            rgba(
+                255,
+                64,
+                72,
+                0.2
+            ),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 70% 70%,
+            rgba(
+                180,
+                0,
+                10,
+                0.18
+            ),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #180608,
+            #0a0a0a
+        );
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    position:
+        relative;
+}
+
+
+.game-image::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent 49%,
+            rgba(
+                227,
+                38,
+                46,
+                0.08
+            ) 50%,
+            transparent 51%
+        ),
+
+        linear-gradient(
+            0deg,
+            transparent 49%,
+            rgba(
+                227,
+                38,
+                46,
+                0.08
+            ) 50%,
+            transparent 51%
+        );
+
+    background-size:
+        32px 32px;
+}
+
+
+/* =====================================================
+   MINECRAFT LOGO
+===================================================== */
+
+.minecraft-logo {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    font-size:
+        30px;
+
+    font-weight:
+        900;
+
+    color:
+        #fff;
+
+    letter-spacing:
+        -1px;
+
+    text-shadow:
+
+        3px 3px 0 #111,
+
+        0 0 18px
+        rgba(
+            255,
+            64,
+            72,
+            0.25
+        );
+}
+
+
+.minecraft-logo span {
+    color:
+        var(--red2);
+}
+
+
+.red-accent {
+
+    position:
+        absolute;
+
+    top:
+        12px;
+
+    right:
+        12px;
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--red);
+
+    box-shadow:
+        0 0 10px
+        var(--red);
+}
+
+
+/* =====================================================
+   GAME INFO
+===================================================== */
+
+.game-info {
+    padding:
+        17px;
+}
+
+
+.game-title {
+
+    font-size:
+        18px;
+
+    font-weight:
+        800;
+
+    margin-bottom:
+        7px;
+}
+
+
+.game-meta {
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+
+    margin-bottom:
+        15px;
+}
+
+
+/* =====================================================
+   PLAY BUTTON
+===================================================== */
+
+.play-small {
+
+    width:
+        100%;
+
+    border:
+        none;
+
+    border-radius:
+        7px;
+
+    padding:
+        10px;
+
+    background:
+        var(--green);
+
+    color:
+        #031007;
+
+    font-weight:
+        900;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.2s;
+}
+
+
+.play-small:hover {
+
+    background:
+        var(--green2);
+
+    box-shadow:
+        0 0 18px
+        rgba(
+            57,
+            255,
+            120,
+            0.35
+        );
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    margin-top:
+        55px;
+
+    padding:
+        25px 0;
+
+    color:
+        #555;
+
+    border-top:
+        1px solid
+        var(--red);
+
+    font-size:
+        12px;
+}
+
+
+footer span {
+    color:
+        var(--red2);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:800px) {
+
+    .sidebar {
+
+        position:
+            relative;
+
+        width:
+            100%;
+
+        height:
+            auto;
+
+        padding:
+            18px;
+
+        border-right:
+            none;
+
+        border-bottom:
+            1px solid
+            var(--red);
+    }
+
+
+    .logo-image {
+        width:
+            145px;
+    }
+
+
+    .version-text {
+        margin-bottom:
+            18px;
+    }
+
+
+    .nav-title {
+        display:
+            none;
+    }
+
+
+    .nav-item {
+        display:
+            none;
+    }
+
+
+    .sidebar-bottom {
+        display:
+            none;
+    }
+
+
+    .main {
+        margin-left:
+            0;
+    }
+
+
+    .topbar {
+        padding:
+            0 20px;
+    }
+
+
+    .topbar-title {
+        font-size:
+            12px;
+    }
+
+
+    .content {
+        padding:
+            28px 20px;
+    }
+
+
+    .welcome h1 {
+        font-size:
+            30px;
+    }
+
+
+    .settings-panel {
+
+        width:
+            min(
+                410px,
+                calc(100vw - 30px)
+            );
+
+        right:
+            -5px;
+    }
+
+}
+
+
+@media(max-width:500px) {
+
+    .status {
+        display:
+            none;
+    }
+
+
+    .settings-panel {
+
+        position:
+            fixed;
+
+        top:
+            70px;
+
+        right:
+            15px;
+
+        left:
+            15px;
+
+        width:
+            auto;
+    }
+
+}
