@@ -168,35 +168,9 @@ body {
     z-index: 8;
 }
 
-.search {
-    position: relative;
-    flex: 1;
-    max-width: 500px;
-}
-
-.search input {
-    width: 100%;
-    height: 42px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: #121620;
-    color: white;
-    padding: 0 16px 0 42px;
-    outline: none;
-    transition: .2s;
-    font-size: 14px;
-}
-
-.search input:focus {
-    border-color: rgba(108,92,231,.7);
-    box-shadow: 0 0 0 3px rgba(108,92,231,.1);
-}
-
-.search-icon {
-    position: absolute;
-    left: 15px;
-    top: 12px;
-    color: #737c8c;
+.top-title {
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .top-actions {
@@ -248,166 +222,22 @@ body {
     padding: 30px 35px 60px;
 }
 
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 17px;
-}
-
-.section-heading h2 {
-    font-size: 20px;
-}
-
-.section-heading button {
-    background: none;
-    border: 0;
-    color: var(--accent2);
-    cursor: pointer;
-    font-size: 13px;
-}
-
 /* =========================
-   FEATURED
+   WELCOME
 ========================= */
 
-.featured {
-    height: 340px;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 35px;
-    background:
-        linear-gradient(90deg,
-        rgba(5,7,11,.98) 0%,
-        rgba(5,7,11,.82) 38%,
-        rgba(5,7,11,.15) 75%,
-        rgba(5,7,11,.35) 100%),
-        radial-gradient(circle at 75% 40%, #725ce7, #171a30 45%, #080a0f 75%);
-    border: 1px solid var(--border);
+.welcome {
+    margin-bottom: 28px;
 }
 
-.featured::after {
-    content: "";
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    right: 7%;
-    top: -30px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(130,112,255,.35), transparent 65%);
-    filter: blur(10px);
-    animation: pulse 5s ease-in-out infinite;
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
 }
 
-@keyframes pulse {
-    0%,100% {
-        transform: scale(1);
-        opacity: .7;
-    }
-
-    50% {
-        transform: scale(1.15);
-        opacity: 1;
-    }
-}
-
-.featured-content {
-    position: relative;
-    z-index: 2;
-    width: 55%;
-    height: 100%;
-    padding: 55px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.featured-label {
-    color: #aaa0ff;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.featured h1 {
-    font-size: 43px;
-    line-height: 1;
-    margin-bottom: 15px;
-    letter-spacing: -1.5px;
-}
-
-.featured p {
-    color: #b5bdcc;
-    max-width: 430px;
+.welcome p {
+    color: var(--muted);
     font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 24px;
-}
-
-.play-button {
-    width: max-content;
-    padding: 13px 24px;
-    border: 0;
-    border-radius: 8px;
-    background: var(--accent);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .2s;
-    box-shadow: 0 8px 25px rgba(108,92,231,.3);
-}
-
-.play-button:hover {
-    background: var(--accent2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(108,92,231,.4);
-}
-
-/* =========================
-   CATEGORIES
-========================= */
-
-.categories {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 5px;
-    margin-bottom: 30px;
-}
-
-.categories::-webkit-scrollbar {
-    height: 4px;
-}
-
-.categories::-webkit-scrollbar-thumb {
-    background: #252b38;
-    border-radius: 10px;
-}
-
-.category {
-    white-space: nowrap;
-    border: 1px solid var(--border);
-    background: #11151e;
-    color: #919aaa;
-    padding: 9px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: .2s;
-    font-size: 13px;
-}
-
-.category:hover {
-    color: white;
-    background: #181d28;
-}
-
-.category.active {
-    color: white;
-    background: var(--accent);
-    border-color: var(--accent);
 }
 
 /* =========================
@@ -419,6 +249,10 @@ body {
     grid-template-columns: repeat(4, minmax(0,1fr));
     gap: 18px;
 }
+
+/* =========================
+   GAME CARD
+========================= */
 
 .game-card {
     background: var(--panel);
@@ -439,21 +273,32 @@ body {
 }
 
 .game-image {
-    height: 165px;
+    height: 190px;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    padding: 14px;
+    padding: 18px;
 }
 
 .game-image::before {
     content: "";
     position: absolute;
     inset: 0;
+
     background:
-        radial-gradient(circle at 70% 25%, rgba(255,255,255,.18), transparent 25%),
-        linear-gradient(135deg, var(--game1), var(--game2));
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(255,255,255,.22),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #5b8c3a,
+            #273c1c 50%,
+            #10160d
+        );
+
     transition: transform .4s;
 }
 
@@ -461,40 +306,48 @@ body {
     transform: scale(1.08);
 }
 
+.game-image::after {
+    content: "⛏";
+    position: absolute;
+    right: 25px;
+    bottom: 18px;
+    font-size: 70px;
+    opacity: .8;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,.5));
+}
+
 .game-number {
     position: relative;
     z-index: 1;
-    font-size: 40px;
+    font-size: 42px;
     font-weight: 900;
     opacity: .8;
     text-shadow: 0 4px 15px rgba(0,0,0,.5);
 }
 
 .game-info {
-    padding: 14px;
+    padding: 16px;
 }
 
 .game-title {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: bold;
     margin-bottom: 7px;
 }
 
 .game-meta {
     color: var(--muted);
-    font-size: 12px;
-    display: flex;
-    justify-content: space-between;
+    font-size: 13px;
 }
 
 .play-small {
-    margin-top: 12px;
+    margin-top: 14px;
     width: 100%;
     border: 0;
     border-radius: 7px;
     background: #202635;
     color: white;
-    padding: 9px;
+    padding: 10px;
     cursor: pointer;
     font-weight: bold;
     transition: .2s;
@@ -502,22 +355,6 @@ body {
 
 .play-small:hover {
     background: var(--accent);
-}
-
-/* =========================
-   EMPTY SEARCH
-========================= */
-
-.no-results {
-    display: none;
-    text-align: center;
-    padding: 50px;
-    color: var(--muted);
-}
-
-.no-results h3 {
-    color: white;
-    margin-bottom: 7px;
 }
 
 /* =========================
@@ -574,15 +411,6 @@ body {
     .games-grid {
         grid-template-columns: repeat(2, minmax(0,1fr));
     }
-
-    .featured-content {
-        width: 75%;
-        padding: 35px;
-    }
-
-    .featured h1 {
-        font-size: 34px;
-    }
 }
 
 @media (max-width: 560px) {
@@ -591,30 +419,12 @@ body {
         display: none;
     }
 
-    .topbar {
-        gap: 8px;
-    }
-
     .top-button {
         display: none;
     }
 
-    .featured {
-        height: 370px;
-    }
-
-    .featured-content {
-        width: 100%;
-        padding: 28px;
-        justify-content: flex-end;
-        background: linear-gradient(
-            transparent,
-            rgba(5,7,11,.95)
-        );
-    }
-
-    .featured h1 {
-        font-size: 30px;
+    .welcome h1 {
+        font-size: 27px;
     }
 
     .games-grid {
@@ -622,7 +432,7 @@ body {
     }
 
     .game-image {
-        height: 190px;
+        height: 210px;
     }
 }
 </style>
@@ -644,34 +454,9 @@ body {
 
         <nav class="nav">
 
-            <button class="active" data-category="all">
+            <button class="active">
                 <span class="nav-icon">⌂</span>
                 <span>Home</span>
-            </button>
-
-            <button data-category="action">
-                <span class="nav-icon">⚔</span>
-                <span>Action</span>
-            </button>
-
-            <button data-category="horror">
-                <span class="nav-icon">☠</span>
-                <span>Horror</span>
-            </button>
-
-            <button data-category="platformer">
-                <span class="nav-icon">▣</span>
-                <span>Platformers</span>
-            </button>
-
-            <button data-category="3d">
-                <span class="nav-icon">◆</span>
-                <span>3D Games</span>
-            </button>
-
-            <button data-category="favorites">
-                <span class="nav-icon">★</span>
-                <span>Favorites</span>
             </button>
 
         </nav>
@@ -691,14 +476,8 @@ body {
         <!-- TOP BAR -->
         <header class="topbar">
 
-            <div class="search">
-                <span class="search-icon">⌕</span>
-                <input
-                    id="search"
-                    type="search"
-                    placeholder="Search games..."
-                    autocomplete="off"
-                >
+            <div class="top-title">
+                Game Library
             </div>
 
             <div class="top-actions">
@@ -723,344 +502,45 @@ body {
         <!-- CONTENT -->
         <div class="content">
 
-            <!-- FEATURED -->
-            <section class="featured">
-
-                <div class="featured-content">
-
-                    <div class="featured-label">
-                        Featured Game
-                    </div>
-
-                    <h1>THE BACKROOMS</h1>
-
-                    <p>
-                        Explore an endless maze of yellow rooms.
-                        Find your way out before something finds you.
-                    </p>
-
-                    <button
-                        class="play-button"
-                        onclick="launchGame('games/backrooms/index.html')">
-                        ▶ PLAY NOW
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- CATEGORIES -->
-            <div class="section-heading">
-                <h2>Browse Games</h2>
-                <button id="clearSearch">Clear Search</button>
-            </div>
-
-            <div class="categories">
-
-                <button class="category active" data-filter="all">
-                    All Games
-                </button>
-
-                <button class="category" data-filter="action">
-                    ⚔ Action
-                </button>
-
-                <button class="category" data-filter="horror">
-                    ☠ Horror
-                </button>
-
-                <button class="category" data-filter="platformer">
-                    ▣ Platformer
-                </button>
-
-                <button class="category" data-filter="3d">
-                    ◆ 3D
-                </button>
-
+            <div class="welcome">
+                <h1>Games</h1>
+                <p>Choose a game from your library.</p>
             </div>
 
 
-            <!-- GAMES -->
-            <div class="games-grid" id="games">
+            <!-- GAME -->
+            <div class="games-grid">
 
-                <!-- GAME 1 -->
                 <article
                     class="game-card"
-                    data-title="The Backrooms"
-                    data-category="horror 3d"
-                    data-favorite="true"
-                    onclick="launchGame('games/backrooms/index.html')">
+                    onclick="launchGame('eaglercraft-1.9.4/index.html')">
 
-                    <div
-                        class="game-image"
-                        style="--game1:#b08b2e; --game2:#3b321d;">
+                    <div class="game-image">
                         <div class="game-number">01</div>
                     </div>
 
                     <div class="game-info">
+
                         <div class="game-title">
-                            The Backrooms
+                            Minecraft
                         </div>
 
                         <div class="game-meta">
-                            <span>Horror</span>
-                            <span>3D</span>
+                            1.9.4
                         </div>
 
                         <button
                             class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/backrooms/index.html')">
-                            PLAY
+                            onclick="event.stopPropagation(); launchGame('eaglercraft-1.9.4/index.html')">
+
+                            ▶ PLAY
+
                         </button>
+
                     </div>
 
                 </article>
 
-
-                <!-- GAME 2 -->
-                <article
-                    class="game-card"
-                    data-title="Neon Runner"
-                    data-category="action platformer"
-                    data-favorite="true"
-                    onclick="launchGame('games/neon-runner/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#1d55a8; --game2:#7d1e91;">
-                        <div class="game-number">02</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            Neon Runner
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Action</span>
-                            <span>2D</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/neon-runner/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-
-                <!-- GAME 3 -->
-                <article
-                    class="game-card"
-                    data-title="Void"
-                    data-category="horror 3d"
-                    data-favorite="false"
-                    onclick="launchGame('games/void/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#161b27; --game2:#050608;">
-                        <div class="game-number">03</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            VOID
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Horror</span>
-                            <span>3D</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/void/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-
-                <!-- GAME 4 -->
-                <article
-                    class="game-card"
-                    data-title="Pixel Quest"
-                    data-category="platformer action"
-                    data-favorite="false"
-                    onclick="launchGame('games/pixel-quest/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#27735e; --game2:#152d52;">
-                        <div class="game-number">04</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            Pixel Quest
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Platformer</span>
-                            <span>2D</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/pixel-quest/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-
-                <!-- GAME 5 -->
-                <article
-                    class="game-card"
-                    data-title="BlockWorld"
-                    data-category="3d action"
-                    data-favorite="true"
-                    onclick="launchGame('games/blockworld/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#326f3d; --game2:#1b344d;">
-                        <div class="game-number">05</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            BlockWorld
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Sandbox</span>
-                            <span>3D</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/blockworld/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-
-                <!-- GAME 6 -->
-                <article
-                    class="game-card"
-                    data-title="Night Shift"
-                    data-category="horror"
-                    data-favorite="false"
-                    onclick="launchGame('games/night-shift/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#25223d; --game2:#09080e;">
-                        <div class="game-number">06</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            Night Shift
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Horror</span>
-                            <span>2D</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/night-shift/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-
-                <!-- GAME 7 -->
-                <article
-                    class="game-card"
-                    data-title="Skybound"
-                    data-category="platformer action"
-                    data-favorite="false"
-                    onclick="launchGame('games/skybound/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#3487c7; --game2:#26366e;">
-                        <div class="game-number">07</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            Skybound
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Platformer</span>
-                            <span>Action</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/skybound/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-
-                <!-- GAME 8 -->
-                <article
-                    class="game-card"
-                    data-title="Lost Sector"
-                    data-category="action 3d"
-                    data-favorite="false"
-                    onclick="launchGame('games/lost-sector/index.html')">
-
-                    <div
-                        class="game-image"
-                        style="--game1:#704b29; --game2:#161719;">
-                        <div class="game-number">08</div>
-                    </div>
-
-                    <div class="game-info">
-                        <div class="game-title">
-                            Lost Sector
-                        </div>
-
-                        <div class="game-meta">
-                            <span>Action</span>
-                            <span>3D</span>
-                        </div>
-
-                        <button
-                            class="play-small"
-                            onclick="event.stopPropagation(); launchGame('games/lost-sector/index.html')">
-                            PLAY
-                        </button>
-                    </div>
-
-                </article>
-
-            </div>
-
-
-            <div class="no-results" id="noResults">
-                <h3>No games found</h3>
-                <p>Try a different search or category.</p>
             </div>
 
         </div>
@@ -1072,202 +552,9 @@ body {
 
 <script>
 
-/* =========================
-   GAME LAUNCHER
-========================= */
-
 function launchGame(path) {
     window.location.href = path;
 }
-
-
-/* =========================
-   SEARCH
-========================= */
-
-const search = document.getElementById("search");
-const cards = [...document.querySelectorAll(".game-card")];
-const noResults = document.getElementById("noResults");
-const clearSearch = document.getElementById("clearSearch");
-
-let currentFilter = "all";
-
-
-function updateGames() {
-
-    const query = search.value.trim().toLowerCase();
-
-    let visible = 0;
-
-    cards.forEach(card => {
-
-        const title =
-            card.dataset.title.toLowerCase();
-
-        const categories =
-            card.dataset.category.toLowerCase();
-
-        const favorite =
-            card.dataset.favorite === "true";
-
-        const matchesSearch =
-            !query || title.includes(query);
-
-        let matchesFilter = true;
-
-        if (currentFilter === "favorites") {
-            matchesFilter = favorite;
-        }
-        else if (currentFilter !== "all") {
-            matchesFilter =
-                categories.includes(currentFilter);
-        }
-
-        if (matchesSearch && matchesFilter) {
-
-            card.style.display = "";
-
-            requestAnimationFrame(() => {
-                card.style.opacity = "1";
-                card.style.transform = "";
-            });
-
-            visible++;
-
-        } else {
-
-            card.style.opacity = "0";
-            card.style.transform = "scale(.96)";
-
-            setTimeout(() => {
-
-                if (
-                    !(matchesSearch && matchesFilter)
-                ) {
-                    card.style.display = "none";
-                }
-
-            }, 180);
-        }
-
-    });
-
-    noResults.style.display =
-        visible === 0 ? "block" : "none";
-}
-
-
-search.addEventListener("input", updateGames);
-
-
-clearSearch.addEventListener("click", () => {
-
-    search.value = "";
-
-    currentFilter = "all";
-
-    document
-        .querySelectorAll(".category")
-        .forEach(button =>
-            button.classList.remove("active")
-        );
-
-    document
-        .querySelector('.category[data-filter="all"]')
-        .classList.add("active");
-
-    updateGames();
-
-    search.focus();
-});
-
-
-/* =========================
-   CATEGORY FILTERS
-========================= */
-
-document
-    .querySelectorAll(".category")
-    .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            document
-                .querySelectorAll(".category")
-                .forEach(btn =>
-                    btn.classList.remove("active")
-                );
-
-            button.classList.add("active");
-
-            currentFilter =
-                button.dataset.filter;
-
-            updateGames();
-        });
-
-    });
-
-
-/* =========================
-   SIDEBAR FILTERS
-========================= */
-
-document
-    .querySelectorAll(".nav button")
-    .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            document
-                .querySelectorAll(".nav button")
-                .forEach(btn =>
-                    btn.classList.remove("active")
-                );
-
-            button.classList.add("active");
-
-            currentFilter =
-                button.dataset.category;
-
-            document
-                .querySelectorAll(".category")
-                .forEach(btn =>
-                    btn.classList.remove("active")
-                );
-
-            const matching =
-                document.querySelector(
-                    `.category[data-filter="${currentFilter}"]`
-                );
-
-            if (matching) {
-                matching.classList.add("active");
-            }
-
-            updateGames();
-        });
-
-    });
-
-
-/* =========================
-   KEYBOARD SHORTCUT
-========================= */
-
-document.addEventListener("keydown", event => {
-
-    if (
-        event.key === "/" &&
-        document.activeElement !== search
-    ) {
-
-        event.preventDefault();
-        search.focus();
-
-    }
-
-});
 
 </script>
 
