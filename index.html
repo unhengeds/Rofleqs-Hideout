@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Rofleq's Hideout</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+
         :root {
             --bg: #050505;
             --sidebar: #080808;
             --panel: #0d0d0d;
-            --panel2: #121212;
 
             --text: #ffffff;
             --muted: #8d8d8d;
@@ -26,172 +28,226 @@
 
             --red: #e3262e;
             --red2: #ff4048;
-
-            --border: rgba(227, 38, 46, 0.25);
         }
+
 
         body {
             font-family: Arial, Helvetica, sans-serif;
+
             background: var(--bg);
+
             color: var(--text);
+
             min-height: 100vh;
+
             overflow-x: hidden;
         }
 
-        /* MOVING CHECKERBOARD BACKGROUND */
+
+        /* =========================
+           MOVING CHECKERBOARD
+        ========================= */
+
         body::before {
             content: "";
+
             position: fixed;
+
             inset: -100px;
+
             z-index: -2;
+
             pointer-events: none;
 
             background:
                 linear-gradient(
                     45deg,
-                    rgba(255, 255, 255, 0.018) 25%,
+                    rgba(255,255,255,0.018) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255, 255, 255, 0.018) 75%
+                    rgba(255,255,255,0.018) 75%
                 ),
+
                 linear-gradient(
                     45deg,
-                    rgba(255, 255, 255, 0.018) 25%,
+                    rgba(255,255,255,0.018) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(255, 255, 255, 0.018) 75%
+                    rgba(255,255,255,0.018) 75%
                 );
 
-            background-size: 80px 80px;
+            background-size:
+                80px 80px;
 
             background-position:
                 0 0,
                 40px 40px;
 
-            animation: checkerMove 6s linear infinite;
+            animation:
+                checkerMove 6s linear infinite;
         }
 
-        /* DARK OVERLAY */
+
+        /* =========================
+           DARK OVERLAY
+        ========================= */
+
         body::after {
             content: "";
+
             position: fixed;
+
             inset: 0;
+
             z-index: -1;
+
             pointer-events: none;
 
             background:
                 radial-gradient(
                     circle at 50% 20%,
-                    rgba(227, 38, 46, 0.025),
+                    rgba(227,38,46,0.025),
                     transparent 45%
                 ),
-                rgba(5, 5, 5, 0.72);
+
+                rgba(5,5,5,0.72);
         }
 
+
         @keyframes checkerMove {
+
             from {
-                transform: translate(0, 0);
+                transform:
+                    translate(0,0);
             }
 
             to {
-                transform: translate(80px, 80px);
+                transform:
+                    translate(80px,80px);
             }
+
         }
 
-        /* SIDEBAR */
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
         .sidebar {
+
             position: fixed;
+
             left: 0;
             top: 0;
 
             width: 240px;
+
             height: 100vh;
 
-            background: rgba(8, 8, 8, 0.94);
+            background:
+                rgba(8,8,8,0.94);
 
-            border-right: 1px solid var(--red);
+            border-right:
+                1px solid var(--red);
 
-            padding: 28px 18px;
+            padding:
+                28px 18px;
 
             display: flex;
+
             flex-direction: column;
 
             z-index: 10;
         }
 
+
+        /* =========================
+           LOGO
+        ========================= */
+
         .logo {
-            display: flex;
-            align-items: center;
-
-            gap: 12px;
-
-            padding: 0 10px;
-
-            margin-bottom: 45px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-
-            border-radius: 10px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff4048,
-                    #a50008
-                );
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
-            color: white;
+            padding:
+                0 5px;
 
-            font-weight: 900;
-            font-size: 18px;
-
-            box-shadow:
-                0 0 20px
-                rgba(227, 38, 46, 0.35);
+            margin-bottom:
+                15px;
         }
 
-        .logo-text {
-            font-size: 20px;
-            font-weight: 800;
+
+        .logo-image {
+
+            width: 165px;
+
+            height: auto;
+
+            display: block;
+
+            object-fit: contain;
+
+            filter:
+                drop-shadow(
+                    0 0 12px
+                    rgba(227,38,46,0.15)
+                );
         }
+
 
         .version-text {
+
+            text-align: center;
+
             font-size: 9px;
 
             color: #666;
 
             font-weight: 600;
 
-            letter-spacing: 0.5px;
+            letter-spacing:
+                0.5px;
 
-            margin-top: 3px;
+            margin-bottom:
+                38px;
         }
 
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
         .nav-title {
-            color: #6d3033;
+
+            color:
+                #6d3033;
 
             font-size: 11px;
 
             font-weight: bold;
 
-            letter-spacing: 1.5px;
+            letter-spacing:
+                1.5px;
 
-            text-transform: uppercase;
+            text-transform:
+                uppercase;
 
-            padding: 0 12px;
+            padding:
+                0 12px;
 
-            margin-bottom: 10px;
+            margin-bottom:
+                10px;
         }
 
+
         .nav-item {
+
             display: flex;
+
             align-items: center;
 
             gap: 12px;
@@ -200,35 +256,43 @@
 
             border-radius: 9px;
 
-            color: var(--muted);
+            color:
+                var(--muted);
 
             text-decoration: none;
 
             margin-bottom: 5px;
 
-            transition: 0.2s;
+            transition:
+                0.2s;
 
             font-size: 14px;
         }
 
+
         .nav-item:hover {
+
             color: white;
 
             background:
-                rgba(227, 38, 46, 0.10);
+                rgba(227,38,46,0.10);
         }
 
+
         .nav-item.active {
+
             color: white;
 
             background:
-                rgba(227, 38, 46, 0.14);
+                rgba(227,38,46,0.14);
 
             border-left:
                 3px solid var(--red);
         }
 
+
         .nav-icon {
+
             width: 20px;
 
             text-align: center;
@@ -236,36 +300,55 @@
             font-size: 17px;
         }
 
-        /* SIDEBAR BOTTOM */
+
+        /* =========================
+           SIDEBAR BOTTOM
+        ========================= */
+
         .sidebar-bottom {
+
             margin-top: auto;
 
             padding:
                 15px 10px 5px;
 
-            color: #555;
+            color:
+                #555;
 
             font-size: 11px;
 
             line-height: 1.5;
         }
 
-        /* MAIN */
-        .main {
-            margin-left: 240px;
 
-            min-height: 100vh;
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+
+            margin-left:
+                240px;
+
+            min-height:
+                100vh;
         }
 
-        /* TOPBAR */
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
         .topbar {
+
             height: 75px;
 
             display: flex;
 
             align-items: center;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
             padding:
                 0 35px;
@@ -274,27 +357,38 @@
                 1px solid var(--red);
 
             background:
-                rgba(5, 5, 5, 0.92);
+                rgba(5,5,5,0.92);
 
             position: relative;
         }
 
-        .topbar-title {
-            font-size: 14px;
 
-            color: var(--muted);
+        .topbar-title {
+
+            font-size: 14px;
         }
+
 
         .topbar-title .red {
-            color: var(--red2);
+
+            color:
+                var(--red2);
         }
+
 
         .topbar-title .green {
-            color: var(--green2);
+
+            color:
+                var(--green2);
         }
 
-        /* RIGHT SIDE OF TOPBAR */
+
+        /* =========================
+           TOP RIGHT
+        ========================= */
+
         .topbar-right {
+
             display: flex;
 
             align-items: center;
@@ -304,99 +398,128 @@
             position: relative;
         }
 
-        /* STATUS */
+
+        /* =========================
+           ONLINE STATUS
+        ========================= */
+
         .status {
+
             display: flex;
 
             align-items: center;
 
             gap: 8px;
 
-            color: #7d7d7d;
+            color:
+                #7d7d7d;
 
             font-size: 12px;
         }
 
+
         .status-dot {
+
             width: 8px;
+
             height: 8px;
 
-            background: var(--green);
+            background:
+                var(--green);
 
             border-radius: 50%;
 
             box-shadow:
-                0 0 10px var(--green);
+                0 0 10px
+                var(--green);
         }
 
-        /* SETTINGS BUTTON */
-        .settings-button {
-            width: 34px;
-            height: 34px;
 
-            border: 1px solid
-                rgba(227, 38, 46, 0.35);
+        /* =========================
+           SETTINGS BUTTON
+        ========================= */
+
+        .settings-button {
+
+            width: 36px;
+
+            height: 36px;
+
+            border:
+                1px solid
+                rgba(227,38,46,0.35);
 
             border-radius: 8px;
 
             background:
-                rgba(227, 38, 46, 0.08);
+                rgba(227,38,46,0.08);
 
-            color: #aaa;
+            color:
+                #aaa;
 
-            font-size: 18px;
+            font-size: 19px;
 
             cursor: pointer;
 
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             transition:
                 0.2s;
         }
 
+
         .settings-button:hover {
+
             color: white;
 
             background:
-                rgba(227, 38, 46, 0.18);
+                rgba(227,38,46,0.18);
 
             border-color:
                 var(--red2);
 
             box-shadow:
                 0 0 15px
-                rgba(227, 38, 46, 0.15);
+                rgba(227,38,46,0.15);
         }
 
-        /* SETTINGS PANEL */
+
+        /* =========================
+           SETTINGS PANEL
+        ========================= */
+
         .settings-panel {
+
             position: absolute;
 
             top: 53px;
+
             right: 0;
 
-            width: 280px;
+            width: 390px;
 
-            padding: 16px;
+            padding: 20px;
 
             background:
-                rgba(13, 13, 13, 0.98);
+                rgba(13,13,13,0.99);
 
             border:
                 1px solid
-                rgba(227, 38, 46, 0.45);
+                rgba(227,38,46,0.45);
 
-            border-radius: 11px;
+            border-radius: 13px;
 
             box-shadow:
-                0 15px 40px
-                rgba(0, 0, 0, 0.55),
 
-                0 0 20px
-                rgba(227, 38, 46, 0.08);
+                0 18px 45px
+                rgba(0,0,0,0.60),
+
+                0 0 25px
+                rgba(227,38,46,0.08);
 
             z-index: 100;
 
@@ -405,146 +528,285 @@
             transform:
                 translateY(-8px);
 
-            pointer-events: none;
+            pointer-events:
+                none;
 
             transition:
                 opacity 0.18s,
                 transform 0.18s;
         }
 
+
         .settings-panel.open {
+
             opacity: 1;
 
             transform:
                 translateY(0);
 
-            pointer-events: auto;
+            pointer-events:
+                auto;
         }
 
+
+        /* =========================
+           SETTINGS HEADER
+        ========================= */
+
         .settings-panel-title {
+
             color: white;
 
-            font-size: 14px;
+            font-size: 18px;
 
             font-weight: 800;
 
-            margin-bottom: 14px;
-
-            padding-bottom: 10px;
-
-            border-bottom:
-                1px solid
-                rgba(227, 38, 46, 0.2);
+            margin-bottom: 5px;
         }
 
-        .setting-box {
-            padding: 12px;
 
-            border-radius: 9px;
+        .settings-panel-subtitle {
+
+            color:
+                #666;
+
+            font-size: 11px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           SETTING CARD
+        ========================= */
+
+        .setting-box {
+
+            position: relative;
+
+            padding: 17px;
+
+            min-height: 82px;
+
+            border-radius: 10px;
 
             background:
-                rgba(227, 38, 46, 0.06);
+                rgba(227,38,46,0.045);
 
             border:
                 1px solid
-                rgba(227, 38, 46, 0.15);
+                rgba(227,38,46,0.16);
+
+            overflow: hidden;
+
+            cursor: default;
+
+            transition:
+                background 0.2s,
+                border-color 0.2s,
+                transform 0.2s;
         }
 
-        .setting-name {
-            color: #aaa;
 
-            font-size: 12px;
+        .setting-box:hover {
 
-            margin-bottom: 10px;
+            background:
+                rgba(227,38,46,0.09);
+
+            border-color:
+                rgba(227,38,46,0.35);
+
+            transform:
+                translateY(-1px);
         }
+
 
         .setting-row {
+
             display: flex;
 
             align-items: center;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
-            gap: 10px;
-        }
+            gap: 15px;
 
-        .setting-description {
-            color: #666;
-
-            font-size: 10px;
-
-            line-height: 1.35;
-        }
-
-        /* TOGGLE */
-        .toggle {
             position: relative;
 
-            width: 40px;
-            height: 22px;
+            z-index: 2;
+        }
+
+
+        .setting-name {
+
+            color:
+                #ddd;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 4px;
+        }
+
+
+        .setting-hint {
+
+            color:
+                #666;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           HOVER DESCRIPTION
+        ========================= */
+
+        .setting-description {
+
+            color:
+                #999;
+
+            font-size: 11px;
+
+            line-height: 1.45;
+
+            margin-top: 0;
+
+            max-height: 0;
+
+            opacity: 0;
+
+            overflow: hidden;
+
+            transform:
+                translateY(-5px);
+
+            transition:
+
+                max-height 0.25s ease,
+
+                opacity 0.2s ease,
+
+                transform 0.25s ease,
+
+                margin-top 0.25s ease;
+        }
+
+
+        .setting-box:hover
+        .setting-description {
+
+            max-height: 60px;
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+            margin-top: 12px;
+        }
+
+
+        /* =========================
+           TOGGLE
+        ========================= */
+
+        .toggle {
+
+            position: relative;
+
+            width: 46px;
+
+            height: 24px;
 
             flex-shrink: 0;
         }
 
+
         .toggle input {
+
             opacity: 0;
 
             width: 0;
+
             height: 0;
         }
 
+
         .slider {
+
             position: absolute;
 
             cursor: pointer;
 
             inset: 0;
 
-            background: #252525;
+            background:
+                #252525;
 
             border:
                 1px solid #444;
 
             border-radius: 20px;
 
-            transition: 0.2s;
+            transition:
+                0.2s;
         }
 
+
         .slider::before {
+
             content: "";
 
             position: absolute;
 
-            width: 16px;
-            height: 16px;
+            width: 18px;
+
+            height: 18px;
 
             left: 2px;
+
             top: 2px;
 
-            background: #777;
+            background:
+                #777;
 
             border-radius: 50%;
 
-            transition: 0.2s;
+            transition:
+                0.2s;
         }
 
+
         .toggle input:checked + .slider {
-            background: var(--green);
+
+            background:
+                var(--green);
 
             border-color:
                 var(--green);
         }
 
+
         .toggle input:checked + .slider::before {
+
             transform:
-                translateX(18px);
+                translateX(22px);
 
             background:
                 #06100a;
         }
 
-        /* CONTENT */
+
+        /* =========================
+           CONTENT
+        ========================= */
+
         .content {
+
             padding: 45px;
 
             max-width: 1400px;
@@ -552,11 +814,16 @@
             margin: auto;
         }
 
+
         .welcome {
-            margin-bottom: 35px;
+
+            margin-bottom:
+                35px;
         }
 
+
         .welcome h1 {
+
             font-size: 38px;
 
             line-height: 1.1;
@@ -564,88 +831,128 @@
             margin-bottom: 10px;
         }
 
+
         .welcome h1 .red {
-            color: var(--red2);
+
+            color:
+                var(--red2);
         }
+
 
         .welcome h1 .green {
-            color: var(--green2);
+
+            color:
+                var(--green2);
         }
 
+
         .welcome p {
-            color: var(--muted);
+
+            color:
+                var(--muted);
 
             font-size: 15px;
         }
 
-        /* SECTION */
+
+        /* =========================
+           SECTION
+        ========================= */
+
         .section-header {
+
             display: flex;
 
             align-items: center;
 
-            justify-content: space-between;
+            justify-content:
+                space-between;
 
-            margin-bottom: 18px;
+            margin-bottom:
+                18px;
         }
 
+
         .section-title {
+
             font-size: 20px;
 
             font-weight: 800;
         }
 
+
         .section-line {
+
             height: 1px;
 
             flex: 1;
 
-            background: var(--red);
+            background:
+                var(--red);
 
-            margin-left: 20px;
+            margin-left:
+                20px;
 
             box-shadow:
                 0 0 8px
-                rgba(227, 38, 46, 0.25);
+                rgba(227,38,46,0.25);
         }
 
-        /* GAME GRID */
+
+        /* =========================
+           GAME GRID
+        ========================= */
+
         .game-grid {
+
             display: grid;
 
             grid-template-columns:
                 repeat(
                     auto-fill,
-                    minmax(230px, 1fr)
+                    minmax(230px,1fr)
                 );
 
             gap: 20px;
         }
 
-        /* GAME CARD */
+
+        /* =========================
+           GAME CARD
+        ========================= */
+
         .game-card {
+
             position: relative;
 
             background:
-                rgba(13, 13, 13, 0.94);
+                rgba(13,13,13,0.94);
 
             border:
                 1px solid
-                rgba(227, 38, 46, 0.35);
+                rgba(227,38,46,0.35);
 
-            border-radius: 13px;
+            border-radius:
+                13px;
 
-            overflow: hidden;
+            overflow:
+                hidden;
 
-            cursor: pointer;
+            cursor:
+                pointer;
 
             transition:
+
                 transform 0.2s,
+
                 border-color 0.2s,
+
                 box-shadow 0.2s;
         }
 
+
         .game-card:hover {
+
             transform:
                 translateY(-5px);
 
@@ -653,27 +960,35 @@
                 var(--red2);
 
             box-shadow:
+
                 0 12px 35px
-                rgba(0, 0, 0, 0.35),
+                rgba(0,0,0,0.35),
 
                 0 0 20px
-                rgba(227, 38, 46, 0.12);
+                rgba(227,38,46,0.12);
         }
 
-        /* GAME IMAGE */
+
+        /* =========================
+           GAME IMAGE
+        ========================= */
+
         .game-image {
-            height: 145px;
+
+            height:
+                145px;
 
             background:
+
                 radial-gradient(
                     circle at 30% 30%,
-                    rgba(255, 64, 72, 0.20),
+                    rgba(255,64,72,0.20),
                     transparent 35%
                 ),
 
                 radial-gradient(
                     circle at 70% 70%,
-                    rgba(180, 0, 10, 0.18),
+                    rgba(180,0,10,0.18),
                     transparent 35%
                 ),
 
@@ -686,12 +1001,16 @@
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
-            position: relative;
+            position:
+                relative;
         }
 
+
         .game-image::before {
+
             content: "";
 
             position: absolute;
@@ -699,230 +1018,368 @@
             inset: 0;
 
             background:
+
                 linear-gradient(
                     90deg,
                     transparent 49%,
-                    rgba(227, 38, 46, 0.08) 50%,
+                    rgba(227,38,46,0.08) 50%,
                     transparent 51%
                 ),
 
                 linear-gradient(
                     0deg,
                     transparent 49%,
-                    rgba(227, 38, 46, 0.08) 50%,
+                    rgba(227,38,46,0.08) 50%,
                     transparent 51%
                 );
 
-            background-size: 32px 32px;
+            background-size:
+                32px 32px;
         }
 
+
         .minecraft-logo {
-            position: relative;
+
+            position:
+                relative;
 
             z-index: 1;
 
-            font-size: 30px;
+            font-size:
+                30px;
 
-            font-weight: 900;
+            font-weight:
+                900;
 
-            color: white;
+            color:
+                white;
 
             text-shadow:
-                3px 3px 0 #111,
-                0 0 18px
-                rgba(255, 64, 72, 0.25);
 
-            letter-spacing: -1px;
+                3px 3px 0 #111,
+
+                0 0 18px
+                rgba(255,64,72,0.25);
+
+            letter-spacing:
+                -1px;
         }
+
 
         .minecraft-logo span {
-            color: var(--red2);
+
+            color:
+                var(--red2);
         }
 
-        /* CARD INFO */
+
+        /* =========================
+           GAME INFO
+        ========================= */
+
         .game-info {
-            padding: 17px;
+
+            padding:
+                17px;
         }
+
 
         .game-title {
-            font-size: 18px;
 
-            font-weight: 800;
+            font-size:
+                18px;
 
-            margin-bottom: 7px;
+            font-weight:
+                800;
+
+            margin-bottom:
+                7px;
         }
+
 
         .game-meta {
-            color: var(--muted);
 
-            font-size: 13px;
+            color:
+                var(--muted);
 
-            margin-bottom: 15px;
+            font-size:
+                13px;
+
+            margin-bottom:
+                15px;
         }
 
-        /* GREEN PLAY BUTTON */
+
+        /* =========================
+           PLAY BUTTON
+        ========================= */
+
         .play-small {
-            width: 100%;
 
-            border: none;
+            width:
+                100%;
 
-            border-radius: 7px;
+            border:
+                none;
 
-            padding: 10px;
+            border-radius:
+                7px;
 
-            background: var(--green);
+            padding:
+                10px;
 
-            color: #031007;
+            background:
+                var(--green);
 
-            font-weight: 900;
+            color:
+                #031007;
 
-            cursor: pointer;
+            font-weight:
+                900;
 
-            transition: 0.2s;
+            cursor:
+                pointer;
+
+            transition:
+                0.2s;
         }
+
 
         .play-small:hover {
-            background: var(--green2);
+
+            background:
+                var(--green2);
 
             box-shadow:
                 0 0 18px
-                rgba(57, 255, 120, 0.35);
+                rgba(57,255,120,0.35);
         }
 
-        /* RED ACCENT */
+
+        /* =========================
+           RED ACCENT
+        ========================= */
+
         .red-accent {
-            position: absolute;
+
+            position:
+                absolute;
 
             top: 12px;
+
             right: 12px;
 
             width: 7px;
+
             height: 7px;
 
-            background: var(--red);
+            background:
+                var(--red);
 
-            border-radius: 50%;
+            border-radius:
+                50%;
 
             box-shadow:
-                0 0 10px var(--red);
+                0 0 10px
+                var(--red);
         }
 
-        /* FOOTER */
+
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
-            margin-top: 55px;
 
-            padding: 25px 0;
+            margin-top:
+                55px;
 
-            color: #555;
+            padding:
+                25px 0;
+
+            color:
+                #555;
 
             border-top:
                 1px solid var(--red);
 
-            font-size: 12px;
+            font-size:
+                12px;
         }
+
 
         footer span {
-            color: var(--red2);
+
+            color:
+                var(--red2);
         }
 
-        /* MOBILE */
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 800px) {
 
             .sidebar {
-                position: relative;
 
-                width: 100%;
-                height: auto;
+                position:
+                    relative;
 
-                border-right: none;
+                width:
+                    100%;
+
+                height:
+                    auto;
+
+                border-right:
+                    none;
 
                 border-bottom:
                     1px solid var(--red);
 
-                padding: 18px;
+                padding:
+                    18px;
             }
+
 
             .logo {
-                margin-bottom: 18px;
+
+                margin-bottom:
+                    8px;
             }
+
+
+            .logo-image {
+
+                width:
+                    145px;
+            }
+
+
+            .version-text {
+
+                margin-bottom:
+                    18px;
+            }
+
 
             .nav-title {
-                display: none;
+
+                display:
+                    none;
             }
+
 
             .nav-item {
-                display: none;
+
+                display:
+                    none;
             }
+
 
             .sidebar-bottom {
-                display: none;
+
+                display:
+                    none;
             }
+
 
             .main {
-                margin-left: 0;
+
+                margin-left:
+                    0;
             }
+
 
             .topbar {
-                padding: 0 20px;
+
+                padding:
+                    0 20px;
             }
+
 
             .topbar-title {
-                font-size: 12px;
+
+                font-size:
+                    12px;
             }
+
 
             .content {
-                padding: 28px 20px;
+
+                padding:
+                    28px 20px;
             }
+
 
             .welcome h1 {
-                font-size: 30px;
+
+                font-size:
+                    30px;
             }
 
+
             .settings-panel {
-                right: -5px;
+
+                width:
+                    340px;
+
+                right:
+                    -5px;
             }
+
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- SIDEBAR -->
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
     <aside class="sidebar">
+
 
         <div class="logo">
 
-            <div class="logo-icon">
-                R
-            </div>
+            <!--
+                LOGO LOCATION:
 
-            <div>
+                assets/logo.png
+            -->
 
-                <div class="logo-text">
-                    <span style="color: #e3262e;">
-                        Rofleq's
-                    </span>
+            <img
+                src="assets/logo.png"
+                alt="Rofleq's Hideout"
+                class="logo-image"
+            >
 
-                    <span style="color: #39ff78;">
-                        Hideout
-                    </span>
-                </div>
+        </div>
 
-                <div class="version-text">
-                    Github Version
-                </div>
 
-            </div>
+        <div class="version-text">
+
+            Github Version
 
         </div>
 
 
         <div class="nav-title">
+
             Menu
+
         </div>
 
 
-        <a href="#" class="nav-item active">
+        <a
+            href="#"
+            class="nav-item active"
+        >
 
             <div class="nav-icon">
                 ⌂
@@ -935,7 +1392,9 @@
 
         <div class="sidebar-bottom">
 
-            Rofleq's Hideout<br>
+            Rofleq's Hideout
+
+            <br>
 
             <span style="color:#e3262e;">
                 Game Hub
@@ -943,14 +1402,22 @@
 
         </div>
 
+
     </aside>
 
 
-    <!-- MAIN -->
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
     <main class="main">
 
+
         <!-- TOPBAR -->
+
         <header class="topbar">
+
 
             <div class="topbar-title">
 
@@ -965,7 +1432,11 @@
             </div>
 
 
+
             <div class="topbar-right">
+
+
+                <!-- ONLINE -->
 
                 <div class="status">
 
@@ -976,41 +1447,70 @@
                 </div>
 
 
+
                 <!-- SETTINGS BUTTON -->
+
                 <button
                     class="settings-button"
                     id="settingsButton"
                     title="Settings"
                     aria-label="Settings"
                 >
+
                     ⚙
+
                 </button>
 
 
+
                 <!-- SETTINGS PANEL -->
+
                 <div
                     class="settings-panel"
                     id="settingsPanel"
                 >
 
+
                     <div class="settings-panel-title">
+
                         Settings
+
                     </div>
 
 
-                    <div class="setting-box">
+                    <div class="settings-panel-subtitle">
 
-                        <div class="setting-name">
-                            Open games in about:blank
-                        </div>
+                        Customize how Rofleq's Hideout works.
+
+                    </div>
+
+
+
+                    <!-- ABOUT:BLANK SETTING -->
+
+                    <div class="setting-box">
 
 
                         <div class="setting-row">
 
-                            <div class="setting-description">
-                                Opens games in a separate<br>
-                                blank-page tab.
+
+                            <div>
+
+                                <div class="setting-name">
+
+                                    Open games in about:blank
+
+                                </div>
+
+
+                                <div class="setting-hint">
+
+                                    Currently enabled
+
+                                </div>
+
                             </div>
+
 
 
                             <label class="toggle">
@@ -1025,21 +1525,48 @@
 
                             </label>
 
+
                         </div>
+
+
+                        <!--
+                            DESCRIPTION APPEARS
+                            WHEN HOVERING OVER
+                            THE SETTING.
+                        -->
+
+                        <div class="setting-description">
+
+                            Opens games in a separate
+                            blank-page tab instead of
+                            navigating away from Rofleq's
+                            Hideout.
+
+                        </div>
+
 
                     </div>
 
+
                 </div>
 
+
             </div>
+
 
         </header>
 
 
-        <!-- CONTENT -->
+
+        <!-- =========================
+             CONTENT
+        ========================= -->
+
         <div class="content">
 
+
             <section class="welcome">
+
 
                 <h1>
 
@@ -1055,54 +1582,89 @@
 
 
                 <p>
+
                     Presented to you by Rofleq
+
                 </p>
+
 
             </section>
 
 
-            <!-- GAMES -->
+
+            <!-- =========================
+                 GAMES
+            ========================= -->
+
             <section>
+
 
                 <div class="section-header">
 
+
                     <div class="section-title">
+
                         Games
+
                     </div>
 
+
                     <div class="section-line"></div>
+
 
                 </div>
 
 
+
                 <div class="game-grid">
 
+
                     <!-- MINECRAFT -->
+
                     <article
                         class="game-card"
-                        onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
+                        onclick="
+                            launchGame(
+                                'games/eaglercraft-1.9.4/index.html'
+                            )
+                        "
                     >
+
 
                         <div class="game-image">
 
+
                             <div class="red-accent"></div>
 
+
                             <div class="minecraft-logo">
-                                MINE<span>CRAFT</span>
+
+                                MINE
+                                <span>
+                                    CRAFT
+                                </span>
+
                             </div>
+
 
                         </div>
 
 
+
                         <div class="game-info">
 
+
                             <div class="game-title">
+
                                 Minecraft
+
                             </div>
 
 
                             <div class="game-meta">
+
                                 1.9.4
+
                             </div>
 
 
@@ -1115,17 +1677,26 @@
                                     )
                                 "
                             >
+
                                 ▶ PLAY
+
                             </button>
+
 
                         </div>
 
+
                     </article>
+
 
                 </div>
 
+
             </section>
 
+
+
+            <!-- FOOTER -->
 
             <footer>
 
@@ -1139,23 +1710,36 @@
 
             </footer>
 
+
         </div>
+
 
     </main>
 
 
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
     <script>
 
-        /* SETTINGS ELEMENTS */
+
+        /* =========================
+           SETTINGS ELEMENTS
+        ========================= */
+
         const settingsButton =
             document.getElementById(
                 "settingsButton"
             );
 
+
         const settingsPanel =
             document.getElementById(
                 "settingsPanel"
             );
+
 
         const blankToggle =
             document.getElementById(
@@ -1163,7 +1747,11 @@
             );
 
 
-        /* LOAD SAVED SETTING */
+
+        /* =========================
+           LOAD SAVED SETTING
+        ========================= */
+
         const savedBlankSetting =
             localStorage.getItem(
                 "openInBlank"
@@ -1172,13 +1760,10 @@
 
         /*
             ABOUT:BLANK IS ON BY DEFAULT.
-
-            If the user has never changed it,
-            it stays enabled.
         */
+
         if (
-            savedBlankSetting === null
-            ||
+            savedBlankSetting === null ||
             savedBlankSetting === "true"
         ) {
 
@@ -1191,7 +1776,42 @@
         }
 
 
-        /* OPEN/CLOSE SETTINGS */
+
+        /* =========================
+           UPDATE SETTING HINT
+        ========================= */
+
+        function updateSettingHint() {
+
+            const hint =
+                document.querySelector(
+                    ".setting-hint"
+                );
+
+
+            if (blankToggle.checked) {
+
+                hint.textContent =
+                    "Currently enabled";
+
+            } else {
+
+                hint.textContent =
+                    "Currently disabled";
+
+            }
+
+        }
+
+
+        updateSettingHint();
+
+
+
+        /* =========================
+           OPEN SETTINGS
+        ========================= */
+
         settingsButton.addEventListener(
             "click",
             function(event) {
@@ -1206,7 +1826,11 @@
         );
 
 
-        /* PREVENT PANEL CLICK FROM CLOSING IT */
+
+        /* =========================
+           KEEP PANEL OPEN
+        ========================= */
+
         settingsPanel.addEventListener(
             "click",
             function(event) {
@@ -1217,7 +1841,11 @@
         );
 
 
-        /* CLOSE SETTINGS WHEN CLICKING ELSEWHERE */
+
+        /* =========================
+           CLOSE SETTINGS
+        ========================= */
+
         document.addEventListener(
             "click",
             function() {
@@ -1230,7 +1858,11 @@
         );
 
 
-        /* SAVE SETTING */
+
+        /* =========================
+           SAVE SETTING
+        ========================= */
+
         blankToggle.addEventListener(
             "change",
             function() {
@@ -1240,18 +1872,28 @@
                     blankToggle.checked
                 );
 
+
+                updateSettingHint();
+
             }
         );
 
 
-        /* LAUNCH GAME */
+
+        /* =========================
+           LAUNCH GAME
+        ========================= */
+
         function launchGame(path) {
+
 
             const useBlank =
                 blankToggle.checked;
 
 
+
             /* NORMAL MODE */
+
             if (!useBlank) {
 
                 window.location.href =
@@ -1262,7 +1904,9 @@
             }
 
 
+
             /* ABOUT:BLANK MODE */
+
             const gameWindow =
                 window.open(
                     "about:blank",
@@ -1270,7 +1914,9 @@
                 );
 
 
+
             /* POPUP BLOCKED */
+
             if (!gameWindow) {
 
                 alert(
@@ -1282,7 +1928,9 @@
             }
 
 
+
             /* CREATE ABOUT:BLANK PAGE */
+
             gameWindow.document.open();
 
 
@@ -1297,6 +1945,7 @@
                     <title>
                         Rofleq's Hideout
                     </title>
+
 
                     <style>
 
@@ -1335,10 +1984,12 @@
 
                 <body>
 
+
                     <iframe
                         src="${path}"
                         allowfullscreen
                     ></iframe>
+
 
                 </body>
 
@@ -1351,7 +2002,9 @@
 
         }
 
+
     </script>
+
 
 </body>
 </html>
