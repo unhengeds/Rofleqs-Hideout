@@ -1,13 +1,3 @@
-/* =====================================================
-   ROFLEQ'S HIDEOUT
-   SETTINGS + FAVORITES + THEMES + NAVIGATION
-===================================================== */
-
-
-/* =====================================================
-   DEFAULT SETTINGS
-===================================================== */
-
 const defaultSettings = {
 
     openInBlank: true,
@@ -20,10 +10,6 @@ const defaultSettings = {
 
 };
 
-
-/* =====================================================
-   STORAGE KEYS
-===================================================== */
 
 const SETTINGS_KEYS = {
 
@@ -50,13 +36,13 @@ const THEME_KEY =
     "rofleqHideoutTheme";
 
 
-/* =====================================================
+const CUSTOM_THEME_KEY =
+    "rofleqHideoutCustomTheme";
+
+
+/* =========================
    THEMES
-
-   Theme Color is NOT shown in Settings anymore.
-
-   The logo is the only way to change themes.
-===================================================== */
+========================= */
 
 const THEMES = [
 
@@ -152,10 +138,6 @@ const THEMES = [
 ];
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
 const siteLogo =
     document.getElementById(
         "siteLogo"
@@ -168,35 +150,139 @@ const themeNotification =
     );
 
 
-/* =====================================================
+const themeName =
+    document.getElementById(
+        "themeName"
+    );
+
+
+const customThemeColor =
+    document.getElementById(
+        "customThemeColor"
+    );
+
+
+const customColorLabel =
+    document.getElementById(
+        "customColorLabel"
+    );
+
+
+/* =========================
    THEME HELPERS
-===================================================== */
+========================= */
+
+function hexToRgba(
+    hex,
+    alpha
+) {
+
+    hex =
+        hex.replace(
+            "#",
+            ""
+        );
+
+
+    if (
+        hex.length === 3
+    ) {
+
+        hex =
+            hex
+                .split("")
+                .map(
+                    char =>
+                        char + char
+                )
+                .join("");
+
+    }
+
+
+    const number =
+        parseInt(
+            hex,
+            16
+        );
+
+
+    const r =
+        (number >> 16) & 255;
+
+    const g =
+        (number >> 8) & 255;
+
+    const b =
+        number & 255;
+
+
+    return `rgba(${r},${g},${b},${alpha})`;
+
+}
+
+
+function createCustomTheme(
+    color
+) {
+
+    return {
+
+        name:
+            "Custom",
+
+        color:
+            color,
+
+        color2:
+            color,
+
+        soft:
+            hexToRgba(
+                color,
+                0.12
+            ),
+
+        border:
+            hexToRgba(
+                color,
+                0.42
+            ),
+
+        glow:
+            hexToRgba(
+                color,
+                0.18
+            )
+
+    };
+
+}
+
 
 function getThemeIndex() {
 
     const saved =
-        localStorage.getItem(
-            THEME_KEY
+        Number(
+            localStorage.getItem(
+                THEME_KEY
+            )
         );
-
-
-    const index =
-        Number(saved);
 
 
     if (
 
         Number.isInteger(
-            index
+            saved
         ) &&
 
-        index >= 0 &&
+        saved >= 0 &&
 
-        index < THEMES.length
+        saved < THEMES.length
 
     ) {
 
-        return index;
+        return saved;
 
     }
 
@@ -206,9 +292,34 @@ function getThemeIndex() {
 }
 
 
-/* =====================================================
+function getCustomTheme() {
+
+    const saved =
+        localStorage.getItem(
+            CUSTOM_THEME_KEY
+        );
+
+
+    if (
+        saved &&
+        /^#[0-9a-fA-F]{6}$/.test(
+            saved
+        )
+    ) {
+
+        return saved;
+
+    }
+
+
+    return "#e3262e";
+
+}
+
+
+/* =========================
    APPLY THEME
-===================================================== */
+========================= */
 
 function applyTheme(
     index,
@@ -223,6 +334,33 @@ function applyTheme(
         return;
     }
 
+
+    applyThemeObject(
+        theme,
+        save
+    );
+
+
+    if (themeName) {
+
+        themeName.textContent =
+            theme.name;
+
+    }
+
+
+    updateThemeButtons(
+        index,
+        false
+    );
+
+}
+
+
+function applyThemeObject(
+    theme,
+    save = true
+) {
 
     const root =
         document.documentElement;
@@ -258,33 +396,13 @@ function applyTheme(
     );
 
 
-    /*
-     * Compatibility variables.
-     */
-
-    root.style.setProperty(
-        "--red",
-        theme.color
-    );
-
-
-    root.style.setProperty(
-        "--red2",
-        theme.color2
-    );
-
-
-    root.style.setProperty(
-        "--border",
-        theme.border
-    );
-
-
     if (save) {
 
         localStorage.setItem(
             THEME_KEY,
-            String(index)
+            theme.name === "Custom"
+                ? "custom"
+                : getThemeIndex()
         );
 
     }
@@ -292,9 +410,112 @@ function applyTheme(
 }
 
 
-/* =====================================================
+function applyCustomTheme(
+    color,
+    save = true
+) {
+
+    const theme =
+        createCustomTheme(
+            color
+        );
+
+
+    applyThemeObject(
+        theme,
+        false
+    );
+
+
+    if (save) {
+
+        localStorage.setItem(
+            THEME_KEY,
+            "custom"
+        );
+
+        localStorage.setItem(
+            CUSTOM_THEME_KEY,
+            color
+        );
+
+    }
+
+
+    if (themeName) {
+
+        themeName.textContent =
+            "Custom";
+
+    }
+
+
+    updateThemeButtons(
+        null,
+        true
+    );
+
+    if (customColorLabel) {
+
+        customColorLabel.textContent =
+            color.toUpperCase();
+
+    }
+
+}
+
+
+function updateThemeButtons(
+    selectedIndex,
+    customSelected
+) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".theme-option"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            const index =
+                Number(
+                    button.dataset.themeIndex
+                );
+
+
+            button.classList.toggle(
+                "selected",
+                !customSelected &&
+                index === selectedIndex
+            );
+
+        }
+    );
+
+
+    const customOption =
+        document.querySelector(
+            ".custom-color-option"
+        );
+
+
+    if (customOption) {
+
+        customOption.classList.toggle(
+            "selected",
+            customSelected
+        );
+
+    }
+
+}
+
+
+/* =========================
    LOGO THEME CYCLE
-===================================================== */
+========================= */
 
 function cycleTheme() {
 
@@ -306,12 +527,9 @@ function cycleTheme() {
 
 
     /*
-     * After Orange:
-     *
-     * Red
-     *
-     * This completes the cycle.
-     */
+        After Orange, return
+        to Red.
+    */
 
     if (
         index >= THEMES.length
@@ -320,6 +538,12 @@ function cycleTheme() {
         index = 0;
 
 
+        /*
+            This is the moment the
+            full theme cycle has
+            completed.
+        */
+
         showThemeUnlockedNotification();
 
     }
@@ -327,7 +551,7 @@ function cycleTheme() {
 
     localStorage.setItem(
         THEME_KEY,
-        String(index)
+        index
     );
 
 
@@ -339,9 +563,9 @@ function cycleTheme() {
 }
 
 
-/* =====================================================
+/* =========================
    THEME NOTIFICATION
-===================================================== */
+========================= */
 
 let notificationTimer =
     null;
@@ -351,34 +575,6 @@ function showThemeUnlockedNotification() {
 
     if (!themeNotification) {
         return;
-    }
-
-
-    const title =
-        themeNotification.querySelector(
-            "strong"
-        );
-
-
-    const message =
-        themeNotification.querySelector(
-            "span"
-        );
-
-
-    if (title) {
-
-        title.textContent =
-            "Theme changes now unlocked!";
-
-    }
-
-
-    if (message) {
-
-        message.textContent =
-            "Click the logo to cycle through themes.";
-
     }
 
 
@@ -394,7 +590,7 @@ function showThemeUnlockedNotification() {
 
     notificationTimer =
         setTimeout(
-            function() {
+            () => {
 
                 themeNotification.classList.remove(
                     "show"
@@ -407,15 +603,15 @@ function showThemeUnlockedNotification() {
 }
 
 
-/* =====================================================
+/* =========================
    LOGO CLICK
-===================================================== */
+========================= */
 
 if (siteLogo) {
 
     siteLogo.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             event.stopPropagation();
 
@@ -427,9 +623,9 @@ if (siteLogo) {
 }
 
 
-/* =====================================================
+/* =========================
    SETTINGS ELEMENTS
-===================================================== */
+========================= */
 
 const settingsButton =
     document.getElementById(
@@ -503,10 +699,6 @@ const aboutBlankHint =
     );
 
 
-/* =====================================================
-   FAVORITES ELEMENTS
-===================================================== */
-
 const favoritesGrid =
     document.getElementById(
         "favoritesGrid"
@@ -537,9 +729,9 @@ const gamesNav =
     );
 
 
-/* =====================================================
+/* =========================
    SETTINGS STORAGE
-===================================================== */
+========================= */
 
 function getSetting(
     key,
@@ -569,38 +761,7 @@ function getSetting(
 
     } catch {
 
-        if (
-            saved === "true"
-        ) {
-
-            return true;
-
-        }
-
-
-        if (
-            saved === "false"
-        ) {
-
-            return false;
-
-        }
-
-
-        const number =
-            Number(saved);
-
-
-        if (
-            !Number.isNaN(number)
-        ) {
-
-            return number;
-
-        }
-
-
-        return saved;
+        return fallback;
 
     }
 
@@ -622,9 +783,9 @@ function setSetting(
 }
 
 
-/* =====================================================
+/* =========================
    SETTINGS PANEL
-===================================================== */
+========================= */
 
 function openSettingsPanel() {
 
@@ -636,15 +797,6 @@ function openSettingsPanel() {
     settingsPanel.classList.add(
         "open"
     );
-
-
-    if (settingsButton) {
-
-        settingsButton.classList.add(
-            "open"
-        );
-
-    }
 
 }
 
@@ -660,15 +812,6 @@ function closeSettingsPanel() {
         "open"
     );
 
-
-    if (settingsButton) {
-
-        settingsButton.classList.remove(
-            "open"
-        );
-
-    }
-
 }
 
 
@@ -676,13 +819,12 @@ if (settingsButton) {
 
     settingsButton.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             event.stopPropagation();
 
 
             if (
-                settingsPanel &&
                 settingsPanel.classList.contains(
                     "open"
                 )
@@ -706,27 +848,7 @@ if (closeSettings) {
 
     closeSettings.addEventListener(
         "click",
-        function(event) {
-
-            event.stopPropagation();
-
-            closeSettingsPanel();
-
-        }
-    );
-
-}
-
-
-if (settingsPanel) {
-
-    settingsPanel.addEventListener(
-        "click",
-        function(event) {
-
-            event.stopPropagation();
-
-        }
+        closeSettingsPanel
     );
 
 }
@@ -734,17 +856,45 @@ if (settingsPanel) {
 
 document.addEventListener(
     "click",
-    function() {
+    event => {
 
-        closeSettingsPanel();
+        if (
+            !settingsPanel ||
+            !settingsButton
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+
+            settingsPanel.classList.contains(
+                "open"
+            ) &&
+
+            !settingsPanel.contains(
+                event.target
+            ) &&
+
+            !settingsButton.contains(
+                event.target
+            )
+
+        ) {
+
+            closeSettingsPanel();
+
+        }
 
     }
 );
 
 
-/* =====================================================
-   ABOUT:BLANK
-===================================================== */
+/* =========================
+   ABOUT BLANK
+========================= */
 
 function applyOpenInBlank(
     value
@@ -753,7 +903,7 @@ function applyOpenInBlank(
     if (openInBlankToggle) {
 
         openInBlankToggle.checked =
-            Boolean(value);
+            value;
 
     }
 
@@ -761,7 +911,6 @@ function applyOpenInBlank(
     if (aboutBlankHint) {
 
         aboutBlankHint.textContent =
-
             value
 
                 ? "Games open in a new about:blank window."
@@ -777,7 +926,7 @@ if (openInBlankToggle) {
 
     openInBlankToggle.addEventListener(
         "change",
-        function() {
+        () => {
 
             const value =
                 openInBlankToggle.checked;
@@ -799,17 +948,13 @@ if (openInBlankToggle) {
 }
 
 
-/* =====================================================
+/* =========================
    ANIMATED BACKGROUND
-===================================================== */
+========================= */
 
 function applyAnimatedBackground(
     value
 ) {
-
-    value =
-        Boolean(value);
-
 
     if (animatedBackgroundToggle) {
 
@@ -847,7 +992,7 @@ if (animatedBackgroundToggle) {
 
     animatedBackgroundToggle.addEventListener(
         "change",
-        function() {
+        () => {
 
             const value =
                 animatedBackgroundToggle.checked;
@@ -869,9 +1014,9 @@ if (animatedBackgroundToggle) {
 }
 
 
-/* =====================================================
+/* =========================
    BACKGROUND SPEED
-===================================================== */
+========================= */
 
 function applyBackgroundSpeed(
     value
@@ -879,16 +1024,6 @@ function applyBackgroundSpeed(
 
     value =
         Number(value);
-
-
-    if (
-        !Number.isFinite(value)
-    ) {
-
-        value =
-            defaultSettings.backgroundSpeed;
-
-    }
 
 
     if (backgroundSpeed) {
@@ -928,7 +1063,7 @@ if (backgroundSpeed) {
 
     backgroundSpeed.addEventListener(
         "input",
-        function() {
+        () => {
 
             const value =
                 Number(
@@ -952,9 +1087,9 @@ if (backgroundSpeed) {
 }
 
 
-/* =====================================================
+/* =========================
    BACKGROUND TRANSPARENCY
-===================================================== */
+========================= */
 
 function applyBackgroundTransparency(
     value
@@ -962,16 +1097,6 @@ function applyBackgroundTransparency(
 
     value =
         Number(value);
-
-
-    if (
-        !Number.isFinite(value)
-    ) {
-
-        value =
-            defaultSettings.backgroundTransparency;
-
-    }
 
 
     if (backgroundTransparency) {
@@ -1002,7 +1127,7 @@ if (backgroundTransparency) {
 
     backgroundTransparency.addEventListener(
         "input",
-        function() {
+        () => {
 
             const value =
                 Number(
@@ -1026,20 +1151,84 @@ if (backgroundTransparency) {
 }
 
 
-/* =====================================================
+/* =========================
+   THEME BUTTONS
+========================= */
+
+document
+    .querySelectorAll(
+        ".theme-option"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const index =
+                        Number(
+                            button.dataset.themeIndex
+                        );
+
+
+                    localStorage.setItem(
+                        THEME_KEY,
+                        index
+                    );
+
+
+                    applyTheme(
+                        index,
+                        false
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================
+   CUSTOM COLOR
+========================= */
+
+if (customThemeColor) {
+
+    customThemeColor.addEventListener(
+        "input",
+        () => {
+
+            const color =
+                customThemeColor.value;
+
+
+            applyCustomTheme(
+                color,
+                true
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
    RESET BUTTONS
-===================================================== */
+========================= */
 
 document
     .querySelectorAll(
         ".setting-reset"
     )
     .forEach(
-        function(button) {
+        button => {
 
             button.addEventListener(
                 "click",
-                function(event) {
+                event => {
 
                     event.stopPropagation();
 
@@ -1119,6 +1308,39 @@ document
 
                     }
 
+
+                    if (
+                        setting ===
+                        "theme"
+                    ) {
+
+                        localStorage.setItem(
+                            THEME_KEY,
+                            0
+                        );
+
+
+                        localStorage.setItem(
+                            CUSTOM_THEME_KEY,
+                            "#e3262e"
+                        );
+
+
+                        if (customThemeColor) {
+
+                            customThemeColor.value =
+                                "#e3262e";
+
+                        }
+
+
+                        applyTheme(
+                            0,
+                            false
+                        );
+
+                    }
+
                 }
             );
 
@@ -1126,9 +1348,9 @@ document
     );
 
 
-/* =====================================================
+/* =========================
    FAVORITES
-===================================================== */
+========================= */
 
 function getFavorites() {
 
@@ -1182,10 +1404,6 @@ function isFavorite(
 }
 
 
-/* =====================================================
-   TOGGLE FAVORITE
-===================================================== */
-
 function toggleFavorite(
     gameId
 ) {
@@ -1202,11 +1420,8 @@ function toggleFavorite(
 
         favorites =
             favorites.filter(
-                function(id) {
-
-                    return id !== gameId;
-
-                }
+                id =>
+                    id !== gameId
             );
 
     } else {
@@ -1232,10 +1447,6 @@ function toggleFavorite(
 }
 
 
-/* =====================================================
-   UPDATE FAVORITE BUTTONS
-===================================================== */
-
 function updateFavoriteButtons() {
 
     const cards =
@@ -1245,7 +1456,7 @@ function updateFavoriteButtons() {
 
 
     cards.forEach(
-        function(card) {
+        card => {
 
             const gameId =
                 card.dataset.gameId;
@@ -1293,12 +1504,10 @@ function updateFavoriteButtons() {
                     ? `Remove ${gameName} from favorites`
 
                     : `Add ${gameName} to favorites`
-
             );
 
 
             button.title =
-
                 favorite
 
                     ? "Remove from favorites"
@@ -1310,10 +1519,6 @@ function updateFavoriteButtons() {
 
 }
 
-
-/* =====================================================
-   FAVORITE COUNT
-===================================================== */
 
 function updateFavoriteCount() {
 
@@ -1328,10 +1533,6 @@ function updateFavoriteCount() {
 }
 
 
-/* =====================================================
-   CREATE FAVORITE CARD
-===================================================== */
-
 function createFavoriteCard(
     originalCard
 ) {
@@ -1343,7 +1544,7 @@ function createFavoriteCard(
 
 
     clone.onclick =
-        function() {
+        () => {
 
             launchGame(
                 clone.dataset.gameUrl
@@ -1361,7 +1562,7 @@ function createFavoriteCard(
     if (favoriteButton) {
 
         favoriteButton.onclick =
-            function(event) {
+            event => {
 
                 event.stopPropagation();
 
@@ -1384,7 +1585,7 @@ function createFavoriteCard(
     if (playButton) {
 
         playButton.onclick =
-            function(event) {
+            event => {
 
                 event.stopPropagation();
 
@@ -1402,10 +1603,6 @@ function createFavoriteCard(
 
 }
 
-
-/* =====================================================
-   RENDER FAVORITES
-===================================================== */
 
 function renderFavorites() {
 
@@ -1433,7 +1630,7 @@ function renderFavorites() {
 
 
     allCards.forEach(
-        function(card) {
+        card => {
 
             const gameId =
                 card.dataset.gameId;
@@ -1488,28 +1685,31 @@ function renderFavorites() {
 }
 
 
-/* =====================================================
+/* =========================
    NAVIGATION
-===================================================== */
-
-/*
- * Favorites section
- *     -> Favorites highlighted.
- *
- * Games section
- *     -> Games highlighted.
- */
+========================= */
 
 function setActiveNav(
     sectionId
 ) {
 
+    /*
+        INTENTIONALLY SWAPPED.
+
+        Favorites section
+        -> Games navigation active.
+
+        Games section
+        -> Favorites navigation active.
+    */
+
     if (favoritesNav) {
 
         favoritesNav.classList.toggle(
             "active",
+
             sectionId ===
-                "favorites"
+                "games"
         );
 
     }
@@ -1519,18 +1719,15 @@ function setActiveNav(
 
         gamesNav.classList.toggle(
             "active",
+
             sectionId ===
-                "games"
+                "favorites"
         );
 
     }
 
 }
 
-
-/* =====================================================
-   SCROLL TO SECTION
-===================================================== */
 
 function scrollToSection(
     sectionId
@@ -1558,11 +1755,6 @@ function scrollToSection(
     });
 
 
-    setActiveNav(
-        sectionId
-    );
-
-
     history.replaceState(
 
         null,
@@ -1573,22 +1765,21 @@ function scrollToSection(
 
     );
 
+
+    setActiveNav(
+        sectionId
+    );
+
 }
 
-
-/* =====================================================
-   FAVORITES NAVIGATION
-===================================================== */
 
 if (favoritesNav) {
 
     favoritesNav.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             event.preventDefault();
-
-            event.stopPropagation();
 
 
             scrollToSection(
@@ -1601,19 +1792,13 @@ if (favoritesNav) {
 }
 
 
-/* =====================================================
-   GAMES NAVIGATION
-===================================================== */
-
 if (gamesNav) {
 
     gamesNav.addEventListener(
         "click",
-        function(event) {
+        event => {
 
             event.preventDefault();
-
-            event.stopPropagation();
 
 
             scrollToSection(
@@ -1626,9 +1811,9 @@ if (gamesNav) {
 }
 
 
-/* =====================================================
-   SECTIONS
-===================================================== */
+/* =========================
+   SCROLL DETECTION
+========================= */
 
 const sections = [
 
@@ -1640,39 +1825,24 @@ const sections = [
         "games"
     )
 
-].filter(
-    Boolean
-);
+].filter(Boolean);
 
-
-/* =====================================================
-   SCROLL DETECTION
-===================================================== */
 
 function updateNavigationFromScroll() {
 
-    const marker =
-        window.scrollY +
-        Math.min(
-            window.innerHeight * 0.28,
-            220
-        );
+    const scrollPosition =
+        window.scrollY + 140;
 
-
-    /*
-     * Default to Games when we're above
-     * the Favorites section.
-     */
 
     let currentSection =
-        "games";
+        null;
 
 
     sections.forEach(
-        function(section) {
+        section => {
 
             if (
-                marker >=
+                scrollPosition >=
                 section.offsetTop
             ) {
 
@@ -1683,6 +1853,20 @@ function updateNavigationFromScroll() {
 
         }
     );
+
+
+    if (!currentSection) {
+
+        /*
+            The welcome area is before
+            Favorites, so treat it like
+            the Games area.
+        */
+
+        currentSection =
+            "games";
+
+    }
 
 
     setActiveNav(
@@ -1702,20 +1886,14 @@ window.addEventListener(
 
 
 window.addEventListener(
-    "resize",
-    updateNavigationFromScroll
-);
-
-
-window.addEventListener(
     "load",
     updateNavigationFromScroll
 );
 
 
-/* =====================================================
+/* =========================
    GAME LAUNCHING
-===================================================== */
+========================= */
 
 function launchGame(
     gameUrl
@@ -1731,114 +1909,108 @@ function launchGame(
         );
 
 
-    if (!openInBlank) {
+    if (openInBlank) {
+
+        const gameWindow =
+            window.open(
+                "about:blank",
+                "_blank"
+            );
+
+
+        if (!gameWindow) {
+
+            window.location.href =
+                gameUrl;
+
+            return;
+
+        }
+
+
+        gameWindow.document.open();
+
+
+        gameWindow.document.write(`
+
+            <!DOCTYPE html>
+
+            <html>
+
+            <head>
+
+                <title>
+                    Rofleq's Hideout
+                </title>
+
+                <style>
+
+                    html,
+                    body {
+
+                        margin: 0;
+
+                        padding: 0;
+
+                        width: 100%;
+
+                        height: 100%;
+
+                        overflow: hidden;
+
+                        background: #000;
+
+                    }
+
+
+                    iframe {
+
+                        width: 100%;
+
+                        height: 100%;
+
+                        border: 0;
+
+                    }
+
+                </style>
+
+            </head>
+
+
+            <body>
+
+                <iframe
+
+                    src="${gameUrl}"
+
+                    allowfullscreen
+
+                ></iframe>
+
+            </body>
+
+            </html>
+
+        `);
+
+
+        gameWindow.document.close();
+
+
+    } else {
 
         window.location.href =
             gameUrl;
 
-        return;
-
     }
-
-
-    const gameWindow =
-        window.open(
-            "about:blank",
-            "_blank"
-        );
-
-
-    if (!gameWindow) {
-
-        window.location.href =
-            gameUrl;
-
-        return;
-
-    }
-
-
-    gameWindow.document.open();
-
-
-    gameWindow.document.write(`
-
-        <!DOCTYPE html>
-
-        <html lang="en">
-
-        <head>
-
-            <meta charset="UTF-8">
-
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            >
-
-            <title>
-                Rofleq's Hideout
-            </title>
-
-            <style>
-
-                html,
-                body {
-
-                    margin: 0;
-
-                    padding: 0;
-
-                    width: 100%;
-
-                    height: 100%;
-
-                    overflow: hidden;
-
-                    background: #000;
-
-                }
-
-
-                iframe {
-
-                    width: 100%;
-
-                    height: 100%;
-
-                    border: 0;
-
-                    display: block;
-
-                }
-
-            </style>
-
-        </head>
-
-
-        <body>
-
-            <iframe
-                src="${gameUrl}"
-                allowfullscreen
-            ></iframe>
-
-        </body>
-
-        </html>
-
-    `);
-
-
-    gameWindow.document.close();
 
 }
 
 
-/* =====================================================
-   INITIALIZE SETTINGS
-===================================================== */
+/* =========================
+   INITIALIZATION
+========================= */
 
 function initializeSettings() {
 
@@ -1896,10 +2068,6 @@ function initializeSettings() {
 }
 
 
-/* =====================================================
-   INITIALIZE FAVORITES
-===================================================== */
-
 function initializeFavorites() {
 
     updateFavoriteButtons();
@@ -1911,10 +2079,6 @@ function initializeFavorites() {
 }
 
 
-/* =====================================================
-   INITIALIZE THEME
-===================================================== */
-
 function initializeTheme() {
 
     const saved =
@@ -1924,22 +2088,27 @@ function initializeTheme() {
 
 
     /*
-     * If an old version had a custom theme,
-     * return it to the normal red theme.
-     */
+        Custom theme
+    */
 
     if (
         saved === "custom"
     ) {
 
-        localStorage.setItem(
-            THEME_KEY,
-            "0"
-        );
+        const color =
+            getCustomTheme();
 
 
-        applyTheme(
-            0,
+        if (customThemeColor) {
+
+            customThemeColor.value =
+                color;
+
+        }
+
+
+        applyCustomTheme(
+            color,
             false
         );
 
@@ -1958,16 +2127,24 @@ function initializeTheme() {
         false
     );
 
+
+    if (customThemeColor) {
+
+        customThemeColor.value =
+            getCustomTheme();
+
+    }
+
 }
 
 
-/* =====================================================
+/* =========================
    PAGE STARTUP
-===================================================== */
+========================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    () => {
 
         initializeSettings();
 
@@ -1976,67 +2153,57 @@ document.addEventListener(
         initializeTheme();
 
 
-        /*
-         * =================================================
-         * ALWAYS OPEN ON FAVORITES
-         * =================================================
-         *
-         * This intentionally ignores whatever section
-         * was previously open and always starts at
-         * Favorites.
-         */
-
-        setTimeout(
-            function() {
-
-                const favorites =
-                    document.getElementById(
-                        "favorites"
-                    );
+        updateNavigationFromScroll();
 
 
-                if (favorites) {
-
-                    favorites.scrollIntoView({
-
-                        behavior:
-                            "instant",
-
-                        block:
-                            "start"
-
-                    });
-
-                }
+        const hash =
+            window.location.hash;
 
 
-                /*
-                 * Favorites should be highlighted
-                 * immediately.
-                 */
+        if (
+            hash === "#favorites"
+        ) {
 
-                setActiveNav(
-                    "favorites"
-                );
+            setTimeout(
+                () => {
+
+                    document
+                        .getElementById(
+                            "favorites"
+                        )
+                        ?.scrollIntoView();
 
 
-                /*
-                 * Make the URL match the section.
-                 */
+                    updateNavigationFromScroll();
 
-                history.replaceState(
+                },
+                100
+            );
 
-                    null,
+        }
 
-                    "",
 
-                    "#favorites"
+        if (
+            hash === "#games"
+        ) {
 
-                );
+            setTimeout(
+                () => {
 
-            },
-            50
-        );
+                    document
+                        .getElementById(
+                            "games"
+                        )
+                        ?.scrollIntoView();
+
+
+                    updateNavigationFromScroll();
+
+                },
+                100
+            );
+
+        }
 
     }
 );
