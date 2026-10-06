@@ -1,173 +1,194 @@
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-const settingsButton =
-    document.getElementById("settingsButton");
-
-const settingsPanel =
-    document.getElementById("settingsPanel");
-
-const blankToggle =
-    document.getElementById("blankToggle");
-
-const blankHint =
-    document.getElementById("blankHint");
-
-const backgroundToggle =
-    document.getElementById("backgroundToggle");
-
-const backgroundHint =
-    document.getElementById("backgroundHint");
-
-const speedSlider =
-    document.getElementById("speedSlider");
-
-const speedValue =
-    document.getElementById("speedValue");
-
-const transparencySlider =
-    document.getElementById("transparencySlider");
-
-const transparencyValue =
-    document.getElementById("transparencyValue");
-
-const speedSetting =
-    document.getElementById("speedSetting");
-
-const transparencySetting =
-    document.getElementById("transparencySetting");
-
-
-/* =========================================================
+/* =========================
    DEFAULT SETTINGS
-========================================================= */
+========================= */
 
 const defaultSettings = {
-
     openInBlank: true,
-
     animatedBackground: true,
-
     backgroundSpeed: 6,
-
     backgroundTransparency: 8
-
 };
 
 
-/* =========================================================
-   LOAD SETTINGS
-========================================================= */
+/* =========================
+   STORAGE KEYS
+========================= */
 
-let openInBlank =
-    localStorage.getItem("openInBlank");
+const SETTINGS_KEYS = {
+    openInBlank: "openInBlank",
+    animatedBackground: "animatedBackground",
+    backgroundSpeed: "backgroundSpeed",
+    backgroundTransparency: "backgroundTransparency"
+};
 
-let animatedBackground =
-    localStorage.getItem("animatedBackground");
-
-let backgroundSpeed =
-    localStorage.getItem("backgroundSpeed");
-
-let backgroundTransparency =
-    localStorage.getItem("backgroundTransparency");
+const FAVORITES_KEY =
+    "rofleqHideoutFavorites";
 
 
-if (openInBlank === null) {
+/* =========================
+   ELEMENTS
+========================= */
 
-    openInBlank =
-        defaultSettings.openInBlank;
+const settingsButton =
+    document.getElementById(
+        "settingsButton"
+    );
 
-} else {
+const settingsPanel =
+    document.getElementById(
+        "settingsPanel"
+    );
 
-    openInBlank =
-        openInBlank === "true";
+const closeSettings =
+    document.getElementById(
+        "closeSettings"
+    );
 
-}
+const openInBlankToggle =
+    document.getElementById(
+        "openInBlankToggle"
+    );
 
+const animatedBackgroundToggle =
+    document.getElementById(
+        "animatedBackgroundToggle"
+    );
 
-if (animatedBackground === null) {
+const backgroundSpeed =
+    document.getElementById(
+        "backgroundSpeed"
+    );
 
-    animatedBackground =
-        defaultSettings.animatedBackground;
+const backgroundTransparency =
+    document.getElementById(
+        "backgroundTransparency"
+    );
 
-} else {
+const backgroundSpeedValue =
+    document.getElementById(
+        "backgroundSpeedValue"
+    );
 
-    animatedBackground =
-        animatedBackground === "true";
+const backgroundTransparencyValue =
+    document.getElementById(
+        "backgroundTransparencyValue"
+    );
 
-}
+const backgroundSpeedBox =
+    document.getElementById(
+        "backgroundSpeedBox"
+    );
 
+const backgroundTransparencyBox =
+    document.getElementById(
+        "backgroundTransparencyBox"
+    );
 
-if (backgroundSpeed === null) {
+const aboutBlankHint =
+    document.getElementById(
+        "aboutBlankHint"
+    );
 
-    backgroundSpeed =
-        defaultSettings.backgroundSpeed;
+const favoritesGrid =
+    document.getElementById(
+        "favoritesGrid"
+    );
 
-} else {
+const emptyFavorites =
+    document.getElementById(
+        "emptyFavorites"
+    );
 
-    backgroundSpeed =
-        Number(backgroundSpeed);
+const favoriteCount =
+    document.getElementById(
+        "favoriteCount"
+    );
 
-}
+const favoritesNav =
+    document.getElementById(
+        "favoritesNav"
+    );
 
-
-if (backgroundTransparency === null) {
-
-    backgroundTransparency =
-        defaultSettings.backgroundTransparency;
-
-} else {
-
-    backgroundTransparency =
-        Number(backgroundTransparency);
-
-}
-
-
-/* =========================================================
-   SETTINGS PANEL
-========================================================= */
-
-if (settingsButton && settingsPanel) {
-
-    settingsButton.addEventListener(
-        "click",
-        function (event) {
-
-            event.stopPropagation();
-
-            const isOpen =
-                settingsPanel.classList.toggle(
-                    "open"
-                );
-
-            settingsButton.classList.toggle(
-                "open",
-                isOpen
-            );
-
-        }
+const gamesNav =
+    document.getElementById(
+        "gamesNav"
     );
 
 
-    document.addEventListener(
+/* =========================
+   SETTINGS STORAGE
+========================= */
+
+function getSetting(key, fallback) {
+
+    const saved =
+        localStorage.getItem(key);
+
+    if (saved === null) {
+        return fallback;
+    }
+
+    try {
+        return JSON.parse(saved);
+    } catch {
+        return fallback;
+    }
+}
+
+
+function setSetting(key, value) {
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+}
+
+
+/* =========================
+   SETTINGS PANEL
+========================= */
+
+function openSettingsPanel() {
+
+    if (!settingsPanel) {
+        return;
+    }
+
+    settingsPanel.classList.add(
+        "open"
+    );
+}
+
+
+function closeSettingsPanel() {
+
+    if (!settingsPanel) {
+        return;
+    }
+
+    settingsPanel.classList.remove(
+        "open"
+    );
+}
+
+
+if (settingsButton) {
+
+    settingsButton.addEventListener(
         "click",
-        function (event) {
+        event => {
+
+            event.stopPropagation();
 
             if (
-                !settingsPanel.contains(event.target) &&
-                !settingsButton.contains(event.target)
+                settingsPanel.classList.contains(
+                    "open"
+                )
             ) {
-
-                settingsPanel.classList.remove(
-                    "open"
-                );
-
-                settingsButton.classList.remove(
-                    "open"
-                );
-
+                closeSettingsPanel();
+            } else {
+                openSettingsPanel();
             }
 
         }
@@ -176,52 +197,85 @@ if (settingsButton && settingsPanel) {
 }
 
 
-/* =========================================================
+if (closeSettings) {
+
+    closeSettings.addEventListener(
+        "click",
+        closeSettingsPanel
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    event => {
+
+        if (
+            !settingsPanel ||
+            !settingsButton
+        ) {
+            return;
+        }
+
+        if (
+            settingsPanel.classList.contains(
+                "open"
+            ) &&
+            !settingsPanel.contains(
+                event.target
+            ) &&
+            !settingsButton.contains(
+                event.target
+            )
+        ) {
+            closeSettingsPanel();
+        }
+
+    }
+);
+
+
+/* =========================
    ABOUT:BLANK
-========================================================= */
+========================= */
 
-function updateBlankSetting() {
+function applyOpenInBlank(value) {
 
-    if (!blankToggle) {
-        return;
+    if (openInBlankToggle) {
+
+        openInBlankToggle.checked =
+            value;
+
     }
 
-    if (blankToggle.checked) {
+    if (aboutBlankHint) {
 
-        blankHint.textContent =
-            "Currently enabled";
-
-    } else {
-
-        blankHint.textContent =
-            "Currently disabled";
+        aboutBlankHint.textContent =
+            value
+                ? "Games open in a new about:blank window."
+                : "Games open directly in this page.";
 
     }
 
 }
 
 
-if (blankToggle) {
+if (openInBlankToggle) {
 
-    blankToggle.checked =
-        openInBlank;
-
-    updateBlankSetting();
-
-
-    blankToggle.addEventListener(
+    openInBlankToggle.addEventListener(
         "change",
-        function () {
+        () => {
 
-            openInBlank =
-                blankToggle.checked;
+            const value =
+                openInBlankToggle.checked;
 
-            localStorage.setItem(
-                "openInBlank",
-                openInBlank
+            setSetting(
+                SETTINGS_KEYS.openInBlank,
+                value
             );
 
-            updateBlankSetting();
+            applyOpenInBlank(value);
 
         }
     );
@@ -229,85 +283,58 @@ if (blankToggle) {
 }
 
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
 
-function updateBackground() {
+function applyAnimatedBackground(value) {
 
-    if (!backgroundToggle) {
-        return;
+    if (animatedBackgroundToggle) {
+
+        animatedBackgroundToggle.checked =
+            value;
+
     }
 
+    document.body.classList.toggle(
+        "background-disabled",
+        !value
+    );
 
-    const enabled =
-        backgroundToggle.checked;
+    if (backgroundSpeedBox) {
 
+        backgroundSpeedBox.style.display =
+            value ? "" : "none";
 
-    if (enabled) {
+    }
 
-        document.body.classList.remove(
-            "background-disabled"
-        );
+    if (backgroundTransparencyBox) {
 
-        backgroundHint.textContent =
-            "Currently enabled";
-
-        if (speedSetting) {
-            speedSetting.style.display =
-                "block";
-        }
-
-        if (transparencySetting) {
-            transparencySetting.style.display =
-                "block";
-        }
-
-    } else {
-
-        document.body.classList.add(
-            "background-disabled"
-        );
-
-        backgroundHint.textContent =
-            "Currently disabled";
-
-        if (speedSetting) {
-            speedSetting.style.display =
-                "none";
-        }
-
-        if (transparencySetting) {
-            transparencySetting.style.display =
-                "none";
-        }
+        backgroundTransparencyBox.style.display =
+            value ? "" : "none";
 
     }
 
 }
 
 
-if (backgroundToggle) {
+if (animatedBackgroundToggle) {
 
-    backgroundToggle.checked =
-        animatedBackground;
-
-    updateBackground();
-
-
-    backgroundToggle.addEventListener(
+    animatedBackgroundToggle.addEventListener(
         "change",
-        function () {
+        () => {
 
-            animatedBackground =
-                backgroundToggle.checked;
+            const value =
+                animatedBackgroundToggle.checked;
 
-            localStorage.setItem(
-                "animatedBackground",
-                animatedBackground
+            setSetting(
+                SETTINGS_KEYS.animatedBackground,
+                value
             );
 
-            updateBackground();
+            applyAnimatedBackground(
+                value
+            );
 
         }
     );
@@ -315,78 +342,60 @@ if (backgroundToggle) {
 }
 
 
-/* =========================================================
+/* =========================
    BACKGROUND SPEED
-========================================================= */
+========================= */
 
-function updateBackgroundSpeed() {
+function applyBackgroundSpeed(value) {
 
-    if (!speedSlider) {
-        return;
-    }
+    value = Number(value);
 
+    if (backgroundSpeed) {
 
-    const value =
-        Number(speedSlider.value);
-
-
-    speedValue.textContent =
-        value;
-
-
-    /*
-       20 = fastest
-       1 = slow
-       0 = essentially stopped
-    */
-
-    let seconds;
-
-
-    if (value <= 0) {
-
-        seconds =
-            999999;
-
-    } else {
-
-        seconds =
-            21 - value;
+        backgroundSpeed.value =
+            value;
 
     }
 
+    if (backgroundSpeedValue) {
+
+        backgroundSpeedValue.textContent =
+            value;
+
+    }
+
+    const seconds =
+        value <= 0
+            ? 999999
+            : 21 - value;
 
     document.documentElement.style.setProperty(
         "--checker-speed",
-        seconds + "s"
+        `${seconds}s`
     );
 
 }
 
 
-if (speedSlider) {
+if (backgroundSpeed) {
 
-    speedSlider.value =
-        backgroundSpeed;
-
-    updateBackgroundSpeed();
-
-
-    speedSlider.addEventListener(
+    backgroundSpeed.addEventListener(
         "input",
-        function () {
+        () => {
 
-            backgroundSpeed =
+            const value =
                 Number(
-                    speedSlider.value
+                    backgroundSpeed.value
                 );
 
-            localStorage.setItem(
-                "backgroundSpeed",
-                backgroundSpeed
+            setSetting(
+                SETTINGS_KEYS.backgroundSpeed,
+                value
             );
 
-            updateBackgroundSpeed();
+            applyBackgroundSpeed(
+                value
+            );
 
         }
     );
@@ -394,26 +403,27 @@ if (speedSlider) {
 }
 
 
-/* =========================================================
+/* =========================
    BACKGROUND TRANSPARENCY
-========================================================= */
+========================= */
 
-function updateBackgroundTransparency() {
+function applyBackgroundTransparency(value) {
 
-    if (!transparencySlider) {
-        return;
+    value = Number(value);
+
+    if (backgroundTransparency) {
+
+        backgroundTransparency.value =
+            value;
+
     }
 
+    if (backgroundTransparencyValue) {
 
-    const value =
-        Number(
-            transparencySlider.value
-        );
+        backgroundTransparencyValue.textContent =
+            `${value}%`;
 
-
-    transparencyValue.textContent =
-        value + "%";
-
+    }
 
     document.documentElement.style.setProperty(
         "--checker-opacity",
@@ -423,29 +433,25 @@ function updateBackgroundTransparency() {
 }
 
 
-if (transparencySlider) {
+if (backgroundTransparency) {
 
-    transparencySlider.value =
-        backgroundTransparency;
-
-    updateBackgroundTransparency();
-
-
-    transparencySlider.addEventListener(
+    backgroundTransparency.addEventListener(
         "input",
-        function () {
+        () => {
 
-            backgroundTransparency =
+            const value =
                 Number(
-                    transparencySlider.value
+                    backgroundTransparency.value
                 );
 
-            localStorage.setItem(
-                "backgroundTransparency",
-                backgroundTransparency
+            setSetting(
+                SETTINGS_KEYS.backgroundTransparency,
+                value
             );
 
-            updateBackgroundTransparency();
+            applyBackgroundTransparency(
+                value
+            );
 
         }
     );
@@ -453,56 +459,28 @@ if (transparencySlider) {
 }
 
 
-/* =========================================================
+/* =========================
    FAVORITES
-========================================================= */
-
-const FAVORITES_KEY =
-    "rofleqHideoutFavorites";
-
-
-/*
-   Get the saved favorites.
-
-   This is an array of game IDs, for example:
-
-   [
-       "minecraft-1.9.4"
-   ]
-*/
+========================= */
 
 function getFavorites() {
 
     try {
 
-        const saved =
-            localStorage.getItem(
-                FAVORITES_KEY
+        const favorites =
+            JSON.parse(
+                localStorage.getItem(
+                    FAVORITES_KEY
+                )
             );
 
+        return Array.isArray(
+            favorites
+        )
+            ? favorites
+            : [];
 
-        if (!saved) {
-            return [];
-        }
-
-
-        const parsed =
-            JSON.parse(saved);
-
-
-        if (!Array.isArray(parsed)) {
-            return [];
-        }
-
-
-        return parsed;
-
-    } catch (error) {
-
-        console.warn(
-            "Could not load favorites:",
-            error
-        );
+    } catch {
 
         return [];
 
@@ -511,23 +489,17 @@ function getFavorites() {
 }
 
 
-/* =========================================================
-   SAVE FAVORITES
-========================================================= */
-
 function saveFavorites(favorites) {
 
     localStorage.setItem(
         FAVORITES_KEY,
-        JSON.stringify(favorites)
+        JSON.stringify(
+            favorites
+        )
     );
 
 }
 
-
-/* =========================================================
-   CHECK FAVORITE
-========================================================= */
 
 function isFavorite(gameId) {
 
@@ -538,46 +510,33 @@ function isFavorite(gameId) {
 }
 
 
-/* =========================================================
-   TOGGLE FAVORITE
-========================================================= */
-
 function toggleFavorite(gameId) {
 
     let favorites =
         getFavorites();
 
+    if (
+        favorites.includes(
+            gameId
+        )
+    ) {
 
-    const index =
-        favorites.indexOf(gameId);
-
-
-    if (index === -1) {
-
-        /*
-           Add to favorites
-        */
-
-        favorites.push(gameId);
+        favorites =
+            favorites.filter(
+                id => id !== gameId
+            );
 
     } else {
 
-        /*
-           Remove from favorites
-        */
-
-        favorites.splice(
-            index,
-            1
+        favorites.push(
+            gameId
         );
 
     }
 
-
     saveFavorites(
         favorites
     );
-
 
     updateFavoriteButtons();
 
@@ -588,116 +547,90 @@ function toggleFavorite(gameId) {
 }
 
 
-/* =========================================================
-   UPDATE STAR BUTTONS
-========================================================= */
+/* =========================
+   FAVORITE BUTTONS
+========================= */
 
 function updateFavoriteButtons() {
 
-    const favorites =
-        getFavorites();
-
-
     const cards =
         document.querySelectorAll(
-            ".game-card"
+            ".game-card[data-game-id]"
         );
 
+    cards.forEach(card => {
 
-    cards.forEach(
-        function (card) {
+        const gameId =
+            card.dataset.gameId;
 
-            const gameId =
-                card.dataset.gameId;
+        const button =
+            card.querySelector(
+                ".favorite-button"
+            );
 
-
-            const button =
-                card.querySelector(
-                    ".favorite-button"
-                );
-
-
-            if (!button) {
-                return;
-            }
-
-
-            const favorite =
-                favorites.includes(
-                    gameId
-                );
-
-
-            if (favorite) {
-
-                button.classList.add(
-                    "favorited"
-                );
-
-                button.textContent =
-                    "★";
-
-                button.title =
-                    "Remove from favorites";
-
-                button.setAttribute(
-                    "aria-label",
-                    "Remove from favorites"
-                );
-
-            } else {
-
-                button.classList.remove(
-                    "favorited"
-                );
-
-                button.textContent =
-                    "☆";
-
-                button.title =
-                    "Add to favorites";
-
-                button.setAttribute(
-                    "aria-label",
-                    "Add to favorites"
-                );
-
-            }
-
+        if (!button) {
+            return;
         }
-    );
+
+        const favorite =
+            isFavorite(
+                gameId
+            );
+
+        button.textContent =
+            favorite
+                ? "★"
+                : "☆";
+
+        button.classList.toggle(
+            "favorited",
+            favorite
+        );
+
+        const gameName =
+            card.dataset.gameName ||
+            "game";
+
+        button.setAttribute(
+            "aria-label",
+            favorite
+                ? `Remove ${gameName} from favorites`
+                : `Add ${gameName} to favorites`
+        );
+
+        button.title =
+            favorite
+                ? "Remove from favorites"
+                : "Add to favorites";
+
+    });
 
 }
 
 
-/* =========================================================
+/* =========================
    FAVORITE COUNT
-========================================================= */
+========================= */
 
 function updateFavoriteCount() {
 
-    const count =
-        document.getElementById(
-            "favoriteCount"
-        );
-
-
-    if (!count) {
+    if (!favoriteCount) {
         return;
     }
 
-
-    count.textContent =
+    favoriteCount.textContent =
         getFavorites().length;
 
 }
 
 
-/* =========================================================
-   CLONE GAME CARD FOR FAVORITES
-========================================================= */
+/* =========================
+   CREATE FAVORITE CARD
+========================= */
 
-function createFavoriteCard(originalCard) {
+function createFavoriteCard(
+    originalCard
+) {
 
     const clone =
         originalCard.cloneNode(
@@ -705,41 +638,25 @@ function createFavoriteCard(originalCard) {
         );
 
 
-    /*
-       Reconnect the game's click handler.
+    clone.onclick = () => {
 
-       cloneNode copies the HTML but not
-       JavaScript event listeners.
-    */
+        launchGame(
+            clone.dataset.gameUrl
+        );
 
-    const gameUrl =
-        clone.dataset.gameUrl;
+    };
 
 
-    clone.onclick =
-        function () {
-
-            launchGame(
-                gameUrl
-            );
-
-        };
-
-
-    /*
-       Reconnect the star button.
-    */
-
-    const star =
+    const favoriteButton =
         clone.querySelector(
             ".favorite-button"
         );
 
 
-    if (star) {
+    if (favoriteButton) {
 
-        star.onclick =
-            function (event) {
+        favoriteButton.onclick =
+            event => {
 
                 event.stopPropagation();
 
@@ -752,25 +669,21 @@ function createFavoriteCard(originalCard) {
     }
 
 
-    /*
-       Reconnect the play button.
-    */
-
-    const play =
+    const playButton =
         clone.querySelector(
             ".play-small"
         );
 
 
-    if (play) {
+    if (playButton) {
 
-        play.onclick =
-            function (event) {
+        playButton.onclick =
+            event => {
 
                 event.stopPropagation();
 
                 launchGame(
-                    gameUrl
+                    clone.dataset.gameUrl
                 );
 
             };
@@ -783,32 +696,15 @@ function createFavoriteCard(originalCard) {
 }
 
 
-/* =========================================================
+/* =========================
    RENDER FAVORITES
-========================================================= */
+========================= */
 
 function renderFavorites() {
 
-    const grid =
-        document.getElementById(
-            "favoritesGrid"
-        );
-
-
-    const empty =
-        document.getElementById(
-            "emptyFavorites"
-        );
-
-
-    if (!grid) {
+    if (!favoritesGrid) {
         return;
     }
-
-
-    grid.innerHTML =
-        "";
-
 
     const favorites =
         getFavorites();
@@ -816,185 +712,91 @@ function renderFavorites() {
 
     const allCards =
         document.querySelectorAll(
-            "#gamesGrid .game-card"
+            "#gamesGrid .game-card[data-game-id]"
         );
 
 
-    let found =
-        0;
+    favoritesGrid.innerHTML = "";
 
 
-    allCards.forEach(
-        function (card) {
-
-            const gameId =
-                card.dataset.gameId;
+    let foundFavorites = 0;
 
 
-            if (
-                favorites.includes(
-                    gameId
-                )
-            ) {
+    allCards.forEach(card => {
 
-                const favoriteCard =
-                    createFavoriteCard(
-                        card
-                    );
+        const gameId =
+            card.dataset.gameId;
 
-
-                grid.appendChild(
-                    favoriteCard
-                );
-
-
-                found++;
-
-            }
-
+        if (
+            !favorites.includes(
+                gameId
+            )
+        ) {
+            return;
         }
-    );
+
+        const favoriteCard =
+            createFavoriteCard(
+                card
+            );
+
+        favoritesGrid.appendChild(
+            favoriteCard
+        );
+
+        foundFavorites++;
+
+    });
 
 
-    if (empty) {
+    if (
+        foundFavorites === 0
+    ) {
 
-        if (found === 0) {
+        if (emptyFavorites) {
 
-            empty.style.display =
-                "block";
+            favoritesGrid.appendChild(
+                emptyFavorites
+            );
 
-        } else {
-
-            empty.style.display =
-                "none";
+            emptyFavorites.style.display =
+                "flex";
 
         }
 
     }
 
-
-    updateFavoriteButtons();
-
 }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* =========================
+   SCROLL NAVIGATION
+========================= */
 
-const favoritesNav =
-    document.getElementById(
-        "favoritesNav"
-    );
+function scrollToSection(
+    sectionId
+) {
 
-const gamesNav =
-    document.getElementById(
-        "gamesNav"
-    );
-
-const favoritesSection =
-    document.getElementById(
-        "favoritesSection"
-    );
-
-const gamesSection =
-    document.getElementById(
-        "gamesSection"
-    );
-
-
-function showFavorites() {
-
-    if (favoritesSection) {
-
-        favoritesSection.classList.remove(
-            "hidden-section"
+    const section =
+        document.getElementById(
+            sectionId
         );
 
+    if (!section) {
+        return;
     }
 
 
-    if (gamesSection) {
-
-        gamesSection.classList.add(
-            "hidden-section"
-        );
-
-    }
-
-
-    if (favoritesNav) {
-
-        favoritesNav.classList.add(
-            "active"
-        );
-
-    }
-
-
-    if (gamesNav) {
-
-        gamesNav.classList.remove(
-            "active"
-        );
-
-    }
-
-
-    renderFavorites();
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
 
     history.replaceState(
         null,
         "",
-        "#favorites"
-    );
-
-}
-
-
-function showGames() {
-
-    if (favoritesSection) {
-
-        favoritesSection.classList.add(
-            "hidden-section"
-        );
-
-    }
-
-
-    if (gamesSection) {
-
-        gamesSection.classList.remove(
-            "hidden-section"
-        );
-
-    }
-
-
-    if (favoritesNav) {
-
-        favoritesNav.classList.remove(
-            "active"
-        );
-
-    }
-
-
-    if (gamesNav) {
-
-        gamesNav.classList.add(
-            "active"
-        );
-
-    }
-
-
-    history.replaceState(
-        null,
-        "",
-        "#games"
+        `#${sectionId}`
     );
 
 }
@@ -1004,11 +806,13 @@ if (favoritesNav) {
 
     favoritesNav.addEventListener(
         "click",
-        function (event) {
+        event => {
 
             event.preventDefault();
 
-            showFavorites();
+            scrollToSection(
+                "favorites"
+            );
 
         }
     );
@@ -1020,11 +824,13 @@ if (gamesNav) {
 
     gamesNav.addEventListener(
         "click",
-        function (event) {
+        event => {
 
             event.preventDefault();
 
-            showGames();
+            scrollToSection(
+                "games"
+            );
 
         }
     );
@@ -1032,22 +838,114 @@ if (gamesNav) {
 }
 
 
-/* =========================================================
-   LAUNCH GAME
-========================================================= */
+/* =========================
+   ACTIVE NAVIGATION
+========================= */
 
-function launchGame(gameUrl) {
+const sections = [
+
+    document.getElementById(
+        "favorites"
+    ),
+
+    document.getElementById(
+        "games"
+    )
+
+].filter(Boolean);
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            const visible =
+                entries
+                    .filter(
+                        entry =>
+                            entry.isIntersecting
+                    )
+                    .sort(
+                        (a, b) =>
+                            b.intersectionRatio -
+                            a.intersectionRatio
+                    )[0];
+
+
+            if (!visible) {
+                return;
+            }
+
+
+            const id =
+                visible.target.id;
+
+
+            if (favoritesNav) {
+
+                favoritesNav.classList.toggle(
+                    "active",
+                    id === "favorites"
+                );
+
+            }
+
+
+            if (gamesNav) {
+
+                gamesNav.classList.toggle(
+                    "active",
+                    id === "games"
+                );
+
+            }
+
+        },
+
+        {
+            root: null,
+
+            threshold: 0.2
+        }
+    );
+
+
+sections.forEach(
+    section => {
+
+        observer.observe(
+            section
+        );
+
+    }
+);
+
+
+/* =========================
+   GAME LAUNCHER
+========================= */
+
+function launchGame(
+    gameUrl
+) {
+
+    const openInBlank =
+        getSetting(
+            SETTINGS_KEYS.openInBlank,
+            defaultSettings.openInBlank
+        );
+
 
     if (openInBlank) {
 
-        const newWindow =
+        const gameWindow =
             window.open(
                 "about:blank",
                 "_blank"
             );
 
 
-        if (!newWindow) {
+        if (!gameWindow) {
 
             window.location.href =
                 gameUrl;
@@ -1057,43 +955,40 @@ function launchGame(gameUrl) {
         }
 
 
-        newWindow.document.open();
+        gameWindow.document.open();
 
 
-        newWindow.document.write(`
+        gameWindow.document.write(`
             <!DOCTYPE html>
 
             <html>
 
             <head>
 
-                <title>Rofleq's Hideout</title>
+                <title>
+                    Rofleq's Hideout
+                </title>
 
                 <style>
 
                     html,
                     body {
-
                         margin: 0;
+                        padding: 0;
 
                         width: 100%;
-
                         height: 100%;
 
                         overflow: hidden;
 
                         background: #000;
-
                     }
 
                     iframe {
-
                         width: 100%;
-
                         height: 100%;
 
-                        border: none;
-
+                        border: 0;
                     }
 
                 </style>
@@ -1113,7 +1008,7 @@ function launchGame(gameUrl) {
         `);
 
 
-        newWindow.document.close();
+        gameWindow.document.close();
 
     } else {
 
@@ -1125,88 +1020,116 @@ function launchGame(gameUrl) {
 }
 
 
-/* =========================================================
-   COMMENTS
-========================================================= */
+/* =========================
+   INITIALIZE SETTINGS
+========================= */
 
-const commentsButton =
-    document.getElementById(
-        "commentsButton"
-    );
+function initializeSettings() {
 
-const commentsPanel =
-    document.getElementById(
-        "commentsPanel"
-    );
-
-const commentsClose =
-    document.getElementById(
-        "commentsClose"
+    applyOpenInBlank(
+        getSetting(
+            SETTINGS_KEYS.openInBlank,
+            defaultSettings.openInBlank
+        )
     );
 
 
-if (
-    commentsButton &&
-    commentsPanel
-) {
-
-    commentsButton.addEventListener(
-        "click",
-        function () {
-
-            commentsPanel.classList.toggle(
-                "open"
-            );
-
-        }
+    applyAnimatedBackground(
+        getSetting(
+            SETTINGS_KEYS.animatedBackground,
+            defaultSettings.animatedBackground
+        )
     );
 
-}
+
+    applyBackgroundSpeed(
+        getSetting(
+            SETTINGS_KEYS.backgroundSpeed,
+            defaultSettings.backgroundSpeed
+        )
+    );
 
 
-if (
-    commentsClose &&
-    commentsPanel
-) {
-
-    commentsClose.addEventListener(
-        "click",
-        function () {
-
-            commentsPanel.classList.remove(
-                "open"
-            );
-
-        }
+    applyBackgroundTransparency(
+        getSetting(
+            SETTINGS_KEYS.backgroundTransparency,
+            defaultSettings.backgroundTransparency
+        )
     );
 
 }
 
 
-/* =========================================================
+/* =========================
    INITIALIZE FAVORITES
-========================================================= */
+========================= */
 
-updateFavoriteButtons();
+function initializeFavorites() {
 
-updateFavoriteCount();
+    updateFavoriteButtons();
 
-renderFavorites();
+    renderFavorites();
 
-
-/* =========================================================
-   LOAD PAGE FROM URL HASH
-========================================================= */
-
-if (
-    window.location.hash ===
-    "#favorites"
-) {
-
-    showFavorites();
-
-} else {
-
-    showGames();
+    updateFavoriteCount();
 
 }
+
+
+/* =========================
+   PAGE STARTUP
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initializeSettings();
+
+        initializeFavorites();
+
+
+        const hash =
+            window.location.hash;
+
+
+        if (
+            hash === "#favorites"
+        ) {
+
+            setTimeout(
+                () => {
+
+                    document
+                        .getElementById(
+                            "favorites"
+                        )
+                        ?.scrollIntoView();
+
+                },
+                100
+            );
+
+        }
+
+
+        if (
+            hash === "#games"
+        ) {
+
+            setTimeout(
+                () => {
+
+                    document
+                        .getElementById(
+                            "games"
+                        )
+                        ?.scrollIntoView();
+
+                },
+                100
+            );
+
+        }
+
+    }
+);
