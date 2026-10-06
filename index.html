@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -9,10 +12,16 @@
 
     <title>Rofleq's Hideout</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
 
+
 <body>
+
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
@@ -20,16 +29,22 @@
         <div class="sidebar-top">
 
             <div class="logo-container">
+
                 <img
                     src="assets/logo.png"
                     alt="Rofleq's Hideout"
                     class="logo"
+                    id="siteLogo"
+                    title="Click to change theme"
                 >
+
             </div>
+
 
             <div class="version">
                 Github Version
             </div>
+
 
             <nav class="sidebar-nav">
 
@@ -38,49 +53,88 @@
                     class="nav-item"
                     id="favoritesNav"
                 >
-                    <div class="nav-icon">★</div>
-                    <span>Favorites</span>
+
+                    <div class="nav-icon">
+                        ★
+                    </div>
+
+                    <span>
+                        Favorites
+                    </span>
+
                     <span
                         class="favorite-count"
                         id="favoriteCount"
-                    >0</span>
+                    >
+                        0
+                    </span>
+
                 </a>
+
 
                 <a
                     href="#games"
                     class="nav-item active"
                     id="gamesNav"
                 >
-                    <div class="nav-icon">🎮</div>
-                    <span>Games</span>
+
+                    <div class="nav-icon">
+                        🎮
+                    </div>
+
+                    <span>
+                        Games
+                    </span>
+
                 </a>
 
             </nav>
 
         </div>
 
+
         <div class="sidebar-footer">
-            <span class="brand-green">Rofleq's</span>
-            <span class="brand-red">Hideout</span>
+
+            <span class="brand-green">
+                Rofleq's
+            </span>
+
+            <span class="brand-red">
+                Hideout
+            </span>
+
         </div>
 
     </aside>
+
 
 
     <!-- TOP BAR -->
     <header class="topbar">
 
         <div class="topbar-title">
-            <span class="brand-green">Rofleq's</span>
-            <span class="brand-red">Hideout</span>
+
+            <span class="brand-green">
+                Rofleq's
+            </span>
+
+            <span class="brand-red">
+                Hideout
+            </span>
+
         </div>
+
 
         <div class="topbar-right">
 
             <div class="online-status">
+
                 <span class="online-dot"></span>
+
                 Online
+
             </div>
+
 
             <button
                 type="button"
@@ -96,6 +150,33 @@
     </header>
 
 
+
+    <!-- THEME NOTIFICATION -->
+    <div
+        class="theme-notification"
+        id="themeNotification"
+    >
+
+        <div class="theme-notification-icon">
+            ✓
+        </div>
+
+        <div>
+
+            <strong>
+                Theme changes now unlocked!
+            </strong>
+
+            <span>
+                Check the Theme Color option in Settings.
+            </span>
+
+        </div>
+
+    </div>
+
+
+
     <!-- SETTINGS PANEL -->
     <div
         class="settings-panel"
@@ -105,12 +186,17 @@
         <div class="settings-header">
 
             <div>
+
                 <div class="settings-kicker">
                     OPTIONS
                 </div>
 
-                <h2>Settings</h2>
+                <h2>
+                    Settings
+                </h2>
+
             </div>
+
 
             <button
                 type="button"
@@ -123,18 +209,36 @@
         </div>
 
 
-        <!-- About blank -->
+
+        <!-- ABOUT BLANK -->
         <div class="setting-box">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="openInBlank"
+                title="Reset to default"
+                aria-label="Reset Open games in about blank to default"
+            >
+                ↶
+            </button>
+
 
             <div class="setting-row">
 
                 <div class="setting-text">
-                    <strong>Open games in about:blank</strong>
+
+                    <strong>
+                        Open games in about:blank
+                    </strong>
 
                     <span id="aboutBlankHint">
-                        Games open in a new about:blank window.
+                        Games open in a new
+                        about:blank window.
                     </span>
+
                 </div>
+
 
                 <label class="switch">
 
@@ -152,18 +256,36 @@
         </div>
 
 
-        <!-- Animated background -->
+
+        <!-- ANIMATED BACKGROUND -->
         <div class="setting-box">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="animatedBackground"
+                title="Reset to default"
+                aria-label="Reset animated background to default"
+            >
+                ↶
+            </button>
+
 
             <div class="setting-row">
 
                 <div class="setting-text">
-                    <strong>Animated background</strong>
+
+                    <strong>
+                        Animated background
+                    </strong>
 
                     <span>
-                        Show the moving red checkerboard.
+                        Show the moving
+                        theme-colored checkerboard.
                     </span>
+
                 </div>
+
 
                 <label class="switch">
 
@@ -181,21 +303,36 @@
         </div>
 
 
-        <!-- Background speed -->
+
+        <!-- BACKGROUND SPEED -->
         <div
             class="setting-box"
             id="backgroundSpeedBox"
         >
 
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="backgroundSpeed"
+                title="Reset to default"
+                aria-label="Reset background speed to default"
+            >
+                ↶
+            </button>
+
+
             <div class="setting-heading">
 
-                <strong>Background speed</strong>
+                <strong>
+                    Background speed
+                </strong>
 
                 <span id="backgroundSpeedValue">
                     6
                 </span>
 
             </div>
+
 
             <input
                 type="range"
@@ -209,21 +346,36 @@
         </div>
 
 
-        <!-- Transparency -->
+
+        <!-- TRANSPARENCY -->
         <div
             class="setting-box"
             id="backgroundTransparencyBox"
         >
 
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="backgroundTransparency"
+                title="Reset to default"
+                aria-label="Reset background transparency to default"
+            >
+                ↶
+            </button>
+
+
             <div class="setting-heading">
 
-                <strong>Background transparency</strong>
+                <strong>
+                    Background transparency
+                </strong>
 
                 <span id="backgroundTransparencyValue">
                     8%
                 </span>
 
             </div>
+
 
             <input
                 type="range"
@@ -236,7 +388,114 @@
 
         </div>
 
+
+
+        <!-- THEME COLOR -->
+        <div class="setting-box theme-setting">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="theme"
+                title="Reset theme to default"
+                aria-label="Reset theme to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-heading">
+
+                <strong>
+                    Theme Color
+                </strong>
+
+                <span id="themeName">
+                    Red
+                </span>
+
+            </div>
+
+
+            <div class="theme-options">
+
+                <button
+                    type="button"
+                    class="theme-option theme-red"
+                    data-theme-index="0"
+                    title="Red"
+                    aria-label="Red theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-green"
+                    data-theme-index="1"
+                    title="Green"
+                    aria-label="Green theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-purple"
+                    data-theme-index="2"
+                    title="Purple"
+                    aria-label="Purple theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-blue"
+                    data-theme-index="3"
+                    title="Blue"
+                    aria-label="Blue theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-orange"
+                    data-theme-index="4"
+                    title="Orange"
+                    aria-label="Orange theme"
+                ></button>
+
+
+                <!-- CUSTOM COLOR -->
+                <label
+                    class="custom-color-option"
+                    title="Custom color"
+                >
+
+                    <input
+                        type="color"
+                        id="customThemeColor"
+                        value="#e3262e"
+                    >
+
+                    <span>
+                        🎨
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <div
+                class="custom-color-label"
+                id="customColorLabel"
+            >
+                Custom color
+            </div>
+
+        </div>
+
     </div>
+
 
 
     <!-- MAIN PAGE -->
@@ -247,15 +506,24 @@
         <section class="welcome-section">
 
             <h1>
-                <span class="brand-green">Rofleq's</span>
-                <span class="brand-red">Hideout</span>
+
+                <span class="brand-green">
+                    Rofleq's
+                </span>
+
+                <span class="brand-red">
+                    Hideout
+                </span>
+
             </h1>
+
 
             <p>
                 Presented to you by Rofleq.
             </p>
 
         </section>
+
 
 
         <!-- FAVORITES -->
@@ -300,7 +568,8 @@
                     </h3>
 
                     <p>
-                        Click the star on a game to add it here.
+                        Click the star on a game
+                        to add it here.
                     </p>
 
                 </div>
@@ -308,6 +577,7 @@
             </div>
 
         </section>
+
 
 
         <!-- GAMES -->
@@ -338,7 +608,6 @@
                 id="gamesGrid"
             >
 
-
                 <!-- MINECRAFT -->
                 <article
                     class="game-card"
@@ -358,7 +627,6 @@
                         >
 
 
-                        <!-- FAVORITE BUTTON -->
                         <button
                             type="button"
                             class="favorite-button"
@@ -366,7 +634,9 @@
                             title="Add to favorites"
                             onclick="
                                 event.stopPropagation();
-                                toggleFavorite('minecraft-1.9.4');
+                                toggleFavorite(
+                                    'minecraft-1.9.4'
+                                );
                             "
                         >
                             ☆
@@ -384,12 +654,12 @@
                             Minecraft
                         </div>
 
+
                         <div class="game-meta">
                             1.9.4
                         </div>
 
 
-                        <!-- PLAY BUTTON -->
                         <button
                             type="button"
                             class="play-small"
@@ -407,19 +677,27 @@
 
                 </article>
 
-
             </div>
 
         </section>
+
 
 
         <!-- FOOTER -->
         <footer class="main-footer">
 
             <div>
-                <span class="brand-green">Rofleq's</span>
-                <span class="brand-red">Hideout</span>
+
+                <span class="brand-green">
+                    Rofleq's
+                </span>
+
+                <span class="brand-red">
+                    Hideout
+                </span>
+
             </div>
+
 
             <div>
                 Doug the GOAT
@@ -430,7 +708,9 @@
     </main>
 
 
+
     <script src="js/settings.js"></script>
 
 </body>
+
 </html>
