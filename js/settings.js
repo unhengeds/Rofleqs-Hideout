@@ -1,271 +1,609 @@
-/* =========================================================
+/* =====================================================
    ROFLEQ'S HIDEOUT
-   settings.js
-   ========================================================= */
+   SETTINGS + FAVORITES + THEMES + NAVIGATION
+===================================================== */
 
 
-/* =========================================================
+/* =====================================================
    DEFAULT SETTINGS
-   ========================================================= */
+===================================================== */
 
 const defaultSettings = {
+
     openInBlank: true,
+
     animatedBackground: true,
-    backgroundSpeed: 1,
-    backgroundTransparency: 1
+
+    backgroundSpeed: 6,
+
+    backgroundTransparency: 8
+
 };
 
+
+/* =====================================================
+   STORAGE KEYS
+===================================================== */
+
 const SETTINGS_KEYS = {
-    openInBlank: "rofleqHideoutOpenInBlank",
-    animatedBackground: "rofleqHideoutAnimatedBackground",
-    backgroundSpeed: "rofleqHideoutBackgroundSpeed",
-    backgroundTransparency: "rofleqHideoutBackgroundTransparency"
+
+    openInBlank:
+        "openInBlank",
+
+    animatedBackground:
+        "animatedBackground",
+
+    backgroundSpeed:
+        "backgroundSpeed",
+
+    backgroundTransparency:
+        "backgroundTransparency"
+
 };
+
 
 const FAVORITES_KEY =
     "rofleqHideoutFavorites";
+
 
 const THEME_KEY =
     "rofleqHideoutTheme";
 
 
-/* =========================================================
-   THEME SYSTEM
-   ========================================================= */
+/* =====================================================
+   THEMES
+
+   Theme Color is NOT shown in Settings anymore.
+
+   The logo is the only way to change themes.
+===================================================== */
 
 const THEMES = [
+
     {
-        name: "red",
-        primary: "#e3262e",
-        secondary: "#20d65a"
+        name: "Red",
+
+        color: "#e3262e",
+
+        color2: "#ff4048",
+
+        soft:
+            "rgba(227,38,46,0.12)",
+
+        border:
+            "rgba(227,38,46,0.42)",
+
+        glow:
+            "rgba(227,38,46,0.18)"
     },
+
+
     {
-        name: "green",
-        primary: "#20d65a",
-        secondary: "#e3262e"
+        name: "Green",
+
+        color: "#20d65a",
+
+        color2: "#39ff78",
+
+        soft:
+            "rgba(32,214,90,0.12)",
+
+        border:
+            "rgba(32,214,90,0.42)",
+
+        glow:
+            "rgba(32,214,90,0.18)"
     },
+
+
     {
-        name: "purple",
-        primary: "#9b59ff",
-        secondary: "#20d65a"
+        name: "Purple",
+
+        color: "#a855f7",
+
+        color2: "#c084fc",
+
+        soft:
+            "rgba(168,85,247,0.12)",
+
+        border:
+            "rgba(168,85,247,0.42)",
+
+        glow:
+            "rgba(168,85,247,0.18)"
     },
+
+
     {
-        name: "blue",
-        primary: "#3185ff",
-        secondary: "#20d65a"
+        name: "Blue",
+
+        color: "#3b82f6",
+
+        color2: "#60a5fa",
+
+        soft:
+            "rgba(59,130,246,0.12)",
+
+        border:
+            "rgba(59,130,246,0.42)",
+
+        glow:
+            "rgba(59,130,246,0.18)"
     },
+
+
     {
-        name: "orange",
-        primary: "#ff8a24",
-        secondary: "#20d65a"
+        name: "Orange",
+
+        color: "#f97316",
+
+        color2: "#fb923c",
+
+        soft:
+            "rgba(249,115,22,0.12)",
+
+        border:
+            "rgba(249,115,22,0.42)",
+
+        glow:
+            "rgba(249,115,22,0.18)"
     }
+
 ];
 
 
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const siteLogo =
+    document.getElementById(
+        "siteLogo"
+    );
+
+
+const themeNotification =
+    document.getElementById(
+        "themeNotification"
+    );
+
+
+/* =====================================================
+   THEME HELPERS
+===================================================== */
+
 function getThemeIndex() {
-    const savedTheme =
-        localStorage.getItem(THEME_KEY);
+
+    const saved =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
 
     const index =
-        parseInt(savedTheme, 10);
+        Number(saved);
+
 
     if (
-        Number.isInteger(index) &&
+
+        Number.isInteger(
+            index
+        ) &&
+
         index >= 0 &&
+
         index < THEMES.length
+
     ) {
+
         return index;
+
     }
 
+
     return 0;
+
 }
 
 
-function applyTheme(index) {
-    if (
-        index < 0 ||
-        index >= THEMES.length
-    ) {
-        index = 0;
-    }
+/* =====================================================
+   APPLY THEME
+===================================================== */
+
+function applyTheme(
+    index,
+    save = true
+) {
 
     const theme =
         THEMES[index];
 
-    document.documentElement.setAttribute(
-        "data-theme",
-        theme.name
+
+    if (!theme) {
+        return;
+    }
+
+
+    const root =
+        document.documentElement;
+
+
+    root.style.setProperty(
+        "--theme",
+        theme.color
     );
+
+
+    root.style.setProperty(
+        "--theme2",
+        theme.color2
+    );
+
+
+    root.style.setProperty(
+        "--theme-soft",
+        theme.soft
+    );
+
+
+    root.style.setProperty(
+        "--theme-border",
+        theme.border
+    );
+
+
+    root.style.setProperty(
+        "--theme-glow",
+        theme.glow
+    );
+
 
     /*
-       These variables make the theme work even if
-       your CSS uses --theme-primary / --theme-secondary.
-    */
-    document.documentElement.style.setProperty(
-        "--theme-primary",
-        theme.primary
+     * Compatibility variables.
+     */
+
+    root.style.setProperty(
+        "--red",
+        theme.color
     );
 
-    document.documentElement.style.setProperty(
-        "--theme-secondary",
-        theme.secondary
+
+    root.style.setProperty(
+        "--red2",
+        theme.color2
     );
 
-    document.documentElement.style.setProperty(
-        "--accent-color",
-        theme.primary
+
+    root.style.setProperty(
+        "--border",
+        theme.border
     );
 
-    document.documentElement.style.setProperty(
-        "--theme-color",
-        theme.primary
-    );
+
+    if (save) {
+
+        localStorage.setItem(
+            THEME_KEY,
+            String(index)
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGO THEME CYCLE
+===================================================== */
+
+function cycleTheme() {
+
+    let index =
+        getThemeIndex();
+
+
+    index++;
+
+
+    /*
+     * After Orange:
+     *
+     * Red
+     *
+     * This completes the cycle.
+     */
+
+    if (
+        index >= THEMES.length
+    ) {
+
+        index = 0;
+
+
+        showThemeUnlockedNotification();
+
+    }
+
 
     localStorage.setItem(
         THEME_KEY,
         String(index)
     );
+
+
+    applyTheme(
+        index,
+        false
+    );
+
 }
+
+
+/* =====================================================
+   THEME NOTIFICATION
+===================================================== */
+
+let notificationTimer =
+    null;
 
 
 function showThemeUnlockedNotification() {
-    let notification =
-        document.getElementById(
-            "themeNotification"
-        );
 
-    if (!notification) {
-        notification =
-            document.createElement("div");
-
-        notification.id =
-            "themeNotification";
-
-        notification.innerHTML = `
-            <div class="theme-notification-title">
-                Theme changes now unlocked!
-            </div>
-
-            <div class="theme-notification-text">
-                Click the logo to cycle through themes.
-            </div>
-        `;
-
-        document.body.appendChild(
-            notification
-        );
-    }
-
-    notification.classList.remove(
-        "show"
-    );
-
-    void notification.offsetWidth;
-
-    notification.classList.add(
-        "show"
-    );
-
-    clearTimeout(
-        notification._hideTimer
-    );
-
-    notification._hideTimer =
-        setTimeout(
-            function() {
-                notification.classList.remove(
-                    "show"
-                );
-            },
-            3500
-        );
-}
-
-
-function cycleTheme() {
-    const oldIndex =
-        getThemeIndex();
-
-    const newIndex =
-        (oldIndex + 1) %
-        THEMES.length;
-
-    applyTheme(newIndex);
-
-    /*
-       Show the notification when the cycle
-       wraps from orange back to red.
-    */
-    if (
-        oldIndex === THEMES.length - 1 &&
-        newIndex === 0
-    ) {
-        showThemeUnlockedNotification();
-    }
-}
-
-
-function initializeTheme() {
-    applyTheme(
-        getThemeIndex()
-    );
-
-    const logo =
-        document.getElementById(
-            "siteLogo"
-        );
-
-    if (!logo) {
+    if (!themeNotification) {
         return;
     }
 
-    logo.addEventListener(
-        "click",
-        function(event) {
-            event.preventDefault();
-            cycleTheme();
-        }
+
+    const title =
+        themeNotification.querySelector(
+            "strong"
+        );
+
+
+    const message =
+        themeNotification.querySelector(
+            "span"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            "Theme changes now unlocked!";
+
+    }
+
+
+    if (message) {
+
+        message.textContent =
+            "Click the logo to cycle through themes.";
+
+    }
+
+
+    themeNotification.classList.add(
+        "show"
     );
+
+
+    clearTimeout(
+        notificationTimer
+    );
+
+
+    notificationTimer =
+        setTimeout(
+            function() {
+
+                themeNotification.classList.remove(
+                    "show"
+                );
+
+            },
+            4500
+        );
+
 }
 
 
-/* =========================================================
+/* =====================================================
+   LOGO CLICK
+===================================================== */
+
+if (siteLogo) {
+
+    siteLogo.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            cycleTheme();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SETTINGS ELEMENTS
+===================================================== */
+
+const settingsButton =
+    document.getElementById(
+        "settingsButton"
+    );
+
+
+const settingsPanel =
+    document.getElementById(
+        "settingsPanel"
+    );
+
+
+const closeSettings =
+    document.getElementById(
+        "closeSettings"
+    );
+
+
+const openInBlankToggle =
+    document.getElementById(
+        "openInBlankToggle"
+    );
+
+
+const animatedBackgroundToggle =
+    document.getElementById(
+        "animatedBackgroundToggle"
+    );
+
+
+const backgroundSpeed =
+    document.getElementById(
+        "backgroundSpeed"
+    );
+
+
+const backgroundTransparency =
+    document.getElementById(
+        "backgroundTransparency"
+    );
+
+
+const backgroundSpeedValue =
+    document.getElementById(
+        "backgroundSpeedValue"
+    );
+
+
+const backgroundTransparencyValue =
+    document.getElementById(
+        "backgroundTransparencyValue"
+    );
+
+
+const backgroundSpeedBox =
+    document.getElementById(
+        "backgroundSpeedBox"
+    );
+
+
+const backgroundTransparencyBox =
+    document.getElementById(
+        "backgroundTransparencyBox"
+    );
+
+
+const aboutBlankHint =
+    document.getElementById(
+        "aboutBlankHint"
+    );
+
+
+/* =====================================================
+   FAVORITES ELEMENTS
+===================================================== */
+
+const favoritesGrid =
+    document.getElementById(
+        "favoritesGrid"
+    );
+
+
+const emptyFavorites =
+    document.getElementById(
+        "emptyFavorites"
+    );
+
+
+const favoriteCount =
+    document.getElementById(
+        "favoriteCount"
+    );
+
+
+const favoritesNav =
+    document.getElementById(
+        "favoritesNav"
+    );
+
+
+const gamesNav =
+    document.getElementById(
+        "gamesNav"
+    );
+
+
+/* =====================================================
    SETTINGS STORAGE
-   ========================================================= */
+===================================================== */
 
 function getSetting(
     key,
     fallback
 ) {
-    const value =
-        localStorage.getItem(key);
 
-    if (value === null) {
+    const saved =
+        localStorage.getItem(
+            key
+        );
+
+
+    if (
+        saved === null
+    ) {
+
         return fallback;
+
     }
 
-    if (
-        value === "true"
-    ) {
-        return true;
+
+    try {
+
+        return JSON.parse(
+            saved
+        );
+
+    } catch {
+
+        if (
+            saved === "true"
+        ) {
+
+            return true;
+
+        }
+
+
+        if (
+            saved === "false"
+        ) {
+
+            return false;
+
+        }
+
+
+        const number =
+            Number(saved);
+
+
+        if (
+            !Number.isNaN(number)
+        ) {
+
+            return number;
+
+        }
+
+
+        return saved;
+
     }
 
-    if (
-        value === "false"
-    ) {
-        return false;
-    }
-
-    const numberValue =
-        Number(value);
-
-    if (
-        !Number.isNaN(numberValue)
-    ) {
-        return numberValue;
-    }
-
-    return value;
 }
 
 
@@ -273,532 +611,745 @@ function setSetting(
     key,
     value
 ) {
+
     localStorage.setItem(
         key,
-        String(value)
+        JSON.stringify(
+            value
+        )
     );
+
 }
 
 
-function resetSetting(
-    key,
-    fallback
-) {
-    setSetting(
-        key,
-        fallback
-    );
-
-    initializeSettings();
-}
-
-
-/* =========================================================
+/* =====================================================
    SETTINGS PANEL
-   ========================================================= */
+===================================================== */
 
-function initializeSettings() {
-    const openInBlank =
-        document.getElementById(
-            "openInBlank"
-        );
+function openSettingsPanel() {
 
-    const animatedBackground =
-        document.getElementById(
-            "animatedBackground"
-        );
-
-    const backgroundSpeed =
-        document.getElementById(
-            "backgroundSpeed"
-        );
-
-    const backgroundTransparency =
-        document.getElementById(
-            "backgroundTransparency"
-        );
-
-
-    if (openInBlank) {
-        openInBlank.checked =
-            getSetting(
-                SETTINGS_KEYS.openInBlank,
-                defaultSettings.openInBlank
-            );
-
-        openInBlank.onchange =
-            function() {
-                setSetting(
-                    SETTINGS_KEYS.openInBlank,
-                    openInBlank.checked
-                );
-            };
+    if (!settingsPanel) {
+        return;
     }
 
 
-    if (animatedBackground) {
-        animatedBackground.checked =
-            getSetting(
-                SETTINGS_KEYS.animatedBackground,
-                defaultSettings.animatedBackground
+    settingsPanel.classList.add(
+        "open"
+    );
+
+
+    if (settingsButton) {
+
+        settingsButton.classList.add(
+            "open"
+        );
+
+    }
+
+}
+
+
+function closeSettingsPanel() {
+
+    if (!settingsPanel) {
+        return;
+    }
+
+
+    settingsPanel.classList.remove(
+        "open"
+    );
+
+
+    if (settingsButton) {
+
+        settingsButton.classList.remove(
+            "open"
+        );
+
+    }
+
+}
+
+
+if (settingsButton) {
+
+    settingsButton.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+
+            if (
+                settingsPanel &&
+                settingsPanel.classList.contains(
+                    "open"
+                )
+            ) {
+
+                closeSettingsPanel();
+
+            } else {
+
+                openSettingsPanel();
+
+            }
+
+        }
+    );
+
+}
+
+
+if (closeSettings) {
+
+    closeSettings.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            closeSettingsPanel();
+
+        }
+    );
+
+}
+
+
+if (settingsPanel) {
+
+    settingsPanel.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    function() {
+
+        closeSettingsPanel();
+
+    }
+);
+
+
+/* =====================================================
+   ABOUT:BLANK
+===================================================== */
+
+function applyOpenInBlank(
+    value
+) {
+
+    if (openInBlankToggle) {
+
+        openInBlankToggle.checked =
+            Boolean(value);
+
+    }
+
+
+    if (aboutBlankHint) {
+
+        aboutBlankHint.textContent =
+
+            value
+
+                ? "Games open in a new about:blank window."
+
+                : "Games open directly in this page.";
+
+    }
+
+}
+
+
+if (openInBlankToggle) {
+
+    openInBlankToggle.addEventListener(
+        "change",
+        function() {
+
+            const value =
+                openInBlankToggle.checked;
+
+
+            setSetting(
+                SETTINGS_KEYS.openInBlank,
+                value
             );
 
-        animatedBackground.onchange =
-            function() {
-                setSetting(
-                    SETTINGS_KEYS.animatedBackground,
-                    animatedBackground.checked
-                );
 
-                updateAnimatedBackground();
-            };
+            applyOpenInBlank(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ANIMATED BACKGROUND
+===================================================== */
+
+function applyAnimatedBackground(
+    value
+) {
+
+    value =
+        Boolean(value);
+
+
+    if (animatedBackgroundToggle) {
+
+        animatedBackgroundToggle.checked =
+            value;
+
+    }
+
+
+    document.body.classList.toggle(
+        "background-disabled",
+        !value
+    );
+
+
+    if (backgroundSpeedBox) {
+
+        backgroundSpeedBox.style.display =
+            value ? "" : "none";
+
+    }
+
+
+    if (backgroundTransparencyBox) {
+
+        backgroundTransparencyBox.style.display =
+            value ? "" : "none";
+
+    }
+
+}
+
+
+if (animatedBackgroundToggle) {
+
+    animatedBackgroundToggle.addEventListener(
+        "change",
+        function() {
+
+            const value =
+                animatedBackgroundToggle.checked;
+
+
+            setSetting(
+                SETTINGS_KEYS.animatedBackground,
+                value
+            );
+
+
+            applyAnimatedBackground(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BACKGROUND SPEED
+===================================================== */
+
+function applyBackgroundSpeed(
+    value
+) {
+
+    value =
+        Number(value);
+
+
+    if (
+        !Number.isFinite(value)
+    ) {
+
+        value =
+            defaultSettings.backgroundSpeed;
+
     }
 
 
     if (backgroundSpeed) {
-        backgroundSpeed.value =
-            getSetting(
-                SETTINGS_KEYS.backgroundSpeed,
-                defaultSettings.backgroundSpeed
-            );
 
-        backgroundSpeed.oninput =
-            function() {
-                setSetting(
-                    SETTINGS_KEYS.backgroundSpeed,
+        backgroundSpeed.value =
+            value;
+
+    }
+
+
+    if (backgroundSpeedValue) {
+
+        backgroundSpeedValue.textContent =
+            value;
+
+    }
+
+
+    const seconds =
+
+        value <= 0
+
+            ? 999999
+
+            : 21 - value;
+
+
+    document.documentElement.style.setProperty(
+        "--checker-speed",
+        `${seconds}s`
+    );
+
+}
+
+
+if (backgroundSpeed) {
+
+    backgroundSpeed.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                Number(
                     backgroundSpeed.value
                 );
 
-                updateBackgroundSpeed();
-            };
+
+            setSetting(
+                SETTINGS_KEYS.backgroundSpeed,
+                value
+            );
+
+
+            applyBackgroundSpeed(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BACKGROUND TRANSPARENCY
+===================================================== */
+
+function applyBackgroundTransparency(
+    value
+) {
+
+    value =
+        Number(value);
+
+
+    if (
+        !Number.isFinite(value)
+    ) {
+
+        value =
+            defaultSettings.backgroundTransparency;
+
     }
 
 
     if (backgroundTransparency) {
-        backgroundTransparency.value =
-            getSetting(
-                SETTINGS_KEYS.backgroundTransparency,
-                defaultSettings.backgroundTransparency
-            );
 
-        backgroundTransparency.oninput =
-            function() {
-                setSetting(
-                    SETTINGS_KEYS.backgroundTransparency,
+        backgroundTransparency.value =
+            value;
+
+    }
+
+
+    if (backgroundTransparencyValue) {
+
+        backgroundTransparencyValue.textContent =
+            `${value}%`;
+
+    }
+
+
+    document.documentElement.style.setProperty(
+        "--checker-opacity",
+        value / 100
+    );
+
+}
+
+
+if (backgroundTransparency) {
+
+    backgroundTransparency.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                Number(
                     backgroundTransparency.value
                 );
 
-                updateBackgroundTransparency();
-            };
-    }
 
-
-    updateAnimatedBackground();
-    updateBackgroundSpeed();
-    updateBackgroundTransparency();
-
-
-    /*
-       Reset buttons.
-
-       They should have:
-       data-setting="openInBlank"
-       data-setting="animatedBackground"
-       data-setting="backgroundSpeed"
-       data-setting="backgroundTransparency"
-    */
-
-    const resetButtons =
-        document.querySelectorAll(
-            "[data-setting-reset]"
-        );
-
-    resetButtons.forEach(
-        function(button) {
-            button.onclick =
-                function(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    const setting =
-                        button.getAttribute(
-                            "data-setting-reset"
-                        );
-
-                    resetSettingByName(
-                        setting
-                    );
-                };
-        }
-    );
-}
-
-
-function resetSettingByName(
-    setting
-) {
-    if (
-        setting === "openInBlank"
-    ) {
-        resetSetting(
-            SETTINGS_KEYS.openInBlank,
-            defaultSettings.openInBlank
-        );
-    }
-
-    if (
-        setting === "animatedBackground"
-    ) {
-        resetSetting(
-            SETTINGS_KEYS.animatedBackground,
-            defaultSettings.animatedBackground
-        );
-    }
-
-    if (
-        setting === "backgroundSpeed"
-    ) {
-        resetSetting(
-            SETTINGS_KEYS.backgroundSpeed,
-            defaultSettings.backgroundSpeed
-        );
-    }
-
-    if (
-        setting === "backgroundTransparency"
-    ) {
-        resetSetting(
-            SETTINGS_KEYS.backgroundTransparency,
-            defaultSettings.backgroundTransparency
-        );
-    }
-}
-
-
-/* =========================================================
-   SETTINGS PANEL OPEN / CLOSE
-   ========================================================= */
-
-function initializeSettingsPanel() {
-    const settingsButton =
-        document.getElementById(
-            "settingsButton"
-        );
-
-    const settingsPanel =
-        document.getElementById(
-            "settingsPanel"
-        );
-
-    const settingsClose =
-        document.getElementById(
-            "settingsClose"
-        );
-
-
-    if (
-        settingsButton &&
-        settingsPanel
-    ) {
-        settingsButton.addEventListener(
-            "click",
-            function() {
-                settingsPanel.classList.toggle(
-                    "open"
-                );
-            }
-        );
-    }
-
-
-    if (
-        settingsClose &&
-        settingsPanel
-    ) {
-        settingsClose.addEventListener(
-            "click",
-            function() {
-                settingsPanel.classList.remove(
-                    "open"
-                );
-            }
-        );
-    }
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-            if (
-                event.key === "Escape" &&
-                settingsPanel
-            ) {
-                settingsPanel.classList.remove(
-                    "open"
-                );
-            }
-        }
-    );
-}
-
-
-/* =========================================================
-   ANIMATED BACKGROUND
-   ========================================================= */
-
-function updateAnimatedBackground() {
-    const enabled =
-        getSetting(
-            SETTINGS_KEYS.animatedBackground,
-            defaultSettings.animatedBackground
-        );
-
-    document.body.classList.toggle(
-        "background-animation-disabled",
-        !enabled
-    );
-}
-
-
-function updateBackgroundSpeed() {
-    const speed =
-        Number(
-            getSetting(
-                SETTINGS_KEYS.backgroundSpeed,
-                defaultSettings.backgroundSpeed
-            )
-        );
-
-    const safeSpeed =
-        Math.max(
-            0.1,
-            Math.min(
-                speed,
-                5
-            )
-        );
-
-    document.documentElement.style.setProperty(
-        "--background-speed",
-        safeSpeed
-    );
-}
-
-
-function updateBackgroundTransparency() {
-    const transparency =
-        Number(
-            getSetting(
+            setSetting(
                 SETTINGS_KEYS.backgroundTransparency,
-                defaultSettings.backgroundTransparency
-            )
-        );
-
-    const safeTransparency =
-        Math.max(
-            0,
-            Math.min(
-                transparency,
-                1
-            )
-        );
-
-    document.documentElement.style.setProperty(
-        "--background-transparency",
-        safeTransparency
-    );
-}
-
-
-/* =========================================================
-   FAVORITES
-   ========================================================= */
-
-function getFavorites() {
-    try {
-        const saved =
-            localStorage.getItem(
-                FAVORITES_KEY
+                value
             );
 
-        if (!saved) {
-            return [];
+
+            applyBackgroundTransparency(
+                value
+            );
+
         }
+    );
 
-        const parsed =
-            JSON.parse(saved);
+}
 
-        if (!Array.isArray(parsed)) {
-            return [];
+
+/* =====================================================
+   RESET BUTTONS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".setting-reset"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function(event) {
+
+                    event.stopPropagation();
+
+
+                    const setting =
+                        button.dataset.reset;
+
+
+                    if (
+                        setting ===
+                        "openInBlank"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.openInBlank,
+                            defaultSettings.openInBlank
+                        );
+
+
+                        applyOpenInBlank(
+                            defaultSettings.openInBlank
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "animatedBackground"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.animatedBackground,
+                            defaultSettings.animatedBackground
+                        );
+
+
+                        applyAnimatedBackground(
+                            defaultSettings.animatedBackground
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "backgroundSpeed"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.backgroundSpeed,
+                            defaultSettings.backgroundSpeed
+                        );
+
+
+                        applyBackgroundSpeed(
+                            defaultSettings.backgroundSpeed
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "backgroundTransparency"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.backgroundTransparency,
+                            defaultSettings.backgroundTransparency
+                        );
+
+
+                        applyBackgroundTransparency(
+                            defaultSettings.backgroundTransparency
+                        );
+
+                    }
+
+                }
+            );
+
         }
+    );
 
-        return parsed;
-    } catch (error) {
+
+/* =====================================================
+   FAVORITES
+===================================================== */
+
+function getFavorites() {
+
+    try {
+
+        const favorites =
+            JSON.parse(
+                localStorage.getItem(
+                    FAVORITES_KEY
+                )
+            );
+
+
+        return Array.isArray(
+            favorites
+        )
+            ? favorites
+            : [];
+
+    } catch {
+
         return [];
+
     }
+
 }
 
 
 function saveFavorites(
     favorites
 ) {
+
     localStorage.setItem(
         FAVORITES_KEY,
-        JSON.stringify(favorites)
+        JSON.stringify(
+            favorites
+        )
     );
+
 }
 
 
 function isFavorite(
     gameId
 ) {
+
     return getFavorites().includes(
         gameId
     );
+
 }
 
+
+/* =====================================================
+   TOGGLE FAVORITE
+===================================================== */
 
 function toggleFavorite(
     gameId
 ) {
+
     let favorites =
         getFavorites();
 
+
     if (
-        favorites.includes(gameId)
+        favorites.includes(
+            gameId
+        )
     ) {
+
         favorites =
             favorites.filter(
                 function(id) {
+
                     return id !== gameId;
+
                 }
             );
+
     } else {
+
         favorites.push(
             gameId
         );
+
     }
+
 
     saveFavorites(
         favorites
     );
 
+
     updateFavoriteButtons();
+
     renderFavorites();
+
+    updateFavoriteCount();
+
 }
 
 
+/* =====================================================
+   UPDATE FAVORITE BUTTONS
+===================================================== */
+
 function updateFavoriteButtons() {
-    const buttons =
+
+    const cards =
         document.querySelectorAll(
-            ".favorite-button"
+            ".game-card[data-game-id]"
         );
 
-    const favorites =
-        getFavorites();
 
-    buttons.forEach(
-        function(button) {
-            const card =
-                button.closest(
-                    ".game-card"
+    cards.forEach(
+        function(card) {
+
+            const gameId =
+                card.dataset.gameId;
+
+
+            const button =
+                card.querySelector(
+                    ".favorite-button"
                 );
 
-            if (!card) {
+
+            if (!button) {
                 return;
             }
 
-            const gameId =
-                card.getAttribute(
-                    "data-game-id"
-                );
 
-            const active =
-                favorites.includes(
+            const favorite =
+                isFavorite(
                     gameId
                 );
 
+
             button.textContent =
-                active ? "★" : "☆";
+                favorite
+                    ? "★"
+                    : "☆";
+
 
             button.classList.toggle(
                 "favorited",
-                active
+                favorite
             );
+
+
+            const gameName =
+                card.dataset.gameName ||
+                "game";
+
 
             button.setAttribute(
                 "aria-label",
-                active
-                    ? "Remove from favorites"
-                    : "Add to favorites"
+
+                favorite
+
+                    ? `Remove ${gameName} from favorites`
+
+                    : `Add ${gameName} to favorites`
+
             );
 
-            button.setAttribute(
-                "title",
-                active
+
+            button.title =
+
+                favorite
+
                     ? "Remove from favorites"
-                    : "Add to favorites"
-            );
+
+                    : "Add to favorites";
+
         }
     );
 
-
-    updateFavoriteCount();
 }
 
+
+/* =====================================================
+   FAVORITE COUNT
+===================================================== */
 
 function updateFavoriteCount() {
-    const count =
+
+    if (!favoriteCount) {
+        return;
+    }
+
+
+    favoriteCount.textContent =
         getFavorites().length;
 
-    const elements =
-        document.querySelectorAll(
-            "[data-favorite-count]"
-        );
-
-    elements.forEach(
-        function(element) {
-            element.textContent =
-                count;
-        }
-    );
 }
 
 
-/* =========================================================
-   FAVORITE CARD CREATION
-   ========================================================= */
+/* =====================================================
+   CREATE FAVORITE CARD
+===================================================== */
 
 function createFavoriteCard(
     originalCard
 ) {
+
     const clone =
         originalCard.cloneNode(
             true
         );
 
-    clone.removeAttribute(
-        "onclick"
-    );
 
-    const gameId =
-        clone.getAttribute(
-            "data-game-id"
-        );
-
-    const gameUrl =
-        clone.getAttribute(
-            "data-game-url"
-        );
-
-    clone.addEventListener(
-        "click",
+    clone.onclick =
         function() {
+
             launchGame(
-                gameUrl
+                clone.dataset.gameUrl
             );
-        }
-    );
+
+        };
 
 
     const favoriteButton =
@@ -806,16 +1357,21 @@ function createFavoriteCard(
             ".favorite-button"
         );
 
+
     if (favoriteButton) {
+
         favoriteButton.onclick =
             function(event) {
-                event.preventDefault();
+
                 event.stopPropagation();
 
+
                 toggleFavorite(
-                    gameId
+                    clone.dataset.gameId
                 );
+
             };
+
     }
 
 
@@ -824,268 +1380,167 @@ function createFavoriteCard(
             ".play-small"
         );
 
+
     if (playButton) {
+
         playButton.onclick =
             function(event) {
-                event.preventDefault();
+
                 event.stopPropagation();
 
+
                 launchGame(
-                    gameUrl
+                    clone.dataset.gameUrl
                 );
+
             };
+
     }
 
 
     return clone;
+
 }
 
 
-/* =========================================================
+/* =====================================================
    RENDER FAVORITES
-   ========================================================= */
+===================================================== */
 
 function renderFavorites() {
-    const favoritesGrid =
-        document.getElementById(
-            "favoritesGrid"
-        );
-
-    const emptyFavorites =
-        document.getElementById(
-            "emptyFavorites"
-        );
 
     if (!favoritesGrid) {
         return;
     }
 
 
-    favoritesGrid.innerHTML =
-        "";
-
-
     const favorites =
         getFavorites();
 
 
-    const gameCards =
+    const allCards =
         document.querySelectorAll(
-            "#gamesGrid .game-card"
+            "#gamesGrid .game-card[data-game-id]"
         );
 
 
-    let rendered =
+    favoritesGrid.innerHTML =
+        "";
+
+
+    let foundFavorites =
         0;
 
 
-    gameCards.forEach(
+    allCards.forEach(
         function(card) {
+
             const gameId =
-                card.getAttribute(
-                    "data-game-id"
-                );
+                card.dataset.gameId;
+
 
             if (
-                favorites.includes(
+                !favorites.includes(
                     gameId
                 )
             ) {
-                favoritesGrid.appendChild(
-                    createFavoriteCard(
-                        card
-                    )
+
+                return;
+
+            }
+
+
+            const favoriteCard =
+                createFavoriteCard(
+                    card
                 );
 
-                rendered++;
-            }
+
+            favoritesGrid.appendChild(
+                favoriteCard
+            );
+
+
+            foundFavorites++;
+
         }
     );
-
-
-    if (emptyFavorites) {
-        emptyFavorites.style.display =
-            rendered === 0
-                ? "block"
-                : "none";
-    }
-
-
-    updateFavoriteButtons();
-
-    /*
-       Make sure newly-created favorite cards
-       also get their missing-image line logic.
-    */
-    updateGameImageAccents();
-}
-
-
-/* =========================================================
-   IMAGE / RED ACCENT HANDLING
-   ========================================================= */
-
-/*
-   If a game has a working image:
-       hide .red-accent
-
-   If it has no image or the image fails:
-       show .red-accent
-
-   This is intentionally based on the actual
-   naturalWidth of the image.
-*/
-
-function updateGameImageAccent(
-    image
-) {
-    if (!image) {
-        return;
-    }
-
-    const card =
-        image.closest(
-            ".game-card"
-        );
-
-    if (!card) {
-        return;
-    }
-
-    const accent =
-        card.querySelector(
-            ".red-accent"
-        );
-
-    if (!accent) {
-        return;
-    }
 
 
     if (
-        image.complete &&
-        image.naturalWidth > 0
+        foundFavorites === 0
     ) {
-        accent.style.display =
-            "none";
 
-        card.classList.add(
-            "has-game-image"
-        );
+        if (emptyFavorites) {
 
-        card.classList.remove(
-            "missing-game-image"
-        );
+            favoritesGrid.appendChild(
+                emptyFavorites
+            );
 
-        return;
+
+            emptyFavorites.style.display =
+                "flex";
+
+        }
+
     }
 
-
-    accent.style.display =
-        "block";
-
-    card.classList.remove(
-        "has-game-image"
-    );
-
-    card.classList.add(
-        "missing-game-image"
-    );
 }
 
 
-function updateGameImageAccents() {
-    const images =
-        document.querySelectorAll(
-            ".game-card .game-image img"
-        );
-
-
-    images.forEach(
-        function(image) {
-
-            /*
-               Handle an image that has already
-               finished loading.
-            */
-            updateGameImageAccent(
-                image
-            );
-
-
-            /*
-               Handle an image that loads after
-               the JS has initialized.
-            */
-            image.addEventListener(
-                "load",
-                function() {
-                    updateGameImageAccent(
-                        image
-                    );
-                }
-            );
-
-
-            image.addEventListener(
-                "error",
-                function() {
-                    updateGameImageAccent(
-                        image
-                    );
-                }
-            );
-        }
-    );
-}
-
-
-/* =========================================================
+/* =====================================================
    NAVIGATION
-   ========================================================= */
+===================================================== */
 
-const sections =
-    document.querySelectorAll(
-        "main section[id]"
-    );
-
-const favoritesNav =
-    document.getElementById(
-        "favoritesNav"
-    );
-
-const gamesNav =
-    document.getElementById(
-        "gamesNav"
-    );
-
+/*
+ * Favorites section
+ *     -> Favorites highlighted.
+ *
+ * Games section
+ *     -> Games highlighted.
+ */
 
 function setActiveNav(
     sectionId
 ) {
+
     if (favoritesNav) {
+
         favoritesNav.classList.toggle(
             "active",
-            sectionId === "favorites"
+            sectionId ===
+                "favorites"
         );
+
     }
+
 
     if (gamesNav) {
+
         gamesNav.classList.toggle(
             "active",
-            sectionId === "games"
+            sectionId ===
+                "games"
         );
+
     }
+
 }
 
+
+/* =====================================================
+   SCROLL TO SECTION
+===================================================== */
 
 function scrollToSection(
     sectionId
 ) {
+
     const section =
         document.getElementById(
             sectionId
         );
+
 
     if (!section) {
         return;
@@ -1093,8 +1548,13 @@ function scrollToSection(
 
 
     section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
     });
 
 
@@ -1104,53 +1564,92 @@ function scrollToSection(
 
 
     history.replaceState(
+
         null,
+
         "",
-        "#" + sectionId
+
+        `#${sectionId}`
+
     );
+
 }
 
 
-function initializeNavigation() {
-    if (favoritesNav) {
-        favoritesNav.addEventListener(
-            "click",
-            function(event) {
-                event.preventDefault();
+/* =====================================================
+   FAVORITES NAVIGATION
+===================================================== */
 
-                scrollToSection(
-                    "favorites"
-                );
-            }
-        );
-    }
+if (favoritesNav) {
+
+    favoritesNav.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
 
 
-    if (gamesNav) {
-        gamesNav.addEventListener(
-            "click",
-            function(event) {
-                event.preventDefault();
+            scrollToSection(
+                "favorites"
+            );
 
-                scrollToSection(
-                    "games"
-                );
-            }
-        );
-    }
+        }
+    );
+
 }
 
 
-/* =========================================================
-   SCROLL NAVIGATION
-   ========================================================= */
+/* =====================================================
+   GAMES NAVIGATION
+===================================================== */
+
+if (gamesNav) {
+
+    gamesNav.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            scrollToSection(
+                "games"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+const sections = [
+
+    document.getElementById(
+        "favorites"
+    ),
+
+    document.getElementById(
+        "games"
+    )
+
+].filter(
+    Boolean
+);
+
+
+/* =====================================================
+   SCROLL DETECTION
+===================================================== */
 
 function updateNavigationFromScroll() {
-    const currentSections =
-        document.querySelectorAll(
-            "main section[id]"
-        );
-
 
     const marker =
         window.scrollY +
@@ -1160,88 +1659,88 @@ function updateNavigationFromScroll() {
         );
 
 
+    /*
+     * Default to Games when we're above
+     * the Favorites section.
+     */
+
     let currentSection =
         "games";
 
 
-    currentSections.forEach(
+    sections.forEach(
         function(section) {
+
             if (
                 marker >=
                 section.offsetTop
             ) {
+
                 currentSection =
                     section.id;
+
             }
+
         }
     );
-
-
-    /*
-       Welcome is not a navigation item,
-       so treat it as Games.
-    */
-    if (
-        currentSection === "welcome"
-    ) {
-        currentSection =
-            "games";
-    }
 
 
     setActiveNav(
         currentSection
     );
+
 }
 
 
-function initializeScrollNavigation() {
-    window.addEventListener(
-        "scroll",
-        updateNavigationFromScroll,
-        {
-            passive: true
-        }
-    );
-
-    window.addEventListener(
-        "resize",
-        updateNavigationFromScroll
-    );
-
-    updateNavigationFromScroll();
-}
+window.addEventListener(
+    "scroll",
+    updateNavigationFromScroll,
+    {
+        passive: true
+    }
+);
 
 
-/* =========================================================
+window.addEventListener(
+    "resize",
+    updateNavigationFromScroll
+);
+
+
+window.addEventListener(
+    "load",
+    updateNavigationFromScroll
+);
+
+
+/* =====================================================
    GAME LAUNCHING
-   ========================================================= */
+===================================================== */
 
 function launchGame(
     gameUrl
 ) {
+
     const openInBlank =
         getSetting(
+
             SETTINGS_KEYS.openInBlank,
+
             defaultSettings.openInBlank
+
         );
 
 
-    /*
-       Normal navigation.
-    */
     if (!openInBlank) {
+
         window.location.href =
             gameUrl;
 
         return;
+
     }
 
 
-    /*
-       Open an about:blank tab and
-       put the game inside an iframe.
-    */
     const gameWindow =
         window.open(
             "about:blank",
@@ -1249,15 +1748,13 @@ function launchGame(
         );
 
 
-    /*
-       If the browser blocks the popup,
-       fall back to normal navigation.
-    */
     if (!gameWindow) {
+
         window.location.href =
             gameUrl;
 
         return;
+
     }
 
 
@@ -1265,6 +1762,7 @@ function launchGame(
 
 
     gameWindow.document.write(`
+
         <!DOCTYPE html>
 
         <html lang="en">
@@ -1286,24 +1784,38 @@ function launchGame(
 
                 html,
                 body {
+
                     margin: 0;
+
                     padding: 0;
+
                     width: 100%;
+
                     height: 100%;
+
                     overflow: hidden;
+
                     background: #000;
+
                 }
 
+
                 iframe {
+
                     width: 100%;
+
                     height: 100%;
+
                     border: 0;
+
                     display: block;
+
                 }
 
             </style>
 
         </head>
+
 
         <body>
 
@@ -1315,223 +1827,216 @@ function launchGame(
         </body>
 
         </html>
+
     `);
 
 
     gameWindow.document.close();
+
 }
 
 
-/* =========================================================
-   FIX GAME CARD EVENTS
-   ========================================================= */
+/* =====================================================
+   INITIALIZE SETTINGS
+===================================================== */
 
-function initializeGameCards() {
-    const cards =
-        document.querySelectorAll(
-            "#gamesGrid .game-card"
+function initializeSettings() {
+
+    applyOpenInBlank(
+
+        getSetting(
+
+            SETTINGS_KEYS.openInBlank,
+
+            defaultSettings.openInBlank
+
+        )
+
+    );
+
+
+    applyAnimatedBackground(
+
+        getSetting(
+
+            SETTINGS_KEYS.animatedBackground,
+
+            defaultSettings.animatedBackground
+
+        )
+
+    );
+
+
+    applyBackgroundSpeed(
+
+        getSetting(
+
+            SETTINGS_KEYS.backgroundSpeed,
+
+            defaultSettings.backgroundSpeed
+
+        )
+
+    );
+
+
+    applyBackgroundTransparency(
+
+        getSetting(
+
+            SETTINGS_KEYS.backgroundTransparency,
+
+            defaultSettings.backgroundTransparency
+
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   INITIALIZE FAVORITES
+===================================================== */
+
+function initializeFavorites() {
+
+    updateFavoriteButtons();
+
+    renderFavorites();
+
+    updateFavoriteCount();
+
+}
+
+
+/* =====================================================
+   INITIALIZE THEME
+===================================================== */
+
+function initializeTheme() {
+
+    const saved =
+        localStorage.getItem(
+            THEME_KEY
         );
 
 
-    cards.forEach(
-        function(card) {
+    /*
+     * If an old version had a custom theme,
+     * return it to the normal red theme.
+     */
 
-            const gameUrl =
-                card.getAttribute(
-                    "data-game-url"
-                );
+    if (
+        saved === "custom"
+    ) {
 
-            const gameId =
-                card.getAttribute(
-                    "data-game-id"
-                );
-
-
-            /*
-               Whole card launches the game.
-            */
-            card.onclick =
-                function(event) {
-
-                    if (
-                        event.target.closest(
-                            ".favorite-button"
-                        ) ||
-                        event.target.closest(
-                            ".play-small"
-                        )
-                    ) {
-                        return;
-                    }
-
-                    launchGame(
-                        gameUrl
-                    );
-                };
+        localStorage.setItem(
+            THEME_KEY,
+            "0"
+        );
 
 
-            /*
-               Favorite button.
-            */
-            const favoriteButton =
-                card.querySelector(
-                    ".favorite-button"
-                );
+        applyTheme(
+            0,
+            false
+        );
 
 
-            if (favoriteButton) {
-                favoriteButton.onclick =
-                    function(event) {
-                        event.preventDefault();
-                        event.stopPropagation();
+        return;
 
-                        toggleFavorite(
-                            gameId
-                        );
-                    };
-            }
+    }
 
 
-            /*
-               PLAY button.
-            */
-            const playButton =
-                card.querySelector(
-                    ".play-small"
-                );
+    const index =
+        getThemeIndex();
 
 
-            if (playButton) {
-                playButton.onclick =
-                    function(event) {
-                        event.preventDefault();
-                        event.stopPropagation();
-
-                        launchGame(
-                            gameUrl
-                        );
-                    };
-            }
-        }
+    applyTheme(
+        index,
+        false
     );
+
 }
 
 
-/* =========================================================
-   STORAGE SYNCHRONIZATION
-   ========================================================= */
+/* =====================================================
+   PAGE STARTUP
+===================================================== */
 
-window.addEventListener(
-    "storage",
-    function(event) {
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-        if (
-            event.key === FAVORITES_KEY
-        ) {
-            updateFavoriteButtons();
-            renderFavorites();
-        }
+        initializeSettings();
 
+        initializeFavorites();
 
-        if (
-            event.key === THEME_KEY
-        ) {
-            applyTheme(
-                getThemeIndex()
-            );
-        }
+        initializeTheme();
 
 
-        if (
-            event.key ===
-            SETTINGS_KEYS.openInBlank ||
-            event.key ===
-            SETTINGS_KEYS.animatedBackground ||
-            event.key ===
-            SETTINGS_KEYS.backgroundSpeed ||
-            event.key ===
-            SETTINGS_KEYS.backgroundTransparency
-        ) {
-            initializeSettings();
-        }
-    }
-);
+        /*
+         * =================================================
+         * ALWAYS OPEN ON FAVORITES
+         * =================================================
+         *
+         * This intentionally ignores whatever section
+         * was previously open and always starts at
+         * Favorites.
+         */
+
+        setTimeout(
+            function() {
+
+                const favorites =
+                    document.getElementById(
+                        "favorites"
+                    );
 
 
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
+                if (favorites) {
 
-function initializeAll() {
-    initializeSettings();
-    initializeSettingsPanel();
+                    favorites.scrollIntoView({
 
-    initializeTheme();
+                        behavior:
+                            "instant",
 
-    initializeNavigation();
-    initializeScrollNavigation();
+                        block:
+                            "start"
 
-    initializeGameCards();
+                    });
 
-    updateFavoriteButtons();
-    renderFavorites();
-
-    /*
-       Run this after the game cards exist.
-    */
-    updateGameImageAccents();
+                }
 
 
-    /*
-       Always open on Favorites when the
-       launcher is refreshed.
-    */
-    setTimeout(
-        function() {
-            const favorites =
-                document.getElementById(
+                /*
+                 * Favorites should be highlighted
+                 * immediately.
+                 */
+
+                setActiveNav(
                     "favorites"
                 );
 
 
-            if (favorites) {
-                favorites.scrollIntoView({
-                    behavior: "instant",
-                    block: "start"
-                });
-            }
+                /*
+                 * Make the URL match the section.
+                 */
 
+                history.replaceState(
 
-            setActiveNav(
-                "favorites"
-            );
+                    null,
 
+                    "",
 
-            history.replaceState(
-                null,
-                "",
-                "#favorites"
-            );
-        },
-        50
-    );
-}
+                    "#favorites"
 
+                );
 
-/*
-   Normally settings.js loads before the end
-   of the page, so DOMContentLoaded is enough.
+            },
+            50
+        );
 
-   This also handles the case where the script
-   gets loaded after the DOM is already ready.
-*/
-if (
-    document.readyState === "loading"
-) {
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeAll
-    );
-} else {
-    initializeAll();
-}
+    }
+);
