@@ -880,6 +880,75 @@
 
                 </article>
 
+                  <!-- COOKIECLICKER -->
+                <article
+                    class="game-card"
+                    data-game-id="deltarune"
+                    data-game-name="deltarune"
+                    data-game-version=""
+                    data-game-url="games/deltarune/index.html"
+                    onclick="launchGame('games/deltarune/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/deltarune"
+                            alt="deltarune"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Deltarune to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'deltarune'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Deltarune
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/deltarune/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
             </div>
 
         </section>
