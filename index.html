@@ -1,536 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Rofleq's Hideout</title>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 
 <body>
 
+    <!-- Animated Background -->
+    <div class="background"></div>
 
-    <!-- =====================================================
-         SIDEBAR
-    ===================================================== -->
-
+    <!-- Sidebar -->
     <aside class="sidebar">
 
-
-        <div class="logo">
-
-            <img
-                src="assets/logo.png"
-                alt="Rofleq's Hideout"
-                class="logo-image"
-            >
-
+        <div class="sidebar-logo">
+            <img src="assets/logo.png" alt="Rofleq's Hideout">
         </div>
 
-
-        <div class="version-text">
-            Github Version
+        <div class="sidebar-title">
+            <span class="green">Rofleq's</span>
+            <span class="red">Hideout</span>
         </div>
 
+        <nav class="sidebar-nav">
 
-        <div class="nav-title">
-            Menu
-        </div>
+            <a href="index.html" class="nav-item active">
+                <span class="nav-icon">⌂</span>
+                <span>Home</span>
+            </a>
 
+            <a href="https://github.com/" target="_blank" class="nav-item">
+                <span class="nav-icon">◈</span>
+                <span>Github Version</span>
+            </a>
 
-        <a
-            href="#"
-            class="nav-item active"
-        >
-
-            <div class="nav-icon">
-                ⌂
-            </div>
-
-            <span>
-                Home
-            </span>
-
-        </a>
-
+        </nav>
 
         <div class="sidebar-bottom">
+            <div class="sidebar-line"></div>
 
-            Rofleq's Hideout
-
-            <br>
-
-            <span class="red-text">
-                Game Hub
-            </span>
-
+            <div class="sidebar-small">
+                ROFLEQ'S HIDEOUT
+            </div>
         </div>
-
 
     </aside>
 
 
-
-    <!-- =====================================================
-         MAIN
-    ===================================================== -->
-
+    <!-- Main -->
     <main class="main">
 
-
+        <!-- Top Bar -->
         <header class="topbar">
 
-
-            <div class="topbar-title">
-
-                <span class="red">
-                    Rofleq's
-                </span>
-
-                <span class="green">
-                    Hideout
-                </span>
-
+            <div class="topbar-left">
+                <h1>Games</h1>
             </div>
-
 
             <div class="topbar-right">
 
-
-                <div class="status">
-
-                    <div class="status-dot"></div>
-
-                    <span>
-                        Online
-                    </span>
-
+                <div class="online-status">
+                    <span class="online-dot"></span>
+                    Online
                 </div>
 
-
-                <button
-                    type="button"
-                    class="settings-button"
-                    id="settingsButton"
-                    title="Settings"
-                    aria-label="Settings"
-                >
-
+                <button class="settings-button" id="settingsButton" aria-label="Settings">
                     ⚙
-
                 </button>
 
-
-                <!-- SETTINGS -->
-
-                <div
-                    class="settings-panel"
-                    id="settingsPanel"
-                >
-
-
-                    <div class="settings-panel-title">
-                        Settings
-                    </div>
-
-
-                    <div class="settings-panel-subtitle">
-
-                        Customize how Rofleq's Hideout
-                        works. Hover over a setting to
-                        learn more.
-
-                    </div>
-
-
-                    <!-- ABOUT BLANK -->
-
-                    <div class="setting-box">
-
-
-                        <div class="setting-row">
-
-
-                            <div class="setting-text">
-
-
-                                <div class="setting-name">
-
-                                    Open games in about:blank
-
-                                </div>
-
-
-                                <div
-                                    class="setting-hint"
-                                    id="blankHint"
-                                >
-
-                                    Currently enabled
-
-                                </div>
-
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="blankToggle"
-                                    checked
-                                >
-
-                                <span class="slider"></span>
-
-                            </label>
-
-
-                        </div>
-
-
-                        <div class="setting-description">
-
-                            When enabled, games open inside
-                            a new about:blank tab instead of
-                            replacing the Hideout page.
-
-                        </div>
-
-
-                    </div>
-
-
-                    <!-- ANIMATED BACKGROUND -->
-
-                    <div class="setting-box">
-
-
-                        <div class="setting-row">
-
-
-                            <div class="setting-text">
-
-
-                                <div class="setting-name">
-                                    Animated Background
-                                </div>
-
-
-                                <div
-                                    class="setting-hint"
-                                    id="backgroundHint"
-                                >
-                                    Currently enabled
-                                </div>
-
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="backgroundToggle"
-                                    checked
-                                >
-
-                                <span class="slider"></span>
-
-                            </label>
-
-
-                        </div>
-
-
-                        <div class="setting-description">
-
-                            Turns the moving red checkerboard
-                            background on or off.
-
-                        </div>
-
-
-                    </div>
-
-
-                    <!-- BACKGROUND SPEED -->
-
-                    <div
-                        class="setting-box background-extra"
-                        id="speedSetting"
-                    >
-
-
-                        <div class="setting-row">
-
-
-                            <div class="setting-text">
-
-
-                                <div class="setting-name">
-                                    Background Speed
-                                </div>
-
-
-                                <div class="setting-hint">
-
-                                    Change how quickly the
-                                    background moves.
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div
-                                class="range-value"
-                                id="speedValue"
-                            >
-                                6
-                            </div>
-
-
-                        </div>
-
-
-                        <input
-                            type="range"
-                            id="speedSlider"
-                            min="0"
-                            max="20"
-                            value="6"
-                            step="1"
-                        >
-
-
-                    </div>
-
-
-                    <!-- TRANSPARENCY -->
-
-                    <div
-                        class="setting-box background-extra"
-                        id="transparencySetting"
-                    >
-
-
-                        <div class="setting-row">
-
-
-                            <div class="setting-text">
-
-
-                                <div class="setting-name">
-                                    Background Transparency
-                                </div>
-
-
-                                <div class="setting-hint">
-
-                                    Change how visible the
-                                    checkerboard is.
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div
-                                class="range-value"
-                                id="transparencyValue"
-                            >
-                                15.5%
-                            </div>
-
-
-                        </div>
-
-
-                        <input
-                            type="range"
-                            id="transparencySlider"
-                            min="0"
-                            max="100"
-                            value="15.5"
-                            step="0.1"
-                        >
-
-
-                    </div>
-
-
-                </div>
-
-
             </div>
-
 
         </header>
 
 
+        <!-- Settings Panel -->
+        <section class="settings-panel" id="settingsPanel">
 
-        <!-- =====================================================
-             CONTENT
-        ===================================================== -->
+            <div class="settings-header">
+                <div>
+                    <h2>Settings</h2>
+                    <p>Customize your Hideout experience.</p>
+                </div>
 
+                <button class="close-settings" id="closeSettings">
+                    ×
+                </button>
+            </div>
+
+
+            <!-- About Blank -->
+            <div class="setting">
+
+                <div class="setting-info">
+                    <h3>Open games in about:blank</h3>
+                    <p>
+                        Opens games inside a blank page instead of directly
+                        navigating away from the Hideout.
+                    </p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="openBlankToggle">
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+
+            <!-- Animated Background -->
+            <div class="setting">
+
+                <div class="setting-info">
+                    <h3>Animated background</h3>
+                    <p>
+                        Makes the red checkerboard background move slowly
+                        across the page.
+                    </p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="animatedBackgroundToggle">
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+
+            <!-- Background Speed -->
+            <div class="setting">
+
+                <div class="setting-info">
+                    <h3>Background speed</h3>
+                    <p>
+                        Controls how quickly the checkerboard moves.
+                    </p>
+                </div>
+
+                <div class="range-container">
+                    <input
+                        type="range"
+                        id="backgroundSpeed"
+                        min="1"
+                        max="20"
+                        value="6"
+                    >
+
+                    <span id="backgroundSpeedValue">
+                        6s
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Transparency -->
+            <div class="setting">
+
+                <div class="setting-info">
+                    <h3>Background transparency</h3>
+                    <p>
+                        Controls how visible the red checkerboard is.
+                    </p>
+                </div>
+
+                <div class="range-container">
+                    <input
+                        type="range"
+                        id="backgroundTransparency"
+                        min="0"
+                        max="100"
+                        step="0.5"
+                        value="15.5"
+                    >
+
+                    <span id="backgroundTransparencyValue">
+                        15.5%
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Content -->
         <div class="content">
 
-
+            <!-- Welcome -->
             <section class="welcome">
 
+                <div class="welcome-decoration"></div>
 
-                <h1>
+                <div class="welcome-content">
 
-                    <span class="red">
-                        Rofleq's
-                    </span>
+                    <p class="welcome-small">
+                        WELCOME TO
+                    </p>
 
-                    <span class="green">
-                        Hideout
-                    </span>
+                    <h2>
+                        <span class="green">ROFLEQ'S</span>
+                        <span class="red">HIDEOUT</span>
+                    </h2>
 
-                </h1>
+                    <p class="welcome-description">
+                        A small collection of games and projects.
+                        Pick something and have fun.
+                    </p>
 
-
-                <p>
-                    Presented to you by Rofleq
-                </p>
-
+                </div>
 
             </section>
 
 
+            <!-- Games -->
+            <section class="games-section">
 
-            <!-- GAMES -->
+                <div class="section-heading">
 
-            <section>
+                    <div>
+                        <p class="section-label">
+                            GAME LIBRARY
+                        </p>
 
-
-                <div class="section-header">
-
-
-                    <div class="section-title">
-                        Games
+                        <h2>
+                            Available Games
+                        </h2>
                     </div>
-
 
                     <div class="section-line"></div>
 
-
                 </div>
 
 
+                <!-- Minecraft -->
+                <div
+                    class="game-card"
+                    onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
+                >
 
-                <div class="game-grid">
+                    <div class="game-image">
 
+                        <img
+                            src="assets/minecraft1.9.4.png"
+                            alt="Minecraft 1.9.4"
+                            class="game-thumbnail"
+                        >
 
-                    <!-- MINECRAFT -->
-
-                    <article
-                        class="game-card"
-                        onclick="
-                            launchGame(
-                                'games/eaglercraft-1.9.4/index.html'
-                            )
-                        "
-                    >
-
-
-                        <div class="game-image">
+                    </div>
 
 
-                            <div class="red-accent"></div>
+                    <div class="game-info">
 
+                        <div class="game-title-row">
 
-                            <div class="minecraft-logo">
+                            <div>
+                                <h3>Minecraft</h3>
 
-                                MINE<span>CRAFT</span>
-
+                                <p>
+                                    Eaglercraft 1.9.4
+                                </p>
                             </div>
 
-
-                        </div>
-
-
-                        <div class="game-info">
-
-
-                            <div class="game-title">
-                                Minecraft
-                            </div>
-
-
-                            <div class="game-meta">
+                            <span class="version">
                                 1.9.4
-                            </div>
-
-
-                            <button
-                                type="button"
-                                class="play-small"
-                                onclick="
-                                    event.stopPropagation();
-                                    launchGame(
-                                        'games/eaglercraft-1.9.4/index.html'
-                                    );
-                                "
-                            >
-
-                                ▶ PLAY
-
-                            </button>
-
+                            </span>
 
                         </div>
 
 
-                    </article>
+                        <p class="game-description">
+                            Play Minecraft directly in your browser.
+                            No download required.
+                        </p>
 
+
+                        <button
+                            class="play-button"
+                            onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')"
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
 
                 </div>
-
 
             </section>
 
 
+            <!-- Footer -->
+            <footer class="footer">
 
-            <footer>
+                <div class="footer-line"></div>
 
-                Rofleq's Hideout
+                <p>
+                    <span class="green">ROFLEQ'S</span>
+                    <span class="red">HIDEOUT</span>
+                </p>
 
-                <span>
-                    •
+                <span class="footer-small">
+                    Built for fun.
                 </span>
-
-                More games coming soon.
 
             </footer>
 
-
         </div>
 
-
     </main>
-
 
 
     <script src="js/settings.js"></script>
 
 </body>
-
 </html>
