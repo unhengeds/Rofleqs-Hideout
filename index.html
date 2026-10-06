@@ -35,6 +35,66 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* MOVING CHECKERBOARD BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -100px;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.018) 25%,
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(255, 255, 255, 0.018) 75%
+                ),
+                linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.018) 25%,
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(255, 255, 255, 0.018) 75%
+                );
+
+            background-size: 80px 80px;
+            background-position:
+                0 0,
+                40px 40px;
+
+            animation: checkerMove 18s linear infinite;
+        }
+
+        /* DARK OVERLAY TO KEEP IT SUBTLE */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(227, 38, 46, 0.025),
+                    transparent 45%
+                ),
+                rgba(5, 5, 5, 0.72);
+        }
+
+        @keyframes checkerMove {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(80px, 80px);
+            }
         }
 
         /* SIDEBAR */
@@ -44,7 +104,7 @@
             top: 0;
             width: 240px;
             height: 100vh;
-            background: var(--sidebar);
+            background: rgba(8, 8, 8, 0.94);
             border-right: 1px solid var(--red);
             padding: 28px 18px;
             display: flex;
@@ -243,7 +303,7 @@
         /* GAME CARD */
         .game-card {
             position: relative;
-            background: var(--panel);
+            background: rgba(13, 13, 13, 0.94);
             border: 1px solid rgba(227, 38, 46, 0.35);
             border-radius: 13px;
             overflow: hidden;
@@ -460,11 +520,9 @@
 
         </div>
 
-
         <div class="nav-title">
             Menu
         </div>
-
 
         <a href="#" class="nav-item active">
 
@@ -475,7 +533,6 @@
             Home
 
         </a>
-
 
         <div class="sidebar-bottom">
 
@@ -502,7 +559,6 @@
                 <strong>Rofleq's Hideout</strong>
 
             </div>
-
 
             <div class="status">
 
