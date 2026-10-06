@@ -55,9 +55,7 @@
             --border:
                 rgba(227, 38, 46, 0.28);
 
-            /* NEW DEFAULTS */
-
-            --checker-opacity: 0.155;
+            --checker-opacity: 0.018;
 
             --checker-speed: 6s;
 
@@ -96,7 +94,7 @@
 
 
         /* =====================================================
-           MOVING RED CHECKERBOARD
+           MOVING CHECKERBOARD
         ===================================================== */
 
         body::before {
@@ -117,16 +115,16 @@
                     45deg,
                     rgba(
                         255,
-                        0,
-                        0,
+                        255,
+                        255,
                         var(--checker-opacity)
                     ) 25%,
                     transparent 25%,
                     transparent 75%,
                     rgba(
                         255,
-                        0,
-                        0,
+                        255,
+                        255,
                         var(--checker-opacity)
                     ) 75%
                 ),
@@ -135,16 +133,16 @@
                     45deg,
                     rgba(
                         255,
-                        0,
-                        0,
+                        255,
+                        255,
                         var(--checker-opacity)
                     ) 25%,
                     transparent 25%,
                     transparent 75%,
                     rgba(
                         255,
-                        0,
-                        0,
+                        255,
+                        255,
                         var(--checker-opacity)
                     ) 75%
                 );
@@ -939,9 +937,6 @@
                 transform
                 0.2s
                 ease;
-
-            margin-bottom:
-                10px;
 
         }
 
@@ -1808,6 +1803,450 @@
 
 
         /* =====================================================
+           COMMENTS BUTTON
+        ===================================================== */
+
+        .comments-button {
+
+            position:
+                fixed;
+
+            right:
+                22px;
+
+            bottom:
+                22px;
+
+            z-index:
+                100;
+
+            border:
+                1px solid
+                var(--red2);
+
+            border-radius:
+                12px;
+
+            padding:
+                12px 17px;
+
+            background:
+                rgba(
+                    13,
+                    13,
+                    13,
+                    0.96
+                );
+
+            color:
+                white;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+
+                0 8px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                ),
+
+                0 0 18px
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.12
+                );
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .comments-button:hover {
+
+            background:
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.18
+                );
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+
+                0 10px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                ),
+
+                0 0 22px
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.2
+                );
+
+        }
+
+
+        /* =====================================================
+           COMMENTS PANEL
+        ===================================================== */
+
+        .comments-panel {
+
+            position:
+                fixed;
+
+            right:
+                22px;
+
+            bottom:
+                78px;
+
+            width:
+                min(
+                    720px,
+                    calc(
+                        100vw - 44px
+                    )
+                );
+
+            max-height:
+                min(
+                    760px,
+                    calc(
+                        100vh - 110px
+                    )
+                );
+
+            overflow-y:
+                auto;
+
+            z-index:
+                99;
+
+            padding:
+                22px;
+
+            background:
+                rgba(
+                    13,
+                    13,
+                    13,
+                    0.98
+                );
+
+            border:
+                1px solid
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.45
+                );
+
+            border-radius:
+                15px;
+
+            box-shadow:
+
+                0 25px 70px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.7
+                ),
+
+                0 0 30px
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.1
+                );
+
+            opacity:
+                0;
+
+            transform:
+                translateY(10px)
+                scale(0.98);
+
+            pointer-events:
+                none;
+
+            transition:
+
+                opacity
+                0.18s
+                ease,
+
+                transform
+                0.18s
+                ease;
+
+        }
+
+
+        .comments-panel.open {
+
+            opacity:
+                1;
+
+            transform:
+                translateY(0)
+                scale(1);
+
+            pointer-events:
+                auto;
+
+        }
+
+
+        /* =====================================================
+           COMMENTS HEADER
+        ===================================================== */
+
+        .comments-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .comments-title {
+
+            font-size:
+                20px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .comments-title .green {
+
+            color:
+                var(--green2);
+
+        }
+
+
+        .comments-title .red {
+
+            color:
+                var(--red2);
+
+        }
+
+
+        .comments-close {
+
+            width:
+                32px;
+
+            height:
+                32px;
+
+            border:
+                1px solid
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.3
+                );
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(
+                    227,
+                    38,
+                    46,
+                    0.08
+                );
+
+            color:
+                #aaa;
+
+            cursor:
+                pointer;
+
+            font-size:
+                17px;
+
+        }
+
+
+        .comments-close:hover {
+
+            color:
+                white;
+
+            border-color:
+                var(--red2);
+
+        }
+
+
+        .comments-subtitle {
+
+            color:
+                #777;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        /* =====================================================
+           COMMENTS NOTE
+        ===================================================== */
+
+        .comments-note {
+
+            padding:
+                12px 14px;
+
+            margin-bottom:
+                16px;
+
+            border:
+                1px solid
+                rgba(
+                    32,
+                    214,
+                    90,
+                    0.18
+                );
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(
+                    32,
+                    214,
+                    90,
+                    0.045
+                );
+
+            color:
+                #999;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .comments-note strong {
+
+            color:
+                var(--green2);
+
+        }
+
+
+        .giscus {
+
+            width:
+                100%;
+
+        }
+
+
+        /* =====================================================
+           COMMENTS MOBILE
+        ===================================================== */
+
+        @media (max-width: 500px) {
+
+            .comments-button {
+
+                right:
+                    15px;
+
+                bottom:
+                    15px;
+
+            }
+
+
+            .comments-panel {
+
+                right:
+                    15px;
+
+                bottom:
+                    68px;
+
+                width:
+                    calc(
+                        100vw - 30px
+                    );
+
+                max-height:
+                    calc(
+                        100vh - 90px
+                    );
+
+                padding:
+                    16px;
+
+            }
+
+        }
+
+
+        /* =====================================================
            MOBILE
         ===================================================== */
 
@@ -1981,6 +2420,8 @@
     <aside class="sidebar">
 
 
+        <!-- LOGO -->
+
         <div class="logo">
 
             <img
@@ -1992,6 +2433,8 @@
         </div>
 
 
+        <!-- VERSION -->
+
         <div class="version-text">
 
             Github Version
@@ -1999,12 +2442,16 @@
         </div>
 
 
+        <!-- NAV TITLE -->
+
         <div class="nav-title">
 
             Menu
 
         </div>
 
+
+        <!-- HOME -->
 
         <a
             href="#"
@@ -2021,6 +2468,8 @@
 
         </a>
 
+
+        <!-- SIDEBAR BOTTOM -->
 
         <div class="sidebar-bottom">
 
@@ -2040,11 +2489,102 @@
 
 
     <!-- =====================================================
+         COMMENTS BUTTON
+    ===================================================== -->
+
+    <button
+        type="button"
+        class="comments-button"
+        id="commentsButton"
+        aria-label="Open comments and suggestions"
+    >
+
+        💬 Comments
+
+    </button>
+
+
+
+    <!-- =====================================================
+         COMMENTS PANEL
+    ===================================================== -->
+
+    <div
+        class="comments-panel"
+        id="commentsPanel"
+    >
+
+
+        <div class="comments-header">
+
+
+            <div class="comments-title">
+
+                <span class="green">
+                    Suggestions
+                </span>
+
+                <span class="red">
+                    & Comments
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="comments-close"
+                id="commentsClose"
+                aria-label="Close comments"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+        <div class="comments-subtitle">
+
+            Have an idea for Rofleq's Hideout?
+            Leave a suggestion, report a problem,
+            or tell me what you would like to see next.
+
+        </div>
+
+
+        <div class="comments-note">
+
+            <strong>
+                Suggestions are handled through GitHub Discussions.
+            </strong>
+
+            You can post with your GitHub account,
+            and repository maintainers can moderate
+            or remove comments.
+
+        </div>
+
+
+        <div class="giscus"></div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
          MAIN
     ===================================================== -->
 
     <main class="main">
 
+
+        <!-- =================================================
+             TOPBAR
+        ================================================= -->
 
         <header class="topbar">
 
@@ -2104,9 +2644,8 @@
 
                     <div class="settings-panel-subtitle">
 
-                        Customize how Rofleq's Hideout
-                        works. Hover over a setting to
-                        learn more.
+                        Customize how Rofleq's Hideout works.
+                        Hover over a setting to learn more.
 
                     </div>
 
@@ -2165,9 +2704,6 @@
                             When enabled, games open inside
                             a new about:blank tab instead of
                             replacing the Hideout page.
-                            This can be useful when you want
-                            the game separated from the
-                            launcher.
 
                         </div>
 
@@ -2226,7 +2762,7 @@
 
                         <div class="setting-description">
 
-                            Turns the moving red checkerboard
+                            Turns the moving checkerboard
                             background on or off. When enabled,
                             extra controls let you change its
                             speed and transparency.
@@ -2323,7 +2859,7 @@
                                 <div class="setting-hint">
 
                                     Change how visible the
-                                    red checkerboard is.
+                                    checkerboard is.
 
                                 </div>
 
@@ -2336,7 +2872,7 @@
                                 id="transparencyValue"
                             >
 
-                                15.5%
+                                1.8%
 
                             </div>
 
@@ -2349,7 +2885,7 @@
                             id="transparencySlider"
                             min="0"
                             max="100"
-                            value="15.5"
+                            value="1.8"
                             step="0.1"
                         >
 
@@ -2523,7 +3059,7 @@
 
 
         /* =====================================================
-           ELEMENTS
+           SETTINGS ELEMENTS
         ===================================================== */
 
         const settingsButton =
@@ -2598,9 +3134,36 @@
             );
 
 
+
         /* =====================================================
-           ABOUT:BLANK
-           DEFAULT = ON
+           COMMENTS ELEMENTS
+        ===================================================== */
+
+        const commentsButton =
+            document.getElementById(
+                "commentsButton"
+            );
+
+
+        const commentsPanel =
+            document.getElementById(
+                "commentsPanel"
+            );
+
+
+        const commentsClose =
+            document.getElementById(
+                "commentsClose"
+            );
+
+
+        let commentsLoaded =
+            false;
+
+
+
+        /* =====================================================
+           LOAD ABOUT:BLANK SETTING
         ===================================================== */
 
         const savedBlankSetting =
@@ -2631,6 +3194,11 @@
         }
 
 
+
+        /* =====================================================
+           UPDATE ABOUT:BLANK TEXT
+        ===================================================== */
+
         function updateBlankHint() {
 
             blankHint.textContent =
@@ -2644,9 +3212,9 @@
         updateBlankHint();
 
 
+
         /* =====================================================
-           BACKGROUND
-           DEFAULT = ON
+           LOAD BACKGROUND SETTINGS
         ===================================================== */
 
         const savedBackground =
@@ -2677,11 +3245,6 @@
         }
 
 
-        /* =====================================================
-           BACKGROUND SPEED
-           DEFAULT = 6
-        ===================================================== */
-
         const savedSpeed =
             localStorage.getItem(
                 "backgroundSpeed"
@@ -2705,11 +3268,6 @@
         }
 
 
-        /* =====================================================
-           BACKGROUND TRANSPARENCY
-           DEFAULT = 15.5%
-        ===================================================== */
-
         const savedTransparency =
             localStorage.getItem(
                 "backgroundTransparency"
@@ -2721,7 +3279,7 @@
         ) {
 
             transparencySlider.value =
-                15.5;
+                1.8;
 
         }
 
@@ -2731,6 +3289,7 @@
                 savedTransparency;
 
         }
+
 
 
         /* =====================================================
@@ -2761,13 +3320,8 @@
                     : "Currently disabled";
 
 
-            /*
-             * Convert the slider percentage
-             * into CSS opacity.
-             */
-
             const opacity =
-                transparency / 100;
+                transparency * 0.01;
 
 
             document.documentElement.style.setProperty(
@@ -2775,14 +3329,6 @@
                 opacity
             );
 
-
-            /*
-             * Speed 0 = stopped.
-             *
-             * Speed 6 = 6 seconds.
-             *
-             * Higher number = faster.
-             */
 
             if (
                 speed === 0
@@ -2799,6 +3345,7 @@
 
                 const duration =
                     36 / speed;
+
 
                 document.documentElement.style.setProperty(
                     "--checker-speed",
@@ -2854,6 +3401,7 @@
         updateBackground();
 
 
+
         /* =====================================================
            BACKGROUND TOGGLE
         ===================================================== */
@@ -2871,6 +3419,7 @@
 
             }
         );
+
 
 
         /* =====================================================
@@ -2892,6 +3441,7 @@
         );
 
 
+
         /* =====================================================
            TRANSPARENCY
         ===================================================== */
@@ -2911,8 +3461,9 @@
         );
 
 
+
         /* =====================================================
-           SETTINGS OPEN/CLOSE
+           OPEN / CLOSE SETTINGS
         ===================================================== */
 
         settingsButton.addEventListener(
@@ -2920,6 +3471,7 @@
             function(event) {
 
                 event.stopPropagation();
+
 
                 const isOpen =
                     settingsPanel.classList.contains(
@@ -2955,8 +3507,9 @@
         );
 
 
+
         /* =====================================================
-           DON'T CLOSE PANEL WHEN CLICKED
+           DON'T CLOSE SETTINGS PANEL
         ===================================================== */
 
         settingsPanel.addEventListener(
@@ -2969,8 +3522,9 @@
         );
 
 
+
         /* =====================================================
-           CLOSE OUTSIDE
+           CLOSE SETTINGS OUTSIDE
         ===================================================== */
 
         document.addEventListener(
@@ -2989,8 +3543,9 @@
         );
 
 
+
         /* =====================================================
-           SAVE ABOUT:BLANK
+           SAVE ABOUT:BLANK SETTING
         ===================================================== */
 
         blankToggle.addEventListener(
@@ -3002,10 +3557,247 @@
                     blankToggle.checked
                 );
 
+
                 updateBlankHint();
 
             }
         );
+
+
+
+        /* =====================================================
+           GISCUS COMMENTS
+        ===================================================== */
+
+        function loadComments() {
+
+            if (
+                commentsLoaded
+            ) {
+
+                return;
+
+            }
+
+
+            commentsLoaded =
+                true;
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            script.src =
+                "https://giscus.app/client.js";
+
+
+            /*
+             * YOUR REPOSITORY
+             */
+
+            script.setAttribute(
+                "data-repo",
+                "unhengeds/Rofleqs-Hideout"
+            );
+
+
+            /*
+             * REQUIRED GISCUS REPOSITORY ID
+             *
+             * Replace this with the value generated
+             * by giscus.app.
+             */
+
+            script.setAttribute(
+                "data-repo-id",
+                "[YOUR REPOSITORY ID]"
+            );
+
+
+            /*
+             * DISCUSSION CATEGORY
+             */
+
+            script.setAttribute(
+                "data-category",
+                "General"
+            );
+
+
+            /*
+             * REQUIRED GISCUS CATEGORY ID
+             *
+             * Replace this with the value generated
+             * by giscus.app.
+             */
+
+            script.setAttribute(
+                "data-category-id",
+                "[YOUR CATEGORY ID]"
+            );
+
+
+            /*
+             * Use one shared discussion for the
+             * Rofleq's Hideout suggestions.
+             */
+
+            script.setAttribute(
+                "data-mapping",
+                "specific"
+            );
+
+
+            script.setAttribute(
+                "data-term",
+                "Rofleq's Hideout Suggestions"
+            );
+
+
+            script.setAttribute(
+                "data-strict",
+                "1"
+            );
+
+
+            script.setAttribute(
+                "data-reactions-enabled",
+                "1"
+            );
+
+
+            script.setAttribute(
+                "data-emit-metadata",
+                "0"
+            );
+
+
+            script.setAttribute(
+                "data-input-position",
+                "top"
+            );
+
+
+            script.setAttribute(
+                "data-theme",
+                "dark_dimmed"
+            );
+
+
+            script.setAttribute(
+                "data-lang",
+                "en"
+            );
+
+
+            script.setAttribute(
+                "crossorigin",
+                "anonymous"
+            );
+
+
+            script.async =
+                true;
+
+
+            document
+                .querySelector(
+                    ".giscus"
+                )
+                .appendChild(
+                    script
+                );
+
+        }
+
+
+
+        /* =====================================================
+           OPEN COMMENTS
+        ===================================================== */
+
+        commentsButton.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+
+                commentsPanel.classList.add(
+                    "open"
+                );
+
+
+                loadComments();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CLOSE COMMENTS
+        ===================================================== */
+
+        commentsClose.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+
+                commentsPanel.classList.remove(
+                    "open"
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           DON'T CLOSE COMMENTS WHEN CLICKING PANEL
+        ===================================================== */
+
+        commentsPanel.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CLOSE COMMENTS WHEN CLICKING OUTSIDE
+        ===================================================== */
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    !commentsPanel.contains(
+                        event.target
+                    ) &&
+                    event.target !==
+                        commentsButton
+                ) {
+
+                    commentsPanel.classList.remove(
+                        "open"
+                    );
+
+                }
+
+            }
+        );
+
 
 
         /* =====================================================
@@ -3014,13 +3806,15 @@
 
         function launchGame(path) {
 
+
             const useBlank =
                 blankToggle.checked;
 
 
-            /*
-             * NORMAL LAUNCH
-             */
+
+            /* ===============================================
+               NORMAL LAUNCH
+            ================================================ */
 
             if (!useBlank) {
 
@@ -3032,9 +3826,10 @@
             }
 
 
-            /*
-             * ABOUT:BLANK LAUNCH
-             */
+
+            /* ===============================================
+               ABOUT:BLANK LAUNCH
+            ================================================ */
 
             const gameWindow =
                 window.open(
@@ -3054,9 +3849,10 @@
             }
 
 
-            /*
-             * CREATE GAME PAGE
-             */
+
+            /* ===============================================
+               CREATE GAME PAGE
+            ================================================ */
 
             gameWindow.document.open();
 
