@@ -70,7 +70,7 @@
             animation: checkerMove 6s linear infinite;
         }
 
-        /* DARK OVERLAY TO KEEP IT SUBTLE */
+        /* DARK OVERLAY */
         body::after {
             content: "";
             position: fixed;
@@ -124,28 +124,28 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
+
             background: linear-gradient(
                 135deg,
                 #ff4048,
                 #a50008
             );
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             color: white;
             font-weight: 900;
             font-size: 18px;
-            box-shadow: 0 0 20px rgba(227, 38, 46, 0.35);
+
+            box-shadow:
+                0 0 20px rgba(227, 38, 46, 0.35);
         }
 
         .logo-text {
             font-size: 20px;
             font-weight: 800;
-            color: var(--red2);
-        }
-
-        .logo-text span {
-            color: var(--green2);
         }
 
         .version-text {
@@ -170,11 +170,16 @@
             display: flex;
             align-items: center;
             gap: 12px;
+
             padding: 12px;
+
             border-radius: 9px;
+
             color: var(--muted);
             text-decoration: none;
+
             margin-bottom: 5px;
+
             transition: 0.2s;
             font-size: 14px;
         }
@@ -196,11 +201,105 @@
             font-size: 17px;
         }
 
+        /* SETTINGS */
+        .settings {
+            margin-top: 25px;
+        }
+
+        .setting-box {
+            padding: 12px;
+
+            border-radius: 9px;
+
+            background: rgba(227, 38, 46, 0.06);
+
+            border: 1px solid rgba(227, 38, 46, 0.15);
+        }
+
+        .setting-name {
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .setting-description {
+            color: #666;
+            font-size: 10px;
+            line-height: 1.35;
+        }
+
+        /* TOGGLE */
+        .toggle {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+
+            background: #252525;
+
+            border: 1px solid #444;
+
+            border-radius: 20px;
+
+            transition: 0.2s;
+        }
+
+        .slider::before {
+            content: "";
+
+            position: absolute;
+
+            width: 16px;
+            height: 16px;
+
+            left: 2px;
+            top: 2px;
+
+            background: #777;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + .slider {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .toggle input:checked + .slider::before {
+            transform: translateX(18px);
+            background: #06100a;
+        }
+
         .sidebar-bottom {
             margin-top: auto;
+
             padding: 15px 10px 5px;
+
             color: #555;
+
             font-size: 11px;
+
             line-height: 1.5;
         }
 
@@ -213,11 +312,15 @@
         /* TOPBAR */
         .topbar {
             height: 75px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 35px;
+
             border-bottom: 1px solid var(--red);
+
             background: rgba(5, 5, 5, 0.92);
         }
 
@@ -233,23 +336,32 @@
         .status {
             display: flex;
             align-items: center;
+
             gap: 8px;
+
             color: #7d7d7d;
+
             font-size: 12px;
         }
 
         .status-dot {
             width: 8px;
             height: 8px;
+
             background: var(--green);
+
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--green);
+
+            box-shadow:
+                0 0 10px var(--green);
         }
 
         /* CONTENT */
         .content {
             padding: 45px;
+
             max-width: 1400px;
+
             margin: auto;
         }
 
@@ -263,8 +375,8 @@
             margin-bottom: 10px;
         }
 
-        .welcome h1 span {
-            color: var(--red2);
+        .welcome h1 .green {
+            color: var(--green2);
         }
 
         .welcome p {
@@ -277,6 +389,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             margin-bottom: 18px;
         }
 
@@ -287,27 +400,46 @@
 
         .section-line {
             height: 1px;
+
             flex: 1;
+
             background: var(--red);
+
             margin-left: 20px;
-            box-shadow: 0 0 8px rgba(227, 38, 46, 0.25);
+
+            box-shadow:
+                0 0 8px rgba(227, 38, 46, 0.25);
         }
 
         /* GAME GRID */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(230px, 1fr)
+                );
+
             gap: 20px;
         }
 
         /* GAME CARD */
         .game-card {
             position: relative;
+
             background: rgba(13, 13, 13, 0.94);
-            border: 1px solid rgba(227, 38, 46, 0.35);
+
+            border:
+                1px solid
+                rgba(227, 38, 46, 0.35);
+
             border-radius: 13px;
+
             overflow: hidden;
+
             cursor: pointer;
+
             transition:
                 transform 0.2s,
                 border-color 0.2s,
@@ -316,7 +448,9 @@
 
         .game-card:hover {
             transform: translateY(-5px);
+
             border-color: var(--red2);
+
             box-shadow:
                 0 12px 35px rgba(0, 0, 0, 0.35),
                 0 0 20px rgba(227, 38, 46, 0.12);
@@ -332,11 +466,13 @@
                     rgba(255, 64, 72, 0.20),
                     transparent 35%
                 ),
+
                 radial-gradient(
                     circle at 70% 70%,
                     rgba(180, 0, 10, 0.18),
                     transparent 35%
                 ),
+
                 linear-gradient(
                     135deg,
                     #180608,
@@ -346,12 +482,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
             position: relative;
         }
 
         .game-image::before {
             content: "";
+
             position: absolute;
+
             inset: 0;
 
             background:
@@ -361,6 +500,7 @@
                     rgba(227, 38, 46, 0.08) 50%,
                     transparent 51%
                 ),
+
                 linear-gradient(
                     0deg,
                     transparent 49%,
@@ -373,9 +513,13 @@
 
         .minecraft-logo {
             position: relative;
+
             z-index: 1;
+
             font-size: 30px;
+
             font-weight: 900;
+
             color: white;
 
             text-shadow:
@@ -396,52 +540,77 @@
 
         .game-title {
             font-size: 18px;
+
             font-weight: 800;
+
             margin-bottom: 7px;
         }
 
         .game-meta {
             color: var(--muted);
+
             font-size: 13px;
+
             margin-bottom: 15px;
         }
 
         /* GREEN PLAY BUTTON */
         .play-small {
             width: 100%;
+
             border: none;
+
             border-radius: 7px;
+
             padding: 10px;
+
             background: var(--green);
+
             color: #031007;
+
             font-weight: 900;
+
             cursor: pointer;
+
             transition: 0.2s;
         }
 
         .play-small:hover {
             background: var(--green2);
-            box-shadow: 0 0 18px rgba(57, 255, 120, 0.35);
+
+            box-shadow:
+                0 0 18px
+                rgba(57, 255, 120, 0.35);
         }
 
         /* RED ACCENT */
         .red-accent {
             position: absolute;
+
             top: 12px;
             right: 12px;
+
             width: 7px;
             height: 7px;
+
             background: var(--red);
+
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--red);
+
+            box-shadow:
+                0 0 10px var(--red);
         }
 
         /* FOOTER */
         footer {
             margin-top: 55px;
+
             padding: 25px 0;
+
             color: #555;
+
             border-top: 1px solid var(--red);
+
             font-size: 12px;
         }
 
@@ -454,10 +623,15 @@
 
             .sidebar {
                 position: relative;
+
                 width: 100%;
                 height: auto;
+
                 border-right: none;
-                border-bottom: 1px solid var(--red);
+
+                border-bottom:
+                    1px solid var(--red);
+
                 padding: 18px;
             }
 
@@ -471,6 +645,10 @@
 
             .nav-item {
                 display: none;
+            }
+
+            .settings {
+                margin-top: 10px;
             }
 
             .sidebar-bottom {
@@ -508,6 +686,7 @@
             </div>
 
             <div>
+
                 <div class="logo-text">
                     <span style="color: #e3262e;">Rofleq's</span>
                     <span style="color: #39ff78;">Hideout</span>
@@ -516,13 +695,16 @@
                 <div class="version-text">
                     Github Version
                 </div>
+
             </div>
 
         </div>
 
+
         <div class="nav-title">
             Menu
         </div>
+
 
         <a href="#" class="nav-item active">
 
@@ -533,6 +715,45 @@
             Home
 
         </a>
+
+
+        <!-- SETTINGS -->
+        <div class="settings">
+
+            <div class="nav-title">
+                Settings
+            </div>
+
+            <div class="setting-box">
+
+                <div class="setting-name">
+                    Open games in about:blank
+                </div>
+
+                <div class="setting-row">
+
+                    <div class="setting-description">
+                        Opens games in a separate<br>
+                        blank-page tab.
+                    </div>
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            id="blankToggle"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         <div class="sidebar-bottom">
 
@@ -555,10 +776,10 @@
 
             <div class="topbar-title">
 
-                Welcome to
                 <strong>Rofleq's Hideout</strong>
 
             </div>
+
 
             <div class="status">
 
@@ -577,8 +798,8 @@
             <section class="welcome">
 
                 <h1>
-                    Welcome to
-                    <span>Rofleq's Hideout</span>
+                    Rofleq's
+                    <span class="green">Hideout</span>
                 </h1>
 
                 <p>
@@ -663,8 +884,117 @@
 
     <script>
 
+        /* LOAD SAVED SETTING */
+        const blankToggle =
+            document.getElementById("blankToggle");
+
+        const savedBlankSetting =
+            localStorage.getItem("openInBlank");
+
+        if (savedBlankSetting === "true") {
+            blankToggle.checked = true;
+        }
+
+
+        /* SAVE SETTING */
+        blankToggle.addEventListener(
+            "change",
+            function () {
+
+                localStorage.setItem(
+                    "openInBlank",
+                    blankToggle.checked
+                );
+
+            }
+        );
+
+
+        /* LAUNCH GAME */
         function launchGame(path) {
-            window.location.href = path;
+
+            const useBlank =
+                blankToggle.checked;
+
+
+            if (!useBlank) {
+
+                window.location.href = path;
+
+                return;
+
+            }
+
+
+            const gameWindow =
+                window.open(
+                    "about:blank",
+                    "_blank"
+                );
+
+
+            if (!gameWindow) {
+
+                alert(
+                    "The new tab was blocked by your browser. Please allow popups for this site."
+                );
+
+                return;
+
+            }
+
+
+            gameWindow.document.open();
+
+            gameWindow.document.write(`
+
+                <!DOCTYPE html>
+
+                <html>
+
+                <head>
+
+                    <title>
+                        Rofleq's Hideout
+                    </title>
+
+                    <style>
+
+                        html,
+                        body {
+                            margin: 0;
+                            width: 100%;
+                            height: 100%;
+                            overflow: hidden;
+                            background: black;
+                        }
+
+                        iframe {
+                            width: 100%;
+                            height: 100%;
+                            border: 0;
+                            display: block;
+                        }
+
+                    </style>
+
+                </head>
+
+                <body>
+
+                    <iframe
+                        src="${path}"
+                        allowfullscreen
+                    ></iframe>
+
+                </body>
+
+                </html>
+
+            `);
+
+            gameWindow.document.close();
+
         }
 
     </script>
