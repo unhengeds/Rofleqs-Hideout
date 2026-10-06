@@ -677,9 +677,76 @@
 
                 </article>
 
+                <!-- RETROBOWL -->
+<article
+    class="game-card"
+    data-game-id="retrobowl"
+    data-game-name="retrobowl"
+    data-game-version=""
+    data-game-url="games/retrobowl/index.html"
+    onclick="launchGame('games/retrobowl/index.html')"
+>
+
+    <div class="game-image">
+
+        <img
+            src="assets/retrobowl"
+            alt="retrobowl"
+            class="minecraft-thumbnail"
+        >
+
+
+        <button
+            type="button"
+            class="favorite-button"
+            aria-label="Add retrobowl to favorites"
+            title="Add to favorites"
+            onclick="
+                event.stopPropagation();
+                toggleFavorite('retrobowl');
+            "
+        >
+            ☆
+        </button>
+
+
+        <div class="red-accent"></div>
+
+    </div>
+
+
+    <div class="game-info">
+
+        <div class="game-title">
+            retrobowl
+        </div>
+
+
+        <div class="game-meta">
+            &nbsp;
+        </div>
+
+
+        <button
+            type="button"
+            class="play-small"
+            onclick="
+                event.stopPropagation();
+                launchGame('games/retrobowl/index.html');
+            "
+        >
+            ▶ PLAY
+        </button>
+
+    </div>
+
+</article>
+
             </div>
 
         </section>
+
+        
 
 
 
