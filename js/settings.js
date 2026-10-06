@@ -1,182 +1,220 @@
+/* =========================
+   SETTINGS
+========================= */
+
 const settingsButton =
-    document.getElementById(
-        "settingsButton"
-    );
+    document.getElementById("settingsButton");
 
 const settingsPanel =
-    document.getElementById(
-        "settingsPanel"
-    );
+    document.getElementById("settingsPanel");
 
-const blankToggle =
-    document.getElementById(
-        "blankToggle"
-    );
+const closeSettings =
+    document.getElementById("closeSettings");
 
-const blankHint =
-    document.getElementById(
-        "blankHint"
-    );
+const openBlankToggle =
+    document.getElementById("openBlankToggle");
 
-const backgroundToggle =
-    document.getElementById(
-        "backgroundToggle"
-    );
+const animatedBackgroundToggle =
+    document.getElementById("animatedBackgroundToggle");
 
-const backgroundHint =
-    document.getElementById(
-        "backgroundHint"
-    );
+const backgroundSpeed =
+    document.getElementById("backgroundSpeed");
 
-const speedSlider =
-    document.getElementById(
-        "speedSlider"
-    );
+const backgroundSpeedValue =
+    document.getElementById("backgroundSpeedValue");
 
-const speedValue =
-    document.getElementById(
-        "speedValue"
-    );
+const backgroundTransparency =
+    document.getElementById("backgroundTransparency");
 
-const transparencySlider =
-    document.getElementById(
-        "transparencySlider"
-    );
+const backgroundTransparencyValue =
+    document.getElementById("backgroundTransparencyValue");
 
-const transparencyValue =
-    document.getElementById(
-        "transparencyValue"
-    );
-
-const speedSetting =
-    document.getElementById(
-        "speedSetting"
-    );
-
-const transparencySetting =
-    document.getElementById(
-        "transparencySetting"
-    );
+const background =
+    document.querySelector(".background");
 
 
-/* =====================================================
-   ABOUT:BLANK SETTING
-===================================================== */
+/* =========================
+   OPEN / CLOSE SETTINGS
+========================= */
 
-const savedBlankSetting =
-    localStorage.getItem(
-        "openInBlank"
-    );
+settingsButton.addEventListener("click", () => {
+
+    settingsPanel.classList.toggle("open");
+
+});
 
 
-if (
-    savedBlankSetting === null
-) {
+closeSettings.addEventListener("click", () => {
 
-    blankToggle.checked =
-        true;
+    settingsPanel.classList.remove("open");
+
+});
+
+
+document.addEventListener("click", (event) => {
+
+    if (
+        settingsPanel.classList.contains("open") &&
+        !settingsPanel.contains(event.target) &&
+        !settingsButton.contains(event.target)
+    ) {
+
+        settingsPanel.classList.remove("open");
+
+    }
+
+});
+
+
+/* =========================
+   ABOUT:BLANK
+========================= */
+
+const savedOpenBlank =
+    localStorage.getItem("openInBlank");
+
+
+if (savedOpenBlank === null) {
+
+    openBlankToggle.checked = true;
 
     localStorage.setItem(
         "openInBlank",
         "true"
     );
 
-}
+} else {
 
-else {
-
-    blankToggle.checked =
-        savedBlankSetting === "true";
+    openBlankToggle.checked =
+        savedOpenBlank === "true";
 
 }
 
 
-function updateBlankHint() {
+openBlankToggle.addEventListener("change", () => {
 
-    if (
-        blankToggle.checked
-    ) {
-
-        blankHint.textContent =
-            "Currently enabled";
-
-    }
-
-    else {
-
-        blankHint.textContent =
-            "Currently disabled";
-
-    }
-
-}
-
-
-updateBlankHint();
-
-
-/* =====================================================
-   BACKGROUND SETTING
-===================================================== */
-
-const savedBackground =
-    localStorage.getItem(
-        "animatedBackground"
+    localStorage.setItem(
+        "openInBlank",
+        openBlankToggle.checked
     );
 
+});
 
-if (
-    savedBackground === null
-) {
 
-    backgroundToggle.checked =
-        true;
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+
+const savedAnimated =
+    localStorage.getItem("animatedBackground");
+
+
+if (savedAnimated === null) {
+
+    animatedBackgroundToggle.checked = true;
 
     localStorage.setItem(
         "animatedBackground",
         "true"
     );
 
-}
+} else {
 
-else {
-
-    backgroundToggle.checked =
-        savedBackground === "true";
+    animatedBackgroundToggle.checked =
+        savedAnimated === "true";
 
 }
 
 
-/* =====================================================
-   SPEED
-===================================================== */
+function updateAnimationState() {
+
+    if (animatedBackgroundToggle.checked) {
+
+        background.classList.remove("paused");
+
+    } else {
+
+        background.classList.add("paused");
+
+    }
+
+}
+
+
+updateAnimationState();
+
+
+animatedBackgroundToggle.addEventListener(
+    "change",
+    () => {
+
+        localStorage.setItem(
+            "animatedBackground",
+            animatedBackgroundToggle.checked
+        );
+
+        updateAnimationState();
+
+    }
+);
+
+
+/* =========================
+   BACKGROUND SPEED
+========================= */
 
 const savedSpeed =
-    localStorage.getItem(
-        "backgroundSpeed"
+    localStorage.getItem("backgroundSpeed");
+
+
+if (savedSpeed === null) {
+
+    backgroundSpeed.value = 6;
+
+} else {
+
+    backgroundSpeed.value = savedSpeed;
+
+}
+
+
+function updateSpeed() {
+
+    const speed =
+        Number(backgroundSpeed.value);
+
+    background.style.setProperty(
+        "--checker-speed",
+        speed + "s"
     );
 
-
-if (
-    savedSpeed === null
-) {
-
-    speedSlider.value =
-        6;
-
-}
-
-else {
-
-    speedSlider.value =
-        savedSpeed;
+    backgroundSpeedValue.textContent =
+        speed + "s";
 
 }
 
 
-/* =====================================================
-   TRANSPARENCY
-===================================================== */
+updateSpeed();
+
+
+backgroundSpeed.addEventListener(
+    "input",
+    () => {
+
+        updateSpeed();
+
+        localStorage.setItem(
+            "backgroundSpeed",
+            backgroundSpeed.value
+        );
+
+    }
+);
+
+
+/* =========================
+   BACKGROUND TRANSPARENCY
+========================= */
 
 const savedTransparency =
     localStorage.getItem(
@@ -184,316 +222,86 @@ const savedTransparency =
     );
 
 
-if (
-    savedTransparency === null
-) {
+if (savedTransparency === null) {
 
-    transparencySlider.value =
-        15.5;
+    backgroundTransparency.value = 15.5;
 
-}
+} else {
 
-else {
-
-    transparencySlider.value =
+    backgroundTransparency.value =
         savedTransparency;
 
 }
 
 
-/* =====================================================
-   UPDATE BACKGROUND
-===================================================== */
-
-function updateBackground() {
-
-    const enabled =
-        backgroundToggle.checked;
-
-    const speed =
-        Number(
-            speedSlider.value
-        );
+function updateTransparency() {
 
     const transparency =
         Number(
-            transparencySlider.value
+            backgroundTransparency.value
         );
 
-
-    backgroundHint.textContent =
-        enabled
-            ? "Currently enabled"
-            : "Currently disabled";
-
-
-    const opacity =
-        transparency * 0.01;
-
-
-    document.documentElement.style.setProperty(
+    background.style.setProperty(
         "--checker-opacity",
-        opacity
+        transparency * 0.01
     );
 
-
-    if (
-        speed === 0
-    ) {
-
-        document.documentElement.style.setProperty(
-            "--checker-speed",
-            "999999s"
-        );
-
-    }
-
-    else {
-
-        const duration =
-            36 / speed;
-
-        document.documentElement.style.setProperty(
-            "--checker-speed",
-            duration + "s"
-        );
-
-    }
-
-
-    speedValue.textContent =
-        speed;
-
-
-    transparencyValue.textContent =
+    backgroundTransparencyValue.textContent =
         transparency + "%";
-
-
-    if (
-        enabled
-    ) {
-
-        document.body.classList.remove(
-            "background-disabled"
-        );
-
-        speedSetting.classList.add(
-            "visible"
-        );
-
-        transparencySetting.classList.add(
-            "visible"
-        );
-
-    }
-
-    else {
-
-        document.body.classList.add(
-            "background-disabled"
-        );
-
-        speedSetting.classList.remove(
-            "visible"
-        );
-
-        transparencySetting.classList.remove(
-            "visible"
-        );
-
-    }
 
 }
 
 
-updateBackground();
+updateTransparency();
 
 
-/* =====================================================
-   BACKGROUND TOGGLE
-===================================================== */
-
-backgroundToggle.addEventListener(
-    "change",
-    function() {
-
-        localStorage.setItem(
-            "animatedBackground",
-            backgroundToggle.checked
-        );
-
-        updateBackground();
-
-    }
-);
-
-
-/* =====================================================
-   SPEED SLIDER
-===================================================== */
-
-speedSlider.addEventListener(
+backgroundTransparency.addEventListener(
     "input",
-    function() {
+    () => {
 
-        localStorage.setItem(
-            "backgroundSpeed",
-            speedSlider.value
-        );
-
-        updateBackground();
-
-    }
-);
-
-
-/* =====================================================
-   TRANSPARENCY SLIDER
-===================================================== */
-
-transparencySlider.addEventListener(
-    "input",
-    function() {
+        updateTransparency();
 
         localStorage.setItem(
             "backgroundTransparency",
-            transparencySlider.value
-        );
-
-        updateBackground();
-
-    }
-);
-
-
-/* =====================================================
-   SETTINGS OPEN / CLOSE
-===================================================== */
-
-settingsButton.addEventListener(
-    "click",
-    function(event) {
-
-        event.stopPropagation();
-
-
-        const isOpen =
-            settingsPanel.classList.contains(
-                "open"
-            );
-
-
-        if (
-            isOpen
-        ) {
-
-            settingsPanel.classList.remove(
-                "open"
-            );
-
-            settingsButton.classList.remove(
-                "open"
-            );
-
-        }
-
-        else {
-
-            settingsPanel.classList.add(
-                "open"
-            );
-
-            settingsButton.classList.add(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-settingsPanel.addEventListener(
-    "click",
-    function(event) {
-
-        event.stopPropagation();
-
-    }
-);
-
-
-document.addEventListener(
-    "click",
-    function() {
-
-        settingsPanel.classList.remove(
-            "open"
-        );
-
-        settingsButton.classList.remove(
-            "open"
+            backgroundTransparency.value
         );
 
     }
 );
 
 
-/* =====================================================
-   ABOUT:BLANK TOGGLE
-===================================================== */
-
-blankToggle.addEventListener(
-    "change",
-    function() {
-
-        localStorage.setItem(
-            "openInBlank",
-            blankToggle.checked
-        );
-
-        updateBlankHint();
-
-    }
-);
-
-
-/* =====================================================
-   LAUNCH GAME
-===================================================== */
+/* =========================
+   GAME LAUNCHER
+========================= */
 
 function launchGame(path) {
 
+    const openBlank =
+        openBlankToggle.checked;
 
-    const useBlank =
-        blankToggle.checked;
 
+    if (!openBlank) {
 
-    if (
-        !useBlank
-    ) {
-
-        window.location.href =
-            path;
+        window.location.href = path;
 
         return;
 
     }
 
 
-    const gameWindow =
-        window.open(
-            "about:blank",
-            "_blank"
-        );
+    /*
+        Create a blank page and place the
+        game inside it with an iframe.
+    */
+
+    const newWindow =
+        window.open("about:blank", "_blank");
 
 
-    if (
-        !gameWindow
-    ) {
+    if (!newWindow) {
 
         alert(
-            "The new tab was blocked by your browser. Please allow popups for this site."
+            "The browser blocked the popup. Please allow popups for this site."
         );
 
         return;
@@ -501,82 +309,62 @@ function launchGame(path) {
     }
 
 
-    gameWindow.document.open();
+    newWindow.document.open();
 
 
-    gameWindow.document.write(`
-
+    newWindow.document.write(`
         <!DOCTYPE html>
 
-        <html lang="en">
+        <html>
 
         <head>
 
-            <meta charset="UTF-8">
+            <title>Rofleq's Hideout</title>
 
             <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
             >
 
-            <title>
-                Rofleq's Hideout
-            </title>
-
-
             <style>
 
                 html,
                 body {
-
                     margin: 0;
-
                     padding: 0;
 
                     width: 100%;
-
                     height: 100%;
 
                     overflow: hidden;
 
-                    background: #000;
-
+                    background: black;
                 }
 
-
                 iframe {
+                    border: none;
 
                     width: 100%;
-
                     height: 100%;
-
-                    border: 0;
-
-                    display: block;
-
                 }
 
             </style>
 
         </head>
 
-
         <body>
-
 
             <iframe
                 src="${path}"
                 allowfullscreen
             ></iframe>
 
-
         </body>
 
         </html>
-
     `);
 
 
-    gameWindow.document.close();
+    newWindow.document.close();
 
 }
