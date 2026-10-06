@@ -1,6 +1,6 @@
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================================================
+   SETTINGS
+========================================================= */
 
 const settingsButton =
     document.getElementById("settingsButton");
@@ -39,9 +39,9 @@ const transparencySetting =
     document.getElementById("transparencySetting");
 
 
-/* =====================================================
+/* =========================================================
    DEFAULT SETTINGS
-===================================================== */
+========================================================= */
 
 const defaultSettings = {
 
@@ -51,14 +51,14 @@ const defaultSettings = {
 
     backgroundSpeed: 6,
 
-    backgroundTransparency: 1.8
+    backgroundTransparency: 8
 
 };
 
 
-/* =====================================================
+/* =========================================================
    LOAD SETTINGS
-===================================================== */
+========================================================= */
 
 let openInBlank =
     localStorage.getItem("openInBlank");
@@ -125,136 +125,75 @@ if (backgroundTransparency === null) {
 }
 
 
-/* =====================================================
+/* =========================================================
    SETTINGS PANEL
-===================================================== */
+========================================================= */
 
-settingsButton.addEventListener(
-    "click",
-    function (event) {
+if (settingsButton && settingsPanel) {
 
-        event.stopPropagation();
+    settingsButton.addEventListener(
+        "click",
+        function (event) {
 
-        const isOpen =
-            settingsPanel.classList.contains("open");
+            event.stopPropagation();
 
-        settingsPanel.classList.toggle(
-            "open",
-            !isOpen
-        );
+            const isOpen =
+                settingsPanel.classList.toggle(
+                    "open"
+                );
 
-        settingsButton.classList.toggle(
-            "open",
-            !isOpen
-        );
-
-    }
-);
-
-
-/* =====================================================
-   CLOSE SETTINGS WHEN CLICKING OUTSIDE
-===================================================== */
-
-document.addEventListener(
-    "click",
-    function (event) {
-
-        if (
-            !settingsPanel.contains(event.target) &&
-            !settingsButton.contains(event.target)
-        ) {
-
-            settingsPanel.classList.remove("open");
-
-            settingsButton.classList.remove("open");
+            settingsButton.classList.toggle(
+                "open",
+                isOpen
+            );
 
         }
-
-    }
-);
+    );
 
 
-/* =====================================================
-   ABOUT:BLANK SETTING
-===================================================== */
+    document.addEventListener(
+        "click",
+        function (event) {
 
-blankToggle.checked =
-    openInBlank;
+            if (
+                !settingsPanel.contains(event.target) &&
+                !settingsButton.contains(event.target)
+            ) {
 
+                settingsPanel.classList.remove(
+                    "open"
+                );
 
-function updateBlankHint() {
+                settingsButton.classList.remove(
+                    "open"
+                );
 
-    blankHint.textContent =
-        blankToggle.checked
-            ? "Currently enabled"
-            : "Currently disabled";
+            }
+
+        }
+    );
 
 }
 
 
-blankToggle.addEventListener(
-    "change",
-    function () {
+/* =========================================================
+   ABOUT:BLANK
+========================================================= */
 
-        openInBlank =
-            blankToggle.checked;
+function updateBlankSetting() {
 
-        localStorage.setItem(
-            "openInBlank",
-            openInBlank
-        );
-
-        updateBlankHint();
-
+    if (!blankToggle) {
+        return;
     }
-);
 
-updateBlankHint();
+    if (blankToggle.checked) {
 
-
-/* =====================================================
-   BACKGROUND SETTING
-===================================================== */
-
-backgroundToggle.checked =
-    animatedBackground;
-
-
-function updateBackground() {
-
-    if (backgroundToggle.checked) {
-
-        document.body.classList.remove(
-            "background-disabled"
-        );
-
-        speedSetting.classList.add(
-            "visible"
-        );
-
-        transparencySetting.classList.add(
-            "visible"
-        );
-
-        backgroundHint.textContent =
+        blankHint.textContent =
             "Currently enabled";
 
     } else {
 
-        document.body.classList.add(
-            "background-disabled"
-        );
-
-        speedSetting.classList.remove(
-            "visible"
-        );
-
-        transparencySetting.classList.remove(
-            "visible"
-        );
-
-        backgroundHint.textContent =
+        blankHint.textContent =
             "Currently disabled";
 
     }
@@ -262,185 +201,903 @@ function updateBackground() {
 }
 
 
-backgroundToggle.addEventListener(
-    "change",
-    function () {
+if (blankToggle) {
 
-        animatedBackground =
-            backgroundToggle.checked;
+    blankToggle.checked =
+        openInBlank;
 
-        localStorage.setItem(
-            "animatedBackground",
-            animatedBackground
+    updateBlankSetting();
+
+
+    blankToggle.addEventListener(
+        "change",
+        function () {
+
+            openInBlank =
+                blankToggle.checked;
+
+            localStorage.setItem(
+                "openInBlank",
+                openInBlank
+            );
+
+            updateBlankSetting();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+function updateBackground() {
+
+    if (!backgroundToggle) {
+        return;
+    }
+
+
+    const enabled =
+        backgroundToggle.checked;
+
+
+    if (enabled) {
+
+        document.body.classList.remove(
+            "background-disabled"
         );
 
-        updateBackground();
+        backgroundHint.textContent =
+            "Currently enabled";
+
+        if (speedSetting) {
+            speedSetting.style.display =
+                "block";
+        }
+
+        if (transparencySetting) {
+            transparencySetting.style.display =
+                "block";
+        }
+
+    } else {
+
+        document.body.classList.add(
+            "background-disabled"
+        );
+
+        backgroundHint.textContent =
+            "Currently disabled";
+
+        if (speedSetting) {
+            speedSetting.style.display =
+                "none";
+        }
+
+        if (transparencySetting) {
+            transparencySetting.style.display =
+                "none";
+        }
 
     }
-);
 
-updateBackground();
+}
 
 
-/* =====================================================
+if (backgroundToggle) {
+
+    backgroundToggle.checked =
+        animatedBackground;
+
+    updateBackground();
+
+
+    backgroundToggle.addEventListener(
+        "change",
+        function () {
+
+            animatedBackground =
+                backgroundToggle.checked;
+
+            localStorage.setItem(
+                "animatedBackground",
+                animatedBackground
+            );
+
+            updateBackground();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    BACKGROUND SPEED
-===================================================== */
+========================================================= */
 
-speedSlider.value =
-    backgroundSpeed;
+function updateBackgroundSpeed() {
 
+    if (!speedSlider) {
+        return;
+    }
 
-function updateSpeed() {
 
     const value =
         Number(speedSlider.value);
 
+
     speedValue.textContent =
         value;
 
-    if (value <= 0) {
-
-        document.documentElement.style.setProperty(
-            "--checker-speed",
-            "999999s"
-        );
-
-        return;
-    }
 
     /*
-        Lower slider value =
-        slower animation.
-
-        Higher slider value =
-        faster animation.
+       20 = fastest
+       1 = slow
+       0 = essentially stopped
     */
 
-    const seconds =
-        21 - value;
+    let seconds;
+
+
+    if (value <= 0) {
+
+        seconds =
+            999999;
+
+    } else {
+
+        seconds =
+            21 - value;
+
+    }
+
 
     document.documentElement.style.setProperty(
         "--checker-speed",
-        `${seconds}s`
+        seconds + "s"
     );
 
 }
 
 
-speedSlider.addEventListener(
-    "input",
-    function () {
+if (speedSlider) {
 
-        backgroundSpeed =
-            Number(speedSlider.value);
+    speedSlider.value =
+        backgroundSpeed;
 
-        localStorage.setItem(
-            "backgroundSpeed",
-            backgroundSpeed
-        );
-
-        updateSpeed();
-
-    }
-);
-
-updateSpeed();
+    updateBackgroundSpeed();
 
 
-/* =====================================================
+    speedSlider.addEventListener(
+        "input",
+        function () {
+
+            backgroundSpeed =
+                Number(
+                    speedSlider.value
+                );
+
+            localStorage.setItem(
+                "backgroundSpeed",
+                backgroundSpeed
+            );
+
+            updateBackgroundSpeed();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    BACKGROUND TRANSPARENCY
-===================================================== */
+========================================================= */
 
-transparencySlider.value =
-    backgroundTransparency;
+function updateBackgroundTransparency() {
 
+    if (!transparencySlider) {
+        return;
+    }
 
-function updateTransparency() {
 
     const value =
-        Number(transparencySlider.value);
+        Number(
+            transparencySlider.value
+        );
+
 
     transparencyValue.textContent =
-        `${value}%`;
+        value + "%";
 
-    /*
-        Convert percentage to the
-        opacity used by the checkerboard.
-    */
-
-    const opacity =
-        value / 100;
 
     document.documentElement.style.setProperty(
         "--checker-opacity",
-        opacity
+        value / 100
     );
 
 }
 
 
-transparencySlider.addEventListener(
-    "input",
-    function () {
+if (transparencySlider) {
 
-        backgroundTransparency =
-            Number(transparencySlider.value);
+    transparencySlider.value =
+        backgroundTransparency;
 
-        localStorage.setItem(
-            "backgroundTransparency",
-            backgroundTransparency
+    updateBackgroundTransparency();
+
+
+    transparencySlider.addEventListener(
+        "input",
+        function () {
+
+            backgroundTransparency =
+                Number(
+                    transparencySlider.value
+                );
+
+            localStorage.setItem(
+                "backgroundTransparency",
+                backgroundTransparency
+            );
+
+            updateBackgroundTransparency();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+const FAVORITES_KEY =
+    "rofleqHideoutFavorites";
+
+
+/*
+   Get the saved favorites.
+
+   This is an array of game IDs, for example:
+
+   [
+       "minecraft-1.9.4"
+   ]
+*/
+
+function getFavorites() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                FAVORITES_KEY
+            );
+
+
+        if (!saved) {
+            return [];
+        }
+
+
+        const parsed =
+            JSON.parse(saved);
+
+
+        if (!Array.isArray(parsed)) {
+            return [];
+        }
+
+
+        return parsed;
+
+    } catch (error) {
+
+        console.warn(
+            "Could not load favorites:",
+            error
         );
 
-        updateTransparency();
+        return [];
 
     }
-);
 
-updateTransparency();
+}
 
 
-/* =====================================================
+/* =========================================================
+   SAVE FAVORITES
+========================================================= */
+
+function saveFavorites(favorites) {
+
+    localStorage.setItem(
+        FAVORITES_KEY,
+        JSON.stringify(favorites)
+    );
+
+}
+
+
+/* =========================================================
+   CHECK FAVORITE
+========================================================= */
+
+function isFavorite(gameId) {
+
+    return getFavorites().includes(
+        gameId
+    );
+
+}
+
+
+/* =========================================================
+   TOGGLE FAVORITE
+========================================================= */
+
+function toggleFavorite(gameId) {
+
+    let favorites =
+        getFavorites();
+
+
+    const index =
+        favorites.indexOf(gameId);
+
+
+    if (index === -1) {
+
+        /*
+           Add to favorites
+        */
+
+        favorites.push(gameId);
+
+    } else {
+
+        /*
+           Remove from favorites
+        */
+
+        favorites.splice(
+            index,
+            1
+        );
+
+    }
+
+
+    saveFavorites(
+        favorites
+    );
+
+
+    updateFavoriteButtons();
+
+    renderFavorites();
+
+    updateFavoriteCount();
+
+}
+
+
+/* =========================================================
+   UPDATE STAR BUTTONS
+========================================================= */
+
+function updateFavoriteButtons() {
+
+    const favorites =
+        getFavorites();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".game-card"
+        );
+
+
+    cards.forEach(
+        function (card) {
+
+            const gameId =
+                card.dataset.gameId;
+
+
+            const button =
+                card.querySelector(
+                    ".favorite-button"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            const favorite =
+                favorites.includes(
+                    gameId
+                );
+
+
+            if (favorite) {
+
+                button.classList.add(
+                    "favorited"
+                );
+
+                button.textContent =
+                    "★";
+
+                button.title =
+                    "Remove from favorites";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Remove from favorites"
+                );
+
+            } else {
+
+                button.classList.remove(
+                    "favorited"
+                );
+
+                button.textContent =
+                    "☆";
+
+                button.title =
+                    "Add to favorites";
+
+                button.setAttribute(
+                    "aria-label",
+                    "Add to favorites"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FAVORITE COUNT
+========================================================= */
+
+function updateFavoriteCount() {
+
+    const count =
+        document.getElementById(
+            "favoriteCount"
+        );
+
+
+    if (!count) {
+        return;
+    }
+
+
+    count.textContent =
+        getFavorites().length;
+
+}
+
+
+/* =========================================================
+   CLONE GAME CARD FOR FAVORITES
+========================================================= */
+
+function createFavoriteCard(originalCard) {
+
+    const clone =
+        originalCard.cloneNode(
+            true
+        );
+
+
+    /*
+       Reconnect the game's click handler.
+
+       cloneNode copies the HTML but not
+       JavaScript event listeners.
+    */
+
+    const gameUrl =
+        clone.dataset.gameUrl;
+
+
+    clone.onclick =
+        function () {
+
+            launchGame(
+                gameUrl
+            );
+
+        };
+
+
+    /*
+       Reconnect the star button.
+    */
+
+    const star =
+        clone.querySelector(
+            ".favorite-button"
+        );
+
+
+    if (star) {
+
+        star.onclick =
+            function (event) {
+
+                event.stopPropagation();
+
+                toggleFavorite(
+                    clone.dataset.gameId
+                );
+
+            };
+
+    }
+
+
+    /*
+       Reconnect the play button.
+    */
+
+    const play =
+        clone.querySelector(
+            ".play-small"
+        );
+
+
+    if (play) {
+
+        play.onclick =
+            function (event) {
+
+                event.stopPropagation();
+
+                launchGame(
+                    gameUrl
+                );
+
+            };
+
+    }
+
+
+    return clone;
+
+}
+
+
+/* =========================================================
+   RENDER FAVORITES
+========================================================= */
+
+function renderFavorites() {
+
+    const grid =
+        document.getElementById(
+            "favoritesGrid"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "emptyFavorites"
+        );
+
+
+    if (!grid) {
+        return;
+    }
+
+
+    grid.innerHTML =
+        "";
+
+
+    const favorites =
+        getFavorites();
+
+
+    const allCards =
+        document.querySelectorAll(
+            "#gamesGrid .game-card"
+        );
+
+
+    let found =
+        0;
+
+
+    allCards.forEach(
+        function (card) {
+
+            const gameId =
+                card.dataset.gameId;
+
+
+            if (
+                favorites.includes(
+                    gameId
+                )
+            ) {
+
+                const favoriteCard =
+                    createFavoriteCard(
+                        card
+                    );
+
+
+                grid.appendChild(
+                    favoriteCard
+                );
+
+
+                found++;
+
+            }
+
+        }
+    );
+
+
+    if (empty) {
+
+        if (found === 0) {
+
+            empty.style.display =
+                "block";
+
+        } else {
+
+            empty.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    updateFavoriteButtons();
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const favoritesNav =
+    document.getElementById(
+        "favoritesNav"
+    );
+
+const gamesNav =
+    document.getElementById(
+        "gamesNav"
+    );
+
+const favoritesSection =
+    document.getElementById(
+        "favoritesSection"
+    );
+
+const gamesSection =
+    document.getElementById(
+        "gamesSection"
+    );
+
+
+function showFavorites() {
+
+    if (favoritesSection) {
+
+        favoritesSection.classList.remove(
+            "hidden-section"
+        );
+
+    }
+
+
+    if (gamesSection) {
+
+        gamesSection.classList.add(
+            "hidden-section"
+        );
+
+    }
+
+
+    if (favoritesNav) {
+
+        favoritesNav.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if (gamesNav) {
+
+        gamesNav.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    renderFavorites();
+
+
+    history.replaceState(
+        null,
+        "",
+        "#favorites"
+    );
+
+}
+
+
+function showGames() {
+
+    if (favoritesSection) {
+
+        favoritesSection.classList.add(
+            "hidden-section"
+        );
+
+    }
+
+
+    if (gamesSection) {
+
+        gamesSection.classList.remove(
+            "hidden-section"
+        );
+
+    }
+
+
+    if (favoritesNav) {
+
+        favoritesNav.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (gamesNav) {
+
+        gamesNav.classList.add(
+            "active"
+        );
+
+    }
+
+
+    history.replaceState(
+        null,
+        "",
+        "#games"
+    );
+
+}
+
+
+if (favoritesNav) {
+
+    favoritesNav.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            showFavorites();
+
+        }
+    );
+
+}
+
+
+if (gamesNav) {
+
+    gamesNav.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            showGames();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    LAUNCH GAME
-===================================================== */
+========================================================= */
 
 function launchGame(gameUrl) {
 
     if (openInBlank) {
 
-        const newTab =
-            window.open("about:blank", "_blank");
+        const newWindow =
+            window.open(
+                "about:blank",
+                "_blank"
+            );
 
-        if (!newTab) {
+
+        if (!newWindow) {
 
             window.location.href =
                 gameUrl;
 
             return;
+
         }
 
-        newTab.document.open();
 
-        newTab.document.write(`
+        newWindow.document.open();
+
+
+        newWindow.document.write(`
             <!DOCTYPE html>
+
             <html>
+
             <head>
+
                 <title>Rofleq's Hideout</title>
+
                 <style>
+
                     html,
                     body {
+
                         margin: 0;
+
                         width: 100%;
+
                         height: 100%;
+
                         overflow: hidden;
+
                         background: #000;
+
                     }
 
                     iframe {
+
                         width: 100%;
+
                         height: 100%;
-                        border: 0;
+
+                        border: none;
+
                     }
+
                 </style>
+
             </head>
 
             <body>
@@ -451,10 +1108,12 @@ function launchGame(gameUrl) {
                 ></iframe>
 
             </body>
+
             </html>
         `);
 
-        newTab.document.close();
+
+        newWindow.document.close();
 
     } else {
 
@@ -462,5 +1121,92 @@ function launchGame(gameUrl) {
             gameUrl;
 
     }
+
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+const commentsButton =
+    document.getElementById(
+        "commentsButton"
+    );
+
+const commentsPanel =
+    document.getElementById(
+        "commentsPanel"
+    );
+
+const commentsClose =
+    document.getElementById(
+        "commentsClose"
+    );
+
+
+if (
+    commentsButton &&
+    commentsPanel
+) {
+
+    commentsButton.addEventListener(
+        "click",
+        function () {
+
+            commentsPanel.classList.toggle(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+if (
+    commentsClose &&
+    commentsPanel
+) {
+
+    commentsClose.addEventListener(
+        "click",
+        function () {
+
+            commentsPanel.classList.remove(
+                "open"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE FAVORITES
+========================================================= */
+
+updateFavoriteButtons();
+
+updateFavoriteCount();
+
+renderFavorites();
+
+
+/* =========================================================
+   LOAD PAGE FROM URL HASH
+========================================================= */
+
+if (
+    window.location.hash ===
+    "#favorites"
+) {
+
+    showFavorites();
+
+} else {
+
+    showGames();
 
 }
