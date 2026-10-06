@@ -1,448 +1,892 @@
-/* =========================================================
+/* =====================================================
    ROFLEQ'S HIDEOUT
-   settings.js
-   ========================================================= */
+   SETTINGS + FAVORITES + THEMES + NAVIGATION
+===================================================== */
 
 
-/* =========================================================
-   STORAGE
-   ========================================================= */
+/* =====================================================
+   DEFAULT SETTINGS
+===================================================== */
 
-const SETTINGS = {
-    openInBlank: "rofleq_openInBlank",
-    animatedBackground: "rofleq_animatedBackground",
-    backgroundSpeed: "rofleq_backgroundSpeed",
-    backgroundTransparency: "rofleq_backgroundTransparency",
-    theme: "rofleq_theme",
-    favorites: "rofleq_favorites"
-};
+const defaultSettings = {
 
-
-const DEFAULTS = {
     openInBlank: true,
+
     animatedBackground: true,
-    backgroundSpeed: 1,
-    backgroundTransparency: 1,
-    theme: 0
+
+    backgroundSpeed: 6,
+
+    backgroundTransparency: 8
+
 };
 
 
-function getValue(key, fallback) {
+/* =====================================================
+   STORAGE KEYS
+===================================================== */
 
-    try {
+const SETTINGS_KEYS = {
 
-        const value = localStorage.getItem(key);
+    openInBlank:
+        "openInBlank",
 
-        if (value === null) {
-            return fallback;
-        }
+    animatedBackground:
+        "animatedBackground",
 
-        return value;
+    backgroundSpeed:
+        "backgroundSpeed",
 
-    } catch {
+    backgroundTransparency:
+        "backgroundTransparency"
 
-        return fallback;
-
-    }
-
-}
-
-
-function setValue(key, value) {
-
-    try {
-
-        localStorage.setItem(
-            key,
-            String(value)
-        );
-
-    } catch {
-
-        /* Storage unavailable */
-
-    }
-
-}
+};
 
 
-/* =========================================================
+const FAVORITES_KEY =
+    "rofleqHideoutFavorites";
+
+
+const THEME_KEY =
+    "rofleqHideoutTheme";
+
+
+/* =====================================================
    THEMES
-   ========================================================= */
+
+   Theme Color is NOT shown in Settings anymore.
+
+   The logo is the only way to change themes.
+===================================================== */
 
 const THEMES = [
 
     {
-        name: "red",
-        primary: "#e3262e"
+        name: "Red",
+
+        color: "#e3262e",
+
+        color2: "#ff4048",
+
+        soft:
+            "rgba(227,38,46,0.12)",
+
+        border:
+            "rgba(227,38,46,0.42)",
+
+        glow:
+            "rgba(227,38,46,0.18)"
     },
 
-    {
-        name: "green",
-        primary: "#20d65a"
-    },
 
     {
-        name: "purple",
-        primary: "#9b59ff"
+        name: "Green",
+
+        color: "#20d65a",
+
+        color2: "#39ff78",
+
+        soft:
+            "rgba(32,214,90,0.12)",
+
+        border:
+            "rgba(32,214,90,0.42)",
+
+        glow:
+            "rgba(32,214,90,0.18)"
     },
 
-    {
-        name: "blue",
-        primary: "#3185ff"
-    },
 
     {
-        name: "orange",
-        primary: "#ff8a24"
+        name: "Purple",
+
+        color: "#a855f7",
+
+        color2: "#c084fc",
+
+        soft:
+            "rgba(168,85,247,0.12)",
+
+        border:
+            "rgba(168,85,247,0.42)",
+
+        glow:
+            "rgba(168,85,247,0.18)"
+    },
+
+
+    {
+        name: "Blue",
+
+        color: "#3b82f6",
+
+        color2: "#60a5fa",
+
+        soft:
+            "rgba(59,130,246,0.12)",
+
+        border:
+            "rgba(59,130,246,0.42)",
+
+        glow:
+            "rgba(59,130,246,0.18)"
+    },
+
+
+    {
+        name: "Orange",
+
+        color: "#f97316",
+
+        color2: "#fb923c",
+
+        soft:
+            "rgba(249,115,22,0.12)",
+
+        border:
+            "rgba(249,115,22,0.42)",
+
+        glow:
+            "rgba(249,115,22,0.18)"
     }
 
 ];
 
 
-function getTheme() {
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-    let theme = Number(
-        getValue(
-            SETTINGS.theme,
-            DEFAULTS.theme
-        )
+const siteLogo =
+    document.getElementById(
+        "siteLogo"
     );
 
+
+const themeNotification =
+    document.getElementById(
+        "themeNotification"
+    );
+
+
+/* =====================================================
+   THEME HELPERS
+===================================================== */
+
+function getThemeIndex() {
+
+    const saved =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+
+    const index =
+        Number(saved);
+
+
     if (
-        !Number.isInteger(theme) ||
-        theme < 0 ||
-        theme >= THEMES.length
+
+        Number.isInteger(
+            index
+        ) &&
+
+        index >= 0 &&
+
+        index < THEMES.length
+
     ) {
 
-        theme = DEFAULTS.theme;
+        return index;
 
     }
 
-    return theme;
+
+    return 0;
 
 }
 
 
-function setTheme(index) {
+/* =====================================================
+   APPLY THEME
+===================================================== */
 
-    if (
-        !Number.isInteger(index) ||
-        index < 0 ||
-        index >= THEMES.length
-    ) {
+function applyTheme(
+    index,
+    save = true
+) {
 
+    const theme =
+        THEMES[index];
+
+
+    if (!theme) {
         return;
-
     }
 
 
-    const theme = THEMES[index];
+    const root =
+        document.documentElement;
 
 
-    document.documentElement.setAttribute(
-        "data-theme",
-        theme.name
+    root.style.setProperty(
+        "--theme",
+        theme.color
     );
 
 
-    document.documentElement.style.setProperty(
-        "--theme-primary",
-        theme.primary
+    root.style.setProperty(
+        "--theme2",
+        theme.color2
     );
 
 
-    document.documentElement.style.setProperty(
-        "--theme-color",
-        theme.primary
+    root.style.setProperty(
+        "--theme-soft",
+        theme.soft
     );
 
 
-    document.documentElement.style.setProperty(
-        "--accent-color",
-        theme.primary
+    root.style.setProperty(
+        "--theme-border",
+        theme.border
     );
 
 
-    setValue(
-        SETTINGS.theme,
-        index
+    root.style.setProperty(
+        "--theme-glow",
+        theme.glow
     );
 
 
-    updateThemeButtons(index);
+    /*
+     * Compatibility variables.
+     */
+
+    root.style.setProperty(
+        "--red",
+        theme.color
+    );
+
+
+    root.style.setProperty(
+        "--red2",
+        theme.color2
+    );
+
+
+    root.style.setProperty(
+        "--border",
+        theme.border
+    );
+
+
+    if (save) {
+
+        localStorage.setItem(
+            THEME_KEY,
+            String(index)
+        );
+
+    }
 
 }
 
+
+/* =====================================================
+   LOGO THEME CYCLE
+===================================================== */
 
 function cycleTheme() {
 
-    const current = getTheme();
-
-    const next =
-        (current + 1) % THEMES.length;
+    let index =
+        getThemeIndex();
 
 
-    setTheme(next);
+    index++;
 
+
+    /*
+     * After Orange:
+     *
+     * Red
+     *
+     * This completes the cycle.
+     */
 
     if (
-        current ===
-        THEMES.length - 1
+        index >= THEMES.length
     ) {
 
-        showThemeNotification();
-
-    }
-
-}
+        index = 0;
 
 
-function updateThemeButtons(index) {
-
-    document
-        .querySelectorAll("[data-theme-index]")
-        .forEach(function(button) {
-
-            const buttonIndex =
-                Number(
-                    button.getAttribute(
-                        "data-theme-index"
-                    )
-                );
-
-
-            const selected =
-                buttonIndex === index;
-
-
-            button.classList.toggle(
-                "active",
-                selected
-            );
-
-
-            button.classList.toggle(
-                "selected",
-                selected
-            );
-
-
-            button.setAttribute(
-                "aria-pressed",
-                selected
-                    ? "true"
-                    : "false"
-            );
-
-        });
-
-}
-
-
-function showThemeNotification() {
-
-    let notification =
-        document.getElementById(
-            "themeNotification"
-        );
-
-
-    if (!notification) {
-
-        notification =
-            document.createElement(
-                "div"
-            );
-
-
-        notification.id =
-            "themeNotification";
-
-
-        notification.innerHTML = `
-
-            <div class="theme-notification-title">
-                Theme changes now unlocked!
-            </div>
-
-            <div class="theme-notification-text">
-                Click the logo to cycle through themes.
-            </div>
-
-        `;
-
-
-        document.body.appendChild(
-            notification
-        );
+        showThemeUnlockedNotification();
 
     }
 
 
-    notification.classList.add(
+    localStorage.setItem(
+        THEME_KEY,
+        String(index)
+    );
+
+
+    applyTheme(
+        index,
+        false
+    );
+
+}
+
+
+/* =====================================================
+   THEME NOTIFICATION
+===================================================== */
+
+let notificationTimer =
+    null;
+
+
+function showThemeUnlockedNotification() {
+
+    if (!themeNotification) {
+        return;
+    }
+
+
+    const title =
+        themeNotification.querySelector(
+            "strong"
+        );
+
+
+    const message =
+        themeNotification.querySelector(
+            "span"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            "Theme changes now unlocked!";
+
+    }
+
+
+    if (message) {
+
+        message.textContent =
+            "Click the logo to cycle through themes.";
+
+    }
+
+
+    themeNotification.classList.add(
         "show"
     );
 
 
     clearTimeout(
-        notification._timer
+        notificationTimer
     );
 
 
-    notification._timer =
-        setTimeout(function() {
+    notificationTimer =
+        setTimeout(
+            function() {
 
-            notification.classList.remove(
-                "show"
-            );
+                themeNotification.classList.remove(
+                    "show"
+                );
 
-        }, 3500);
+            },
+            4500
+        );
 
 }
 
 
-/* =========================================================
-   INITIALIZE THEME
-   ========================================================= */
+/* =====================================================
+   LOGO CLICK
+===================================================== */
 
-function initializeTheme() {
+if (siteLogo) {
 
-    setTheme(
-        getTheme()
+    siteLogo.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            cycleTheme();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SETTINGS ELEMENTS
+===================================================== */
+
+const settingsButton =
+    document.getElementById(
+        "settingsButton"
     );
 
 
-    const logo =
-        document.getElementById(
-            "siteLogo"
+const settingsPanel =
+    document.getElementById(
+        "settingsPanel"
+    );
+
+
+const closeSettings =
+    document.getElementById(
+        "closeSettings"
+    );
+
+
+const openInBlankToggle =
+    document.getElementById(
+        "openInBlankToggle"
+    );
+
+
+const animatedBackgroundToggle =
+    document.getElementById(
+        "animatedBackgroundToggle"
+    );
+
+
+const backgroundSpeed =
+    document.getElementById(
+        "backgroundSpeed"
+    );
+
+
+const backgroundTransparency =
+    document.getElementById(
+        "backgroundTransparency"
+    );
+
+
+const backgroundSpeedValue =
+    document.getElementById(
+        "backgroundSpeedValue"
+    );
+
+
+const backgroundTransparencyValue =
+    document.getElementById(
+        "backgroundTransparencyValue"
+    );
+
+
+const backgroundSpeedBox =
+    document.getElementById(
+        "backgroundSpeedBox"
+    );
+
+
+const backgroundTransparencyBox =
+    document.getElementById(
+        "backgroundTransparencyBox"
+    );
+
+
+const aboutBlankHint =
+    document.getElementById(
+        "aboutBlankHint"
+    );
+
+
+/* =====================================================
+   FAVORITES ELEMENTS
+===================================================== */
+
+const favoritesGrid =
+    document.getElementById(
+        "favoritesGrid"
+    );
+
+
+const emptyFavorites =
+    document.getElementById(
+        "emptyFavorites"
+    );
+
+
+const favoriteCount =
+    document.getElementById(
+        "favoriteCount"
+    );
+
+
+const favoritesNav =
+    document.getElementById(
+        "favoritesNav"
+    );
+
+
+const gamesNav =
+    document.getElementById(
+        "gamesNav"
+    );
+
+
+/* =====================================================
+   SETTINGS STORAGE
+===================================================== */
+
+function getSetting(
+    key,
+    fallback
+) {
+
+    const saved =
+        localStorage.getItem(
+            key
         );
 
 
-    if (logo) {
+    if (
+        saved === null
+    ) {
 
-        logo.addEventListener(
-            "click",
-            function(event) {
+        return fallback;
 
-                event.preventDefault();
+    }
 
-                event.stopPropagation();
 
-                cycleTheme();
+    try {
+
+        return JSON.parse(
+            saved
+        );
+
+    } catch {
+
+        if (
+            saved === "true"
+        ) {
+
+            return true;
+
+        }
+
+
+        if (
+            saved === "false"
+        ) {
+
+            return false;
+
+        }
+
+
+        const number =
+            Number(saved);
+
+
+        if (
+            !Number.isNaN(number)
+        ) {
+
+            return number;
+
+        }
+
+
+        return saved;
+
+    }
+
+}
+
+
+function setSetting(
+    key,
+    value
+) {
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(
+            value
+        )
+    );
+
+}
+
+
+/* =====================================================
+   SETTINGS PANEL
+===================================================== */
+
+function openSettingsPanel() {
+
+    if (!settingsPanel) {
+        return;
+    }
+
+
+    settingsPanel.classList.add(
+        "open"
+    );
+
+
+    if (settingsButton) {
+
+        settingsButton.classList.add(
+            "open"
+        );
+
+    }
+
+}
+
+
+function closeSettingsPanel() {
+
+    if (!settingsPanel) {
+        return;
+    }
+
+
+    settingsPanel.classList.remove(
+        "open"
+    );
+
+
+    if (settingsButton) {
+
+        settingsButton.classList.remove(
+            "open"
+        );
+
+    }
+
+}
+
+
+if (settingsButton) {
+
+    settingsButton.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+
+            if (
+                settingsPanel &&
+                settingsPanel.classList.contains(
+                    "open"
+                )
+            ) {
+
+                closeSettingsPanel();
+
+            } else {
+
+                openSettingsPanel();
 
             }
-        );
 
-    }
-
-
-    document
-        .querySelectorAll(
-            "[data-theme-index]"
-        )
-        .forEach(function(button) {
-
-            button.addEventListener(
-                "click",
-                function(event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-
-                    const index =
-                        Number(
-                            button.getAttribute(
-                                "data-theme-index"
-                            )
-                        );
-
-
-                    setTheme(index);
-
-                }
-            );
-
-        });
+        }
+    );
 
 }
 
 
-/* =========================================================
-   SETTINGS
-   ========================================================= */
+if (closeSettings) {
 
-function initializeSettings() {
+    closeSettings.addEventListener(
+        "click",
+        function(event) {
 
-    const openInBlank =
-        document.getElementById(
-            "openInBlank"
-        );
+            event.stopPropagation();
 
+            closeSettingsPanel();
 
-    const animatedBackground =
-        document.getElementById(
-            "animatedBackground"
-        );
+        }
+    );
+
+}
 
 
-    const backgroundSpeed =
-        document.getElementById(
-            "backgroundSpeed"
-        );
+if (settingsPanel) {
+
+    settingsPanel.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+}
 
 
-    const backgroundTransparency =
-        document.getElementById(
-            "backgroundTransparency"
-        );
+document.addEventListener(
+    "click",
+    function() {
+
+        closeSettingsPanel();
+
+    }
+);
 
 
-    if (openInBlank) {
+/* =====================================================
+   ABOUT:BLANK
+===================================================== */
 
-        openInBlank.checked =
-            getValue(
-                SETTINGS.openInBlank,
-                DEFAULTS.openInBlank
-            ) === "true";
+function applyOpenInBlank(
+    value
+) {
 
+    if (openInBlankToggle) {
 
-        openInBlank.onchange =
-            function() {
-
-                setValue(
-                    SETTINGS.openInBlank,
-                    openInBlank.checked
-                );
-
-            };
+        openInBlankToggle.checked =
+            Boolean(value);
 
     }
 
 
-    if (animatedBackground) {
+    if (aboutBlankHint) {
 
-        animatedBackground.checked =
-            getValue(
-                SETTINGS.animatedBackground,
-                DEFAULTS.animatedBackground
-            ) === "true";
+        aboutBlankHint.textContent =
 
+            value
 
-        animatedBackground.onchange =
-            function() {
+                ? "Games open in a new about:blank window."
 
-                setValue(
-                    SETTINGS.animatedBackground,
-                    animatedBackground.checked
-                );
+                : "Games open directly in this page.";
+
+    }
+
+}
 
 
-                updateBackground();
+if (openInBlankToggle) {
 
-            };
+    openInBlankToggle.addEventListener(
+        "change",
+        function() {
+
+            const value =
+                openInBlankToggle.checked;
+
+
+            setSetting(
+                SETTINGS_KEYS.openInBlank,
+                value
+            );
+
+
+            applyOpenInBlank(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ANIMATED BACKGROUND
+===================================================== */
+
+function applyAnimatedBackground(
+    value
+) {
+
+    value =
+        Boolean(value);
+
+
+    if (animatedBackgroundToggle) {
+
+        animatedBackgroundToggle.checked =
+            value;
+
+    }
+
+
+    document.body.classList.toggle(
+        "background-disabled",
+        !value
+    );
+
+
+    if (backgroundSpeedBox) {
+
+        backgroundSpeedBox.style.display =
+            value ? "" : "none";
+
+    }
+
+
+    if (backgroundTransparencyBox) {
+
+        backgroundTransparencyBox.style.display =
+            value ? "" : "none";
+
+    }
+
+}
+
+
+if (animatedBackgroundToggle) {
+
+    animatedBackgroundToggle.addEventListener(
+        "change",
+        function() {
+
+            const value =
+                animatedBackgroundToggle.checked;
+
+
+            setSetting(
+                SETTINGS_KEYS.animatedBackground,
+                value
+            );
+
+
+            applyAnimatedBackground(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BACKGROUND SPEED
+===================================================== */
+
+function applyBackgroundSpeed(
+    value
+) {
+
+    value =
+        Number(value);
+
+
+    if (
+        !Number.isFinite(value)
+    ) {
+
+        value =
+            defaultSettings.backgroundSpeed;
 
     }
 
@@ -450,24 +894,82 @@ function initializeSettings() {
     if (backgroundSpeed) {
 
         backgroundSpeed.value =
-            getValue(
-                SETTINGS.backgroundSpeed,
-                DEFAULTS.backgroundSpeed
-            );
+            value;
+
+    }
 
 
-        backgroundSpeed.oninput =
-            function() {
+    if (backgroundSpeedValue) {
 
-                setValue(
-                    SETTINGS.backgroundSpeed,
+        backgroundSpeedValue.textContent =
+            value;
+
+    }
+
+
+    const seconds =
+
+        value <= 0
+
+            ? 999999
+
+            : 21 - value;
+
+
+    document.documentElement.style.setProperty(
+        "--checker-speed",
+        `${seconds}s`
+    );
+
+}
+
+
+if (backgroundSpeed) {
+
+    backgroundSpeed.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                Number(
                     backgroundSpeed.value
                 );
 
 
-                updateBackground();
+            setSetting(
+                SETTINGS_KEYS.backgroundSpeed,
+                value
+            );
 
-            };
+
+            applyBackgroundSpeed(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   BACKGROUND TRANSPARENCY
+===================================================== */
+
+function applyBackgroundTransparency(
+    value
+) {
+
+    value =
+        Number(value);
+
+
+    if (
+        !Number.isFinite(value)
+    ) {
+
+        value =
+            defaultSettings.backgroundTransparency;
 
     }
 
@@ -475,260 +977,48 @@ function initializeSettings() {
     if (backgroundTransparency) {
 
         backgroundTransparency.value =
-            getValue(
-                SETTINGS.backgroundTransparency,
-                DEFAULTS.backgroundTransparency
-            );
+            value;
+
+    }
 
 
-        backgroundTransparency.oninput =
-            function() {
+    if (backgroundTransparencyValue) {
 
-                setValue(
-                    SETTINGS.backgroundTransparency,
+        backgroundTransparencyValue.textContent =
+            `${value}%`;
+
+    }
+
+
+    document.documentElement.style.setProperty(
+        "--checker-opacity",
+        value / 100
+    );
+
+}
+
+
+if (backgroundTransparency) {
+
+    backgroundTransparency.addEventListener(
+        "input",
+        function() {
+
+            const value =
+                Number(
                     backgroundTransparency.value
                 );
 
 
-                updateBackground();
-
-            };
-
-    }
-
-
-    updateBackground();
-
-
-    document
-        .querySelectorAll(
-            "[data-setting-reset]"
-        )
-        .forEach(function(button) {
-
-            button.onclick =
-                function(event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-
-                    resetSetting(
-                        button.getAttribute(
-                            "data-setting-reset"
-                        )
-                    );
-
-                };
-
-        });
-
-}
-
-
-/* =========================================================
-   RESET SETTINGS
-   ========================================================= */
-
-function resetSetting(name) {
-
-    switch (name) {
-
-        case "openInBlank":
-
-            setValue(
-                SETTINGS.openInBlank,
-                DEFAULTS.openInBlank
+            setSetting(
+                SETTINGS_KEYS.backgroundTransparency,
+                value
             );
 
-            break;
 
-
-        case "animatedBackground":
-
-            setValue(
-                SETTINGS.animatedBackground,
-                DEFAULTS.animatedBackground
+            applyBackgroundTransparency(
+                value
             );
-
-            break;
-
-
-        case "backgroundSpeed":
-
-            setValue(
-                SETTINGS.backgroundSpeed,
-                DEFAULTS.backgroundSpeed
-            );
-
-            break;
-
-
-        case "backgroundTransparency":
-
-            setValue(
-                SETTINGS.backgroundTransparency,
-                DEFAULTS.backgroundTransparency
-            );
-
-            break;
-
-
-        case "theme":
-
-            setValue(
-                SETTINGS.theme,
-                DEFAULTS.theme
-            );
-
-            setTheme(
-                DEFAULTS.theme
-            );
-
-            break;
-
-    }
-
-
-    initializeSettings();
-
-}
-
-
-/* =========================================================
-   BACKGROUND
-   ========================================================= */
-
-function updateBackground() {
-
-    const animated =
-        getValue(
-            SETTINGS.animatedBackground,
-            DEFAULTS.animatedBackground
-        ) === "true";
-
-
-    const speed =
-        Number(
-            getValue(
-                SETTINGS.backgroundSpeed,
-                DEFAULTS.backgroundSpeed
-            )
-        );
-
-
-    const transparency =
-        Number(
-            getValue(
-                SETTINGS.backgroundTransparency,
-                DEFAULTS.backgroundTransparency
-            )
-        );
-
-
-    document.body.classList.toggle(
-        "background-animation-disabled",
-        !animated
-    );
-
-
-    document.documentElement.style.setProperty(
-        "--background-speed",
-        Number.isFinite(speed)
-            ? speed
-            : DEFAULTS.backgroundSpeed
-    );
-
-
-    document.documentElement.style.setProperty(
-        "--background-transparency",
-        Number.isFinite(transparency)
-            ? transparency
-            : DEFAULTS.backgroundTransparency
-    );
-
-}
-
-
-/* =========================================================
-   SETTINGS PANEL
-   ========================================================= */
-
-function initializeSettingsPanel() {
-
-    const panel =
-        document.getElementById(
-            "settingsPanel"
-        );
-
-
-    const open =
-        document.getElementById(
-            "settingsButton"
-        );
-
-
-    const close =
-        document.getElementById(
-            "settingsClose"
-        );
-
-
-    if (open && panel) {
-
-        open.addEventListener(
-            "click",
-            function(event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-                panel.classList.add(
-                    "open"
-                );
-
-            }
-        );
-
-    }
-
-
-    if (close && panel) {
-
-        close.addEventListener(
-            "click",
-            function(event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-                panel.classList.remove(
-                    "open"
-                );
-
-            }
-        );
-
-    }
-
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Escape" &&
-                panel
-            ) {
-
-                panel.classList.remove(
-                    "open"
-                );
-
-            }
 
         }
     );
@@ -736,30 +1026,125 @@ function initializeSettingsPanel() {
 }
 
 
-/* =========================================================
+/* =====================================================
+   RESET BUTTONS
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".setting-reset"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function(event) {
+
+                    event.stopPropagation();
+
+
+                    const setting =
+                        button.dataset.reset;
+
+
+                    if (
+                        setting ===
+                        "openInBlank"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.openInBlank,
+                            defaultSettings.openInBlank
+                        );
+
+
+                        applyOpenInBlank(
+                            defaultSettings.openInBlank
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "animatedBackground"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.animatedBackground,
+                            defaultSettings.animatedBackground
+                        );
+
+
+                        applyAnimatedBackground(
+                            defaultSettings.animatedBackground
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "backgroundSpeed"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.backgroundSpeed,
+                            defaultSettings.backgroundSpeed
+                        );
+
+
+                        applyBackgroundSpeed(
+                            defaultSettings.backgroundSpeed
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "backgroundTransparency"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.backgroundTransparency,
+                            defaultSettings.backgroundTransparency
+                        );
+
+
+                        applyBackgroundTransparency(
+                            defaultSettings.backgroundTransparency
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
    FAVORITES
-   ========================================================= */
+===================================================== */
 
 function getFavorites() {
 
     try {
 
-        const saved =
-            localStorage.getItem(
-                SETTINGS.favorites
+        const favorites =
+            JSON.parse(
+                localStorage.getItem(
+                    FAVORITES_KEY
+                )
             );
 
 
-        if (!saved) {
-            return [];
-        }
-
-
-        const favorites =
-            JSON.parse(saved);
-
-
-        return Array.isArray(favorites)
+        return Array.isArray(
+            favorites
+        )
             ? favorites
             : [];
 
@@ -772,25 +1157,23 @@ function getFavorites() {
 }
 
 
-function saveFavorites(favorites) {
+function saveFavorites(
+    favorites
+) {
 
-    try {
-
-        localStorage.setItem(
-            SETTINGS.favorites,
-            JSON.stringify(favorites)
-        );
-
-    } catch {
-
-        /* Storage unavailable */
-
-    }
+    localStorage.setItem(
+        FAVORITES_KEY,
+        JSON.stringify(
+            favorites
+        )
+    );
 
 }
 
 
-function isFavorite(gameId) {
+function isFavorite(
+    gameId
+) {
 
     return getFavorites().includes(
         gameId
@@ -799,7 +1182,13 @@ function isFavorite(gameId) {
 }
 
 
-function toggleFavorite(gameId) {
+/* =====================================================
+   TOGGLE FAVORITE
+===================================================== */
+
+function toggleFavorite(
+    gameId
+) {
 
     let favorites =
         getFavorites();
@@ -838,112 +1227,216 @@ function toggleFavorite(gameId) {
 
     renderFavorites();
 
+    updateFavoriteCount();
+
 }
 
 
-/* =========================================================
-   FAVORITE BUTTONS
-   ========================================================= */
+/* =====================================================
+   UPDATE FAVORITE BUTTONS
+===================================================== */
 
 function updateFavoriteButtons() {
 
-    const favorites =
-        getFavorites();
+    const cards =
+        document.querySelectorAll(
+            ".game-card[data-game-id]"
+        );
 
 
-    document
-        .querySelectorAll(
-            ".favorite-button"
-        )
-        .forEach(function(button) {
+    cards.forEach(
+        function(card) {
 
-            const card =
-                button.closest(
-                    ".game-card"
+            const gameId =
+                card.dataset.gameId;
+
+
+            const button =
+                card.querySelector(
+                    ".favorite-button"
                 );
 
 
-            if (!card) {
+            if (!button) {
                 return;
             }
 
 
-            const gameId =
-                card.getAttribute(
-                    "data-game-id"
-                );
-
-
-            const active =
-                favorites.includes(
+            const favorite =
+                isFavorite(
                     gameId
                 );
 
 
             button.textContent =
-                active
+                favorite
                     ? "★"
                     : "☆";
 
 
             button.classList.toggle(
                 "favorited",
-                active
+                favorite
             );
+
+
+            const gameName =
+                card.dataset.gameName ||
+                "game";
 
 
             button.setAttribute(
                 "aria-label",
-                active
-                    ? "Remove from favorites"
-                    : "Add to favorites"
+
+                favorite
+
+                    ? `Remove ${gameName} from favorites`
+
+                    : `Add ${gameName} to favorites`
+
             );
 
-        });
+
+            button.title =
+
+                favorite
+
+                    ? "Remove from favorites"
+
+                    : "Add to favorites";
+
+        }
+    );
 
 }
 
 
-/* =========================================================
-   FAVORITES SECTION
-   ========================================================= */
+/* =====================================================
+   FAVORITE COUNT
+===================================================== */
 
-function renderFavorites() {
+function updateFavoriteCount() {
 
-    const grid =
-        document.getElementById(
-            "favoritesGrid"
-        );
-
-
-    const empty =
-        document.getElementById(
-            "emptyFavorites"
-        );
-
-
-    if (!grid) {
+    if (!favoriteCount) {
         return;
     }
 
 
-    grid.innerHTML = "";
+    favoriteCount.textContent =
+        getFavorites().length;
+
+}
+
+
+/* =====================================================
+   CREATE FAVORITE CARD
+===================================================== */
+
+function createFavoriteCard(
+    originalCard
+) {
+
+    const clone =
+        originalCard.cloneNode(
+            true
+        );
+
+
+    clone.onclick =
+        function() {
+
+            launchGame(
+                clone.dataset.gameUrl
+            );
+
+        };
+
+
+    const favoriteButton =
+        clone.querySelector(
+            ".favorite-button"
+        );
+
+
+    if (favoriteButton) {
+
+        favoriteButton.onclick =
+            function(event) {
+
+                event.stopPropagation();
+
+
+                toggleFavorite(
+                    clone.dataset.gameId
+                );
+
+            };
+
+    }
+
+
+    const playButton =
+        clone.querySelector(
+            ".play-small"
+        );
+
+
+    if (playButton) {
+
+        playButton.onclick =
+            function(event) {
+
+                event.stopPropagation();
+
+
+                launchGame(
+                    clone.dataset.gameUrl
+                );
+
+            };
+
+    }
+
+
+    return clone;
+
+}
+
+
+/* =====================================================
+   RENDER FAVORITES
+===================================================== */
+
+function renderFavorites() {
+
+    if (!favoritesGrid) {
+        return;
+    }
 
 
     const favorites =
         getFavorites();
 
 
-    document
-        .querySelectorAll(
-            "#gamesGrid .game-card"
-        )
-        .forEach(function(card) {
+    const allCards =
+        document.querySelectorAll(
+            "#gamesGrid .game-card[data-game-id]"
+        );
+
+
+    favoritesGrid.innerHTML =
+        "";
+
+
+    let foundFavorites =
+        0;
+
+
+    allCards.forEach(
+        function(card) {
 
             const gameId =
-                card.getAttribute(
-                    "data-game-id"
-                );
+                card.dataset.gameId;
 
 
             if (
@@ -957,262 +1450,77 @@ function renderFavorites() {
             }
 
 
-            const copy =
-                card.cloneNode(true);
-
-
-            const gameUrl =
-                card.getAttribute(
-                    "data-game-url"
+            const favoriteCard =
+                createFavoriteCard(
+                    card
                 );
 
 
-            copy.removeAttribute(
-                "onclick"
+            favoritesGrid.appendChild(
+                favoriteCard
             );
 
 
-            copy.addEventListener(
-                "click",
-                function(event) {
+            foundFavorites++;
 
-                    if (
-                        event.target.closest(
-                            ".favorite-button"
-                        ) ||
-                        event.target.closest(
-                            ".play-small"
-                        )
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    launchGame(
-                        gameUrl
-                    );
-
-                }
-            );
-
-
-            const favoriteButton =
-                copy.querySelector(
-                    ".favorite-button"
-                );
-
-
-            if (favoriteButton) {
-
-                favoriteButton.addEventListener(
-                    "click",
-                    function(event) {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-
-                        toggleFavorite(
-                            gameId
-                        );
-
-                    }
-                );
-
-            }
-
-
-            const play =
-                copy.querySelector(
-                    ".play-small"
-                );
-
-
-            if (play) {
-
-                play.addEventListener(
-                    "click",
-                    function(event) {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-
-                        launchGame(
-                            gameUrl
-                        );
-
-                    }
-                );
-
-            }
-
-
-            grid.appendChild(
-                copy
-            );
-
-        });
-
-
-    const count =
-        grid.children.length;
-
-
-    if (empty) {
-
-        empty.style.display =
-            count === 0
-                ? "block"
-                : "none";
-
-    }
-
-
-    updateFavoriteButtons();
-
-    updateImageLines();
-
-}
-
-
-/* =========================================================
-   IMAGE / RED ACCENT LINE
-   ========================================================= */
-
-function updateImageLine(image) {
-
-    const card =
-        image.closest(
-            ".game-card"
-        );
-
-
-    if (!card) {
-        return;
-    }
-
-
-    const line =
-        card.querySelector(
-            ".red-accent"
-        );
-
-
-    if (!line) {
-        return;
-    }
+        }
+    );
 
 
     if (
-        image.complete &&
-        image.naturalWidth > 0
+        foundFavorites === 0
     ) {
 
-        line.style.display =
-            "none";
+        if (emptyFavorites) {
 
-    } else {
+            favoritesGrid.appendChild(
+                emptyFavorites
+            );
 
-        line.style.display =
-            "block";
+
+            emptyFavorites.style.display =
+                "flex";
+
+        }
 
     }
 
 }
 
 
-function updateImageLines() {
-
-    document
-        .querySelectorAll(
-            ".game-card .game-image img"
-        )
-        .forEach(function(image) {
-
-            updateImageLine(
-                image
-            );
-
-
-            if (
-                image.dataset.lineListener
-            ) {
-
-                return;
-
-            }
-
-
-            image.dataset.lineListener =
-                "true";
-
-
-            image.addEventListener(
-                "load",
-                function() {
-
-                    updateImageLine(
-                        image
-                    );
-
-                }
-            );
-
-
-            image.addEventListener(
-                "error",
-                function() {
-
-                    updateImageLine(
-                        image
-                    );
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
+/* =====================================================
    NAVIGATION
-   ========================================================= */
+===================================================== */
 
-function setActiveNav(section) {
+/*
+ * Favorites section
+ *     -> Favorites highlighted.
+ *
+ * Games section
+ *     -> Games highlighted.
+ */
 
-    const favorites =
-        document.getElementById(
-            "favoritesNav"
-        );
+function setActiveNav(
+    sectionId
+) {
 
+    if (favoritesNav) {
 
-    const games =
-        document.getElementById(
-            "gamesNav"
-        );
-
-
-    if (favorites) {
-
-        favorites.classList.toggle(
+        favoritesNav.classList.toggle(
             "active",
-            section === "favorites"
+            sectionId ===
+                "favorites"
         );
 
     }
 
 
-    if (games) {
+    if (gamesNav) {
 
-        games.classList.toggle(
+        gamesNav.classList.toggle(
             "active",
-            section === "games"
+            sectionId ===
+                "games"
         );
 
     }
@@ -1220,11 +1528,17 @@ function setActiveNav(section) {
 }
 
 
-function scrollToSection(id) {
+/* =====================================================
+   SCROLL TO SECTION
+===================================================== */
+
+function scrollToSection(
+    sectionId
+) {
 
     const section =
         document.getElementById(
-            id
+            sectionId
         );
 
 
@@ -1234,259 +1548,190 @@ function scrollToSection(id) {
 
 
     section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+
+        behavior:
+            "smooth",
+
+        block:
+            "start"
+
     });
 
 
     setActiveNav(
-        id
+        sectionId
     );
 
 
     history.replaceState(
+
         null,
+
         "",
-        "#" + id
+
+        `#${sectionId}`
+
     );
 
 }
 
 
-function initializeNavigation() {
+/* =====================================================
+   FAVORITES NAVIGATION
+===================================================== */
 
-    const favorites =
-        document.getElementById(
-            "favoritesNav"
-        );
+if (favoritesNav) {
 
+    favoritesNav.addEventListener(
+        "click",
+        function(event) {
 
-    const games =
-        document.getElementById(
-            "gamesNav"
-        );
+            event.preventDefault();
 
-
-    if (favorites) {
-
-        favorites.addEventListener(
-            "click",
-            function(event) {
-
-                event.preventDefault();
-
-                scrollToSection(
-                    "favorites"
-                );
-
-            }
-        );
-
-    }
+            event.stopPropagation();
 
 
-    if (games) {
-
-        games.addEventListener(
-            "click",
-            function(event) {
-
-                event.preventDefault();
-
-                scrollToSection(
-                    "games"
-                );
-
-            }
-        );
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        function() {
-
-            const sections =
-                document.querySelectorAll(
-                    "main section[id]"
-                );
-
-
-            const marker =
-                window.scrollY +
-                Math.min(
-                    window.innerHeight * 0.28,
-                    220
-                );
-
-
-            let current =
-                "games";
-
-
-            sections.forEach(
-                function(section) {
-
-                    if (
-                        marker >=
-                        section.offsetTop
-                    ) {
-
-                        current =
-                            section.id;
-
-                    }
-
-                }
+            scrollToSection(
+                "favorites"
             );
 
-
-            if (
-                current === "welcome"
-            ) {
-
-                current =
-                    "games";
-
-            }
-
-
-            setActiveNav(
-                current
-            );
-
-        },
-        {
-            passive: true
         }
     );
 
 }
 
 
-/* =========================================================
-   GAME CARDS
-   ========================================================= */
+/* =====================================================
+   GAMES NAVIGATION
+===================================================== */
 
-function initializeGameCards() {
+if (gamesNav) {
 
-    document
-        .querySelectorAll(
-            "#gamesGrid .game-card"
-        )
-        .forEach(function(card) {
+    gamesNav.addEventListener(
+        "click",
+        function(event) {
 
-            const gameId =
-                card.getAttribute(
-                    "data-game-id"
-                );
+            event.preventDefault();
+
+            event.stopPropagation();
 
 
-            const gameUrl =
-                card.getAttribute(
-                    "data-game-url"
-                );
-
-
-            card.addEventListener(
-                "click",
-                function(event) {
-
-                    if (
-                        event.target.closest(
-                            ".favorite-button"
-                        ) ||
-                        event.target.closest(
-                            ".play-small"
-                        )
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    launchGame(
-                        gameUrl
-                    );
-
-                }
+            scrollToSection(
+                "games"
             );
 
-
-            const favorite =
-                card.querySelector(
-                    ".favorite-button"
-                );
-
-
-            if (favorite) {
-
-                favorite.addEventListener(
-                    "click",
-                    function(event) {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-
-                        toggleFavorite(
-                            gameId
-                        );
-
-                    }
-                );
-
-            }
-
-
-            const play =
-                card.querySelector(
-                    ".play-small"
-                );
-
-
-            if (play) {
-
-                play.addEventListener(
-                    "click",
-                    function(event) {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-
-                        launchGame(
-                            gameUrl
-                        );
-
-                    }
-                );
-
-            }
-
-        });
+        }
+    );
 
 }
 
 
-/* =========================================================
-   GAME LAUNCHER
-   ========================================================= */
+/* =====================================================
+   SECTIONS
+===================================================== */
 
-function launchGame(gameUrl) {
+const sections = [
 
-    const blank =
-        getValue(
-            SETTINGS.openInBlank,
-            DEFAULTS.openInBlank
-        ) === "true";
+    document.getElementById(
+        "favorites"
+    ),
+
+    document.getElementById(
+        "games"
+    )
+
+].filter(
+    Boolean
+);
 
 
-    if (!blank) {
+/* =====================================================
+   SCROLL DETECTION
+===================================================== */
+
+function updateNavigationFromScroll() {
+
+    const marker =
+        window.scrollY +
+        Math.min(
+            window.innerHeight * 0.28,
+            220
+        );
+
+
+    /*
+     * Default to Games when we're above
+     * the Favorites section.
+     */
+
+    let currentSection =
+        "games";
+
+
+    sections.forEach(
+        function(section) {
+
+            if (
+                marker >=
+                section.offsetTop
+            ) {
+
+                currentSection =
+                    section.id;
+
+            }
+
+        }
+    );
+
+
+    setActiveNav(
+        currentSection
+    );
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    updateNavigationFromScroll,
+    {
+        passive: true
+    }
+);
+
+
+window.addEventListener(
+    "resize",
+    updateNavigationFromScroll
+);
+
+
+window.addEventListener(
+    "load",
+    updateNavigationFromScroll
+);
+
+
+/* =====================================================
+   GAME LAUNCHING
+===================================================== */
+
+function launchGame(
+    gameUrl
+) {
+
+    const openInBlank =
+        getSetting(
+
+            SETTINGS_KEYS.openInBlank,
+
+            defaultSettings.openInBlank
+
+        );
+
+
+    if (!openInBlank) {
 
         window.location.href =
             gameUrl;
@@ -1496,14 +1741,14 @@ function launchGame(gameUrl) {
     }
 
 
-    const win =
+    const gameWindow =
         window.open(
             "about:blank",
             "_blank"
         );
 
 
-    if (!win) {
+    if (!gameWindow) {
 
         window.location.href =
             gameUrl;
@@ -1513,14 +1758,14 @@ function launchGame(gameUrl) {
     }
 
 
-    win.document.open();
+    gameWindow.document.open();
 
 
-    win.document.write(`
+    gameWindow.document.write(`
 
         <!DOCTYPE html>
 
-        <html>
+        <html lang="en">
 
         <head>
 
@@ -1531,18 +1776,22 @@ function launchGame(gameUrl) {
                 content="width=device-width, initial-scale=1.0"
             >
 
-            <title>Rofleq's Hideout</title>
+            <title>
+                Rofleq's Hideout
+            </title>
 
             <style>
 
                 html,
                 body {
 
-                    width: 100%;
-                    height: 100%;
-
                     margin: 0;
+
                     padding: 0;
+
+                    width: 100%;
+
+                    height: 100%;
 
                     overflow: hidden;
 
@@ -1554,6 +1803,7 @@ function launchGame(gameUrl) {
                 iframe {
 
                     width: 100%;
+
                     height: 100%;
 
                     border: 0;
@@ -1581,93 +1831,212 @@ function launchGame(gameUrl) {
     `);
 
 
-    win.document.close();
+    gameWindow.document.close();
 
 }
 
 
-/* =========================================================
-   STARTUP
-   ========================================================= */
+/* =====================================================
+   INITIALIZE SETTINGS
+===================================================== */
 
-function startSite() {
+function initializeSettings() {
 
-    initializeSettings();
+    applyOpenInBlank(
 
-    initializeTheme();
+        getSetting(
 
-    initializeSettingsPanel();
+            SETTINGS_KEYS.openInBlank,
 
-    initializeNavigation();
+            defaultSettings.openInBlank
 
-    initializeGameCards();
+        )
+
+    );
+
+
+    applyAnimatedBackground(
+
+        getSetting(
+
+            SETTINGS_KEYS.animatedBackground,
+
+            defaultSettings.animatedBackground
+
+        )
+
+    );
+
+
+    applyBackgroundSpeed(
+
+        getSetting(
+
+            SETTINGS_KEYS.backgroundSpeed,
+
+            defaultSettings.backgroundSpeed
+
+        )
+
+    );
+
+
+    applyBackgroundTransparency(
+
+        getSetting(
+
+            SETTINGS_KEYS.backgroundTransparency,
+
+            defaultSettings.backgroundTransparency
+
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   INITIALIZE FAVORITES
+===================================================== */
+
+function initializeFavorites() {
 
     updateFavoriteButtons();
 
     renderFavorites();
 
-    updateImageLines();
+    updateFavoriteCount();
+
+}
+
+
+/* =====================================================
+   INITIALIZE THEME
+===================================================== */
+
+function initializeTheme() {
+
+    const saved =
+        localStorage.getItem(
+            THEME_KEY
+        );
 
 
     /*
-       Always start on Favorites.
-       This intentionally ignores whatever section
-       was previously in the URL.
-    */
+     * If an old version had a custom theme,
+     * return it to the normal red theme.
+     */
 
-    setTimeout(
-        function() {
+    if (
+        saved === "custom"
+    ) {
 
-            const favorites =
-                document.getElementById(
-                    "favorites"
-                );
+        localStorage.setItem(
+            THEME_KEY,
+            "0"
+        );
 
 
-            if (favorites) {
+        applyTheme(
+            0,
+            false
+        );
 
-                favorites.scrollIntoView({
-                    behavior: "instant",
-                    block: "start"
-                });
 
+        return;
+
+    }
+
+
+    const index =
+        getThemeIndex();
+
+
+    applyTheme(
+        index,
+        false
+    );
+
+}
+
+
+/* =====================================================
+   PAGE STARTUP
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        initializeSettings();
+
+        initializeFavorites();
+
+        initializeTheme();
+
+
+        /*
+         * =================================================
+         * ALWAYS OPEN ON FAVORITES
+         * =================================================
+         *
+         * This intentionally ignores whatever section
+         * was previously open and always starts at
+         * Favorites.
+         */
+
+        setTimeout(
+            function() {
+
+                const favorites =
+                    document.getElementById(
+                        "favorites"
+                    );
+
+
+                if (favorites) {
+
+                    favorites.scrollIntoView({
+
+                        behavior:
+                            "instant",
+
+                        block:
+                            "start"
+
+                    });
+
+                }
+
+
+                /*
+                 * Favorites should be highlighted
+                 * immediately.
+                 */
 
                 setActiveNav(
                     "favorites"
                 );
 
 
+                /*
+                 * Make the URL match the section.
+                 */
+
                 history.replaceState(
+
                     null,
+
                     "",
+
                     "#favorites"
+
                 );
 
-            }
+            },
+            50
+        );
 
-        },
-        50
-    );
-
-}
-
-
-/* =========================================================
-   DOM READY
-   ========================================================= */
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        startSite
-    );
-
-} else {
-
-    startSite();
-
-}
+    }
+);
