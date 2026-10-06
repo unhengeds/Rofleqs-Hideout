@@ -1,20 +1,4 @@
-/* =====================================================
-   RESET
-===================================================== */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
 :root {
-
     --bg: #050505;
     --sidebar: #080808;
     --panel: #0d0d0d;
@@ -29,46 +13,43 @@
     --red: #e3262e;
     --red2: #ff4048;
 
-    --border:
-        rgba(227, 38, 46, 0.28);
+    --border: rgba(227, 38, 46, 0.28);
 
-    --checker-opacity: 0.018;
+    /* Red checkerboard */
+    --checker-opacity: 0.08;
     --checker-speed: 6s;
 }
 
+/* =========================================================
+   GLOBAL
+   ========================================================= */
 
-/* =====================================================
-   BODY
-===================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-html {
+html,
+body {
+    width: 100%;
     min-height: 100%;
 }
 
 body {
-
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
     font-family:
         Arial,
         Helvetica,
         sans-serif;
-
-    background:
-        var(--bg);
-
-    color:
-        var(--text);
-
-    min-height:
-        100vh;
-
-    overflow-x:
-        hidden;
+    overflow-x: hidden;
 }
 
-
-/* =====================================================
-   MOVING CHECKERBOARD
-===================================================== */
+/* =========================================================
+   MOVING RED CHECKERBOARD BACKGROUND
+   ========================================================= */
 
 body::before {
     content: "";
@@ -87,7 +68,6 @@ body::before {
             transparent 75%,
             rgba(227, 38, 46, var(--checker-opacity)) 75%
         ),
-
         linear-gradient(
             45deg,
             rgba(227, 38, 46, var(--checker-opacity)) 25%,
@@ -96,1486 +76,1054 @@ body::before {
             rgba(227, 38, 46, var(--checker-opacity)) 75%
         );
 
-    background-size:
-        80px 80px;
-
+    background-size: 80px 80px;
     background-position:
         0 0,
         40px 40px;
 
     animation:
-        checkerMove var(--checker-speed) linear infinite;
+        checkerMove var(--checker-speed)
+        linear infinite;
 }
 
+@keyframes checkerMove {
+    from {
+        background-position:
+            0 0,
+            40px 40px;
+    }
 
-/* =====================================================
-   DARK OVERLAY
-===================================================== */
+    to {
+        background-position:
+            80px 80px,
+            120px 120px;
+    }
+}
+
+/* Dark overlay above checkerboard */
 
 body::after {
-
     content: "";
 
     position: fixed;
-
     inset: 0;
 
     z-index: -1;
-
     pointer-events: none;
 
     background:
-
         radial-gradient(
             circle at 50% 20%,
-            rgba(227,38,46,0.025),
+            rgba(227, 38, 46, 0.025),
             transparent 45%
         ),
-
-        rgba(5,5,5,0.72);
+        rgba(5, 5, 5, 0.72);
 }
+
+/* Disable animated background */
 
 body.background-disabled::before {
     display: none;
 }
 
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
 
-@keyframes checkerMove {
-
-    from {
-        transform:
-            translate(0, 0);
-    }
-
-    to {
-        transform:
-            translate(80px, 80px);
-    }
-
+::-webkit-scrollbar {
+    width: 8px;
 }
 
+::-webkit-scrollbar-track {
+    background: #080808;
+}
 
-/* =====================================================
+::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--red);
+}
+
+/* =========================================================
    SIDEBAR
-===================================================== */
+   ========================================================= */
 
 .sidebar {
-
     position: fixed;
 
     left: 0;
-
     top: 0;
+    bottom: 0;
 
     width: 240px;
 
-    height: 100vh;
-
-    background:
-        rgba(8,8,8,0.95);
+    background: rgba(8, 8, 8, 0.96);
 
     border-right:
-        1px solid var(--red);
+        1px solid
+        rgba(255, 255, 255, 0.06);
 
-    padding:
-        25px 18px;
+    z-index: 20;
 
     display: flex;
-
     flex-direction: column;
-
-    z-index: 50;
 }
 
-
-/* =====================================================
+/* =========================================================
    LOGO
-===================================================== */
+   ========================================================= */
 
-.logo {
+.logo-area {
+    height: 75px;
 
     display: flex;
-
-    justify-content: center;
-
     align-items: center;
 
-    width: 100%;
-
-    padding:
-        5px 0;
-
-    margin-bottom:
-        5px;
-}
-
-
-.logo-image {
-
-    width:
-        170px;
-
-    height:
-        auto;
-
-    max-height:
-        155px;
-
-    object-fit:
-        contain;
-
-    display:
-        block;
-
-    filter:
-        drop-shadow(
-            0 0 12px
-            rgba(227,38,46,0.15)
-        );
-}
-
-
-.version-text {
-
-    text-align:
-        center;
-
-    color:
-        #666;
-
-    font-size:
-        9px;
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.5px;
-
-    margin-bottom:
-        32px;
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-.nav-title {
-
-    color:
-        #6d3033;
-
-    font-size:
-        11px;
-
-    font-weight:
-        bold;
-
-    letter-spacing:
-        1.5px;
-
-    text-transform:
-        uppercase;
-
-    padding:
-        0 12px;
-
-    margin-bottom:
-        10px;
-}
-
-
-.nav-item {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        12px;
-
-    padding:
-        12px;
-
-    border-radius:
-        9px;
-
-    color:
-        var(--muted);
-
-    text-decoration:
-        none;
-
-    margin-bottom:
-        5px;
-
-    font-size:
-        14px;
-
-    transition:
-        0.2s;
-}
-
-
-.nav-item:hover {
-
-    color:
-        white;
-
-    background:
-        rgba(227,38,46,0.10);
-}
-
-
-.nav-item.active {
-
-    color:
-        white;
-
-    background:
-        rgba(227,38,46,0.14);
-
-    border-left:
-        3px solid var(--red);
-}
-
-
-.nav-icon {
-
-    width:
-        20px;
-
-    text-align:
-        center;
-
-    font-size:
-        17px;
-}
-
-
-/* =====================================================
-   SIDEBAR FOOTER
-===================================================== */
-
-.sidebar-bottom {
-
-    margin-top:
-        auto;
-
-    padding:
-        15px 10px 5px;
-
-    color:
-        #555;
-
-    font-size:
-        11px;
-
-    line-height:
-        1.5;
-}
-
-
-.sidebar-bottom .red-text {
-
-    color:
-        var(--red2);
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.main {
-
-    margin-left:
-        240px;
-
-    min-height:
-        100vh;
-}
-
-
-/* =====================================================
-   TOPBAR
-===================================================== */
-
-.topbar {
-
-    height:
-        75px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    padding:
-        0 35px;
+    padding: 0 22px;
 
     border-bottom:
-        1px solid var(--red);
-
-    background:
-        rgba(5,5,5,0.92);
-
-    position:
-        relative;
-
-    z-index:
-        40;
-}
-
-
-.topbar-title {
-
-    font-size:
-        14px;
-
-    font-weight:
-        700;
-}
-
-
-.topbar-title .red {
-
-    color:
-        var(--red2);
-}
-
-
-.topbar-title .green {
-
-    color:
-        var(--green2);
-}
-
-
-/* =====================================================
-   TOP RIGHT
-===================================================== */
-
-.topbar-right {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        14px;
-
-    position:
-        relative;
-}
-
-
-/* =====================================================
-   ONLINE STATUS
-===================================================== */
-
-.status {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        8px;
-
-    color:
-        #777;
-
-    font-size:
-        12px;
-}
-
-
-.status-dot {
-
-    width:
-        8px;
-
-    height:
-        8px;
-
-    border-radius:
-        50%;
-
-    background:
-        var(--green);
-
-    box-shadow:
-        0 0 10px var(--green);
-}
-
-
-/* =====================================================
-   SETTINGS BUTTON
-===================================================== */
-
-.settings-button {
-
-    width:
-        38px;
-
-    height:
-        38px;
-
-    border:
         1px solid
-        rgba(227,38,46,0.35);
+        rgba(255, 255, 255, 0.06);
+}
 
-    border-radius:
-        9px;
+.logo {
+    font-size: 20px;
+    font-weight: 900;
 
-    background:
-        rgba(227,38,46,0.08);
+    letter-spacing: -0.5px;
 
-    color:
-        #aaa;
+    color: #ffffff;
+}
 
-    font-size:
-        20px;
+.logo span {
+    color: var(--red);
+}
 
-    cursor:
-        pointer;
+/* =========================================================
+   SIDEBAR NAV
+   ========================================================= */
 
-    display:
-        flex;
+.sidebar-content {
+    flex: 1;
 
-    align-items:
-        center;
+    padding: 24px 14px;
+}
 
-    justify-content:
-        center;
+.nav-label {
+    padding:
+        0 10px
+        10px;
+
+    color: #555;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 13px;
+
+    margin-bottom: 5px;
+
+    border-radius: 6px;
+
+    color: #999;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
 
     transition:
-        0.2s;
+        background 0.15s ease,
+        color 0.15s ease;
 }
 
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+}
 
-.settings-button:hover {
+.nav-item.active {
+    background:
+        rgba(227, 38, 46, 0.12);
 
-    color:
-        white;
+    color: #ffffff;
+
+    border-left:
+        2px solid
+        var(--red);
+}
+
+.nav-icon {
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+    padding: 18px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+}
+
+.version {
+    color: #555;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   MAIN AREA
+   ========================================================= */
+
+.main {
+    margin-left: 240px;
+
+    min-height: 100vh;
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    position: sticky;
+
+    top: 0;
+
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
 
     background:
-        rgba(227,38,46,0.18);
+        rgba(5, 5, 5, 0.9);
 
-    border-color:
-        var(--red2);
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 10;
+}
+
+.topbar-title {
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+/* =========================================================
+   ONLINE STATUS
+   ========================================================= */
+
+.online-status {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: #777;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.online-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--green);
 
     box-shadow:
-        0 0 16px
-        rgba(227,38,46,0.16);
+        0 0 8px
+        rgba(32, 214, 90, 0.6);
 }
 
+/* =========================================================
+   SETTINGS BUTTON
+   ========================================================= */
 
-.settings-button.open {
+.settings-button {
+    width: 36px;
+    height: 36px;
 
-    color:
-        white;
-
-    background:
-        rgba(227,38,46,0.18);
-
-    border-color:
-        var(--red2);
-}
-
-
-/* =====================================================
-   SETTINGS PANEL
-===================================================== */
-
-.settings-panel {
-
-    position:
-        absolute;
-
-    top:
-        52px;
-
-    right:
-        0;
-
-    width:
-        410px;
-
-    padding:
-        22px;
-
-    background:
-        rgba(13,13,13,0.99);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border:
         1px solid
-        rgba(227,38,46,0.45);
+        rgba(255, 255, 255, 0.08);
 
-    border-radius:
-        14px;
+    border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: #777;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.settings-button:hover {
+    color: #ffffff;
+
+    background:
+        rgba(227, 38, 46, 0.1);
+
+    border-color:
+        rgba(227, 38, 46, 0.35);
+}
+
+/* =========================================================
+   SETTINGS PANEL
+   ========================================================= */
+
+.settings-panel {
+    position: fixed;
+
+    top: 75px;
+    right: 20px;
+
+    width: 410px;
+
+    max-width:
+        calc(100vw - 40px);
+
+    padding: 22px;
+
+    background:
+        rgba(13, 13, 13, 0.98);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 8px;
 
     box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.5);
 
-        0 20px 50px
-        rgba(0,0,0,0.65),
+    z-index: 50;
 
-        0 0 25px
-        rgba(227,38,46,0.08);
-
-    opacity:
-        0;
+    opacity: 0;
+    visibility: hidden;
 
     transform:
         translateY(-8px);
 
-    pointer-events:
-        none;
-
     transition:
-        opacity 0.18s ease,
-        transform 0.18s ease;
+        opacity 0.15s ease,
+        visibility 0.15s ease,
+        transform 0.15s ease;
 }
-
 
 .settings-panel.open {
-
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
-
-    pointer-events:
-        auto;
-}
-
-
-/* =====================================================
-   SETTINGS HEADER
-===================================================== */
-
-.settings-panel-title {
-
-    color:
-        white;
-
-    font-size:
-        19px;
-
-    font-weight:
-        800;
-
-    margin-bottom:
-        5px;
-}
-
-
-.settings-panel-subtitle {
-
-    color:
-        #666;
-
-    font-size:
-        11px;
-
-    line-height:
-        1.4;
-
-    margin-bottom:
-        20px;
-}
-
-
-/* =====================================================
-   SETTING CARD
-===================================================== */
-
-.setting-box {
-
-    position:
-        relative;
-
-    padding:
-        17px;
-
-    border:
-        1px solid
-        rgba(227,38,46,0.16);
-
-    border-radius:
-        11px;
-
-    background:
-        rgba(227,38,46,0.045);
-
-    overflow:
-        hidden;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.setting-box:hover {
-
-    background:
-        rgba(227,38,46,0.09);
-
-    border-color:
-        rgba(227,38,46,0.36);
-
-    transform:
-        translateY(-1px);
-}
-
-
-.setting-row {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        15px;
-}
-
-
-.setting-name {
-
-    color:
-        #ddd;
-
-    font-size:
-        14px;
-
-    font-weight:
-        700;
-
-    margin-bottom:
-        5px;
-}
-
-
-.setting-hint {
-
-    color:
-        #666;
-
-    font-size:
-        10px;
-}
-
-
-/* =====================================================
-   SETTING DESCRIPTION
-===================================================== */
-
-.setting-description {
-
-    color:
-        #999;
-
-    font-size:
-        11px;
-
-    line-height:
-        1.5;
-
-    max-height:
-        0;
-
-    opacity:
-        0;
-
-    overflow:
-        hidden;
-
-    margin-top:
-        0;
-
-    transform:
-        translateY(-5px);
-
-    transition:
-
-        max-height 0.28s ease,
-
-        opacity 0.2s ease,
-
-        margin-top 0.28s ease,
-
-        transform 0.28s ease;
-}
-
-
-.setting-box:hover
-.setting-description {
-
-    max-height:
-        100px;
-
-    opacity:
-        1;
-
-    margin-top:
-        13px;
+    opacity: 1;
+    visibility: visible;
 
     transform:
         translateY(0);
 }
 
+.settings-title {
+    font-size: 16px;
+    font-weight: 900;
 
-/* =====================================================
+    margin-bottom: 18px;
+}
+
+.settings-section {
+    margin-bottom: 20px;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.settings-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+    color: #ddd;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.settings-description {
+    color: #666;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    margin-top: 6px;
+}
+
+/* =========================================================
    TOGGLE
-===================================================== */
+   ========================================================= */
 
 .toggle {
+    position: relative;
 
-    position:
-        relative;
+    width: 38px;
+    height: 20px;
 
-    width:
-        48px;
-
-    height:
-        26px;
-
-    flex-shrink:
-        0;
+    flex-shrink: 0;
 }
-
 
 .toggle input {
+    opacity: 0;
 
-    opacity:
-        0;
-
-    width:
-        0;
-
-    height:
-        0;
+    width: 0;
+    height: 0;
 }
 
+.toggle-slider {
+    position: absolute;
 
-.slider {
+    inset: 0;
 
-    position:
-        absolute;
+    cursor: pointer;
 
-    inset:
-        0;
+    background: #252525;
 
-    cursor:
-        pointer;
-
-    background:
-        #252525;
-
-    border:
-        1px solid #444;
-
-    border-radius:
-        20px;
+    border-radius: 20px;
 
     transition:
-        0.2s;
+        background 0.2s ease;
 }
 
+.toggle-slider::before {
+    content: "";
 
-.slider::before {
+    position: absolute;
 
-    content:
-        "";
+    width: 14px;
+    height: 14px;
 
-    position:
-        absolute;
+    left: 3px;
+    top: 3px;
 
-    width:
-        18px;
+    background: #777;
 
-    height:
-        18px;
-
-    left:
-        3px;
-
-    top:
-        3px;
-
-    border-radius:
-        50%;
-
-    background:
-        #777;
+    border-radius: 50%;
 
     transition:
-        0.2s;
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
-
-.toggle input:checked + .slider {
-
+.toggle input:checked + .toggle-slider {
     background:
-        var(--green);
-
-    border-color:
-        var(--green);
-
-    box-shadow:
-        0 0 10px
-        rgba(32,214,90,0.15);
+        rgba(227, 38, 46, 0.45);
 }
 
-
-.toggle input:checked
-+ .slider::before {
-
+.toggle input:checked + .toggle-slider::before {
     transform:
-        translateX(22px);
+        translateX(18px);
 
-    background:
-        #06100a;
+    background: var(--red);
 }
 
+/* =========================================================
+   RANGE SLIDERS
+   ========================================================= */
 
-/* =====================================================
-   BACKGROUND RANGE SETTINGS
-===================================================== */
+.range-row {
+    display: flex;
+    align-items: center;
 
-.background-extra {
-    display: none;
+    gap: 12px;
 }
-
-.background-extra.visible {
-    display: block;
-}
-
-
-/* =====================================================
-   RANGE
-===================================================== */
 
 .range-value {
+    min-width: 40px;
 
-    color:
-        var(--green2);
+    text-align: right;
 
-    font-size:
-        11px;
+    color: #777;
 
-    font-weight:
-        700;
-
-    min-width:
-        42px;
-
-    text-align:
-        right;
+    font-size: 10px;
+    font-weight: 700;
 }
-
 
 input[type="range"] {
+    flex: 1;
 
-    width:
-        100%;
+    appearance: none;
 
-    margin-top:
-        15px;
+    height: 3px;
 
-    accent-color:
-        var(--red);
+    background: #292929;
 
-    cursor:
-        pointer;
+    border-radius: 3px;
+
+    outline: none;
 }
 
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
 
-/* =====================================================
-   CONTENT
-===================================================== */
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: var(--red);
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 8px
+        rgba(227, 38, 46, 0.3);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--red);
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
 
 .content {
-
-    padding:
-        45px 35px 30px;
-
-    max-width:
-        1500px;
-
-    margin:
-        0 auto;
+    padding: 38px 30px 50px;
 }
-
-
-/* =====================================================
-   WELCOME
-===================================================== */
 
 .welcome {
-
-    margin-bottom:
-        50px;
+    margin-bottom: 42px;
 }
 
+.welcome-label {
+    margin-bottom: 9px;
+
+    color: var(--red);
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
 
 .welcome h1 {
+    margin-bottom: 10px;
 
-    font-size:
-        clamp(34px, 5vw, 58px);
+    font-size: 34px;
+    font-weight: 900;
 
-    line-height:
-        1;
-
-    margin-bottom:
-        12px;
-
-    font-weight:
-        900;
-
-    letter-spacing:
-        -2px;
+    letter-spacing: -1.5px;
 }
-
-
-.welcome h1 .red {
-    color:
-        var(--red2);
-}
-
-
-.welcome h1 .green {
-    color:
-        var(--green2);
-}
-
 
 .welcome p {
+    max-width: 620px;
 
-    color:
-        #666;
+    color: #777;
 
-    font-size:
-        13px;
+    font-size: 13px;
+
+    line-height: 1.7;
 }
 
+/* =========================================================
+   GAMES HEADER
+   ========================================================= */
 
-/* =====================================================
-   SECTION HEADER
-===================================================== */
+.games-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-.section-header {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        15px;
-
-    margin-bottom:
-        20px;
+    margin-bottom: 18px;
 }
 
-
-.section-title {
-
-    color:
-        white;
-
-    font-size:
-        14px;
-
-    font-weight:
-        800;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        1px;
+.games-title {
+    font-size: 15px;
+    font-weight: 900;
 }
 
+.games-count {
+    color: #555;
 
-.section-line {
+    font-size: 10px;
+    font-weight: 700;
 
-    flex:
-        1;
-
-    height:
-        1px;
-
-    background:
-        rgba(227,38,46,0.25);
+    letter-spacing: 0.5px;
 }
 
+/* =========================================================
+   GAMES GRID
+   ========================================================= */
 
-/* =====================================================
-   GAME GRID
-===================================================== */
-
-.game-grid {
-
-    display:
-        grid;
+.games-grid {
+    display: grid;
 
     grid-template-columns:
         repeat(
             auto-fill,
-            minmax(230px, 1fr)
+            minmax(250px, 1fr)
         );
 
-    gap:
-        20px;
+    gap: 18px;
 }
 
-
-/* =====================================================
+/* =========================================================
    GAME CARD
-===================================================== */
+   ========================================================= */
 
 .game-card {
+    position: relative;
+
+    overflow: hidden;
 
     background:
-        rgba(13,13,13,0.94);
+        rgba(13, 13, 13, 0.94);
 
     border:
         1px solid
-        rgba(227,38,46,0.25);
+        rgba(255, 255, 255, 0.07);
 
-    border-radius:
-        12px;
+    border-radius: 7px;
 
-    overflow:
-        hidden;
-
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
-
 .game-card:hover {
-
     transform:
-        translateY(-4px);
+        translateY(-3px);
 
     border-color:
-        rgba(227,38,46,0.65);
+        rgba(227, 38, 46, 0.45);
 
     box-shadow:
         0 12px 30px
-        rgba(0,0,0,0.45);
+        rgba(0, 0, 0, 0.35);
 }
 
-
-/* =====================================================
+/* =========================================================
    GAME IMAGE
-===================================================== */
+   ========================================================= */
 
 .game-image {
+    position: relative;
 
-    height:
-        145px;
+    width: 100%;
 
-    position:
-        relative;
+    height: 170px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
-    background:
-        #080808;
+    background: #101010;
 }
 
-
 .game-image::before {
+    content: "";
 
-    content:
-        "";
+    position: absolute;
 
-    position:
-        absolute;
+    inset: 0;
 
-    inset:
-        0;
+    z-index: 1;
 
-    z-index:
-        1;
-
-    pointer-events:
-        none;
+    pointer-events: none;
 
     background:
-
+        linear-gradient(
+            rgba(0, 0, 0, 0.08),
+            rgba(0, 0, 0, 0.2)
+        ),
         linear-gradient(
             90deg,
-            rgba(227,38,46,0.04) 1px,
+            rgba(255, 255, 255, 0.025) 1px,
             transparent 1px
         ),
-
         linear-gradient(
-            rgba(227,38,46,0.04) 1px,
+            rgba(255, 255, 255, 0.025) 1px,
             transparent 1px
         );
 
     background-size:
+        100% 100%,
+        20px 20px,
         20px 20px;
 }
 
-
-/* =====================================================
-   MINECRAFT IMAGE
-===================================================== */
+/* =========================================================
+   MINECRAFT THUMBNAIL
+   ========================================================= */
 
 .minecraft-thumbnail {
+    position: relative;
 
-    position:
-        relative;
+    z-index: 0;
 
-    z-index:
-        0;
+    width: 100%;
+    height: 100%;
 
-    width:
-        100%;
+    display: block;
 
-    height:
-        100%;
+    object-fit: cover;
 
-    display:
-        block;
-
-    object-fit:
-        cover;
-
-    object-position:
-        center;
+    object-position: center;
 
     transition:
         transform 0.2s ease;
 }
 
-
 .game-card:hover
 .minecraft-thumbnail {
-
     transform:
         scale(1.025);
 }
 
-
-/* =====================================================
+/* =========================================================
    RED ACCENT
-===================================================== */
+   ========================================================= */
 
 .red-accent {
+    position: absolute;
 
-    position:
-        absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-    z-index:
-        2;
+    height: 3px;
 
-    top:
-        12px;
-
-    right:
-        12px;
-
-    width:
-        8px;
-
-    height:
-        8px;
-
-    border-radius:
-        50%;
+    z-index: 2;
 
     background:
-        var(--red2);
-
-    box-shadow:
-        0 0 12px
-        rgba(255,64,72,0.75);
+        linear-gradient(
+            90deg,
+            var(--red),
+            var(--red2)
+        );
 }
 
-
-/* =====================================================
+/* =========================================================
    GAME INFO
-===================================================== */
+   ========================================================= */
 
 .game-info {
-
-    padding:
-        16px;
+    padding: 17px;
 }
-
 
 .game-title {
+    margin-bottom: 5px;
 
-    color:
-        white;
-
-    font-size:
-        16px;
-
-    font-weight:
-        800;
-
-    margin-bottom:
-        3px;
+    font-size: 15px;
+    font-weight: 900;
 }
-
 
 .game-meta {
+    color: #666;
 
-    color:
-        #666;
+    font-size: 10px;
+    font-weight: 700;
 
-    font-size:
-        11px;
-
-    margin-bottom:
-        14px;
+    letter-spacing: 0.4px;
 }
 
-
-/* =====================================================
+/* =========================================================
    PLAY BUTTON
-===================================================== */
+   ========================================================= */
 
 .play-small {
+    float: right;
 
-    width:
-        100%;
+    margin-top: -25px;
 
     padding:
-        10px;
+        6px 10px;
 
     border:
         1px solid
-        rgba(32,214,90,0.35);
+        rgba(227, 38, 46, 0.3);
 
-    border-radius:
-        7px;
+    border-radius: 4px;
 
     background:
-        rgba(32,214,90,0.08);
+        rgba(227, 38, 46, 0.08);
 
-    color:
-        var(--green2);
+    color: #ddd;
 
-    font-size:
-        11px;
+    font-size: 9px;
+    font-weight: 900;
 
-    font-weight:
-        800;
-
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
-        0.2s;
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
 }
-
 
 .play-small:hover {
-
     background:
-        rgba(32,214,90,0.16);
+        var(--red);
 
     border-color:
-        var(--green);
+        var(--red);
 
-    box-shadow:
-        0 0 15px
-        rgba(32,214,90,0.12);
+    color: #ffffff;
 }
 
-
-/* =====================================================
+/* =========================================================
    FOOTER
-===================================================== */
+   ========================================================= */
 
-footer {
+.main-footer {
+    margin-top: 60px;
 
-    margin-top:
-        55px;
-
-    padding:
-        25px 0;
+    padding-top: 22px;
 
     border-top:
         1px solid
-        rgba(227,38,46,0.15);
+        rgba(255, 255, 255, 0.06);
 
-    color:
-        #444;
+    color: #444;
 
-    font-size:
-        11px;
+    font-size: 10px;
 
-    text-align:
-        center;
+    line-height: 1.6;
 }
 
-
-footer span {
-
-    color:
-        var(--red);
-
-    margin:
-        0 5px;
+.main-footer span {
+    color: #666;
 }
 
+/* =========================================================
+   SETTINGS HIDDEN CONTROLS
+   ========================================================= */
 
-/* =====================================================
-   MOBILE
-===================================================== */
+.settings-control.hidden {
+    display: none;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
 
 @media (max-width: 800px) {
-
     .sidebar {
-
-        width:
-            190px;
+        width: 200px;
     }
 
     .main {
-
-        margin-left:
-            190px;
+        margin-left: 200px;
     }
 
     .content {
-
         padding:
-            35px 22px 25px;
+            30px 22px 40px;
     }
 
     .topbar {
-
         padding:
             0 22px;
     }
 
+    .welcome h1 {
+        font-size: 29px;
+    }
+
+    .games-grid {
+        grid-template-columns:
+            repeat(
+                auto-fill,
+                minmax(210px, 1fr)
+            );
+    }
 }
 
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
 
 @media (max-width: 500px) {
-
     .sidebar {
+        position: relative;
 
-        width:
-            65px;
+        width: 100%;
+        height: auto;
 
+        min-height: 0;
+
+        border-right: none;
+
+        border-bottom:
+            1px solid
+            rgba(255, 255, 255, 0.06);
+    }
+
+    .logo-area {
+        height: 60px;
+    }
+
+    .sidebar-content {
         padding:
-            15px 8px;
+            8px 12px 12px;
     }
 
-    .logo-image {
-
-        width:
-            50px;
-    }
-
-    .version-text,
-    .nav-title,
-    .nav-item span:not(.nav-icon),
-    .sidebar-bottom {
-
-        display:
-            none;
+    .nav-label {
+        display: none;
     }
 
     .nav-item {
+        display: inline-flex;
 
-        justify-content:
-            center;
+        width: auto;
 
-        padding:
-            12px 5px;
+        margin-right: 4px;
+        margin-bottom: 0;
+    }
+
+    .sidebar-footer {
+        display: none;
     }
 
     .main {
-
-        margin-left:
-            65px;
+        margin-left: 0;
     }
 
     .topbar {
+        height: 60px;
 
         padding:
-            0 15px;
+            0 16px;
     }
 
-    .status {
-
-        display:
-            none;
+    .topbar-title {
+        font-size: 12px;
     }
 
-    .settings-panel {
-
-        position:
-            fixed;
-
-        top:
-            65px;
-
-        right:
-            10px;
-
-        left:
-            10px;
-
-        width:
-            auto;
-
-        max-height:
-            calc(100vh - 80px);
-
-        overflow-y:
-            auto;
+    .online-status {
+        display: none;
     }
 
     .content {
-
         padding:
-            30px 15px 20px;
+            25px 16px 35px;
     }
 
-    .game-grid {
-
-        grid-template-columns:
-            1fr;
+    .welcome {
+        margin-bottom: 30px;
     }
 
+    .welcome h1 {
+        font-size: 27px;
+    }
+
+    .welcome p {
+        font-size: 12px;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-image {
+        height: 190px;
+    }
+
+    .settings-panel {
+        top: 68px;
+        right: 10px;
+
+        width:
+            calc(100vw - 20px);
+    }
 }
+
+/* =========================================================
+   RED CHECKERBOARD — EXTRA VISIBILITY
+   ========================================================= */
+
+/*
+   The checkerboard uses the site's red color:
+
+   #e3262e
+
+   Change --checker-opacity above if you want to adjust
+   how visible the red squares are.
+
+   Examples:
+
+   0.03 = very subtle
+   0.05 = subtle
+   0.08 = visible
+   0.12 = strong
+   0.18 = very strong
+*/
