@@ -27,7 +27,9 @@ const backgroundTransparency =
     document.getElementById("backgroundTransparency");
 
 const backgroundTransparencyValue =
-    document.getElementById("backgroundTransparencyValue");
+    document.getElementById(
+        "backgroundTransparencyValue"
+    );
 
 const background =
     document.querySelector(".background");
@@ -91,14 +93,17 @@ if (savedOpenBlank === null) {
 }
 
 
-openBlankToggle.addEventListener("change", () => {
+openBlankToggle.addEventListener(
+    "change",
+    () => {
 
-    localStorage.setItem(
-        "openInBlank",
-        openBlankToggle.checked
-    );
+        localStorage.setItem(
+            "openInBlank",
+            openBlankToggle.checked
+        );
 
-});
+    }
+);
 
 
 /* =========================
@@ -106,7 +111,9 @@ openBlankToggle.addEventListener("change", () => {
 ========================= */
 
 const savedAnimated =
-    localStorage.getItem("animatedBackground");
+    localStorage.getItem(
+        "animatedBackground"
+    );
 
 
 if (savedAnimated === null) {
@@ -164,7 +171,9 @@ animatedBackgroundToggle.addEventListener(
 ========================= */
 
 const savedSpeed =
-    localStorage.getItem("backgroundSpeed");
+    localStorage.getItem(
+        "backgroundSpeed"
+    );
 
 
 if (savedSpeed === null) {
@@ -289,13 +298,11 @@ function launchGame(path) {
     }
 
 
-    /*
-        Create a blank page and place the
-        game inside it with an iframe.
-    */
-
     const newWindow =
-        window.open("about:blank", "_blank");
+        window.open(
+            "about:blank",
+            "_blank"
+        );
 
 
     if (!newWindow) {
