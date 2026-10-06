@@ -13,21 +13,21 @@
         }
 
         :root {
-            --bg: #050806;
-            --sidebar: #080d09;
-            --panel: #0b120d;
-            --panel2: #101a12;
+            --bg: #050505;
+            --sidebar: #080808;
+            --panel: #0d0d0d;
+            --panel2: #121212;
 
-            --text: #f1fff3;
-            --muted: #849889;
+            --text: #ffffff;
+            --muted: #8d8d8d;
 
-            --green: #21c45b;
+            --green: #20d65a;
             --green2: #39ff78;
 
             --red: #e3262e;
             --red2: #ff4048;
 
-            --border: rgba(42, 255, 102, 0.12);
+            --border: rgba(227, 38, 46, 0.25);
         }
 
         body {
@@ -45,7 +45,7 @@
             width: 240px;
             height: 100vh;
             background: var(--sidebar);
-            border-right: 1px solid var(--border);
+            border-right: 1px solid var(--red);
             padding: 28px 18px;
             display: flex;
             flex-direction: column;
@@ -64,24 +64,28 @@
             width: 40px;
             height: 40px;
             border-radius: 10px;
+
+            /* RED GRADIENT */
             background: linear-gradient(
                 135deg,
-                var(--green),
-                var(--red)
+                #ff4048,
+                #a50008
             );
+
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 900;
             font-size: 18px;
-            box-shadow: 0 0 20px rgba(33, 196, 91, 0.25);
+
+            box-shadow: 0 0 20px rgba(227, 38, 46, 0.35);
         }
 
         .logo-text {
             font-size: 20px;
             font-weight: 800;
-            color: white;
+            color: var(--red2);
         }
 
         .logo-text span {
@@ -89,7 +93,7 @@
         }
 
         .nav-title {
-            color: #536257;
+            color: #6d3033;
             font-size: 11px;
             font-weight: bold;
             letter-spacing: 1.5px;
@@ -113,13 +117,13 @@
 
         .nav-item:hover {
             color: white;
-            background: rgba(33, 196, 91, 0.08);
+            background: rgba(227, 38, 46, 0.10);
         }
 
         .nav-item.active {
             color: white;
-            background: rgba(33, 196, 91, 0.13);
-            border-left: 3px solid var(--green);
+            background: rgba(227, 38, 46, 0.14);
+            border-left: 3px solid var(--red);
         }
 
         .nav-icon {
@@ -131,7 +135,7 @@
         .sidebar-bottom {
             margin-top: auto;
             padding: 15px 10px 5px;
-            color: #48564b;
+            color: #555;
             font-size: 11px;
             line-height: 1.5;
         }
@@ -149,8 +153,11 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 35px;
-            border-bottom: 1px solid var(--border);
-            background: rgba(5, 8, 6, 0.92);
+
+            /* RED LINE */
+            border-bottom: 1px solid var(--red);
+
+            background: rgba(5, 5, 5, 0.92);
         }
 
         .topbar-title {
@@ -159,14 +166,14 @@
         }
 
         .topbar-title strong {
-            color: var(--green2);
+            color: var(--red2);
         }
 
         .status {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #7d8e81;
+            color: #7d7d7d;
             font-size: 12px;
         }
 
@@ -195,8 +202,9 @@
             margin-bottom: 10px;
         }
 
+        /* RED "Rofleq's" */
         .welcome h1 span {
-            color: var(--green2);
+            color: var(--red2);
         }
 
         .welcome p {
@@ -217,11 +225,13 @@
             font-weight: 800;
         }
 
+        /* RED SECTION LINE */
         .section-line {
             height: 1px;
             flex: 1;
-            background: var(--border);
+            background: var(--red);
             margin-left: 20px;
+            box-shadow: 0 0 8px rgba(227, 38, 46, 0.25);
         }
 
         /* GAME GRID */
@@ -235,10 +245,14 @@
         .game-card {
             position: relative;
             background: var(--panel);
-            border: 1px solid var(--border);
+
+            /* RED BORDER */
+            border: 1px solid rgba(227, 38, 46, 0.35);
+
             border-radius: 13px;
             overflow: hidden;
             cursor: pointer;
+
             transition:
                 transform 0.2s,
                 border-color 0.2s,
@@ -247,28 +261,32 @@
 
         .game-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(57, 255, 120, 0.45);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+            border-color: var(--red2);
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.35),
+                0 0 20px rgba(227, 38, 46, 0.12);
         }
 
         /* GAME IMAGE */
         .game-image {
             height: 145px;
+
+            /* RED GRADIENT */
             background:
                 radial-gradient(
                     circle at 30% 30%,
-                    rgba(57, 255, 120, 0.18),
+                    rgba(255, 64, 72, 0.20),
                     transparent 35%
                 ),
                 radial-gradient(
                     circle at 70% 70%,
-                    rgba(227, 38, 46, 0.16),
+                    rgba(180, 0, 10, 0.18),
                     transparent 35%
                 ),
                 linear-gradient(
                     135deg,
-                    #07140b,
-                    #111111
+                    #180608,
+                    #0a0a0a
                 );
 
             display: flex;
@@ -281,19 +299,22 @@
             content: "";
             position: absolute;
             inset: 0;
+
+            /* RED GRID LINES */
             background:
                 linear-gradient(
                     90deg,
                     transparent 49%,
-                    rgba(255,255,255,0.025) 50%,
+                    rgba(227, 38, 46, 0.08) 50%,
                     transparent 51%
                 ),
                 linear-gradient(
                     0deg,
                     transparent 49%,
-                    rgba(255,255,255,0.025) 50%,
+                    rgba(227, 38, 46, 0.08) 50%,
                     transparent 51%
                 );
+
             background-size: 32px 32px;
         }
 
@@ -303,14 +324,16 @@
             font-size: 30px;
             font-weight: 900;
             color: white;
+
             text-shadow:
                 3px 3px 0 #111,
-                0 0 18px rgba(57, 255, 120, 0.25);
+                0 0 18px rgba(255, 64, 72, 0.25);
+
             letter-spacing: -1px;
         }
 
         .minecraft-logo span {
-            color: var(--green2);
+            color: var(--red2);
         }
 
         /* CARD INFO */
@@ -330,13 +353,16 @@
             margin-bottom: 15px;
         }
 
+        /* GREEN PLAY BUTTON */
         .play-small {
             width: 100%;
             border: none;
             border-radius: 7px;
             padding: 10px;
+
             background: var(--green);
             color: #031007;
+
             font-weight: 900;
             cursor: pointer;
             transition: 0.2s;
@@ -344,7 +370,7 @@
 
         .play-small:hover {
             background: var(--green2);
-            box-shadow: 0 0 18px rgba(57, 255, 120, 0.25);
+            box-shadow: 0 0 18px rgba(57, 255, 120, 0.35);
         }
 
         /* RED ACCENT */
@@ -363,9 +389,13 @@
         footer {
             margin-top: 55px;
             padding: 25px 0;
-            color: #465349;
+
+            color: #555;
+
+            /* RED LINE */
+            border-top: 1px solid var(--red);
+
             font-size: 12px;
-            border-top: 1px solid var(--border);
         }
 
         footer span {
@@ -374,12 +404,13 @@
 
         /* MOBILE */
         @media (max-width: 800px) {
+
             .sidebar {
                 position: relative;
                 width: 100%;
                 height: auto;
                 border-right: none;
-                border-bottom: 1px solid var(--border);
+                border-bottom: 1px solid var(--red);
                 padding: 18px;
             }
 
@@ -424,25 +455,42 @@
     <aside class="sidebar">
 
         <div class="logo">
-            <div class="logo-icon">R</div>
+
+            <div class="logo-icon">
+                R
+            </div>
 
             <div class="logo-text">
-                Rofleq's <span>Hideout</span>
+                <span>Rofleq's</span> <span style="color: #39ff78;">Hideout</span>
             </div>
+
         </div>
+
 
         <div class="nav-title">
             Menu
         </div>
 
+
         <a href="#" class="nav-item active">
-            <div class="nav-icon">⌂</div>
+
+            <div class="nav-icon">
+                ⌂
+            </div>
+
             Home
+
         </a>
 
+
         <div class="sidebar-bottom">
+
             Rofleq's Hideout<br>
-            <span style="color:#21c45b;">Game Hub</span>
+
+            <span style="color:#e3262e;">
+                Game Hub
+            </span>
+
         </div>
 
     </aside>
@@ -455,12 +503,19 @@
         <header class="topbar">
 
             <div class="topbar-title">
-                Welcome to <strong>Rofleq's Hideout</strong>
+
+                Welcome to
+                <strong>Rofleq's Hideout</strong>
+
             </div>
 
+
             <div class="status">
+
                 <div class="status-dot"></div>
+
                 Online
+
             </div>
 
         </header>
@@ -502,7 +557,8 @@
                     <!-- MINECRAFT -->
                     <article
                         class="game-card"
-                        onclick="launchGame('games/eaglercraft-1.9.4/index.html')">
+                        onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
+                    >
 
                         <div class="game-image">
 
@@ -525,9 +581,11 @@
                                 1.9.4
                             </div>
 
+
                             <button
                                 class="play-small"
-                                onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')">
+                                onclick="event.stopPropagation(); launchGame('games/eaglercraft-1.9.4/index.html')"
+                            >
                                 ▶ PLAY
                             </button>
 
@@ -541,7 +599,11 @@
 
 
             <footer>
-                Rofleq's Hideout <span>•</span> More games coming soon.
+
+                Rofleq's Hideout
+                <span>•</span>
+                More games coming soon.
+
             </footer>
 
         </div>
@@ -550,9 +612,11 @@
 
 
     <script>
+
         function launchGame(path) {
             window.location.href = path;
         }
+
     </script>
 
 </body>
