@@ -1,0 +1,242 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameHub</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">🎮</div>
+            <div class="logo-text">GameHub</div>
+        </div>
+
+        <div class="nav-title">Library</div>
+
+        <nav class="nav">
+
+            <button class="active" data-category="all">
+                <span class="nav-icon">⌂</span>
+                <span>Home</span>
+            </button>
+
+            <button data-category="action">
+                <span class="nav-icon">⚔</span>
+                <span>Action</span>
+            </button>
+
+            <button data-category="horror">
+                <span class="nav-icon">☠</span>
+                <span>Horror</span>
+            </button>
+
+            <button data-category="platformer">
+                <span class="nav-icon">▣</span>
+                <span>Platformers</span>
+            </button>
+
+            <button data-category="3d">
+                <span class="nav-icon">◆</span>
+                <span>3D Games</span>
+            </button>
+
+            <button data-category="favorites">
+                <span class="nav-icon">★</span>
+                <span>Favorites</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="version">
+                GAMEHUB v1.0
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="search">
+                <span class="search-icon">⌕</span>
+
+                <input
+                    id="search"
+                    type="search"
+                    placeholder="Search games..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="top-actions">
+
+                <button class="top-button" title="Notifications">
+                    ♢
+                </button>
+
+                <button class="top-button" title="Settings">
+                    ⚙
+                </button>
+
+                <div class="profile">
+                    <div class="avatar">G</div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <!-- FEATURED GAME -->
+            <section class="featured">
+
+                <div class="featured-content">
+
+                    <div class="featured-label">
+                        Featured Game
+                    </div>
+
+                    <h1>THE BACKROOMS</h1>
+
+                    <p>
+                        Explore an endless maze of yellow rooms.
+                        Find your way out before something finds you.
+                    </p>
+
+                    <button
+                        class="play-button"
+                        data-launch="games/backrooms/index.html">
+
+                        ▶ PLAY NOW
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- BROWSE -->
+            <div class="section-heading">
+
+                <h2>Browse Games</h2>
+
+                <button id="clearSearch">
+                    Clear Search
+                </button>
+
+            </div>
+
+
+            <!-- CATEGORIES -->
+            <div class="categories">
+
+                <button
+                    class="category active"
+                    data-filter="all">
+
+                    All Games
+
+                </button>
+
+                <button
+                    class="category"
+                    data-filter="action">
+
+                    ⚔ Action
+
+                </button>
+
+                <button
+                    class="category"
+                    data-filter="horror">
+
+                    ☠ Horror
+
+                </button>
+
+                <button
+                    class="category"
+                    data-filter="platformer">
+
+                    ▣ Platformer
+
+                </button>
+
+                <button
+                    class="category"
+                    data-filter="3d">
+
+                    ◆ 3D
+
+                </button>
+
+            </div>
+
+
+            <!-- GAME GRID -->
+            <div class="games-grid" id="games">
+
+                <!-- BACKROOMS -->
+                <article
+                    class="game-card"
+                    data-title="The Backrooms"
+                    data-category="horror 3d"
+                    data-favorite="true"
+                    data-launch="games/backrooms/index.html">
+
+                    <div
+                        class="game-image"
+                        style="--game1:#b08b2e; --game2:#3b321d;">
+
+                        <div class="game-number">
+                            01
+                        </div>
+
+                    </div>
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            The Backrooms
+                        </div>
+
+                        <div class="game-meta">
+                            <span>Horror</span>
+                            <span>3D</span>
+                        </div>
+
+                        <button
+                            class="play-small"
+                            data-launch="games/backrooms/index.html">
+
+                            PLAY
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- NEON RUNNER -->
+                <
