@@ -2460,3 +2460,15 @@ input[type="range"] {
     }
 
 }
+
+/* ================================
+   GAME SEARCH FILTER
+================================ */
+
+.game-card.search-hidden {
+    display: none !important;
+}
+
+.game-search-empty {
+    display: none;
+}
