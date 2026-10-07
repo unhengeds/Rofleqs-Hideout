@@ -1,1657 +1,301 @@
 /* =========================================================
    ROFLEQ'S HIDEOUT
-   SETTINGS + THEMES + FAVORITES + SEARCH
+   MAIN STYLES
 ========================================================= */
 
+:root {
 
-/* =========================================================
-   DEFAULT SETTINGS
-========================================================= */
+    --bg: #050505;
 
-const DEFAULTS = {
+    --sidebar: #080808;
 
-    openInBlank: true,
+    --panel: #0d0d0d;
 
-    animatedBackground: true,
+    --panel2: #121212;
 
-    backgroundSpeed: 6,
+    --text: #ffffff;
 
-    backgroundTransparency: 8,
+    --muted: #8d8d8d;
 
-    theme: 0,
+    --theme-primary: #e3262e;
 
-    customColor: "#e3262e"
+    --theme-bright: #ff4048;
 
-};
+    --theme-rgb: 227, 38, 46;
 
+    --border: rgba(227, 38, 46, 0.28);
 
-/* =========================================================
-   STORAGE
-========================================================= */
+    --green: #20d65a;
 
-const STORAGE_KEYS = {
+    --green2: #39ff78;
 
-    openInBlank:
-        "rofleq_openInBlank",
+    --checker-opacity: 0.08;
 
-    animatedBackground:
-        "rofleq_animatedBackground",
+    --checker-speed: 6s;
 
-    backgroundSpeed:
-        "rofleq_backgroundSpeed",
-
-    backgroundTransparency:
-        "rofleq_backgroundTransparency",
-
-    theme:
-        "rofleq_theme",
-
-    customColor:
-        "rofleq_customColor",
-
-    themeUnlocked:
-        "rofleq_themeUnlocked",
-
-    favorites:
-        "rofleq_favorites"
-
-};
-
-
-/* =========================================================
-   THEMES
-========================================================= */
-
-const THEMES = [
-
-    {
-        name: "Red",
-        primary: "#e3262e",
-        bright: "#ff4048",
-        rgb: "227, 38, 46"
-    },
-
-    {
-        name: "Green",
-        primary: "#20d65a",
-        bright: "#39ff78",
-        rgb: "32, 214, 90"
-    },
-
-    {
-        name: "Purple",
-        primary: "#9b4dff",
-        bright: "#bd7cff",
-        rgb: "155, 77, 255"
-    },
-
-    {
-        name: "Blue",
-        primary: "#2787ff",
-        bright: "#55a1ff",
-        rgb: "39, 135, 255"
-    },
-
-    {
-        name: "Orange",
-        primary: "#ff7a18",
-        bright: "#ff9b4a",
-        rgb: "255, 122, 24"
-    }
-
-];
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const siteLogo =
-    document.getElementById("siteLogo");
-
-const settingsButton =
-    document.getElementById("settingsButton");
-
-const settingsPanel =
-    document.getElementById("settingsPanel");
-
-const closeSettings =
-    document.getElementById("closeSettings");
-
-const openInBlankToggle =
-    document.getElementById("openInBlankToggle");
-
-const animatedBackgroundToggle =
-    document.getElementById(
-        "animatedBackgroundToggle"
-    );
-
-const backgroundSpeed =
-    document.getElementById(
-        "backgroundSpeed"
-    );
-
-const backgroundSpeedBox =
-    document.getElementById(
-        "backgroundSpeedBox"
-    );
-
-const backgroundSpeedValue =
-    document.getElementById(
-        "backgroundSpeedValue"
-    );
-
-const backgroundTransparency =
-    document.getElementById(
-        "backgroundTransparency"
-    );
-
-const backgroundTransparencyBox =
-    document.getElementById(
-        "backgroundTransparencyBox"
-    );
-
-const backgroundTransparencyValue =
-    document.getElementById(
-        "backgroundTransparencyValue"
-    );
-
-const themeName =
-    document.getElementById("themeName");
-
-const customThemeColor =
-    document.getElementById(
-        "customThemeColor"
-    );
-
-const customColorLabel =
-    document.getElementById(
-        "customColorLabel"
-    );
-
-const themeNotification =
-    document.getElementById(
-        "themeNotification"
-    );
-
-const favoritesGrid =
-    document.getElementById(
-        "favoritesGrid"
-    );
-
-const gamesGrid =
-    document.getElementById(
-        "gamesGrid"
-    );
-
-const emptyFavorites =
-    document.getElementById(
-        "emptyFavorites"
-    );
-
-const favoriteCount =
-    document.getElementById(
-        "favoriteCount"
-    );
-
-const favoritesNav =
-    document.getElementById(
-        "favoritesNav"
-    );
-
-const gamesNav =
-    document.getElementById(
-        "gamesNav"
-    );
-
-const gameSearch =
-    document.getElementById(
-        "gameSearch"
-    );
-
-const searchClear =
-    document.getElementById(
-        "searchClear"
-    );
-
-const searchResultsText =
-    document.getElementById(
-        "searchResultsText"
-    );
-
-
-/* =========================================================
-   STORAGE HELPERS
-========================================================= */
-
-function getStorage(key, fallback) {
-
-    const value =
-        localStorage.getItem(key);
-
-    if (value === null) {
-        return fallback;
-    }
-
-    return value;
-
-}
-
-
-function getBoolean(key, fallback) {
-
-    const value =
-        localStorage.getItem(key);
-
-    if (value === null) {
-        return fallback;
-    }
-
-    return value === "true";
-
-}
-
-
-function getNumber(key, fallback) {
-
-    const value =
-        localStorage.getItem(key);
-
-    if (value === null) {
-        return fallback;
-    }
-
-    const number =
-        Number(value);
-
-    return Number.isFinite(number)
-        ? number
-        : fallback;
+    --sidebar-width: 240px;
 
 }
 
 
 /* =========================================================
-   SETTINGS STATE
+   RESET
 ========================================================= */
 
-let openInBlank =
-    getBoolean(
-        STORAGE_KEYS.openInBlank,
-        DEFAULTS.openInBlank
-    );
+* {
+    box-sizing: border-box;
+}
 
-let animatedBackground =
-    getBoolean(
-        STORAGE_KEYS.animatedBackground,
-        DEFAULTS.animatedBackground
-    );
+html {
+    scroll-behavior: smooth;
+}
 
-let currentThemeIndex =
-    getNumber(
-        STORAGE_KEYS.theme,
-        DEFAULTS.theme
-    );
+body {
 
-let currentBackgroundSpeed =
-    getNumber(
-        STORAGE_KEYS.backgroundSpeed,
-        DEFAULTS.backgroundSpeed
-    );
+    margin: 0;
 
-let currentBackgroundTransparency =
-    getNumber(
-        STORAGE_KEYS.backgroundTransparency,
-        DEFAULTS.backgroundTransparency
-    );
+    min-height: 100vh;
 
-let customColor =
-    getStorage(
-        STORAGE_KEYS.customColor,
-        DEFAULTS.customColor
-    );
+    background: var(--bg);
 
-let themeUnlocked =
-    getBoolean(
-        STORAGE_KEYS.themeUnlocked,
-        false
-    );
+    color: var(--text);
 
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
 
-/* Make sure theme index is valid */
-
-if (
-    currentThemeIndex < 0 ||
-    currentThemeIndex >= THEMES.length
-) {
-
-    currentThemeIndex =
-        DEFAULTS.theme;
+    overflow-x: hidden;
 
 }
 
 
 /* =========================================================
-   THEME HELPERS
+   ANIMATED CHECKERBOARD
 ========================================================= */
 
-function hexToRgb(hex) {
+body::before {
 
-    let clean =
-        String(hex)
-            .replace("#", "")
-            .trim();
+    content: "";
 
-    if (clean.length === 3) {
+    position: fixed;
 
-        clean =
-            clean
-                .split("")
-                .map(char => char + char)
-                .join("");
+    inset: 0;
 
-    }
+    z-index: -2;
 
-    const number =
-        parseInt(
-            clean,
-            16
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            rgba(
+                var(--theme-rgb),
+                var(--checker-opacity)
+            ) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(
+                var(--theme-rgb),
+                var(--checker-opacity)
+            ) 75%
+        ),
+        linear-gradient(
+            45deg,
+            rgba(
+                var(--theme-rgb),
+                var(--checker-opacity)
+            ) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(
+                var(--theme-rgb),
+                var(--checker-opacity)
+            ) 75%
         );
 
-    if (
-        !Number.isFinite(number)
-    ) {
+    background-position:
+        0 0,
+        28px 28px;
 
-        return {
-            r: 227,
-            g: 38,
-            b: 46
-        };
+    background-size:
+        56px 56px;
 
-    }
+    animation:
+        checkerMove var(--checker-speed)
+        linear infinite;
 
-    return {
-
-        r:
-            (number >> 16) & 255,
-
-        g:
-            (number >> 8) & 255,
-
-        b:
-            number & 255
-
-    };
+    opacity: 1;
 
 }
 
 
-function applyTheme(
-    index = currentThemeIndex,
-    custom = false
-) {
+body::after {
 
-    const root =
-        document.documentElement;
+    content: "";
 
-    let primary;
-    let bright;
-    let rgb;
-    let name;
+    position: fixed;
 
-    if (custom) {
+    inset: 0;
 
-        const converted =
-            hexToRgb(customColor);
+    z-index: -1;
 
-        primary =
-            customColor;
+    pointer-events: none;
 
-        bright =
-            customColor;
-
-        rgb =
-            `${converted.r}, ${converted.g}, ${converted.b}`;
-
-        name =
-            "Custom";
-
-    } else {
-
-        const theme =
-            THEMES[index];
-
-        primary =
-            theme.primary;
-
-        bright =
-            theme.bright;
-
-        rgb =
-            theme.rgb;
-
-        name =
-            theme.name;
-
-    }
-
-    root.style.setProperty(
-        "--theme-primary",
-        primary
-    );
-
-    root.style.setProperty(
-        "--theme-bright",
-        bright
-    );
-
-    root.style.setProperty(
-        "--theme-rgb",
-        rgb
-    );
-
-    root.style.setProperty(
-        "--border",
-        `rgba(${rgb}, 0.28)`
-    );
-
-    if (themeName) {
-
-        themeName.textContent =
-            name;
-
-    }
-
-    if (customColorLabel) {
-
-        customColorLabel.textContent =
-            custom
-                ? `Custom: ${customColor}`
-                : "Custom color";
-
-    }
-
-    updateThemeButtons(
-        custom
-            ? -1
-            : index
-    );
-
-}
-
-
-/* =========================================================
-   THEME BUTTONS
-========================================================= */
-
-function updateThemeButtons(activeIndex) {
-
-    document
-        .querySelectorAll(".theme-option")
-        .forEach(button => {
-
-            const index =
-                Number(
-                    button.dataset.themeIndex
-                );
-
-            button.classList.toggle(
-                "active",
-                index === activeIndex
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   THEME NOTIFICATION
-========================================================= */
-
-let notificationTimer = null;
-
-
-function showThemeNotification() {
-
-    if (!themeNotification) {
-        return;
-    }
-
-    themeNotification.classList.add(
-        "show"
-    );
-
-    clearTimeout(
-        notificationTimer
-    );
-
-    notificationTimer =
-        setTimeout(
-            () => {
-
-                themeNotification.classList.remove(
-                    "show"
-                );
-
-            },
-            5000
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(
+                var(--theme-rgb),
+                0.07
+            ),
+            transparent 35%
         );
 
 }
 
 
-/* =========================================================
-   LOGO THEME CYCLING
-========================================================= */
+@keyframes checkerMove {
 
-function cycleTheme() {
-
-    currentThemeIndex++;
-
-    if (
-        currentThemeIndex >=
-        THEMES.length
-    ) {
-
-        /*
-         * Returning from Orange to Red.
-         * This is the point where the custom
-         * theme setting becomes unlocked.
-         */
-
-        currentThemeIndex = 0;
-
-        if (!themeUnlocked) {
-
-            themeUnlocked = true;
-
-            localStorage.setItem(
-                STORAGE_KEYS.themeUnlocked,
-                "true"
-            );
-
-            showThemeNotification();
-
-        }
-
+    from {
+        background-position:
+            0 0,
+            28px 28px;
     }
 
-    localStorage.setItem(
-        STORAGE_KEYS.theme,
-        String(currentThemeIndex)
-    );
-
-    applyTheme(
-        currentThemeIndex,
-        false
-    );
-
-}
-
-
-if (siteLogo) {
-
-    siteLogo.addEventListener(
-        "click",
-        cycleTheme
-    );
+    to {
+        background-position:
+            112px 112px,
+            140px 140px;
+    }
 
 }
 
 
 /* =========================================================
-   CUSTOM COLOR
+   SIDEBAR
 ========================================================= */
 
-if (customThemeColor) {
+.sidebar {
 
-    customThemeColor.value =
-        customColor;
+    position: fixed;
 
-    customThemeColor.addEventListener(
-        "input",
-        () => {
+    left: 0;
+    top: 0;
+    bottom: 0;
 
-            if (!themeUnlocked) {
+    width: var(--sidebar-width);
 
-                customThemeColor.value =
-                    customColor;
+    display: flex;
 
-                return;
+    flex-direction: column;
 
-            }
+    justify-content: space-between;
 
-            customColor =
-                customThemeColor.value;
+    padding: 28px 18px 20px;
 
-            localStorage.setItem(
-                STORAGE_KEYS.customColor,
-                customColor
-            );
+    background:
+        rgba(8, 8, 8, 0.96);
 
-            applyTheme(
-                currentThemeIndex,
-                true
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   THEME BUTTON CLICK
-========================================================= */
-
-document
-    .querySelectorAll(".theme-option")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                if (!themeUnlocked) {
-
-                    showThemeNotification();
-
-                    return;
-
-                }
-
-                const index =
-                    Number(
-                        button.dataset.themeIndex
-                    );
-
-                if (
-                    !Number.isFinite(index) ||
-                    !THEMES[index]
-                ) {
-                    return;
-                }
-
-                currentThemeIndex =
-                    index;
-
-                localStorage.setItem(
-                    STORAGE_KEYS.theme,
-                    String(
-                        currentThemeIndex
-                    )
-                );
-
-                applyTheme(
-                    currentThemeIndex,
-                    false
-                );
-
-            }
+    border-right:
+        1px solid
+        rgba(
+            var(--theme-rgb),
+            0.22
         );
 
-    });
+    z-index: 100;
+
+}
+
+
+.sidebar-top {
+
+    width: 100%;
+
+}
 
 
 /* =========================================================
-   SETTINGS PANEL
+   LOGO
 ========================================================= */
 
-function openSettings() {
+.logo-container {
 
-    if (!settingsPanel) {
-        return;
-    }
+    display: flex;
 
-    settingsPanel.classList.add(
-        "open"
-    );
+    align-items: center;
 
-}
+    justify-content: center;
 
-
-function closeSettingsPanel() {
-
-    if (!settingsPanel) {
-        return;
-    }
-
-    settingsPanel.classList.remove(
-        "open"
-    );
+    margin-bottom: 6px;
 
 }
 
 
-if (settingsButton) {
+.logo {
 
-    settingsButton.addEventListener(
-        "click",
-        event => {
+    width: 155px;
 
-            event.stopPropagation();
+    max-width: 100%;
 
-            if (
-                settingsPanel.classList.contains(
-                    "open"
-                )
-            ) {
+    height: auto;
 
-                closeSettingsPanel();
+    display: block;
 
-            } else {
+    cursor: pointer;
 
-                openSettings();
+    user-select: none;
 
-            }
-
-        }
-    );
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
 
 }
 
 
-if (closeSettings) {
+.logo:hover {
 
-    closeSettings.addEventListener(
-        "click",
-        closeSettingsPanel
-    );
+    transform:
+        scale(1.04)
+        rotate(-1deg);
 
-}
-
-
-/* Close when clicking outside */
-
-document.addEventListener(
-    "click",
-    event => {
-
-        if (!settingsPanel) {
-            return;
-        }
-
-        if (
-            !settingsPanel.classList.contains(
-                "open"
+    filter:
+        drop-shadow(
+            0 0 14px
+            rgba(
+                var(--theme-rgb),
+                0.45
             )
-        ) {
-            return;
-        }
-
-        const clickedInside =
-            settingsPanel.contains(
-                event.target
-            );
-
-        const clickedButton =
-            settingsButton &&
-            settingsButton.contains(
-                event.target
-            );
-
-        if (
-            !clickedInside &&
-            !clickedButton
-        ) {
-
-            closeSettingsPanel();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   ABOUT:BLANK
-========================================================= */
-
-function updateAboutBlankSetting() {
-
-    if (!openInBlankToggle) {
-        return;
-    }
-
-    openInBlankToggle.checked =
-        openInBlank;
+        );
 
 }
 
 
-if (openInBlankToggle) {
+.logo:active {
 
-    openInBlankToggle.checked =
-        openInBlank;
-
-    openInBlankToggle.addEventListener(
-        "change",
-        () => {
-
-            openInBlank =
-                openInBlankToggle.checked;
-
-            localStorage.setItem(
-                STORAGE_KEYS.openInBlank,
-                String(openInBlank)
-            );
-
-        }
-    );
+    transform:
+        scale(0.96);
 
 }
 
 
 /* =========================================================
-   BACKGROUND
+   VERSION
 ========================================================= */
 
-function updateBackground() {
+.version {
 
-    if (!animatedBackgroundToggle) {
-        return;
-    }
+    text-align: center;
 
-    animatedBackgroundToggle.checked =
-        animatedBackground;
+    color: var(--muted);
 
-    if (backgroundSpeedBox) {
+    font-size: 11px;
 
-        backgroundSpeedBox.classList.toggle(
-            "background-disabled",
-            !animatedBackground
-        );
+    letter-spacing: 0.8px;
 
-    }
-
-    if (backgroundTransparencyBox) {
-
-        backgroundTransparencyBox.classList.toggle(
-            "background-disabled",
-            !animatedBackground
-        );
-
-    }
-
-}
-
-
-function updateBackgroundSpeed() {
-
-    if (!backgroundSpeed) {
-        return;
-    }
-
-    currentBackgroundSpeed =
-        Number(
-            backgroundSpeed.value
-        );
-
-    if (backgroundSpeedValue) {
-
-        backgroundSpeedValue.textContent =
-            currentBackgroundSpeed;
-
-    }
-
-    /*
-     * 0 means stopped.
-     * Higher numbers mean faster animation.
-     */
-
-    if (
-        currentBackgroundSpeed <= 0
-    ) {
-
-        document.documentElement.style.setProperty(
-            "--checker-speed",
-            "999999s"
-        );
-
-    } else {
-
-        /*
-         * 20 = 1.5 seconds
-         * 6 = 6 seconds
-         * 1 = 14 seconds
-         */
-
-        const duration =
-            15 -
-            (
-                currentBackgroundSpeed *
-                0.675
-            );
-
-        document.documentElement.style.setProperty(
-            "--checker-speed",
-            `${Math.max(
-                1.5,
-                duration
-            )}s`
-        );
-
-    }
-
-}
-
-
-function updateBackgroundTransparency() {
-
-    if (!backgroundTransparency) {
-        return;
-    }
-
-    currentBackgroundTransparency =
-        Number(
-            backgroundTransparency.value
-        );
-
-    if (backgroundTransparencyValue) {
-
-        backgroundTransparencyValue.textContent =
-            `${currentBackgroundTransparency}%`;
-
-    }
-
-    document.documentElement.style.setProperty(
-        "--checker-opacity",
-        String(
-            currentBackgroundTransparency /
-            100
-        )
-    );
-
-}
-
-
-if (animatedBackgroundToggle) {
-
-    animatedBackgroundToggle.checked =
-        animatedBackground;
-
-    animatedBackgroundToggle.addEventListener(
-        "change",
-        () => {
-
-            animatedBackground =
-                animatedBackgroundToggle.checked;
-
-            localStorage.setItem(
-                STORAGE_KEYS.animatedBackground,
-                String(
-                    animatedBackground
-                )
-            );
-
-            updateBackground();
-
-        }
-    );
-
-}
-
-
-if (backgroundSpeed) {
-
-    backgroundSpeed.value =
-        currentBackgroundSpeed;
-
-    backgroundSpeed.addEventListener(
-        "input",
-        () => {
-
-            currentBackgroundSpeed =
-                Number(
-                    backgroundSpeed.value
-                );
-
-            localStorage.setItem(
-                STORAGE_KEYS.backgroundSpeed,
-                String(
-                    currentBackgroundSpeed
-                )
-            );
-
-            updateBackgroundSpeed();
-
-        }
-    );
-
-}
-
-
-if (backgroundTransparency) {
-
-    backgroundTransparency.value =
-        currentBackgroundTransparency;
-
-    backgroundTransparency.addEventListener(
-        "input",
-        () => {
-
-            currentBackgroundTransparency =
-                Number(
-                    backgroundTransparency.value
-                );
-
-            localStorage.setItem(
-                STORAGE_KEYS.backgroundTransparency,
-                String(
-                    currentBackgroundTransparency
-                )
-            );
-
-            updateBackgroundTransparency();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   FAVORITES
-========================================================= */
-
-function getFavorites() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(
-                STORAGE_KEYS.favorites
-            );
-
-        if (!saved) {
-            return [];
-        }
-
-        const parsed =
-            JSON.parse(saved);
-
-        if (!Array.isArray(parsed)) {
-            return [];
-        }
-
-        return parsed;
-
-    } catch (error) {
-
-        console.warn(
-            "Could not load favorites:",
-            error
-        );
-
-        return [];
-
-    }
-
-}
-
-
-let favorites =
-    getFavorites();
-
-
-function saveFavorites() {
-
-    localStorage.setItem(
-        STORAGE_KEYS.favorites,
-        JSON.stringify(
-            favorites
-        )
-    );
-
-}
-
-
-function isFavorite(gameId) {
-
-    return favorites.includes(
-        gameId
-    );
-
-}
-
-
-/* =========================================================
-   FAVORITE CARDS
-========================================================= */
-
-function createFavoriteCard(
-    originalCard
-) {
-
-    const clone =
-        originalCard.cloneNode(true);
-
-    clone.removeAttribute(
-        "onclick"
-    );
-
-    clone.classList.add(
-        "favorite-copy"
-    );
-
-    clone.addEventListener(
-        "click",
-        () => {
-
-            launchGame(
-                originalCard.dataset.gameUrl
-            );
-
-        }
-    );
-
-
-    const star =
-        clone.querySelector(
-            ".favorite-button"
-        );
-
-    if (star) {
-
-        star.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                toggleFavorite(
-                    originalCard.dataset.gameId
-                );
-
-            }
-        );
-
-    }
-
-
-    const play =
-        clone.querySelector(
-            ".play-small"
-        );
-
-    if (play) {
-
-        play.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                launchGame(
-                    originalCard.dataset.gameUrl
-                );
-
-            }
-        );
-
-    }
-
-    return clone;
-
-}
-
-
-/* =========================================================
-   UPDATE FAVORITES
-========================================================= */
-
-function updateFavoriteUI() {
-
-    if (!gamesGrid) {
-        return;
-    }
-
-    const gameCards =
-        gamesGrid.querySelectorAll(
-            ".game-card"
-        );
-
-
-    gameCards.forEach(card => {
-
-        const id =
-            card.dataset.gameId;
-
-        const star =
-            card.querySelector(
-                ".favorite-button"
-            );
-
-        const favorite =
-            isFavorite(id);
-
-        if (star) {
-
-            star.textContent =
-                favorite
-                    ? "★"
-                    : "☆";
-
-            star.classList.toggle(
-                "is-favorite",
-                favorite
-            );
-
-            star.setAttribute(
-                "aria-label",
-                favorite
-                    ? `Remove ${card.dataset.gameName} from favorites`
-                    : `Add ${card.dataset.gameName} to favorites`
-            );
-
-            star.setAttribute(
-                "title",
-                favorite
-                    ? "Remove from favorites"
-                    : "Add to favorites"
-            );
-
-        }
-
-    });
-
-
-    renderFavorites();
-
-    updateFavoriteCount();
-
-}
-
-
-function renderFavorites() {
-
-    if (!favoritesGrid) {
-        return;
-    }
-
-    favoritesGrid
-        .querySelectorAll(
-            ".favorite-copy"
-        )
-        .forEach(card => {
-            card.remove();
-        });
-
-
-    const allCards =
-        gamesGrid
-            ? Array.from(
-                gamesGrid.querySelectorAll(
-                    ".game-card"
-                )
-            )
-            : [];
-
-
-    const favoriteCards =
-        allCards.filter(
-            card =>
-                isFavorite(
-                    card.dataset.gameId
-                )
-        );
-
-
-    if (emptyFavorites) {
-
-        emptyFavorites.style.display =
-            favoriteCards.length === 0
-                ? ""
-                : "none";
-
-    }
-
-
-    favoriteCards.forEach(
-        originalCard => {
-
-            const card =
-                createFavoriteCard(
-                    originalCard
-                );
-
-            favoritesGrid.appendChild(
-                card
-            );
-
-            /*
-             * Make the copied favorite card's
-             * star match its favorite state.
-             */
-
-            const star =
-                card.querySelector(
-                    ".favorite-button"
-                );
-
-            if (star) {
-
-                star.textContent =
-                    "★";
-
-                star.classList.add(
-                    "is-favorite"
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-function updateFavoriteCount() {
-
-    if (!favoriteCount) {
-        return;
-    }
-
-    favoriteCount.textContent =
-        favorites.length;
-
-}
-
-
-/* =========================================================
-   TOGGLE FAVORITE
-========================================================= */
-
-function toggleFavorite(gameId) {
-
-    const index =
-        favorites.indexOf(
-            gameId
-        );
-
-    if (index === -1) {
-
-        favorites.push(
-            gameId
-        );
-
-    } else {
-
-        favorites.splice(
-            index,
-            1
-        );
-
-    }
-
-    saveFavorites();
-
-    updateFavoriteUI();
-
-}
-
-
-/* Make inline HTML handlers work */
-
-window.toggleFavorite =
-    toggleFavorite;
-
-
-/* =========================================================
-   GAME LAUNCHER
-========================================================= */
-
-function launchGame(url) {
-
-    if (!url) {
-        return;
-    }
-
-
-    if (!openInBlank) {
-
-        window.location.href =
-            url;
-
-        return;
-
-    }
-
-
-    /*
-     * Open a real about:blank tab first.
-     * This needs to happen immediately after
-     * the click so popup blockers are less
-     * likely to block it.
-     */
-
-    const newWindow =
-        window.open(
-            "about:blank",
-            "_blank"
-        );
-
-
-    if (!newWindow) {
-
-        /*
-         * If the browser blocks the popup,
-         * fall back to opening the game normally.
-         */
-
-        window.location.href =
-            url;
-
-        return;
-
-    }
-
-
-    try {
-
-        newWindow.document.open();
-
-        newWindow.document.write(`
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Rofleq's Hideout</title>
-    <style>
-        html,
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #000;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-        }
-    </style>
-</head>
-<body>
-    <iframe
-        src="${url.replace(/"/g, "&quot;")}"
-        allowfullscreen
-    ></iframe>
-</body>
-</html>
-        `);
-
-        newWindow.document.close();
-
-        newWindow.focus();
-
-    } catch (error) {
-
-        console.error(
-            "Could not create about:blank game window:",
-            error
-        );
-
-        try {
-
-            newWindow.location.href =
-                url;
-
-        } catch (_) {}
-
-    }
-
-}
-
-
-window.launchGame =
-    launchGame;
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function searchGames() {
-
-    if (!gameSearch || !gamesGrid) {
-        return;
-    }
-
-    const search =
-        gameSearch.value
-            .trim()
-            .toLowerCase();
-
-
-    const gameCards =
-        gamesGrid.querySelectorAll(
-            ".game-card"
-        );
-
-
-    let visibleGames = 0;
-
-
-    gameCards.forEach(
-        card => {
-
-            const name =
-                card.dataset.gameName ||
-                card.querySelector(
-                    ".game-title"
-                )?.textContent ||
-                "";
-
-
-            const version =
-                card.dataset.gameVersion ||
-                card.querySelector(
-                    ".game-meta"
-                )?.textContent ||
-                "";
-
-
-            const searchableText =
-                `${name} ${version}`
-                    .toLowerCase();
-
-
-            const matches =
-                search === "" ||
-                searchableText.includes(
-                    search
-                );
-
-
-            card.style.display =
-                matches
-                    ? ""
-                    : "none";
-
-
-            if (matches) {
-
-                visibleGames++;
-
-            }
-
-        }
-    );
-
-
-    if (searchResultsText) {
-
-        if (search === "") {
-
-            searchResultsText.textContent =
-                "";
-
-        } else if (
-            visibleGames === 0
-        ) {
-
-            searchResultsText.textContent =
-                `No games found for "${gameSearch.value}"`;
-
-        } else {
-
-            searchResultsText.textContent =
-                `${visibleGames} game${
-                    visibleGames === 1
-                        ? ""
-                        : "s"
-                } found`;
-
-        }
-
-    }
-
-
-    if (searchClear) {
-
-        searchClear.classList.toggle(
-            "visible",
-            search !== ""
-        );
-
-    }
-
-}
-
-
-if (gameSearch) {
-
-    gameSearch.addEventListener(
-        "input",
-        searchGames
-    );
-
-}
-
-
-if (searchClear) {
-
-    searchClear.addEventListener(
-        "click",
-        () => {
-
-            if (!gameSearch) {
-                return;
-            }
-
-            gameSearch.value =
-                "";
-
-            searchGames();
-
-            gameSearch.focus();
-
-        }
-    );
+    margin-bottom: 28px;
 
 }
 
@@ -1660,372 +304,2332 @@ if (searchClear) {
    NAVIGATION
 ========================================================= */
 
-function setActiveNav(
-    favoritesActive
-) {
+.sidebar-nav {
 
-    if (!favoritesNav ||
-        !gamesNav
-    ) {
-        return;
-    }
+    display: flex;
 
+    flex-direction: column;
 
-    favoritesNav.classList.toggle(
-        "active",
-        favoritesActive
-    );
-
-    gamesNav.classList.toggle(
-        "active",
-        !favoritesActive
-    );
+    gap: 8px;
 
 }
 
 
-/*
- * Track which section is on screen.
- *
- * The active navigation is intentionally
- * swapped to match the behavior requested:
- *
- * Games visible     -> Favorites highlighted
- * Favorites visible -> Games highlighted
- */
+.nav-item {
 
-const favoritesSection =
-    document.getElementById(
-        "favorites"
-    );
+    position: relative;
 
-const gamesSection =
-    document.getElementById(
-        "games"
-    );
+    min-height: 48px;
 
+    display: flex;
 
-if (
-    favoritesSection &&
-    gamesSection &&
-    "IntersectionObserver" in window
-) {
+    align-items: center;
 
-    const observer =
-        new IntersectionObserver(
-            entries => {
+    gap: 12px;
 
-                entries.forEach(
-                    entry => {
+    padding: 0 12px;
 
-                        if (
-                            !entry.isIntersecting
-                        ) {
-                            return;
-                        }
+    border-radius: 8px;
+
+    border:
+        1px solid
+        transparent;
+
+    color: #a9a9a9;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
 
 
-                        if (
-                            entry.target ===
-                            gamesSection
-                        ) {
+.nav-item:hover {
 
-                            setActiveNav(
-                                true
-                            );
+    color: white;
 
-                        }
-
-
-                        if (
-                            entry.target ===
-                            favoritesSection
-                        ) {
-
-                            setActiveNav(
-                                false
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-            {
-                root: null,
-
-                threshold: 0.35,
-
-                rootMargin:
-                    "-80px 0px -35% 0px"
-
-            }
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.08
         );
 
+    border-color:
+        rgba(
+            var(--theme-rgb),
+            0.2
+        );
 
-    observer.observe(
-        favoritesSection
-    );
+}
 
-    observer.observe(
-        gamesSection
-    );
+
+.nav-item.active {
+
+    color: white;
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.13
+        );
+
+    border-color:
+        var(--theme-primary);
+
+    box-shadow:
+        0 0 18px
+        rgba(
+            var(--theme-rgb),
+            0.08
+        );
+
+}
+
+
+.nav-icon {
+
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 17px;
+
+}
+
+
+.favorite-count {
+
+    margin-left: auto;
+
+    min-width: 22px;
+
+    height: 22px;
+
+    padding: 0 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.16
+        );
+
+    color: var(--theme-bright);
+
+    font-size: 11px;
+
+    font-weight: 700;
 
 }
 
 
 /* =========================================================
-   RESET SETTINGS
+   SIDEBAR FOOTER
 ========================================================= */
 
-document
-    .querySelectorAll(
-        ".setting-reset"
-    )
-    .forEach(button => {
+.sidebar-footer {
 
-        button.addEventListener(
-            "click",
-            event => {
+    color: #666;
 
-                event.stopPropagation();
+    font-size: 12px;
 
-                const setting =
-                    button.dataset.reset;
+    text-align: center;
 
-
-                switch (setting) {
-
-
-                    case "openInBlank":
-
-                        openInBlank =
-                            DEFAULTS.openInBlank;
-
-                        localStorage.setItem(
-                            STORAGE_KEYS.openInBlank,
-                            String(
-                                openInBlank
-                            )
-                        );
-
-                        if (
-                            openInBlankToggle
-                        ) {
-
-                            openInBlankToggle.checked =
-                                openInBlank;
-
-                        }
-
-                        break;
-
-
-
-                    case "animatedBackground":
-
-                        animatedBackground =
-                            DEFAULTS.animatedBackground;
-
-                        localStorage.setItem(
-                            STORAGE_KEYS.animatedBackground,
-                            String(
-                                animatedBackground
-                            )
-                        );
-
-                        updateBackground();
-
-                        break;
-
-
-
-                    case "backgroundSpeed":
-
-                        currentBackgroundSpeed =
-                            DEFAULTS.backgroundSpeed;
-
-                        if (
-                            backgroundSpeed
-                        ) {
-
-                            backgroundSpeed.value =
-                                currentBackgroundSpeed;
-
-                        }
-
-                        localStorage.setItem(
-                            STORAGE_KEYS.backgroundSpeed,
-                            String(
-                                currentBackgroundSpeed
-                            )
-                        );
-
-                        updateBackgroundSpeed();
-
-                        break;
-
-
-
-                    case "backgroundTransparency":
-
-                        currentBackgroundTransparency =
-                            DEFAULTS.backgroundTransparency;
-
-                        if (
-                            backgroundTransparency
-                        ) {
-
-                            backgroundTransparency.value =
-                                currentBackgroundTransparency;
-
-                        }
-
-                        localStorage.setItem(
-                            STORAGE_KEYS.backgroundTransparency,
-                            String(
-                                currentBackgroundTransparency
-                            )
-                        );
-
-                        updateBackgroundTransparency();
-
-                        break;
-
-
-
-                    case "theme":
-
-                        currentThemeIndex =
-                            DEFAULTS.theme;
-
-                        customColor =
-                            DEFAULTS.customColor;
-
-                        localStorage.setItem(
-                            STORAGE_KEYS.theme,
-                            String(
-                                DEFAULTS.theme
-                            )
-                        );
-
-                        localStorage.setItem(
-                            STORAGE_KEYS.customColor,
-                            DEFAULTS.customColor
-                        );
-
-                        if (
-                            customThemeColor
-                        ) {
-
-                            customThemeColor.value =
-                                DEFAULTS.customColor;
-
-                        }
-
-                        applyTheme(
-                            DEFAULTS.theme,
-                            false
-                        );
-
-                        break;
-
-                }
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-function initialize() {
-
-    /*
-     * Apply saved theme.
-     */
-
-    applyTheme(
-        currentThemeIndex,
-        false
-    );
-
-
-    /*
-     * Apply saved background settings.
-     */
-
-    if (backgroundSpeed) {
-
-        backgroundSpeed.value =
-            currentBackgroundSpeed;
-
-    }
-
-
-    if (backgroundTransparency) {
-
-        backgroundTransparency.value =
-            currentBackgroundTransparency;
-
-    }
-
-
-    if (openInBlankToggle) {
-
-        openInBlankToggle.checked =
-            openInBlank;
-
-    }
-
-
-    if (animatedBackgroundToggle) {
-
-        animatedBackgroundToggle.checked =
-            animatedBackground;
-
-    }
-
-
-    updateBackground();
-
-    updateBackgroundSpeed();
-
-    updateBackgroundTransparency();
-
-
-    /*
-     * Load favorites.
-     */
-
-    updateFavoriteUI();
-
-
-    /*
-     * Make sure custom color input
-     * starts with saved color.
-     */
-
-    if (customThemeColor) {
-
-        customThemeColor.value =
-            customColor;
-
-    }
-
-
-    /*
-     * Start with the normal Games
-     * navigation state.
-     */
-
-    setActiveNav(false);
+    padding-top: 15px;
 
 }
 
 
-initialize();
+.brand-green {
+
+    color: var(--green2);
+
+}
+
+
+.brand-red {
+
+    color: var(--theme-bright);
+
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar {
+
+    position: fixed;
+
+    top: 0;
+
+    left: var(--sidebar-width);
+
+    right: 0;
+
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    background:
+        rgba(
+            5,
+            5,
+            5,
+            0.88
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            var(--theme-rgb),
+            0.16
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    z-index: 90;
+
+}
+
+
+.topbar-title {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+.topbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+}
+
+
+.online-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #9b9b9b;
+
+    font-size: 12px;
+
+}
+
+
+.online-dot {
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    box-shadow:
+        0 0 10px
+        rgba(
+            32,
+            214,
+            90,
+            0.7
+        );
+
+}
+
+
+.settings-button {
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid
+        rgba(
+            var(--theme-rgb),
+            0.25
+        );
+
+    border-radius: 8px;
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.07
+        );
+
+    color: #aaa;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.settings-button:hover {
+
+    color: white;
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.16
+        );
+
+    border-color:
+        var(--theme-primary);
+
+    transform:
+        rotate(20deg);
+
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+
+    margin-left: var(--sidebar-width);
+
+    padding:
+        115px 40px
+        50px;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome-section {
+
+    max-width: 1100px;
+
+    margin:
+        0 auto 35px;
+
+}
+
+
+.welcome-section h1 {
+
+    margin: 0 0 10px;
+
+    font-size:
+        clamp(
+            34px,
+            5vw,
+            58px
+        );
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+}
+
+
+.welcome-section p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================================
+   SEARCH BAR
+========================================================= */
+
+.search-section {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin:
+        0 auto 20px;
+
+}
+
+
+.search-box {
+
+    width: 100%;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        rgba(
+            10,
+            10,
+            10,
+            0.92
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.search-box:focus-within {
+
+    border-color:
+        var(--theme-primary);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(
+            var(--theme-rgb),
+            0.12
+        ),
+        0 0 25px
+        rgba(
+            var(--theme-rgb),
+            0.12
+        );
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.search-icon {
+
+    width: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        var(--theme-primary);
+
+    font-size: 28px;
+
+    user-select: none;
+
+}
+
+
+#gameSearch {
+
+    flex: 1;
+
+    height: 100%;
+
+    min-width: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    padding:
+        0 10px 0 0;
+
+}
+
+
+#gameSearch::placeholder {
+
+    color: var(--muted);
+
+}
+
+
+#gameSearch::-webkit-search-cancel-button {
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+}
+
+
+.search-clear {
+
+    width: 42px;
+    height: 42px;
+
+    margin-right: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.search-clear.visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.search-clear:hover {
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.12
+        );
+
+    color:
+        var(--theme-bright);
+
+}
+
+
+.search-results-text {
+
+    min-height: 20px;
+
+    margin-top: 9px;
+
+    padding-left: 5px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   GAME SECTIONS
+========================================================= */
+
+.game-section {
+
+    max-width: 1100px;
+
+    margin:
+        0 auto 70px;
+
+    scroll-margin-top: 90px;
+
+}
+
+
+.section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+}
+
+
+.section-kicker {
+
+    margin-bottom: 5px;
+
+    color:
+        var(--theme-primary);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+}
+
+
+.section-header h2 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+/* =========================================================
+   GAME GRID
+========================================================= */
+
+.games-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(
+                230px,
+                1fr
+            )
+        );
+
+    gap: 20px;
+
+}
+
+
+/* =========================================================
+   GAME CARD
+========================================================= */
+
+.game-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-width: 0;
+
+    background:
+        rgba(
+            10,
+            10,
+            10,
+            0.92
+        );
+
+    border:
+        1px solid
+        rgba(
+            var(--theme-rgb),
+            0.2
+        );
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+
+}
+
+
+.game-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--theme-primary);
+
+    box-shadow:
+        0 15px 35px
+        rgba(
+            0,
+            0,
+            0,
+            0.4
+        ),
+        0 0 22px
+        rgba(
+            var(--theme-rgb),
+            0.08
+        );
+
+}
+
+
+/* =========================================================
+   GAME IMAGE
+========================================================= */
+
+.game-image {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background: #111;
+
+}
+
+
+.minecraft-thumbnail {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.game-card:hover
+.minecraft-thumbnail {
+
+    transform:
+        scale(1.04);
+
+}
+
+
+/* =========================================================
+   FAVORITE STAR
+========================================================= */
+
+.favorite-button {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    z-index: 5;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.7
+        );
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    backdrop-filter:
+        blur(5px);
+
+    transition:
+        transform 0.18s ease,
+        color 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease;
+
+}
+
+
+.favorite-button:hover {
+
+    transform:
+        scale(1.1);
+
+    color:
+        var(--theme-bright);
+
+    border-color:
+        var(--theme-primary);
+
+}
+
+
+.favorite-button.is-favorite {
+
+    color:
+        var(--theme-bright);
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.2
+        );
+
+    border-color:
+        var(--theme-primary);
+
+}
+
+
+/* =========================================================
+   CARD ACCENT
+========================================================= */
+
+.red-accent {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 3px;
+
+    background:
+        var(--theme-primary);
+
+    opacity: 0.9;
+
+}
+
+
+/* =========================================================
+   GAME INFO
+========================================================= */
+
+.game-info {
+
+    padding: 15px;
+
+}
+
+
+.game-title {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: white;
+
+    margin-bottom: 4px;
+
+}
+
+
+.game-meta {
+
+    min-height: 17px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+.play-small {
+
+    width: 100%;
+
+    height: 36px;
+
+    margin-top: 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background:
+        var(--green);
+
+    color: #031007;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.7px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.play-small:hover {
+
+    background:
+        var(--green2);
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 5px 18px
+        rgba(
+            32,
+            214,
+            90,
+            0.22
+        );
+
+}
+
+
+/* =========================================================
+   EMPTY FAVORITES
+========================================================= */
+
+.empty-favorites {
+
+    grid-column:
+        1 / -1;
+
+    padding:
+        55px 20px;
+
+    text-align: center;
+
+    border:
+        1px dashed
+        rgba(
+            var(--theme-rgb),
+            0.25
+        );
+
+    border-radius: 12px;
+
+    background:
+        rgba(
+            10,
+            10,
+            10,
+            0.5
+        );
+
+}
+
+
+.empty-favorites-icon {
+
+    color:
+        var(--theme-primary);
+
+    font-size: 40px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.empty-favorites h3 {
+
+    margin:
+        0 0 7px;
+
+    font-size: 17px;
+
+}
+
+
+.empty-favorites p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   SETTINGS PANEL
+========================================================= */
+
+.settings-panel {
+
+    position: fixed;
+
+    top: 82px;
+
+    right: 25px;
+
+    width:
+        min(
+            430px,
+            calc(
+                100vw - 30px
+            )
+        );
+
+    max-height:
+        calc(
+            100vh - 105px
+        );
+
+    overflow-y: auto;
+
+    padding: 22px;
+
+    background:
+        rgba(
+            10,
+            10,
+            10,
+            0.97
+        );
+
+    border:
+        1px solid
+        rgba(
+            var(--theme-rgb),
+            0.35
+        );
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(
+            0,
+            0,
+            0,
+            0.6
+        );
+
+    backdrop-filter:
+        blur(18px);
+
+    z-index: 200;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(-10px)
+        scale(0.98);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.settings-panel.open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
+
+}
+
+
+/* =========================================================
+   SETTINGS HEADER
+========================================================= */
+
+.settings-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+
+}
+
+
+.settings-kicker {
+
+    color:
+        var(--theme-primary);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.settings-header h2 {
+
+    margin:
+        3px 0 0;
+
+    font-size: 25px;
+
+}
+
+
+.settings-close {
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+    border-radius: 7px;
+
+    background: #151515;
+
+    color: #aaa;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+}
+
+
+.settings-close:hover {
+
+    color: white;
+
+    border-color:
+        var(--theme-primary);
+
+}
+
+
+/* =========================================================
+   SETTING BOX
+========================================================= */
+
+.setting-box {
+
+    position: relative;
+
+    padding:
+        17px 15px;
+
+    margin-bottom: 11px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.025
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+
+    border-radius: 10px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.setting-box:hover {
+
+    border-color:
+        rgba(
+            var(--theme-rgb),
+            0.3
+        );
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.035
+        );
+
+}
+
+
+.setting-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+}
+
+
+.setting-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding-right: 20px;
+
+}
+
+
+.setting-text strong {
+
+    font-size: 13px;
+
+}
+
+
+.setting-text span {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+   RESET BUTTON
+========================================================= */
+
+.setting-reset {
+
+    position: absolute;
+
+    top: 7px;
+
+    right: 7px;
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #666;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.setting-box:hover .setting-reset {
+
+    opacity: 1;
+
+}
+
+
+.setting-reset:hover {
+
+    color: var(--theme-bright);
+
+    background:
+        rgba(
+            var(--theme-rgb),
+            0.12
+        );
+
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.switch {
+
+    position: relative;
+
+    width: 46px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+}
+
+
+.switch input {
+
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+
+}
+
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    cursor: pointer;
+
+    background: #292929;
+
+    border-radius: 999px;
+
+    transition:
+        background 0.2s ease;
+
+}
+
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+    height: 19px;
+
+    left: 3px;
+    top: 3px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.switch input:checked + .slider {
+
+    background:
+        var(--theme-primary);
+
+}
+
+
+.switch input:checked + .slider::before {
+
+    transform:
+        translateX(21px);
+
+}
+
+
+/* =========================================================
+   SETTING HEADINGS
+========================================================= */
+
+.setting-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-right: 22px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.setting-heading strong {
+
+    font-size: 13px;
+
+}
+
+
+.setting-heading span {
+
+    color:
+        var(--theme-bright);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   RANGE SLIDERS
+========================================================= */
+
+input[type="range"] {
+
+    width: 100%;
+
+    height: 5px;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    background:
+        #292929;
+
+    border-radius: 999px;
+
+    outline: none;
+
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    border: 2px solid #111;
+
+    background:
+        var(--theme-primary);
+
+    cursor: pointer;
+
+}
+
+
+input[type="range"]::-moz-range-thumb {
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    border: 2px solid #111;
+
+    background:
+        var(--theme-primary);
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   THEME OPTIONS
+========================================================= */
+
+.theme-options {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 4px;
+
+}
+
+
+.theme-option {
+
+    width: 35px;
+    height: 35px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.theme-option:hover {
+
+    transform:
+        scale(1.12);
+
+}
+
+
+.theme-option.active {
+
+    border-color: white;
+
+    box-shadow:
+        0 0 0 2px
+        var(--theme-primary),
+        0 0 16px
+        rgba(
+            var(--theme-rgb),
+            0.35
+        );
+
+}
+
+
+.theme-red {
+
+    background: #e3262e;
+
+}
+
+
+.theme-green {
+
+    background: #20d65a;
+
+}
+
+
+.theme-purple {
+
+    background: #9b4dff;
+
+}
+
+
+.theme-blue {
+
+    background: #2787ff;
+
+}
+
+
+.theme-orange {
+
+    background: #ff7a18;
+
+}
+
+
+/* =========================================================
+   CUSTOM COLOR
+========================================================= */
+
+.custom-color-option {
+
+    position: relative;
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        2px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.custom-color-option:hover {
+
+    transform:
+        scale(1.12);
+
+    border-color: white;
+
+}
+
+
+.custom-color-option input {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+}
+
+
+.custom-color-option span {
+
+    pointer-events: none;
+
+    font-size: 16px;
+
+}
+
+
+.custom-color-label {
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   DELETE FAVORITES
+========================================================= */
+
+.danger-setting {
+
+    border-color:
+        rgba(
+            255,
+            60,
+            60,
+            0.15
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+}
+
+
+.danger-setting:hover {
+
+    border-color:
+        rgba(
+            255,
+            60,
+            60,
+            0.4
+        );
+
+    background:
+        rgba(
+            255,
+            40,
+            40,
+            0.035
+        );
+
+}
+
+
+.delete-favorites-button {
+
+    flex-shrink: 0;
+
+    height: 34px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            70,
+            70,
+            0.35
+        );
+
+    border-radius: 7px;
+
+    background:
+        rgba(
+            255,
+            50,
+            50,
+            0.08
+        );
+
+    color:
+        #ff6b6b;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.7px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.delete-favorites-button:hover {
+
+    background:
+        rgba(
+            255,
+            50,
+            50,
+            0.18
+        );
+
+    border-color:
+        #ff5555;
+
+    color:
+        #ffffff;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   THEME NOTIFICATION
+========================================================= */
+
+.theme-notification {
+
+    position: fixed;
+
+    top: 85px;
+
+    right: 25px;
+
+    width:
+        min(
+            370px,
+            calc(
+                100vw - 30px
+            )
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 15px 17px;
+
+    background:
+        rgba(
+            10,
+            10,
+            10,
+            0.97
+        );
+
+    border:
+        1px solid
+        var(--theme-primary);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.5
+        ),
+        0 0 25px
+        rgba(
+            var(--theme-rgb),
+            0.12
+        );
+
+    z-index: 300;
+
+    transform:
+        translateX(
+            calc(100% + 30px)
+        );
+
+    opacity: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+
+}
+
+
+.theme-notification.show {
+
+    transform:
+        translateX(0);
+
+    opacity: 1;
+
+}
+
+
+.theme-notification-icon {
+
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--theme-primary);
+
+    color: white;
+
+    font-weight: 900;
+
+}
+
+
+.theme-notification strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 13px;
+
+}
+
+
+.theme-notification span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.main-footer {
+
+    max-width: 1100px;
+
+    margin:
+        100px auto 0;
+
+    padding-top: 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top:
+        1px solid
+        rgba(
+            var(--theme-rgb),
+            0.12
+        );
+
+    color: #666;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   HIDDEN BACKGROUND CONTROLS
+========================================================= */
+
+.background-disabled {
+
+    display: none !important;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    :root {
+
+        --sidebar-width: 190px;
+
+    }
+
+
+    .main-content {
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+
+    }
+
+
+    .sidebar {
+
+        padding-left: 12px;
+
+        padding-right: 12px;
+
+    }
+
+
+    .logo {
+
+        width: 135px;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    :root {
+
+        --sidebar-width: 0px;
+
+    }
+
+
+    .sidebar {
+
+        position: fixed;
+
+        left: 10px;
+        right: 10px;
+
+        top: auto;
+        bottom: 10px;
+
+        width: auto;
+
+        height: 64px;
+
+        padding: 8px;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        border:
+            1px solid
+            rgba(
+                var(--theme-rgb),
+                0.3
+            );
+
+        border-radius: 14px;
+
+        backdrop-filter:
+            blur(15px);
+
+        background:
+            rgba(
+                8,
+                8,
+                8,
+                0.94
+            );
+
+    }
+
+
+    .sidebar-top {
+
+        display: flex;
+
+        align-items: center;
+
+        width: 100%;
+
+    }
+
+
+    .logo-container,
+    .version,
+    .sidebar-footer {
+
+        display: none;
+
+    }
+
+
+    .sidebar-nav {
+
+        width: 100%;
+
+        flex-direction: row;
+
+        gap: 5px;
+
+    }
+
+
+    .nav-item {
+
+        flex: 1;
+
+        justify-content: center;
+
+        min-height: 46px;
+
+    }
+
+
+    .nav-item span:not(.favorite-count) {
+
+        display: none;
+
+    }
+
+
+    .nav-icon {
+
+        font-size: 20px;
+
+    }
+
+
+    .topbar {
+
+        left: 0;
+
+        padding:
+            0 16px;
+
+    }
+
+
+    .topbar-title {
+
+        font-size: 14px;
+
+    }
+
+
+    .online-status {
+
+        display: none;
+
+    }
+
+
+    .main-content {
+
+        padding:
+            100px 16px
+            95px;
+
+    }
+
+
+    .welcome-section h1 {
+
+        font-size: 36px;
+
+        letter-spacing: -1.5px;
+
+    }
+
+
+    .games-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+        gap: 12px;
+
+    }
+
+
+    .game-info {
+
+        padding: 11px;
+
+    }
+
+
+    .game-title {
+
+        font-size: 14px;
+
+    }
+
+
+    .play-small {
+
+        height: 34px;
+
+    }
+
+
+    .main-footer {
+
+        margin-top: 70px;
+
+        flex-direction: column;
+
+    }
+
+
+    .settings-panel {
+
+        top: 75px;
+
+        right: 10px;
+
+        width:
+            calc(
+                100vw - 20px
+            );
+
+    }
+
+
+    .theme-notification {
+
+        top: 75px;
+
+        right: 10px;
+
+        width:
+            calc(
+                100vw - 20px
+            );
+
+    }
+
+
+    .danger-setting {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .delete-favorites-button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .games-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
