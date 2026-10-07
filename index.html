@@ -1227,7 +1227,76 @@
 
                 </article>
 
+                 <!-- MINESWEEPER -->
+                <article
+                    class="game-card"
+                    data-game-id="mine"
+                    data-game-name="mine"
+                    data-game-version=""
+                    data-game-url="games/mine/index.html"
+                    onclick="launchGame('games/mine/index.html')"
+                >
 
+                    <div class="game-image">
+
+                        <img
+                            src="assets/mine"
+                            alt="Minesweeper"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Minesweeper to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'mine'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Minesweeper
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/mine/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                
             </div>
 
         </section>
