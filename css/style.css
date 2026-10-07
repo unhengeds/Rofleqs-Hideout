@@ -8,16 +8,13 @@
 
     --panel2: #160909;
 
-
     --text: #ffffff;
 
     --muted: #9a8585;
 
-
     --green: #20d65a;
 
     --green2: #39ff78;
-
 
     --theme: #e3262e;
 
@@ -31,7 +28,6 @@
 
     --theme-glow:
         rgba(227,38,46,0.18);
-
 
     --checker-opacity: 0.11;
 
@@ -103,35 +99,23 @@ body::before {
     opacity:
         var(--checker-opacity);
 
-
     background:
 
         linear-gradient(
             45deg,
-
-            var(--theme)
-            25%,
-
+            var(--theme) 25%,
             transparent 25%,
-
             transparent 75%,
-
             var(--theme) 75%
         ),
 
         linear-gradient(
             45deg,
-
-            var(--theme)
-            25%,
-
+            var(--theme) 25%,
             transparent 25%,
-
             transparent 75%,
-
             var(--theme) 75%
         );
-
 
     background-size:
         80px 80px;
@@ -140,13 +124,11 @@ body::before {
         0 0,
         40px 40px;
 
-
     animation:
         checkerMove
         var(--checker-speed)
         linear
         infinite;
-
 
     transition:
         opacity 0.3s ease;
@@ -196,14 +178,11 @@ body::after {
 
         radial-gradient(
             circle at 50% 20%,
-
             color-mix(
                 in srgb,
-                var(--theme)
-                7%,
+                var(--theme) 7%,
                 transparent
             ),
-
             transparent 45%
         ),
 
@@ -237,24 +216,19 @@ body.background-disabled::before {
 
     display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
     background:
 
         linear-gradient(
             180deg,
-
             color-mix(
                 in srgb,
-                var(--theme)
-                7%,
+                var(--theme) 7%,
                 #100303
             ),
-
             #070202
         );
 
@@ -262,8 +236,7 @@ body.background-disabled::before {
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            22%,
+            var(--theme) 22%,
             transparent
         );
 
@@ -286,30 +259,23 @@ body.background-disabled::before {
 
     display: flex;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    margin-bottom:
-        12px;
+    margin-bottom: 12px;
 }
 
 
 .logo {
 
-    max-width:
-        175px;
+    max-width: 175px;
 
-    max-height:
-        80px;
+    max-height: 80px;
 
-    object-fit:
-        contain;
+    object-fit: contain;
 
-    display:
-        block;
+    display: block;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
         transform 0.18s ease,
@@ -339,28 +305,22 @@ body.background-disabled::before {
 
 .version {
 
-    text-align:
-        center;
+    text-align: center;
 
     color:
         color-mix(
             in srgb,
-            var(--theme)
-            35%,
+            var(--theme) 35%,
             #634b4b
         );
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 
-    letter-spacing:
-        1.4px;
+    letter-spacing: 1.4px;
 
-    margin-bottom:
-        30px;
+    margin-bottom: 30px;
 }
 
 
@@ -368,54 +328,39 @@ body.background-disabled::before {
 
 .sidebar-nav {
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    gap:
-        7px;
+    gap: 7px;
 }
 
 
 .nav-item {
 
-    position:
-        relative;
+    position: relative;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        11px;
+    gap: 11px;
 
-    min-height:
-        44px;
+    min-height: 44px;
 
-    padding:
-        0 12px;
+    padding: 0 12px;
 
-    color:
-        #a38383;
+    color: #a38383;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
-    border:
-        1px solid transparent;
+    border: 1px solid transparent;
 
-    border-radius:
-        7px;
+    border-radius: 7px;
 
-    font-size:
-        13px;
+    font-size: 13px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
     transition:
         background 0.20s ease,
@@ -428,8 +373,7 @@ body.background-disabled::before {
 
 .nav-item:hover {
 
-    color:
-        #fff;
+    color: #fff;
 
     background:
         var(--theme-soft);
@@ -441,8 +385,7 @@ body.background-disabled::before {
 
 .nav-item.active {
 
-    color:
-        var(--theme);
+    color: var(--theme);
 
     background:
         var(--theme-soft);
@@ -462,24 +405,19 @@ body.background-disabled::before {
 
 .nav-item.active .nav-icon {
 
-    color:
-        var(--theme);
+    color: var(--theme);
 }
 
 
 .nav-icon {
 
-    width:
-        22px;
+    width: 22px;
 
-    display:
-        flex;
+    display: flex;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    font-size:
-        17px;
+    font-size: 17px;
 
     transition:
         color 0.20s ease;
@@ -488,38 +426,28 @@ body.background-disabled::before {
 
 .favorite-count {
 
-    margin-left:
-        auto;
+    margin-left: auto;
 
-    min-width:
-        22px;
+    min-width: 22px;
 
-    height:
-        22px;
+    height: 22px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    padding:
-        0 6px;
+    padding: 0 6px;
 
-    border-radius:
-        11px;
+    border-radius: 11px;
 
     background:
         var(--theme-soft);
 
-    color:
-        #fff;
+    color: #fff;
 
-    font-size:
-        10px;
+    font-size: 10px;
 }
 
 
@@ -538,35 +466,28 @@ body.background-disabled::before {
 
 .sidebar-footer {
 
-    padding:
-        20px;
+    padding: 20px;
 
     color:
         color-mix(
             in srgb,
-            var(--theme)
-            30%,
+            var(--theme) 30%,
             #553737
         );
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    text-align:
-        center;
+    text-align: center;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 
-    letter-spacing:
-        1px;
+    letter-spacing: 1px;
 
     border-top:
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            14%,
+            var(--theme) 14%,
             transparent
         );
 }
@@ -576,32 +497,23 @@ body.background-disabled::before {
 
 .topbar {
 
-    position:
-        fixed;
+    position: fixed;
 
-    top:
-        0;
+    top: 0;
 
-    left:
-        240px;
+    left: 240px;
 
-    right:
-        0;
+    right: 0;
 
-    height:
-        75px;
+    height: 75px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    padding:
-        0 28px;
+    padding: 0 28px;
 
     background:
         rgba(
@@ -615,83 +527,64 @@ body.background-disabled::before {
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            18%,
+            var(--theme) 18%,
             transparent
         );
 
     backdrop-filter:
         blur(10px);
 
-    z-index:
-        90;
+    z-index: 90;
 }
 
 
 .topbar-title {
 
-    font-size:
-        15px;
+    font-size: 15px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    letter-spacing:
-        0.3px;
+    letter-spacing: 0.3px;
 }
 
 
 .topbar-right {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        18px;
+    gap: 18px;
 }
 
 
 .online-status {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        7px;
+    gap: 7px;
 
-    color:
-        #967878;
+    color: #967878;
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 
-    letter-spacing:
-        0.8px;
+    letter-spacing: 0.8px;
 }
 
 
 .online-dot {
 
-    width:
-        7px;
+    width: 7px;
 
-    height:
-        7px;
+    height: 7px;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
         var(--green);
@@ -709,39 +602,30 @@ body.background-disabled::before {
 
 .settings-button {
 
-    width:
-        36px;
+    width: 36px;
 
-    height:
-        36px;
+    height: 36px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
     border:
         1px solid
         var(--theme-border);
 
-    border-radius:
-        7px;
+    border-radius: 7px;
 
     background:
         #110505;
 
-    color:
-        #a88787;
+    color: #a88787;
 
-    font-size:
-        17px;
+    font-size: 17px;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
         color 0.15s ease,
@@ -753,8 +637,7 @@ body.background-disabled::before {
 
 .settings-button:hover {
 
-    color:
-        #fff;
+    color: #fff;
 
     background:
         var(--theme-soft);
@@ -771,32 +654,23 @@ body.background-disabled::before {
 
 .theme-notification {
 
-    position:
-        fixed;
+    position: fixed;
 
-    top:
-        90px;
+    top: 90px;
 
-    right:
-        22px;
+    right: 22px;
 
-    z-index:
-        500;
+    z-index: 500;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        12px;
+    gap: 12px;
 
-    width:
-        330px;
+    width: 330px;
 
-    padding:
-        14px 16px;
+    padding: 14px 16px;
 
     background:
         rgba(
@@ -814,10 +688,10 @@ body.background-disabled::before {
         3px solid
         var(--theme);
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
     box-shadow:
+
         0 12px 40px
         rgba(
             0,
@@ -832,11 +706,9 @@ body.background-disabled::before {
     backdrop-filter:
         blur(12px);
 
-    opacity:
-        0;
+    opacity: 0;
 
-    visibility:
-        hidden;
+    visibility: hidden;
 
     transform:
         translateX(30px);
@@ -850,11 +722,9 @@ body.background-disabled::before {
 
 .theme-notification.show {
 
-    opacity:
-        1;
+    opacity: 1;
 
-    visibility:
-        visible;
+    visibility: visible;
 
     transform:
         translateX(0);
@@ -863,26 +733,19 @@ body.background-disabled::before {
 
 .theme-notification-icon {
 
-    width:
-        28px;
+    width: 28px;
 
-    height:
-        28px;
+    height: 28px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    flex:
-        0 0 auto;
+    flex: 0 0 auto;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
         var(--theme);
@@ -890,40 +753,31 @@ body.background-disabled::before {
     color:
         #050505;
 
-    font-weight:
-        900;
+    font-weight: 900;
 }
 
 
 .theme-notification strong {
 
-    display:
-        block;
+    display: block;
 
-    color:
-        #fff;
+    color: #fff;
 
-    font-size:
-        12px;
+    font-size: 12px;
 
-    margin-bottom:
-        3px;
+    margin-bottom: 3px;
 }
 
 
 .theme-notification span {
 
-    display:
-        block;
+    display: block;
 
-    color:
-        #876f6f;
+    color: #876f6f;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    line-height:
-        1.4;
+    line-height: 1.4;
 }
 
 
@@ -931,17 +785,13 @@ body.background-disabled::before {
 
 .settings-panel {
 
-    position:
-        fixed;
+    position: fixed;
 
-    top:
-        85px;
+    top: 85px;
 
-    right:
-        18px;
+    right: 18px;
 
-    width:
-        410px;
+    width: 410px;
 
     max-width:
         calc(
@@ -953,11 +803,9 @@ body.background-disabled::before {
             100vh - 105px
         );
 
-    overflow-y:
-        auto;
+    overflow-y: auto;
 
-    padding:
-        20px;
+    padding: 20px;
 
     background:
         rgba(
@@ -971,8 +819,7 @@ body.background-disabled::before {
         1px solid
         var(--theme-border);
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
     box-shadow:
         0 18px 60px
@@ -986,11 +833,9 @@ body.background-disabled::before {
     backdrop-filter:
         blur(12px);
 
-    opacity:
-        0;
+    opacity: 0;
 
-    visibility:
-        hidden;
+    visibility: hidden;
 
     transform:
         translateY(-8px);
@@ -1000,18 +845,15 @@ body.background-disabled::before {
         transform 0.18s ease,
         visibility 0.18s ease;
 
-    z-index:
-        200;
+    z-index: 200;
 }
 
 
 .settings-panel.open {
 
-    opacity:
-        1;
+    opacity: 1;
 
-    visibility:
-        visible;
+    visibility: visible;
 
     transform:
         translateY(0);
@@ -1020,17 +862,13 @@ body.background-disabled::before {
 
 .settings-header {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        flex-start;
+    align-items: flex-start;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    margin-bottom:
-        18px;
+    margin-bottom: 18px;
 }
 
 
@@ -1039,58 +877,44 @@ body.background-disabled::before {
     color:
         var(--theme);
 
-    font-size:
-        9px;
+    font-size: 9px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    letter-spacing:
-        1.5px;
+    letter-spacing: 1.5px;
 }
 
 
 .settings-header h2 {
 
-    margin:
-        4px 0 0;
+    margin: 4px 0 0;
 
-    font-size:
-        20px;
+    font-size: 20px;
 }
 
 
 .settings-close {
 
-    width:
-        30px;
+    width: 30px;
 
-    height:
-        30px;
+    height: 30px;
 
-    border:
-        0;
+    border: 0;
 
-    background:
-        transparent;
+    background: transparent;
 
-    color:
-        #866;
+    color: #866;
 
-    font-size:
-        24px;
+    font-size: 24px;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 }
 
 
 .settings-close:hover {
-    color:
-        #fff;
+    color: #fff;
 }
 
 
@@ -1098,20 +922,16 @@ body.background-disabled::before {
 
 .setting-box {
 
-    position:
-        relative;
+    position: relative;
 
-    padding:
-        14px;
+    padding: 14px;
 
-    margin-top:
-        9px;
+    margin-top: 9px;
 
     background:
         color-mix(
             in srgb,
-            var(--theme)
-            3%,
+            var(--theme) 3%,
             transparent
         );
 
@@ -1119,13 +939,11 @@ body.background-disabled::before {
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            15%,
+            var(--theme) 15%,
             transparent
         );
 
-    border-radius:
-        7px;
+    border-radius: 7px;
 }
 
 
@@ -1133,54 +951,39 @@ body.background-disabled::before {
 
 .setting-reset {
 
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        8px;
+    top: 8px;
 
-    right:
-        8px;
+    right: 8px;
 
-    width:
-        25px;
+    width: 25px;
 
-    height:
-        25px;
+    height: 25px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    padding:
-        0;
+    padding: 0;
 
     border:
         1px solid
         transparent;
 
-    border-radius:
-        5px;
+    border-radius: 5px;
 
-    background:
-        transparent;
+    background: transparent;
 
-    color:
-        #765f5f;
+    color: #765f5f;
 
-    font-size:
-        15px;
+    font-size: 15px;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
         color 0.15s ease,
@@ -1192,8 +995,7 @@ body.background-disabled::before {
 
 .setting-reset:hover {
 
-    color:
-        #fff;
+    color: #fff;
 
     background:
         var(--theme-soft);
@@ -1208,76 +1010,58 @@ body.background-disabled::before {
 
 .setting-row {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    gap:
-        20px;
+    gap: 20px;
 
-    padding-right:
-        30px;
+    padding-right: 30px;
 }
 
 
 .setting-text {
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    gap:
-        5px;
+    gap: 5px;
 }
 
 
 .setting-text strong,
 .setting-heading strong {
 
-    color:
-        #e0caca;
+    color: #e0caca;
 
-    font-size:
-        12px;
+    font-size: 12px;
 }
 
 
 .setting-text span {
 
-    color:
-        #806b6b;
+    color: #806b6b;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    line-height:
-        1.4;
+    line-height: 1.4;
 }
 
 
 .setting-heading {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    margin-bottom:
-        12px;
+    margin-bottom: 12px;
 
-    padding-right:
-        30px;
+    padding-right: 30px;
 }
 
 
@@ -1286,11 +1070,9 @@ body.background-disabled::before {
     color:
         var(--theme);
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 }
 
 
@@ -1298,58 +1080,45 @@ body.background-disabled::before {
 
 .switch {
 
-    position:
-        relative;
+    position: relative;
 
-    flex:
-        0 0 auto;
+    flex: 0 0 auto;
 
-    width:
-        40px;
+    width: 40px;
 
-    height:
-        22px;
+    height: 22px;
 }
 
 
 .switch input {
 
-    opacity:
-        0;
+    opacity: 0;
 
-    width:
-        0;
+    width: 0;
 
-    height:
-        0;
+    height: 0;
 }
 
 
 .slider {
 
-    position:
-        absolute;
+    position: absolute;
 
-    inset:
-        0;
+    inset: 0;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
-    background:
-        #241111;
+    background: #241111;
 
     border:
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            30%,
+            var(--theme) 30%,
             #4b2222
         );
 
-    border-radius:
-        20px;
+    border-radius: 20px;
 
     transition:
         background 0.2s ease;
@@ -1358,29 +1127,21 @@ body.background-disabled::before {
 
 .slider::before {
 
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        16px;
+    width: 16px;
 
-    height:
-        16px;
+    height: 16px;
 
-    left:
-        2px;
+    left: 2px;
 
-    top:
-        2px;
+    top: 2px;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
-    background:
-        #8c5555;
+    background: #8c5555;
 
     transition:
         transform 0.2s ease,
@@ -1394,8 +1155,7 @@ body.background-disabled::before {
     background:
         color-mix(
             in srgb,
-            var(--theme)
-            22%,
+            var(--theme) 22%,
             transparent
         );
 
@@ -1419,14 +1179,12 @@ body.background-disabled::before {
 
 input[type="range"] {
 
-    width:
-        100%;
+    width: 100%;
 
     accent-color:
         var(--theme);
 
-    cursor:
-        pointer;
+    cursor: pointer;
 }
 
 
@@ -1434,31 +1192,24 @@ input[type="range"] {
 
 .theme-options {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    gap:
-        10px;
+    gap: 10px;
 
-    padding:
-        4px 0 8px;
+    padding: 4px 0 8px;
 }
 
 
 .theme-option,
 .custom-color-option {
 
-    width:
-        32px;
+    width: 32px;
 
-    height:
-        32px;
+    height: 32px;
 
-    flex:
-        0 0 auto;
+    flex: 0 0 auto;
 
     border:
         2px solid
@@ -1469,11 +1220,9 @@ input[type="range"] {
             0.12
         );
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
         transform 0.15s ease,
@@ -1493,63 +1242,54 @@ input[type="range"] {
 .theme-option.selected,
 .custom-color-option.selected {
 
-    border-color:
-        #fff;
+    border-color: #fff;
 
     box-shadow:
+
         0 0 0 2px
         var(--theme),
+
         0 0 12px
         var(--theme-glow);
 }
 
 
 .theme-red {
-    background:
-        #e3262e;
+    background: #e3262e;
 }
 
 
 .theme-green {
-    background:
-        #20d65a;
+    background: #20d65a;
 }
 
 
 .theme-purple {
-    background:
-        #a855f7;
+    background: #a855f7;
 }
 
 
 .theme-blue {
-    background:
-        #3b82f6;
+    background: #3b82f6;
 }
 
 
 .theme-orange {
-    background:
-        #f97316;
+    background: #f97316;
 }
 
 
 .custom-color-option {
 
-    position:
-        relative;
+    position: relative;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         conic-gradient(
@@ -1562,46 +1302,35 @@ input[type="range"] {
             #ff0000
         );
 
-    color:
-        #fff;
+    color: #fff;
 
-    font-size:
-        15px;
+    font-size: 15px;
 }
 
 
 .custom-color-option input {
 
-    position:
-        absolute;
+    position: absolute;
 
-    inset:
-        0;
+    inset: 0;
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        100%;
+    height: 100%;
 
-    opacity:
-        0;
+    opacity: 0;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 }
 
 
 .custom-color-option span {
 
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        2;
+    z-index: 2;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     text-shadow:
         0 1px 4px #000;
@@ -1610,14 +1339,11 @@ input[type="range"] {
 
 .custom-color-label {
 
-    color:
-        #765f5f;
+    color: #765f5f;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    margin-top:
-        3px;
+    margin-top: 3px;
 }
 
 
@@ -1625,17 +1351,13 @@ input[type="range"] {
 
 .main-content {
 
-    margin-left:
-        240px;
+    margin-left: 240px;
 
-    padding:
-        110px 34px 50px;
+    padding: 110px 34px 50px;
 
-    min-height:
-        100vh;
+    min-height: 100vh;
 
-    max-width:
-        1500px;
+    max-width: 1500px;
 }
 
 
@@ -1643,15 +1365,13 @@ input[type="range"] {
 
 .welcome-section {
 
-    padding:
-        25px 0 55px;
+    padding: 25px 0 55px;
 }
 
 
 .welcome-section h1 {
 
-    margin:
-        8px 0 8px;
+    margin: 8px 0 8px;
 
     font-size:
         clamp(
@@ -1660,24 +1380,19 @@ input[type="range"] {
             48px
         );
 
-    line-height:
-        1.05;
+    line-height: 1.05;
 
-    letter-spacing:
-        -1.5px;
+    letter-spacing: -1.5px;
 }
 
 
 .welcome-section p {
 
-    margin:
-        0;
+    margin: 0;
 
-    color:
-        #876f6f;
+    color: #876f6f;
 
-    font-size:
-        14px;
+    font-size: 14px;
 }
 
 
@@ -1685,43 +1400,33 @@ input[type="range"] {
 
 .game-section {
 
-    display:
-        block;
+    display: block;
 
-    scroll-margin-top:
-        95px;
+    scroll-margin-top: 95px;
 
-    padding-bottom:
-        75px;
+    padding-bottom: 75px;
 }
 
 
 .section-header {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        flex-end;
+    align-items: flex-end;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    gap:
-        20px;
+    gap: 20px;
 
-    margin-bottom:
-        18px;
+    margin-bottom: 18px;
 
-    padding-bottom:
-        12px;
+    padding-bottom: 12px;
 
     border-bottom:
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            18%,
+            var(--theme) 18%,
             transparent
         );
 }
@@ -1732,27 +1437,21 @@ input[type="range"] {
     color:
         var(--theme);
 
-    font-size:
-        9px;
+    font-size: 9px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    letter-spacing:
-        1.7px;
+    letter-spacing: 1.7px;
 }
 
 
 .section-header h2 {
 
-    margin:
-        5px 0 0;
+    margin: 5px 0 0;
 
-    font-size:
-        22px;
+    font-size: 22px;
 
-    letter-spacing:
-        -0.3px;
+    letter-spacing: -0.3px;
 }
 
 
@@ -1760,245 +1459,183 @@ input[type="range"] {
    GAME SEARCH
    ========================================================= */
 
-.game-search {
+.games-search {
 
-    position:
-        relative;
+    position: relative;
 
-    display:
-        flex;
+    width: 280px;
 
-    align-items:
-        center;
+    flex: 0 0 auto;
+}
 
-    width:
-        280px;
 
-    height:
-        42px;
+.games-search input {
 
-    flex:
-        0 0 280px;
+    width: 100%;
 
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.28
-        );
+    height: 40px;
+
+    padding:
+        0 40px 0 38px;
 
     border:
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            18%,
+            var(--theme) 25%,
             transparent
         );
 
-    border-radius:
-        7px;
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--theme) 4%,
+            #100505
+        );
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 12px;
 
     transition:
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
 
-.game-search:hover {
+.games-search input::placeholder {
 
-    border-color:
-        var(--theme-border);
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
+    color:
+        #765f5f;
 }
 
 
-.game-search:focus-within {
+.games-search input:hover {
 
     border-color:
         var(--theme-border);
+}
+
+
+.games-search input:focus {
+
+    border-color:
+        var(--theme);
 
     background:
-        rgba(
-            0,
-            0,
-            0,
-            0.42
+        color-mix(
+            in srgb,
+            var(--theme) 7%,
+            #100505
         );
 
     box-shadow:
+
+        0 0 0 3px
+        var(--theme-soft),
+
         0 0 18px
         var(--theme-glow);
 }
 
 
-.game-search-icon {
+.games-search-icon {
 
-    display:
-        flex;
+    position: absolute;
 
-    align-items:
-        center;
+    left: 13px;
 
-    justify-content:
-        center;
+    top: 50%;
 
-    width:
-        38px;
+    transform:
+        translateY(-50%);
 
-    flex:
-        0 0 38px;
+    z-index: 2;
 
     color:
         var(--theme);
 
-    font-size:
-        15px;
+    font-size: 19px;
 
-    opacity:
-        0.85;
+    line-height: 1;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 }
 
 
-#gameSearch {
+.games-search-clear {
 
-    width:
-        100%;
+    position: absolute;
 
-    height:
-        100%;
+    right: 8px;
 
-    min-width:
-        0;
+    top: 50%;
 
-    padding:
-        0 38px 0 0;
+    width: 26px;
 
-    border:
-        none;
+    height: 26px;
 
-    outline:
-        none;
+    display: flex;
 
-    background:
-        transparent;
+    align-items: center;
 
-    color:
-        #fff;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-}
-
-
-#gameSearch::placeholder {
-
-    color:
-        #765f5f;
-
-    opacity:
-        1;
-}
-
-
-#gameSearch::-webkit-search-cancel-button {
-
-    display:
-        none;
-}
-
-
-.clear-search {
-
-    position:
-        absolute;
-
-    top:
-        50%;
-
-    right:
-        7px;
-
-    width:
-        28px;
-
-    height:
-        28px;
-
-    display:
-        none;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        0;
+    justify-content: center;
 
     transform:
         translateY(-50%);
 
     border:
-        1px solid transparent;
-
-    border-radius:
-        5px;
-
-    background:
+        1px solid
         transparent;
 
-    color:
-        #765f5f;
+    border-radius: 5px;
 
-    font-size:
-        20px;
+    background: transparent;
 
-    line-height:
-        1;
+    color: #765f5f;
 
-    cursor:
-        pointer;
+    font-family: inherit;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
 
     transition:
+        opacity 0.15s ease,
+        visibility 0.15s ease,
         color 0.15s ease,
-        background 0.15s ease,
-        border-color 0.15s ease;
+        background 0.15s ease;
 }
 
 
-.clear-search.visible {
+.games-search-clear.visible {
 
-    display:
-        flex;
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
 }
 
 
-.clear-search:hover {
+.games-search-clear:hover {
 
-    color:
-        #fff;
+    color: #fff;
 
     background:
         var(--theme-soft);
@@ -2010,90 +1647,67 @@ input[type="range"] {
 
 /* NO SEARCH RESULTS */
 
-.no-search-results {
+.game-search-empty {
 
-    grid-column:
-        1 / -1;
+    grid-column: 1 / -1;
 
-    min-height:
-        190px;
+    min-height: 190px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    flex-direction: column;
 
-    justify-content:
-        center;
+    align-items: center;
 
-    flex-direction:
-        column;
-
-    padding:
-        30px;
+    justify-content: center;
 
     border:
         1px dashed
         var(--theme-border);
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
     background:
         color-mix(
             in srgb,
-            var(--theme)
-            2%,
+            var(--theme) 2%,
             transparent
         );
 
-    text-align:
-        center;
+    text-align: center;
 }
 
 
-.no-search-results-icon {
+.game-search-empty-icon {
 
-    margin-bottom:
-        8px;
+    margin-bottom: 8px;
 
     color:
         color-mix(
             in srgb,
-            var(--theme)
-            50%,
+            var(--theme) 55%,
             #633f3f
         );
 
-    font-size:
-        36px;
+    font-size: 38px;
 }
 
 
-.no-search-results h3 {
+.game-search-empty h3 {
 
-    margin:
-        0 0 5px;
+    margin: 0 0 5px;
 
-    color:
-        #fff;
-
-    font-size:
-        16px;
+    font-size: 16px;
 }
 
 
-.no-search-results p {
+.game-search-empty p {
 
-    margin:
-        0;
+    margin: 0;
 
-    color:
-        #765f5f;
+    color: #765f5f;
 
-    font-size:
-        12px;
+    font-size: 13px;
 }
 
 
@@ -2101,8 +1715,7 @@ input[type="range"] {
 
 .games-grid {
 
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
         repeat(
@@ -2113,8 +1726,7 @@ input[type="range"] {
             )
         );
 
-    gap:
-        18px;
+    gap: 18px;
 }
 
 
@@ -2122,11 +1734,9 @@ input[type="range"] {
 
 .game-card {
 
-    position:
-        relative;
+    position: relative;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
 
@@ -2135,8 +1745,7 @@ input[type="range"] {
 
             color-mix(
                 in srgb,
-                var(--theme)
-                5%,
+                var(--theme) 5%,
                 #140707
             ),
 
@@ -2147,16 +1756,13 @@ input[type="range"] {
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            18%,
+            var(--theme) 18%,
             transparent
         );
 
-    border-radius:
-        9px;
+    border-radius: 9px;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
         transform 0.18s ease,
@@ -2192,17 +1798,13 @@ input[type="range"] {
 
 .game-image {
 
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        170px;
+    height: 170px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         #120606;
@@ -2211,20 +1813,15 @@ input[type="range"] {
 
 .minecraft-thumbnail {
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        100%;
+    height: 100%;
 
-    display:
-        block;
+    display: block;
 
-    object-fit:
-        cover;
+    object-fit: cover;
 
-    object-position:
-        center;
+    object-position: center;
 
     transition:
         transform 0.2s ease;
@@ -2241,20 +1838,15 @@ input[type="range"] {
 
 .game-image::before {
 
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    inset:
-        0;
+    inset: 0;
 
-    z-index:
-        1;
+    z-index: 1;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     background:
 
@@ -2281,8 +1873,7 @@ input[type="range"] {
             transparent 1px
         );
 
-    background-size:
-        24px 24px;
+    background-size: 24px 24px;
 }
 
 
@@ -2290,31 +1881,23 @@ input[type="range"] {
 
 .red-accent {
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        0;
+    left: 0;
 
-    right:
-        0;
+    right: 0;
 
-    bottom:
-        0;
+    bottom: 0;
 
-    height:
-        3px;
+    height: 3px;
 
-    z-index:
-        3;
+    z-index: 3;
 
     background:
 
         linear-gradient(
             90deg,
-
             var(--theme),
-
             var(--theme2)
         );
 }
@@ -2324,32 +1907,23 @@ input[type="range"] {
 
 .favorite-button {
 
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        10px;
+    top: 10px;
 
-    left:
-        10px;
+    left: 10px;
 
-    z-index:
-        10;
+    z-index: 10;
 
-    width:
-        34px;
+    width: 34px;
 
-    height:
-        34px;
+    height: 34px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
     border:
         1px solid
@@ -2360,8 +1934,7 @@ input[type="range"] {
             0.12
         );
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
     background:
         rgba(
@@ -2371,17 +1944,13 @@ input[type="range"] {
             0.65
         );
 
-    color:
-        #aaa;
+    color: #aaa;
 
-    font-size:
-        22px;
+    font-size: 22px;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     backdrop-filter:
         blur(4px);
@@ -2396,8 +1965,7 @@ input[type="range"] {
 
 .favorite-button:hover {
 
-    color:
-        #fff;
+    color: #fff;
 
     background:
         rgba(
@@ -2417,8 +1985,7 @@ input[type="range"] {
 
 .favorite-button.favorited {
 
-    color:
-        #ffd83d;
+    color: #ffd83d;
 
     background:
         var(--theme-soft);
@@ -2445,34 +2012,28 @@ input[type="range"] {
 /* GAME INFO */
 
 .game-info {
-    padding:
-        16px;
+
+    padding: 16px;
 }
 
 
 .game-title {
 
-    color:
-        #fff;
+    color: #fff;
 
-    font-size:
-        15px;
+    font-size: 15px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 }
 
 
 .game-meta {
 
-    margin-top:
-        4px;
+    margin-top: 4px;
 
-    color:
-        #765f5f;
+    color: #765f5f;
 
-    font-size:
-        11px;
+    font-size: 11px;
 }
 
 
@@ -2480,20 +2041,15 @@ input[type="range"] {
 
 .play-small {
 
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    margin-top:
-        12px;
+    margin-top: 12px;
 
-    padding:
-        9px 15px;
+    padding: 9px 15px;
 
     border:
         1px solid
@@ -2504,8 +2060,7 @@ input[type="range"] {
             0.45
         );
 
-    border-radius:
-        6px;
+    border-radius: 6px;
 
     background:
         var(--green);
@@ -2513,20 +2068,15 @@ input[type="range"] {
     color:
         #050505;
 
-    font-family:
-        inherit;
+    font-family: inherit;
 
-    font-size:
-        12px;
+    font-size: 12px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    letter-spacing:
-        0.5px;
+    letter-spacing: 0.5px;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     transition:
         background 0.15s ease,
@@ -2565,82 +2115,65 @@ input[type="range"] {
 
 .empty-favorites {
 
-    grid-column:
-        1 / -1;
+    grid-column: 1 / -1;
 
-    min-height:
-        190px;
+    min-height: 190px;
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
     border:
         1px dashed
         var(--theme-border);
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
     background:
         color-mix(
             in srgb,
-            var(--theme)
-            2%,
+            var(--theme) 2%,
             transparent
         );
 
-    text-align:
-        center;
+    text-align: center;
 }
 
 
 .empty-favorites-icon {
 
-    margin-bottom:
-        8px;
+    margin-bottom: 8px;
 
     color:
         color-mix(
             in srgb,
-            var(--theme)
-            40%,
+            var(--theme) 40%,
             #633f3f
         );
 
-    font-size:
-        42px;
+    font-size: 42px;
 }
 
 
 .empty-favorites h3 {
 
-    margin:
-        0 0 5px;
+    margin: 0 0 5px;
 
-    font-size:
-        16px;
+    font-size: 16px;
 }
 
 
 .empty-favorites p {
 
-    margin:
-        0;
+    margin: 0;
 
-    color:
-        #765f5f;
+    color: #765f5f;
 
-    font-size:
-        13px;
+    font-size: 13px;
 }
 
 
@@ -2648,47 +2181,36 @@ input[type="range"] {
 
 .main-footer {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    gap:
-        20px;
+    gap: 20px;
 
-    padding:
-        25px 0;
+    padding: 25px 0;
 
-    margin-top:
-        15px;
+    margin-top: 15px;
 
     color:
         color-mix(
             in srgb,
-            var(--theme)
-            30%,
+            var(--theme) 30%,
             #553737
         );
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 
-    letter-spacing:
-        0.8px;
+    letter-spacing: 0.8px;
 
     border-top:
         1px solid
         color-mix(
             in srgb,
-            var(--theme)
-            12%,
+            var(--theme) 12%,
             transparent
         );
 }
@@ -2697,84 +2219,52 @@ input[type="range"] {
 /* BRAND */
 
 .brand-green {
-    color:
-        #20d65a;
+    color: #20d65a;
 }
 
 
 .brand-red {
-    color:
-        #e3262e;
+    color: #e3262e;
 }
 
 
 /* RESPONSIVE */
 
-@media (max-width: 900px) {
-
-    .game-search {
-
-        width:
-            230px;
-
-        flex-basis:
-            230px;
-    }
-
-}
-
-
 @media (max-width: 800px) {
 
     .sidebar {
-        width:
-            190px;
+        width: 190px;
     }
 
 
     .topbar {
-        left:
-            190px;
+        left: 190px;
     }
 
 
     .main-content {
 
-        margin-left:
-            190px;
+        margin-left: 190px;
 
-        padding-left:
-            22px;
+        padding-left: 22px;
 
-        padding-right:
-            22px;
+        padding-right: 22px;
     }
 
-}
-
-
-@media (max-width: 700px) {
 
     .section-header {
 
-        align-items:
-            stretch;
+        align-items: flex-start;
 
-        flex-direction:
-            column;
+        flex-direction: column;
 
-        gap:
-            14px;
+        gap: 14px;
     }
 
 
-    .game-search {
+    .games-search {
 
-        width:
-            100%;
-
-        flex-basis:
-            42px;
+        width: 100%;
     }
 
 }
@@ -2784,32 +2274,23 @@ input[type="range"] {
 
     .sidebar {
 
-        position:
-            fixed;
+        position: fixed;
 
-        width:
-            100%;
+        width: 100%;
 
-        height:
-            58px;
+        height: 58px;
 
-        top:
-            auto;
+        top: auto;
 
-        bottom:
-            0;
+        bottom: 0;
 
-        left:
-            0;
+        left: 0;
 
-        right:
-            0;
+        right: 0;
 
-        flex-direction:
-            row;
+        flex-direction: row;
 
-        border-right:
-            0;
+        border-right: 0;
 
         border-top:
             1px solid
@@ -2819,11 +2300,9 @@ input[type="range"] {
 
     .sidebar-top {
 
-        width:
-            100%;
+        width: 100%;
 
-        padding:
-            0;
+        padding: 0;
     }
 
 
@@ -2831,63 +2310,49 @@ input[type="range"] {
     .version,
     .sidebar-footer {
 
-        display:
-            none;
+        display: none;
     }
 
 
     .sidebar-nav {
 
-        width:
-            100%;
+        width: 100%;
 
-        height:
-            58px;
+        height: 58px;
 
-        flex-direction:
-            row;
+        flex-direction: row;
 
-        justify-content:
-            center;
+        justify-content: center;
 
-        gap:
-            5px;
+        gap: 5px;
 
-        padding:
-            7px;
+        padding: 7px;
     }
 
 
     .nav-item {
 
-        flex:
-            1;
+        flex: 1;
 
-        justify-content:
-            center;
+        justify-content: center;
 
-        min-height:
-            44px;
+        min-height: 44px;
     }
 
 
     .topbar {
 
-        left:
-            0;
+        left: 0;
 
-        height:
-            65px;
+        height: 65px;
 
-        padding:
-            0 15px;
+        padding: 0 15px;
     }
 
 
     .main-content {
 
-        margin-left:
-            0;
+        margin-left: 0;
 
         padding:
             90px 15px 90px;
@@ -2895,18 +2360,15 @@ input[type="range"] {
 
 
     .online-status {
-        display:
-            none;
+        display: none;
     }
 
 
     .settings-panel {
 
-        top:
-            75px;
+        top: 75px;
 
-        right:
-            10px;
+        right: 10px;
 
         width:
             calc(
@@ -2917,41 +2379,45 @@ input[type="range"] {
 
     .theme-notification {
 
-        top:
-            75px;
+        top: 75px;
 
-        left:
-            10px;
+        left: 10px;
 
-        right:
-            10px;
+        right: 10px;
 
-        width:
-            auto;
+        width: auto;
     }
 
 
     .welcome-section {
 
-        padding-bottom:
-            40px;
+        padding-bottom: 40px;
     }
 
 
     .games-grid {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
+    }
+
+
+    .games-search {
+
+        width: 100%;
+    }
+
+
+    .games-search input {
+
+        height: 42px;
     }
 
 
     .main-footer {
 
-        flex-direction:
-            column;
+        flex-direction: column;
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
     }
 
 }
@@ -2961,43 +2427,36 @@ input[type="range"] {
 
     .nav-item {
 
-        font-size:
-            11px;
+        font-size: 11px;
     }
 
 
     .nav-icon {
 
-        font-size:
-            14px;
+        font-size: 14px;
     }
 
 
     .favorite-count {
 
-        min-width:
-            19px;
+        min-width: 19px;
 
-        height:
-            19px;
+        height: 19px;
     }
 
 
     .theme-options {
 
-        gap:
-            7px;
+        gap: 7px;
     }
 
 
     .theme-option,
     .custom-color-option {
 
-        width:
-            29px;
+        width: 29px;
 
-        height:
-            29px;
+        height: 29px;
     }
 
 }
