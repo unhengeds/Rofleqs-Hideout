@@ -882,7 +882,7 @@
 
                 </article>
 
-                  <!-- COOKIECLICKER -->
+                  <!-- DELTARUNE -->
                 <article
                     class="game-card"
                     data-game-id="deltarune"
@@ -950,6 +950,76 @@
                     </div>
 
                 </article>
+
+                  <!-- HALF-LIFE -->
+                <article
+                    class="game-card"
+                    data-game-id="half-life"
+                    data-game-name="half-life"
+                    data-game-version=""
+                    data-game-url="games/half-life/index.html"
+                    onclick="launchGame('games/half-life/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/halflife"
+                            alt="halflife"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Half Life to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'half-life'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Half Life
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/half-life/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
 
             </div>
 
