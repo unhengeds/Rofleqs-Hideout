@@ -44,6 +44,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ================================
+    // STORAGE KEYS
+    // ================================
+
+    const SETTINGS_KEY = "rofleqHideoutSettings";
+    const FAVORITES_KEY = "rofleqHideoutFavorites";
+    const THEME_KEY = "rofleqHideoutTheme";
+    const CUSTOM_THEME_KEY = "rofleqHideoutCustomTheme";
+
+
+    // ================================
     // DEFAULT SETTINGS
     // ================================
 
@@ -53,14 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
         backgroundSpeed: 6,
         backgroundTransparency: 8
     };
-
-    const SETTINGS_KEY = "rofleqHideoutSettings";
-
-    const FAVORITES_KEY = "rofleqHideoutFavorites";
-
-    const THEME_KEY = "rofleqHideoutTheme";
-
-    const CUSTOM_THEME_KEY = "rofleqHideoutCustomTheme";
 
 
     // ================================
@@ -97,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadSettings() {
 
-        let savedSettings;
+        let savedSettings = null;
 
         try {
             savedSettings = JSON.parse(
@@ -117,19 +119,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (animatedBackgroundToggle) {
-            animatedBackgroundToggle.checked = settings.animatedBackground;
+            animatedBackgroundToggle.checked =
+                settings.animatedBackground;
         }
 
         if (backgroundSpeed) {
-            backgroundSpeed.value = settings.backgroundSpeed;
+            backgroundSpeed.value =
+                settings.backgroundSpeed;
         }
 
         if (backgroundTransparency) {
-            backgroundTransparency.value = settings.backgroundTransparency;
+            backgroundTransparency.value =
+                settings.backgroundTransparency;
         }
 
         updateBackgroundSpeed();
-
         updateBackgroundTransparency();
 
         applyAnimatedBackground(
@@ -145,25 +149,21 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveSettings() {
 
         const settings = {
-            openInBlank:
-                openInBlankToggle
-                    ? openInBlankToggle.checked
-                    : defaultSettings.openInBlank,
+            openInBlank: openInBlankToggle
+                ? openInBlankToggle.checked
+                : defaultSettings.openInBlank,
 
-            animatedBackground:
-                animatedBackgroundToggle
-                    ? animatedBackgroundToggle.checked
-                    : defaultSettings.animatedBackground,
+            animatedBackground: animatedBackgroundToggle
+                ? animatedBackgroundToggle.checked
+                : defaultSettings.animatedBackground,
 
-            backgroundSpeed:
-                backgroundSpeed
-                    ? Number(backgroundSpeed.value)
-                    : defaultSettings.backgroundSpeed,
+            backgroundSpeed: backgroundSpeed
+                ? Number(backgroundSpeed.value)
+                : defaultSettings.backgroundSpeed,
 
-            backgroundTransparency:
-                backgroundTransparency
-                    ? Number(backgroundTransparency.value)
-                    : defaultSettings.backgroundTransparency
+            backgroundTransparency: backgroundTransparency
+                ? Number(backgroundTransparency.value)
+                : defaultSettings.backgroundTransparency
         };
 
         localStorage.setItem(
@@ -181,21 +181,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!backgroundSpeed) return;
 
-        const value = Number(backgroundSpeed.value);
+        const value =
+            Number(backgroundSpeed.value);
 
         if (backgroundSpeedValue) {
-            backgroundSpeedValue.textContent = value;
+            backgroundSpeedValue.textContent =
+                value;
         }
 
-        /*
-            Higher number = faster animation.
-            The CSS variable controls the animation duration.
-        */
-
-        const duration = Math.max(
-            2,
-            22 - value * 2
-        );
+        const duration =
+            Math.max(
+                2,
+                22 - value * 2
+            );
 
         document.documentElement.style.setProperty(
             "--checker-speed",
@@ -212,21 +210,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!backgroundTransparency) return;
 
-        const value = Number(
-            backgroundTransparency.value
-        );
+        const value =
+            Number(backgroundTransparency.value);
 
         if (backgroundTransparencyValue) {
             backgroundTransparencyValue.textContent =
                 value + "%";
         }
 
-        /*
-            Convert slider value into opacity.
-        */
-
         const opacity =
-            Math.max(0, Math.min(1, value / 100));
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    value / 100
+                )
+            );
 
         document.documentElement.style.setProperty(
             "--checker-opacity",
@@ -256,9 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         openInBlankToggle.addEventListener(
             "change",
-            () => {
-                saveSettings();
-            }
+            saveSettings
         );
     }
 
@@ -286,7 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 updateBackgroundSpeed();
-
                 saveSettings();
             }
         );
@@ -300,7 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 updateBackgroundTransparency();
-
                 saveSettings();
             }
         );
@@ -324,8 +319,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-
-    // Close settings if clicking outside
 
     document.addEventListener(
         "click",
@@ -353,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ================================
-    // THEME FUNCTIONS
+    // THEME
     // ================================
 
     function applyTheme(color) {
@@ -382,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.documentElement.style.setProperty(
             "--theme-strong",
-            `color-mix(in srgb, ${color} 80%, white 0%)`
+            color
         );
     }
 
@@ -396,10 +389,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    function updateThemeSelection(index) {
+
+        const themeButtons =
+            document.querySelectorAll(
+                ".theme-option"
+            );
+
+        themeButtons.forEach(
+            button => {
+
+                const buttonIndex =
+                    Number(
+                        button.dataset.themeIndex
+                    );
+
+                button.classList.toggle(
+                    "active",
+                    buttonIndex === index
+                );
+            }
+        );
+    }
+
+
     function loadTheme() {
 
         const savedTheme =
-            localStorage.getItem(THEME_KEY);
+            localStorage.getItem(
+                THEME_KEY
+            );
 
         const customTheme =
             localStorage.getItem(
@@ -421,7 +440,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let index = Number(savedTheme);
+        let index =
+            Number(savedTheme);
 
         if (
             Number.isNaN(index) ||
@@ -439,30 +459,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function updateThemeSelection(index) {
-
-        const themeButtons =
-            document.querySelectorAll(
-                ".theme-option"
-            );
-
-        themeButtons.forEach(
-            (button) => {
-
-                const buttonIndex =
-                    Number(
-                        button.dataset.themeIndex
-                    );
-
-                button.classList.toggle(
-                    "active",
-                    buttonIndex === index
-                );
-            }
-        );
-    }
-
-
     // ================================
     // THEME BUTTONS
     // ================================
@@ -473,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     themeButtons.forEach(
-        (button) => {
+        button => {
 
             button.addEventListener(
                 "click",
@@ -515,7 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ================================
-    // CUSTOM THEME COLOR
+    // CUSTOM COLOR
     // ================================
 
     if (customThemeColor) {
@@ -538,6 +534,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 themeButtons.forEach(
                     button => {
+
                         button.classList.remove(
                             "active"
                         );
@@ -553,6 +550,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ================================
 
     let currentThemeIndex = 0;
+
 
     function getCurrentThemeIndex() {
 
@@ -612,11 +610,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 currentThemeIndex++;
 
-                /*
-                    When we loop from Orange back
-                    to Red, show the unlock message.
-                */
-
                 if (
                     currentThemeIndex >=
                     themes.length
@@ -630,7 +623,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const theme =
                     themes[currentThemeIndex];
 
-                applyTheme(theme.color);
+                applyTheme(
+                    theme.color
+                );
 
                 saveTheme(
                     currentThemeIndex
@@ -641,7 +636,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
                 if (customThemeColor) {
-
                     customThemeColor.value =
                         theme.color;
                 }
@@ -737,7 +731,7 @@ document.addEventListener("DOMContentLoaded", () => {
             getFavorites();
 
         buttons.forEach(
-            (button) => {
+            button => {
 
                 const gameId =
                     button.dataset.gameId;
@@ -772,11 +766,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!favoriteCount) return;
 
-        const count =
-            getFavorites().length;
-
         favoriteCount.textContent =
-            count;
+            getFavorites().length;
     }
 
 
@@ -789,12 +780,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const card =
             originalCard.cloneNode(true);
 
-        /*
-            Reconnect the favorite button
-            because cloneNode does not copy
-            event listeners.
-        */
-
         const favoriteButton =
             card.querySelector(
                 ".favorite-button"
@@ -803,7 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (favoriteButton) {
 
             favoriteButton.onclick =
-                (event) => {
+                event => {
 
                     event.stopPropagation();
 
@@ -814,13 +799,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
         }
 
-        /*
-            Make the entire card launchable.
-        */
-
         card.addEventListener(
             "click",
-            (event) => {
+            event => {
 
                 if (
                     event.target.closest(
@@ -859,7 +840,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let found = 0;
 
         favorites.forEach(
-            (gameId) => {
+            gameId => {
 
                 if (!gamesGrid) return;
 
@@ -894,7 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ================================
-    // MAIN GAME FAVORITE BUTTONS
+    // FAVORITE BUTTON EVENTS
     // ================================
 
     const favoriteButtons =
@@ -903,11 +884,11 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     favoriteButtons.forEach(
-        (button) => {
+        button => {
 
             button.addEventListener(
                 "click",
-                (event) => {
+                event => {
 
                     event.stopPropagation();
 
@@ -940,76 +921,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const gameCards =
             gamesGrid.querySelectorAll(
-                ".game-card[data-game-id]"
+                ".game-card"
             );
 
         let visibleGames = 0;
 
+
         gameCards.forEach(
-            (card) => {
+            card => {
 
-                const gameName =
-                    (
-                        card.dataset.gameName ||
-                        ""
-                    ).toLowerCase();
+                /*
+                    Search the actual text inside
+                    the card. This means it will work
+                    even if a data-game-name attribute
+                    is missing or incorrect.
+                */
 
-                const gameVersion =
-                    (
-                        card.dataset.gameVersion ||
-                        ""
-                    ).toLowerCase();
-
-                const titleElement =
-                    card.querySelector(
-                        ".game-title"
-                    );
-
-                const metaElement =
-                    card.querySelector(
-                        ".game-meta"
-                    );
-
-                const title =
-                    titleElement
-                        ? titleElement.textContent.toLowerCase()
-                        : "";
-
-                const meta =
-                    metaElement
-                        ? metaElement.textContent.toLowerCase()
-                        : "";
+                const cardText =
+                    card.textContent
+                        .toLowerCase()
+                        .replace(/\s+/g, " ")
+                        .trim();
 
                 const matches =
                     query === "" ||
-                    gameName.includes(query) ||
-                    gameVersion.includes(query) ||
-                    title.includes(query) ||
-                    meta.includes(query);
+                    cardText.includes(query);
 
                 if (matches) {
 
-                    card.style.display = "";
+                    card.classList.remove(
+                        "search-hidden"
+                    );
 
                     visibleGames++;
 
                 } else {
 
-                    card.style.display =
-                        "none";
+                    card.classList.add(
+                        "search-hidden"
+                    );
                 }
             }
         );
 
 
         // ================================
-        // NO RESULTS MESSAGE
+        // NO RESULTS
         // ================================
 
         if (gameSearchEmpty) {
 
+            /*
+                IMPORTANT:
+                Empty search = NEVER show
+                "No games found".
+            */
+
             if (
-                query !== "" &&
+                query.length > 0 &&
                 visibleGames === 0
             ) {
 
@@ -1038,7 +1007,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    // ================================
+    // SEARCH INPUT
+    // ================================
+
     if (gameSearch) {
+
+        /*
+            Prevent the browser from restoring
+            an old search when the page opens.
+        */
+
+        gameSearch.value = "";
 
         gameSearch.addEventListener(
             "input",
@@ -1047,11 +1027,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gameSearch.addEventListener(
             "keydown",
-            (event) => {
+            event => {
 
                 if (
-                    event.key === "Escape" &&
-                    gameSearch.value !== ""
+                    event.key === "Escape"
                 ) {
 
                     gameSearch.value = "";
@@ -1064,6 +1043,10 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
+
+    // ================================
+    // CLEAR SEARCH
+    // ================================
 
     if (clearGameSearch) {
 
@@ -1120,12 +1103,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (openInBlank) {
 
-            /*
-                Opens the game in a new blank tab.
-                The iframe keeps the original game
-                page inside the blank tab.
-            */
-
             const newWindow =
                 window.open(
                     "about:blank",
@@ -1143,11 +1120,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             newWindow.document.write(`
                 <!DOCTYPE html>
+
                 <html>
+
                 <head>
+
                     <title>Rofleq's Hideout</title>
 
                     <style>
+
                         html,
                         body {
                             margin: 0;
@@ -1164,18 +1145,24 @@ document.addEventListener("DOMContentLoaded", () => {
                             height: 100%;
                             display: block;
                         }
+
                     </style>
+
                 </head>
 
                 <body>
 
                     <iframe
-                        src="${url.replace(/"/g, "&quot;")}"
+                        src="${url.replace(
+                            /"/g,
+                            "&quot;"
+                        )}"
                         allowfullscreen
                         allow="fullscreen; autoplay; gamepad; keyboard-lock"
                     ></iframe>
 
                 </body>
+
                 </html>
             `);
 
@@ -1198,16 +1185,11 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
     gameCards.forEach(
-        (card) => {
+        card => {
 
             card.addEventListener(
                 "click",
-                (event) => {
-
-                    /*
-                        Don't launch the game when
-                        clicking the favorite button.
-                    */
+                event => {
 
                     if (
                         event.target.closest(
@@ -1233,20 +1215,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // NAVIGATION
     // ================================
 
-    /*
-        The navigation is intentionally swapped:
-
-        Clicking "Favorites" goes to Games.
-        Clicking "Games" goes to Favorites.
-
-        This matches the behavior requested.
-    */
-
     if (favoritesNav) {
 
         favoritesNav.addEventListener(
             "click",
-            (event) => {
+            event => {
 
                 event.preventDefault();
 
@@ -1266,7 +1239,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gamesNav.addEventListener(
             "click",
-            (event) => {
+            event => {
 
                 event.preventDefault();
 
@@ -1299,27 +1272,23 @@ document.addEventListener("DOMContentLoaded", () => {
             window.scrollY +
             window.innerHeight * 0.35;
 
-        const favoritesTop =
-            favoritesSection.offsetTop;
-
         const gamesTop =
             gamesSection.offsetTop;
 
-        /*
-            Navigation is swapped intentionally.
-        */
 
         if (
             scrollPosition >= gamesTop
         ) {
 
             if (favoritesNav) {
+
                 favoritesNav.classList.add(
                     "active"
                 );
             }
 
             if (gamesNav) {
+
                 gamesNav.classList.remove(
                     "active"
                 );
@@ -1328,12 +1297,14 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
 
             if (favoritesNav) {
+
                 favoritesNav.classList.remove(
                     "active"
                 );
             }
 
             if (gamesNav) {
+
                 gamesNav.classList.add(
                     "active"
                 );
@@ -1352,7 +1323,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ================================
-    // PAGE STARTUP
+    // STARTUP
     // ================================
 
     loadSettings();
@@ -1364,6 +1335,12 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFavoriteButtons();
 
     updateFavoriteCount();
+
+    /*
+        Run search once after clearing the
+        input. This makes every game visible
+        when the page first opens.
+    */
 
     filterGames();
 
