@@ -1296,6 +1296,74 @@
 
                 </article>
 
+                 <!-- BASKETRANDOM -->
+                <article
+                    class="game-card"
+                    data-game-id="basket"
+                    data-game-name="basket"
+                    data-game-version=""
+                    data-game-url="games/basket/index.html"
+                    onclick="launchGame('games/basket/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/basket"
+                            alt="Basket Random"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Basket Random to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'basket'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Basket Random
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/basket/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
                 
             </div>
 
