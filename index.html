@@ -526,6 +526,47 @@
 
 
 
+        <!-- SEARCH -->
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+
+                <input
+                    type="search"
+                    id="gameSearch"
+                    placeholder="Search games..."
+                    autocomplete="off"
+                    aria-label="Search games"
+                >
+
+
+                <button
+                    type="button"
+                    class="search-clear"
+                    id="searchClear"
+                    aria-label="Clear search"
+                    title="Clear search"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="search-results-text"
+                id="searchResultsText"
+            ></div>
+
+        </section>
+
+
+
         <!-- FAVORITES -->
         <section
             class="game-section"
@@ -608,6 +649,7 @@
                 id="gamesGrid"
             >
 
+
                 <!-- MINECRAFT -->
                 <article
                     class="game-card"
@@ -634,9 +676,7 @@
                             title="Add to favorites"
                             onclick="
                                 event.stopPropagation();
-                                toggleFavorite(
-                                    'minecraft-1.9.4'
-                                );
+                                toggleFavorite('minecraft-1.9.4');
                             "
                         >
                             ☆
@@ -677,70 +717,76 @@
 
                 </article>
 
+
+
                 <!-- RETROBOWL -->
-<article
-    class="game-card"
-    data-game-id="retrobowl"
-    data-game-name="retrobowl"
-    data-game-version=""
-    data-game-url="games/retrobowl/index.html"
-    onclick="launchGame('games/retrobowl/index.html')"
->
+                <article
+                    class="game-card"
+                    data-game-id="retrobowl"
+                    data-game-name="retrobowl"
+                    data-game-version=""
+                    data-game-url="games/retrobowl/index.html"
+                    onclick="launchGame('games/retrobowl/index.html')"
+                >
 
-    <div class="game-image">
+                    <div class="game-image">
 
-        <img
-            src="assets/retrobowl"
-            alt="retrobowl"
-            class="minecraft-thumbnail"
-        >
-
-
-        <button
-            type="button"
-            class="favorite-button"
-            aria-label="Add retrobowl to favorites"
-            title="Add to favorites"
-            onclick="
-                event.stopPropagation();
-                toggleFavorite('retrobowl');
-            "
-        >
-            ☆
-        </button>
+                        <img
+                            src="assets/retrobowl"
+                            alt="retrobowl"
+                            class="minecraft-thumbnail"
+                        >
 
 
-        <div class="red-accent"></div>
-
-    </div>
-
-
-    <div class="game-info">
-
-        <div class="game-title">
-            Retrobowl
-        </div>
-
-
-        <div class="game-meta">
-            &nbsp;
-        </div>
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add retrobowl to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite('retrobowl');
+                            "
+                        >
+                            ☆
+                        </button>
 
 
-        <button
-            type="button"
-            class="play-small"
-            onclick="
-                event.stopPropagation();
-                launchGame('games/retrobowl/index.html');
-            "
-        >
-            ▶ PLAY
-        </button>
+                        <div class="red-accent"></div>
 
-    </div>
+                    </div>
 
-</article>
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Retrobowl
+                        </div>
+
+
+                        <div class="game-meta">
+                            &nbsp;
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/retrobowl/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+
 
                 <!-- BASKETBROS -->
                 <article
@@ -768,9 +814,7 @@
                             title="Add to favorites"
                             onclick="
                                 event.stopPropagation();
-                                toggleFavorite(
-                                    'Basketbros'
-                                );
+                                toggleFavorite('Basketbros');
                             "
                         >
                             ☆
@@ -790,7 +834,6 @@
 
 
                         <div class="game-meta">
-                            
                         </div>
 
 
@@ -811,7 +854,9 @@
 
                 </article>
 
-                <!-- COOKIECLICKER -->
+
+
+                <!-- COOKIE CLICKER -->
                 <article
                     class="game-card"
                     data-game-id="cookie"
@@ -837,9 +882,7 @@
                             title="Add to favorites"
                             onclick="
                                 event.stopPropagation();
-                                toggleFavorite(
-                                    'cookie'
-                                );
+                                toggleFavorite('cookie');
                             "
                         >
                             ☆
@@ -859,7 +902,6 @@
 
 
                         <div class="game-meta">
-                            
                         </div>
 
 
@@ -880,7 +922,9 @@
 
                 </article>
 
-                  <!-- COOKIECLICKER -->
+
+
+                <!-- DELTARUNE -->
                 <article
                     class="game-card"
                     data-game-id="deltarune"
@@ -906,9 +950,7 @@
                             title="Add to favorites"
                             onclick="
                                 event.stopPropagation();
-                                toggleFavorite(
-                                    'deltarune'
-                                );
+                                toggleFavorite('deltarune');
                             "
                         >
                             ☆
@@ -928,7 +970,6 @@
 
 
                         <div class="game-meta">
-                            
                         </div>
 
 
@@ -948,6 +989,7 @@
                     </div>
 
                 </article>
+
 
             </div>
 
