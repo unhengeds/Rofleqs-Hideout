@@ -40,9 +40,7 @@
 }
 
 
-/* =========================================================
-   RESET
-========================================================= */
+/* RESET */
 
 * {
     box-sizing: border-box;
@@ -88,9 +86,7 @@ body {
 }
 
 
-/* =========================================================
-   RED CHECKERBOARD BACKGROUND
-========================================================= */
+/* BACKGROUND */
 
 body::before {
 
@@ -106,6 +102,7 @@ body::before {
 
     opacity:
         var(--checker-opacity);
+
 
     background:
 
@@ -135,6 +132,7 @@ body::before {
             var(--theme) 75%
         );
 
+
     background-size:
         80px 80px;
 
@@ -142,11 +140,13 @@ body::before {
         0 0,
         40px 40px;
 
+
     animation:
         checkerMove
         var(--checker-speed)
         linear
         infinite;
+
 
     transition:
         opacity 0.3s ease;
@@ -163,6 +163,7 @@ body::before {
                 0,
                 0
             );
+
     }
 
     to {
@@ -173,7 +174,9 @@ body::before {
                 80px,
                 0
             );
+
     }
+
 }
 
 
@@ -214,15 +217,11 @@ body::after {
 
 
 body.background-disabled::before {
-
-    display:
-        none;
+    display: none;
 }
 
 
-/* =========================================================
-   SIDEBAR
-========================================================= */
+/* SIDEBAR */
 
 .sidebar {
 
@@ -268,8 +267,7 @@ body.background-disabled::before {
             transparent
         );
 
-    z-index:
-        100;
+    z-index: 100;
 
     transition:
         background 0.25s ease,
@@ -278,19 +276,15 @@ body.background-disabled::before {
 
 
 .sidebar-top {
-
-    padding:
-        26px 18px;
+    padding: 26px 18px;
 }
 
 
 .logo-container {
 
-    width:
-        100%;
+    width: 100%;
 
-    display:
-        flex;
+    display: flex;
 
     justify-content:
         center;
@@ -370,9 +364,7 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* NAVIGATION */
 
 .sidebar-nav {
 
@@ -414,8 +406,7 @@ body.background-disabled::before {
         none;
 
     border:
-        1px solid
-        transparent;
+        1px solid transparent;
 
     border-radius:
         7px;
@@ -532,7 +523,8 @@ body.background-disabled::before {
 }
 
 
-.nav-item.active .favorite-count {
+.nav-item.active
+.favorite-count {
 
     background:
         var(--theme);
@@ -542,9 +534,7 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   SIDEBAR FOOTER
-========================================================= */
+/* SIDEBAR FOOTER */
 
 .sidebar-footer {
 
@@ -582,9 +572,7 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   TOP BAR
-========================================================= */
+/* TOP BAR */
 
 .topbar {
 
@@ -719,10 +707,6 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   SETTINGS BUTTON
-========================================================= */
-
 .settings-button {
 
     width:
@@ -783,9 +767,7 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   THEME NOTIFICATION
-========================================================= */
+/* THEME NOTIFICATION */
 
 .theme-notification {
 
@@ -836,7 +818,6 @@ body.background-disabled::before {
         8px;
 
     box-shadow:
-
         0 12px 40px
         rgba(
             0,
@@ -946,9 +927,7 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   SETTINGS PANEL
-========================================================= */
+/* SETTINGS */
 
 .settings-panel {
 
@@ -1039,36 +1018,6 @@ body.background-disabled::before {
 }
 
 
-/* SETTINGS SCROLLBAR */
-
-.settings-panel::-webkit-scrollbar {
-
-    width:
-        5px;
-}
-
-
-.settings-panel::-webkit-scrollbar-track {
-
-    background:
-        transparent;
-}
-
-
-.settings-panel::-webkit-scrollbar-thumb {
-
-    background:
-        var(--theme-border);
-
-    border-radius:
-        10px;
-}
-
-
-/* =========================================================
-   SETTINGS HEADER
-========================================================= */
-
 .settings-header {
 
     display:
@@ -1136,26 +1085,16 @@ body.background-disabled::before {
 
     cursor:
         pointer;
-
-    transition:
-        color 0.15s ease,
-        transform 0.15s ease;
 }
 
 
 .settings-close:hover {
-
     color:
         #fff;
-
-    transform:
-        rotate(90deg);
 }
 
 
-/* =========================================================
-   SETTING BOX
-========================================================= */
+/* SETTING BOX */
 
 .setting-box {
 
@@ -1187,28 +1126,10 @@ body.background-disabled::before {
 
     border-radius:
         7px;
-
-    transition:
-        border-color 0.2s ease,
-        background 0.2s ease;
 }
 
 
-.setting-box:hover {
-
-    border-color:
-        color-mix(
-            in srgb,
-            var(--theme)
-            27%,
-            transparent
-        );
-}
-
-
-/* =========================================================
-   RESET BUTTON
-========================================================= */
+/* RESET BUTTON */
 
 .setting-reset {
 
@@ -1284,10 +1205,6 @@ body.background-disabled::before {
         rotate(-25deg);
 }
 
-
-/* =========================================================
-   SETTINGS ROW
-========================================================= */
 
 .setting-row {
 
@@ -1377,9 +1294,7 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   SWITCH
-========================================================= */
+/* SWITCH */
 
 .switch {
 
@@ -1437,8 +1352,7 @@ body.background-disabled::before {
         20px;
 
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
+        background 0.2s ease;
 }
 
 
@@ -1474,7 +1388,8 @@ body.background-disabled::before {
 }
 
 
-.switch input:checked + .slider {
+.switch input:checked
++ .slider {
 
     background:
         color-mix(
@@ -1489,7 +1404,8 @@ body.background-disabled::before {
 }
 
 
-.switch input:checked + .slider::before {
+.switch input:checked
++ .slider::before {
 
     transform:
         translateX(18px);
@@ -1499,138 +1415,14 @@ body.background-disabled::before {
 }
 
 
-/* =========================================================
-   SLIDERS
-========================================================= */
+/* RANGE */
 
 input[type="range"] {
 
     width:
         100%;
 
-    height:
-        4px;
-
-    margin:
-        3px 0 2px;
-
-    padding:
-        0;
-
-    appearance:
-        none;
-
-    -webkit-appearance:
-        none;
-
-    background:
-        #292626;
-
-    border:
-        0;
-
-    border-radius:
-        10px;
-
-    outline:
-        none;
-
-    cursor:
-        pointer;
-}
-
-
-input[type="range"]::-webkit-slider-runnable-track {
-
-    height:
-        4px;
-
-    background:
-        #292626;
-
-    border-radius:
-        10px;
-}
-
-
-input[type="range"]::-webkit-slider-thumb {
-
-    appearance:
-        none;
-
-    -webkit-appearance:
-        none;
-
-    width:
-        14px;
-
-    height:
-        14px;
-
-    margin-top:
-        -5px;
-
-    border:
-        0;
-
-    border-radius:
-        50%;
-
-    background:
-        var(--theme);
-
-    box-shadow:
-        none;
-
-    cursor:
-        pointer;
-}
-
-
-input[type="range"]::-moz-range-track {
-
-    height:
-        4px;
-
-    background:
-        #292626;
-
-    border:
-        0;
-
-    border-radius:
-        10px;
-}
-
-
-input[type="range"]::-moz-range-progress {
-
-    height:
-        4px;
-
-    background:
-        var(--theme);
-
-    border-radius:
-        10px;
-}
-
-
-input[type="range"]::-moz-range-thumb {
-
-    width:
-        14px;
-
-    height:
-        14px;
-
-    border:
-        0;
-
-    border-radius:
-        50%;
-
-    background:
+    accent-color:
         var(--theme);
 
     cursor:
@@ -1638,9 +1430,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   THEME OPTIONS
-========================================================= */
+/* THEME OPTIONS */
 
 .theme-options {
 
@@ -1649,9 +1439,6 @@ input[type="range"]::-moz-range-thumb {
 
     align-items:
         center;
-
-    flex-wrap:
-        wrap;
 
     gap:
         10px;
@@ -1710,45 +1497,38 @@ input[type="range"]::-moz-range-thumb {
         #fff;
 
     box-shadow:
-
         0 0 0 2px
         var(--theme),
-
         0 0 12px
         var(--theme-glow);
 }
 
 
 .theme-red {
-
     background:
         #e3262e;
 }
 
 
 .theme-green {
-
     background:
         #20d65a;
 }
 
 
 .theme-purple {
-
     background:
         #a855f7;
 }
 
 
 .theme-blue {
-
     background:
         #3b82f6;
 }
 
 
 .theme-orange {
-
     background:
         #f97316;
 }
@@ -1772,7 +1552,6 @@ input[type="range"]::-moz-range-thumb {
         hidden;
 
     background:
-
         conic-gradient(
             #ff0000,
             #ffff00,
@@ -1842,9 +1621,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
+/* MAIN */
 
 .main-content {
 
@@ -1862,9 +1639,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   WELCOME
-========================================================= */
+/* WELCOME */
 
 .welcome-section {
 
@@ -1906,9 +1681,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   SECTIONS
-========================================================= */
+/* SECTIONS */
 
 .game-section {
 
@@ -1980,9 +1753,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   GAME GRID
-========================================================= */
+/* GAME GRID */
 
 .games-grid {
 
@@ -2003,9 +1774,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   GAME CARD
-========================================================= */
+/* GAME CARD */
 
 .game-card {
 
@@ -2075,9 +1844,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   GAME IMAGE
-========================================================= */
+/* IMAGE */
 
 .game-image {
 
@@ -2097,12 +1864,6 @@ input[type="range"]::-moz-range-thumb {
         #120606;
 }
 
-
-/*
-   IMPORTANT:
-   There is intentionally NO grid-line overlay here.
-   Images stay completely clean.
-*/
 
 .minecraft-thumbnail {
 
@@ -2126,16 +1887,62 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-.game-card:hover .minecraft-thumbnail {
+.game-card:hover
+.minecraft-thumbnail {
 
     transform:
         scale(1.025);
 }
 
 
-/* =========================================================
-   CARD ACCENT
-========================================================= */
+.game-image::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    pointer-events:
+        none;
+
+    background:
+
+        linear-gradient(
+            rgba(
+                255,
+                255,
+                255,
+                0.035
+            )
+            1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(
+                255,
+                255,
+                255,
+                0.035
+            )
+            1px,
+            transparent 1px
+        );
+
+    background-size:
+        24px 24px;
+}
+
+
+/* CARD ACCENT */
 
 .red-accent {
 
@@ -2169,9 +1976,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   FAVORITE BUTTON
-========================================================= */
+/* FAVORITE */
 
 .favorite-button {
 
@@ -2212,7 +2017,7 @@ input[type="range"]::-moz-range-thumb {
         );
 
     border-radius:
-        50%;
+        8px;
 
     background:
         rgba(
@@ -2293,12 +2098,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   GAME INFO
-========================================================= */
+/* GAME INFO */
 
 .game-info {
-
     padding:
         16px;
 }
@@ -2330,14 +2132,12 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   PLAY BUTTON
-========================================================= */
+/* PLAY */
 
 .play-small {
 
     display:
-        flex;
+        inline-flex;
 
     align-items:
         center;
@@ -2345,14 +2145,11 @@ input[type="range"]::-moz-range-thumb {
     justify-content:
         center;
 
-    width:
-        100%;
-
     margin-top:
         12px;
 
     padding:
-        10px 15px;
+        9px 15px;
 
     border:
         1px solid
@@ -2420,9 +2217,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   EMPTY FAVORITES
-========================================================= */
+/* EMPTY FAVORITES */
 
 .empty-favorites {
 
@@ -2505,9 +2300,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
+/* FOOTER */
 
 .main-footer {
 
@@ -2557,39 +2350,31 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* =========================================================
-   BRAND COLORS
-========================================================= */
+/* BRAND */
 
 .brand-green {
-
     color:
         #20d65a;
 }
 
 
 .brand-red {
-
     color:
         #e3262e;
 }
 
 
-/* =========================================================
-   RESPONSIVE — TABLET
-========================================================= */
+/* RESPONSIVE */
 
 @media (max-width: 800px) {
 
     .sidebar {
-
         width:
             190px;
     }
 
 
     .topbar {
-
         left:
             190px;
     }
@@ -2606,12 +2391,9 @@ input[type="range"]::-moz-range-thumb {
         padding-right:
             22px;
     }
+
 }
 
-
-/* =========================================================
-   RESPONSIVE — MOBILE
-========================================================= */
 
 @media (max-width: 600px) {
 
@@ -2728,7 +2510,6 @@ input[type="range"]::-moz-range-thumb {
 
 
     .online-status {
-
         display:
             none;
     }
@@ -2787,12 +2568,9 @@ input[type="range"]::-moz-range-thumb {
         align-items:
             flex-start;
     }
+
 }
 
-
-/* =========================================================
-   RESPONSIVE — SMALL PHONES
-========================================================= */
 
 @media (max-width: 400px) {
 
@@ -2836,4 +2614,5 @@ input[type="range"]::-moz-range-thumb {
         height:
             29px;
     }
+
 }
