@@ -1158,6 +1158,76 @@
 
                 </article>
 
+                 <!-- MY-FRIEND-PEDRO -->
+                <article
+                    class="game-card"
+                    data-game-id="Pedro"
+                    data-game-name="Pedro"
+                    data-game-version=""
+                    data-game-url="games/Pedro/index.html"
+                    onclick="launchGame('games/Pedro/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/Pedro"
+                            alt="Pedro"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add My Friend Pedro to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'Pedro'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            My Friend Pedro
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/Pedro/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+
             </div>
 
         </section>
