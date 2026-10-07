@@ -39,6 +39,9 @@ const THEME_KEY =
 const CUSTOM_THEME_KEY =
     "rofleqHideoutCustomTheme";
 
+const removeAllFavorites =
+    document.getElementById("removeAllFavorites");
+
 
 /* =========================
    THEMES
@@ -728,6 +731,105 @@ const gamesNav =
         "gamesNav"
     );
 
+/* =====================================================
+   REMOVE ALL FAVORITES
+===================================================== */
+
+if (removeAllFavorites) {
+
+    removeAllFavorites.addEventListener(
+        "click",
+        function () {
+
+            const favorites =
+                JSON.parse(
+                    localStorage.getItem("favorites") || "[]"
+                );
+
+            if (favorites.length === 0) {
+
+                alert(
+                    "You don't have any favorite games."
+                );
+
+                return;
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to remove ALL favorites?\n\n" +
+                    "This will remove " +
+                    favorites.length +
+                    " game" +
+                    (favorites.length === 1 ? "" : "s") +
+                    " from your Favorites."
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            /* Clear favorites */
+
+            localStorage.setItem(
+                "favorites",
+                JSON.stringify([])
+            );
+
+
+            /* Rebuild the favorites section */
+
+            if (
+                typeof renderFavorites === "function"
+            ) {
+
+                renderFavorites();
+
+            }
+
+
+            /* Update favorite count */
+
+            if (
+                typeof updateFavoriteCount === "function"
+            ) {
+
+                updateFavoriteCount();
+
+            }
+
+
+            /* Update all star buttons */
+
+            document
+                .querySelectorAll(".favorite-button")
+                .forEach(function (button) {
+
+                    button.textContent = "☆";
+
+                    button.classList.remove(
+                        "favorited"
+                    );
+
+                    button.setAttribute(
+                        "title",
+                        "Add to favorites"
+                    );
+
+                    button.setAttribute(
+                        "aria-label",
+                        "Add to favorites"
+                    );
+
+                });
+
+        }
+    );
+
+}
 
 /* =========================
    SETTINGS STORAGE
