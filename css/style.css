@@ -2577,3 +2577,74 @@ input[type="range"]::-moz-range-thumb {
             15px;
     }
 }
+/* =====================================================
+   REMOVE ALL FAVORITES
+===================================================== */
+
+.danger-setting {
+    border-color: rgba(227, 38, 46, 0.22);
+}
+
+.danger-setting:hover {
+    border-color: rgba(227, 38, 46, 0.5);
+    background: rgba(227, 38, 46, 0.08);
+}
+
+
+/* Settings heading */
+
+.setting-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+
+/* Favorite reset button */
+
+.reset-favorites-button {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    border: 1px solid rgba(227, 38, 46, 0.35);
+
+    border-radius: 8px;
+
+    background: rgba(227, 38, 46, 0.08);
+
+    color: #aaa;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.reset-favorites-button:hover {
+    color: white;
+
+    background: rgba(227, 38, 46, 0.2);
+
+    border-color: #e3262e;
+
+    transform: rotate(-15deg);
+
+    box-shadow:
+        0 0 12px rgba(227, 38, 46, 0.18);
+}
+
+.reset-favorites-button:active {
+    transform: scale(0.9);
+}
