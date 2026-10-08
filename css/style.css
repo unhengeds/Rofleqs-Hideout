@@ -2622,47 +2622,46 @@ input[type="range"] {
 ========================================================= */
 
 .about-dropdown {
-
-    width: min(100%, 760px);
-
+    
+    width:
+        100%;
+    
     margin:
-        14px auto 0;
-
+        14px 0 0;
+    
     text-align:
         left;
+    
 }
-
-
 .about-dropdown summary {
-
+    
     display:
         inline-flex;
-
+    
     align-items:
         center;
-
+    
     gap:
         8px;
-
+    
     color:
         var(--muted);
-
+    
     cursor:
         pointer;
-
+    
     font-weight:
         700;
-
+    
     list-style:
         none;
-
+    
     user-select:
         none;
-
+    
     transition:
         color 0.25s ease;
 }
-
 
 .about-dropdown summary::-webkit-details-marker {
 
