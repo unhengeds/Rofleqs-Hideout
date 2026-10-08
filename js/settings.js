@@ -6,7 +6,11 @@ const defaultSettings = {
 
     backgroundSpeed: 6,
 
-    backgroundTransparency: 8
+    backgroundTransparency: 8,
+
+    sidebarCollapsed: false,
+
+    favoriteSort: "library
 
 };
 
@@ -23,7 +27,13 @@ const SETTINGS_KEYS = {
         "backgroundSpeed",
 
     backgroundTransparency:
-        "backgroundTransparency"
+        "backgroundTransparency",
+
+    sidebarCollapsed:
+        "sidebarCollapsed",
+
+    favoriteSort:
+        "favoriteSort"
 
 };
 
