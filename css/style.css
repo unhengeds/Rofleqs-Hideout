@@ -2791,3 +2791,7 @@ input[type="range"] {
 
 }
 
+/* REMOVE GAME THUMBNAIL LINES */
+.game-image::before {
+    display: none !important;
+}
