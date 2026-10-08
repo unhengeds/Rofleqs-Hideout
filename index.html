@@ -388,7 +388,98 @@
 
         </div>
 
+    <!-- SIDEBAR -->
+    <div class="setting-box">
 
+        <button
+            type="button"
+            class="setting-reset"
+            data-reset="sidebarCollapsed"
+            title="Reset to default"
+            aria-label="Reset sidebar collapse to default"
+        >
+            ↶
+        </button>
+
+
+        <div class="setting-row">
+
+            <div class="setting-text">
+
+                <strong>
+                    Collapse sidebar
+                </strong>
+
+                <span>
+                    Make the sidebar smaller while keeping the navigation icons.
+                </span>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="sidebarCollapsedToggle"
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <!-- FAVORITE SORTING -->
+    <div class="setting-box">
+
+        <button
+            type="button"
+            class="setting-reset"
+            data-reset="favoriteSort"
+            title="Reset to default"
+            aria-label="Reset favorite sorting to default"
+        >
+            ↶
+        </button>
+
+
+        <div class="setting-text">
+
+            <strong>
+                Favorite sorting
+            </strong>
+
+            <span>
+                Choose how your favorite games are arranged.
+            </span>
+
+        </div>
+
+
+        <select
+            class="setting-select"
+            id="favoriteSort"
+        >
+
+            <option value="library">
+                Library order
+            </option>
+
+            <option value="az">
+                A → Z
+            </option>
+
+            <option value="recent">
+                Recently added
+            </option>
+
+        </select>
+
+    </div>
 
         <!-- THEME COLOR -->
         <div class="setting-box theme-setting">
