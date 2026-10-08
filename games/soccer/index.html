@@ -1,65 +1,92 @@
+<!-- Ultimate Game Stash file -->
+<!-- For the regularly updating doc go to:
+https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> 
-    <link rel="shortcut icon" href="soccer random.jpg">
-    <title>soccer random | Alexx743</title>
+
+    <title>Soccer Random 1</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    >
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MENBM6GSNY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag("js", new Date());
+        gtag("config", "G-MENBM6GSNY");
+    </script>
+
+    <!-- Game stylesheet -->
+    <link
+        rel="stylesheet"
+        href="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/style.css"
+        type="text/css"
+    >
+
+    <!-- Prevent scrolling when using game controls -->
+    <script>
+        window.addEventListener("keydown", function (e) {
+            // Space and arrow keys
+            if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+    </script>
 </head>
+
 <body>
 
-    <h2>Soccer random</h2>
+    <div id="fb-root"></div>
 
-    <div class="topnav">
-      <a href="games.html">
-      <button title="Games" id="Games" class="divbutton"> Games </button> 
-    </a> 
-  
-      <a href="Apps.html">
-      <button title="Apps" id="Apps" class="divbutton"> Apps</button>
-      </a>
-  
-    <a href="index.html">
-      <button title="home" id="home" class="divbutton">home</button>
-    </a>
+    <!-- Box2D -->
+    <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/box2d.wasm.js"></script>
 
-    <a href="shooter.html">
-      <button title="shooter" class="divbutton">shooter</button>
-    </a>
+    <!-- Message shown if JavaScript is disabled -->
+    <noscript>
+        <div id="notSupportedWrap">
+            <h2 id="notSupportedTitle">
+                This content requires JavaScript
+            </h2>
 
-    <a href="sports.html">
-      <button title="sports" class="divbutton">Sports</button>
-    </a>
+            <p class="notSupportedMessage">
+                JavaScript appears to be disabled.
+                Please enable it to view this content.
+            </p>
+        </div>
+    </noscript>
 
-    <a href="cars.html">
-      <button title="cars" class="divbutton">Cars</button>
-    </a>
-    </div>
+    <!-- Support check -->
+    <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/supportcheck.js"></script>
 
-      <iframe src="https://soccer-random-five.vercel.app"></iframe>
+    <!-- Offline client -->
+    <script
+        src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/offlineclient.js"
+        type="module">
+    </script>
 
-      <button 
-      onclick="iffs('https://soccer-random-five.vercel.app')"
-       class="fullscreen"></button>
-      
-       <script>
-        function iffs(href) {
-      const iframe = document.querySelector("iframe");
-      const stl = iframe.style;
-      stl.border = stl.outline = 'none';
-      stl.width = '100vw';
-      stl.height = '100vh';
-      stl.position = 'fixed';
-      stl.left = stl.right = stl.top = stl.bottom = '0';
-      iframe.src = href;
-      }
-      </script>
-   
-   <script>
-    document.addEventListener("keydown", 
-    async (e) => { if ("`" == e.key) window.parent.window.location.replace("https://google.com/") });
-  </script>
-    
+    <!-- Main game -->
+    <script
+        src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/main.js"
+        type="module">
+    </script>
+
+    <!-- Service worker registration -->
+    <script
+        src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/register-sw.js"
+        type="module">
+    </script>
+
 </body>
 </html>
