@@ -2791,3 +2791,161 @@ body.card-size-large .games-grid {
 .game-image::before {
     display: none !important;
 }
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+#continueGameButton {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    margin-top: 12px;
+
+    padding: 10px 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--theme-border, #e3262e);
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(227, 38, 46, 0.12),
+            rgba(227, 38, 46, 0.04)
+        );
+
+    color: var(--text, #ffffff);
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+/* Play icon */
+
+#continueGameButton::before {
+
+    content: "▶";
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 24px;
+
+    height: 24px;
+
+    flex-shrink: 0;
+
+    border-radius: 5px;
+
+    background:
+        var(--theme, #e3262e);
+
+    color: white;
+
+    font-size: 10px;
+
+    line-height: 1;
+
+    box-shadow:
+        0 0 10px
+        var(--theme-glow, rgba(227, 38, 46, 0.18));
+
+}
+
+
+/* Hover */
+
+#continueGameButton:hover {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(227, 38, 46, 0.22),
+            rgba(227, 38, 46, 0.08)
+        );
+
+    border-color:
+        var(--theme, #e3262e);
+
+    box-shadow:
+        0 0 14px
+        var(--theme-glow, rgba(227, 38, 46, 0.18));
+
+    transform:
+        translateX(2px);
+
+}
+
+
+/* Click */
+
+#continueGameButton:active {
+
+    transform:
+        translateX(1px)
+        scale(0.98);
+
+}
+
+
+/* Hidden when there is no previous game */
+
+#continueGameButton[hidden] {
+
+    display: none !important;
+
+}
+
+
+/* Reduced motion */
+
+body.reduce-motion #continueGameButton {
+
+    transition: none;
+
+}
+
+
+/* No glow */
+
+body.glow-disabled #continueGameButton {
+
+    box-shadow: none;
+
+}
+
+
+body.glow-disabled #continueGameButton::before {
+
+    box-shadow: none;
+
+}
