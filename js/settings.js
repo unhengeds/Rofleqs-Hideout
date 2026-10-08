@@ -10,7 +10,7 @@ const defaultSettings = {
 
     sidebarCollapsed: false,
 
-    favoriteSort: "library
+    favoriteSort: "library"
 
 };
 
@@ -536,23 +536,11 @@ function cycleTheme() {
     index++;
 
 
-    /*
-        After Orange, return
-        to Red.
-    */
-
     if (
         index >= THEMES.length
     ) {
 
         index = 0;
-
-
-        /*
-            This is the moment the
-            full theme cycle has
-            completed.
-        */
 
         showThemeUnlockedNotification();
 
@@ -691,6 +679,18 @@ const backgroundTransparencyValue =
     );
 
 
+const sidebarCollapsedToggle =
+    document.getElementById(
+        "sidebarCollapsedToggle"
+    );
+
+
+const favoriteSort =
+    document.getElementById(
+        "favoriteSort"
+    );
+
+
 const backgroundSpeedBox =
     document.getElementById(
         "backgroundSpeedBox"
@@ -737,6 +737,119 @@ const gamesNav =
     document.getElementById(
         "gamesNav"
     );
+
+
+/* =========================
+   SIDEBAR COLLAPSE
+========================= */
+
+function applySidebarCollapsed(
+    value
+) {
+
+    value =
+        Boolean(value);
+
+
+    document.body.classList.toggle(
+        "sidebar-collapsed",
+        value
+    );
+
+
+    if (sidebarCollapsedToggle) {
+
+        sidebarCollapsedToggle.checked =
+            value;
+
+    }
+
+}
+
+
+if (sidebarCollapsedToggle) {
+
+    sidebarCollapsedToggle.addEventListener(
+        "change",
+        () => {
+
+            const value =
+                sidebarCollapsedToggle.checked;
+
+
+            setSetting(
+                SETTINGS_KEYS.sidebarCollapsed,
+                value
+            );
+
+
+            applySidebarCollapsed(
+                value
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   FAVORITE SORTING
+========================= */
+
+function applyFavoriteSort(
+    value
+) {
+
+    if (
+        value !== "library" &&
+        value !== "az" &&
+        value !== "recent"
+    ) {
+
+        value =
+            defaultSettings.favoriteSort;
+
+    }
+
+
+    if (favoriteSort) {
+
+        favoriteSort.value =
+            value;
+
+    }
+
+
+    renderFavorites();
+
+}
+
+
+if (favoriteSort) {
+
+    favoriteSort.addEventListener(
+        "change",
+        () => {
+
+            const value =
+                favoriteSort.value;
+
+
+            setSetting(
+                SETTINGS_KEYS.favoriteSort,
+                value
+            );
+
+
+            applyFavoriteSort(
+                value
+            );
+
+        }
+    );
+
+}
 
 
 /* =========================
@@ -1321,6 +1434,42 @@ document
 
                     if (
                         setting ===
+                        "sidebarCollapsed"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.sidebarCollapsed,
+                            defaultSettings.sidebarCollapsed
+                        );
+
+
+                        applySidebarCollapsed(
+                            defaultSettings.sidebarCollapsed
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
+                        "favoriteSort"
+                    ) {
+
+                        setSetting(
+                            SETTINGS_KEYS.favoriteSort,
+                            defaultSettings.favoriteSort
+                        );
+
+
+                        applyFavoriteSort(
+                            defaultSettings.favoriteSort
+                        );
+
+                    }
+
+
+                    if (
+                        setting ===
                         "theme"
                     ) {
 
@@ -1626,56 +1775,104 @@ function renderFavorites() {
 
 
     const allCards =
-        document.querySelectorAll(
-            "#gamesGrid .game-card[data-game-id]"
+        Array.from(
+            document.querySelectorAll(
+                "#gamesGrid .game-card[data-game-id]"
+            )
         );
+
+
+    const favoriteCards =
+        allCards.filter(
+            card =>
+                favorites.includes(
+                    card.dataset.gameId
+                )
+        );
+
+
+    const sort =
+        getSetting(
+            SETTINGS_KEYS.favoriteSort,
+            defaultSettings.favoriteSort
+        );
+
+
+    if (sort === "az") {
+
+        favoriteCards.sort(
+            (a, b) => {
+
+                const nameA =
+                    a.dataset.gameName ||
+                    "";
+
+                const nameB =
+                    b.dataset.gameName ||
+                    "";
+
+                return nameA.localeCompare(
+                    nameB,
+                    undefined,
+                    {
+                        sensitivity: "base"
+                    }
+                );
+
+            }
+        );
+
+    } else if (sort === "recent") {
+
+        const favoriteOrder =
+            new Map(
+                favorites.map(
+                    (id, index) =>
+                        [id, index]
+                )
+            );
+
+
+        favoriteCards.sort(
+            (a, b) => {
+
+                const indexA =
+                    favoriteOrder.get(
+                        a.dataset.gameId
+                    );
+
+                const indexB =
+                    favoriteOrder.get(
+                        b.dataset.gameId
+                    );
+
+                return indexB - indexA;
+
+            }
+        );
+
+    }
 
 
     favoritesGrid.innerHTML =
         "";
 
 
-    let foundFavorites =
-        0;
-
-
-    allCards.forEach(
+    favoriteCards.forEach(
         card => {
 
-            const gameId =
-                card.dataset.gameId;
-
-
-            if (
-                !favorites.includes(
-                    gameId
-                )
-            ) {
-
-                return;
-
-            }
-
-
-            const favoriteCard =
+            favoritesGrid.appendChild(
                 createFavoriteCard(
                     card
-                );
-
-
-            favoritesGrid.appendChild(
-                favoriteCard
+                )
             );
-
-
-            foundFavorites++;
 
         }
     );
 
 
     if (
-        foundFavorites === 0
+        favoriteCards.length === 0
     ) {
 
         if (emptyFavorites) {
@@ -1866,12 +2063,6 @@ function updateNavigationFromScroll() {
 
 
     if (!currentSection) {
-
-        /*
-            The welcome area is before
-            Favorites, so treat it like
-            the Games area.
-        */
 
         currentSection =
             "games";
@@ -2075,6 +2266,32 @@ function initializeSettings() {
 
     );
 
+
+    applySidebarCollapsed(
+
+        getSetting(
+
+            SETTINGS_KEYS.sidebarCollapsed,
+
+            defaultSettings.sidebarCollapsed
+
+        )
+
+    );
+
+
+    applyFavoriteSort(
+
+        getSetting(
+
+            SETTINGS_KEYS.favoriteSort,
+
+            defaultSettings.favoriteSort
+
+        )
+
+    );
+
 }
 
 
@@ -2096,10 +2313,6 @@ function initializeTheme() {
             THEME_KEY
         );
 
-
-    /*
-        Custom theme
-    */
 
     if (
         saved === "custom"
@@ -2217,3 +2430,588 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   EXTRA SETTINGS
+========================================================= */
+
+const EXTRA_SETTINGS = {
+    backgroundStyle: "checkerboard",
+    glowEffects: true,
+    cardAnimations: true,
+    reduceMotion: false,
+    continueButton: true,
+    launchAnimation: "fade",
+    confirmLaunch: false,
+    cardSize: "medium"
+};
+
+const EXTRA_KEYS = {
+    backgroundStyle: "rofleqBackgroundStyle",
+    glowEffects: "rofleqGlowEffects",
+    cardAnimations: "rofleqCardAnimations",
+    reduceMotion: "rofleqReduceMotion",
+    continueButton: "rofleqContinueButton",
+    launchAnimation: "rofleqLaunchAnimation",
+    confirmLaunch: "rofleqConfirmLaunch",
+    cardSize: "rofleqCardSize",
+    lastGame: "rofleqLastGame"
+};
+
+function extraSetting(key) {
+    return getSetting(
+        EXTRA_KEYS[key],
+        EXTRA_SETTINGS[key]
+    );
+}
+
+function saveExtraSetting(
+    key,
+    value
+) {
+    setSetting(
+        EXTRA_KEYS[key],
+        value
+    );
+}
+
+const backgroundStyleControl =
+    document.getElementById(
+        "backgroundStyle"
+    );
+
+const glowEffectsToggle =
+    document.getElementById(
+        "glowEffectsToggle"
+    );
+
+const cardAnimationsToggle =
+    document.getElementById(
+        "cardAnimationsToggle"
+    );
+
+const reduceMotionToggle =
+    document.getElementById(
+        "reduceMotionToggle"
+    );
+
+const continueButtonToggle =
+    document.getElementById(
+        "continueButtonToggle"
+    );
+
+const launchAnimationControl =
+    document.getElementById(
+        "launchAnimation"
+    );
+
+const confirmLaunchToggle =
+    document.getElementById(
+        "confirmLaunchToggle"
+    );
+
+const cardSizeControl =
+    document.getElementById(
+        "cardSize"
+    );
+
+const continueGameButton =
+    document.getElementById(
+        "continueGameButton"
+    );
+
+
+function applyExtraSettings() {
+
+    const backgroundStyle =
+        extraSetting(
+            "backgroundStyle"
+        );
+
+    const glowEffects =
+        extraSetting(
+            "glowEffects"
+        );
+
+    const cardAnimations =
+        extraSetting(
+            "cardAnimations"
+        );
+
+    const reduceMotion =
+        extraSetting(
+            "reduceMotion"
+        );
+
+    const continueButton =
+        extraSetting(
+            "continueButton"
+        );
+
+    const cardSize =
+        extraSetting(
+            "cardSize"
+        );
+
+
+    document.body.classList.remove(
+
+        "bg-style-checkerboard",
+
+        "bg-style-grid",
+
+        "bg-style-dots",
+
+        "bg-style-scanlines",
+
+        "bg-style-none"
+
+    );
+
+
+    document.body.classList.add(
+        `bg-style-${backgroundStyle}`
+    );
+
+
+    document.body.classList.toggle(
+        "glow-disabled",
+        !glowEffects
+    );
+
+
+    document.body.classList.toggle(
+        "cards-no-animation",
+        !cardAnimations
+    );
+
+
+    document.body.classList.toggle(
+        "reduce-motion",
+        reduceMotion
+    );
+
+
+    document.body.classList.remove(
+
+        "card-size-small",
+
+        "card-size-medium",
+
+        "card-size-large"
+
+    );
+
+
+    document.body.classList.add(
+        `card-size-${cardSize}`
+    );
+
+
+    if (backgroundStyleControl)
+        backgroundStyleControl.value =
+            backgroundStyle;
+
+
+    if (glowEffectsToggle)
+        glowEffectsToggle.checked =
+            glowEffects;
+
+
+    if (cardAnimationsToggle)
+        cardAnimationsToggle.checked =
+            cardAnimations;
+
+
+    if (reduceMotionToggle)
+        reduceMotionToggle.checked =
+            reduceMotion;
+
+
+    if (continueButtonToggle)
+        continueButtonToggle.checked =
+            continueButton;
+
+
+    if (launchAnimationControl)
+        launchAnimationControl.value =
+            extraSetting(
+                "launchAnimation"
+            );
+
+
+    if (confirmLaunchToggle)
+        confirmLaunchToggle.checked =
+            extraSetting(
+                "confirmLaunch"
+            );
+
+
+    if (cardSizeControl)
+        cardSizeControl.value =
+            cardSize;
+
+
+    updateContinueButton();
+
+}
+
+
+function updateContinueButton() {
+
+    if (!continueGameButton)
+        return;
+
+
+    const enabled =
+        extraSetting(
+            "continueButton"
+        );
+
+
+    const lastGame =
+        extraSetting(
+            "lastGame"
+        );
+
+
+    if (
+        !enabled ||
+        !lastGame
+    ) {
+
+        continueGameButton.hidden =
+            true;
+
+        return;
+
+    }
+
+
+    continueGameButton.hidden =
+        false;
+
+
+    continueGameButton.textContent =
+        `▶ CONTINUE ${lastGame.name}`;
+
+
+    continueGameButton.dataset.url =
+        lastGame.url;
+
+}
+
+
+function connectExtraSetting(
+    control,
+    key,
+    type = "value"
+) {
+
+    if (!control)
+        return;
+
+
+    control.addEventListener(
+
+        type === "change"
+            ? "change"
+            : "input",
+
+        () => {
+
+            let value =
+                type === "checked"
+                    ? control.checked
+                    : control.value;
+
+
+            saveExtraSetting(
+                key,
+                value
+            );
+
+
+            applyExtraSettings();
+
+        }
+
+    );
+
+}
+
+
+connectExtraSetting(
+    backgroundStyleControl,
+    "backgroundStyle"
+);
+
+
+connectExtraSetting(
+    glowEffectsToggle,
+    "glowEffects",
+    "checked"
+);
+
+
+connectExtraSetting(
+    cardAnimationsToggle,
+    "cardAnimations",
+    "checked"
+);
+
+
+connectExtraSetting(
+    reduceMotionToggle,
+    "reduceMotion",
+    "checked"
+);
+
+
+connectExtraSetting(
+    continueButtonToggle,
+    "continueButton",
+    "checked"
+);
+
+
+connectExtraSetting(
+    launchAnimationControl,
+    "launchAnimation"
+);
+
+
+connectExtraSetting(
+    confirmLaunchToggle,
+    "confirmLaunch",
+    "checked"
+);
+
+
+connectExtraSetting(
+    cardSizeControl,
+    "cardSize"
+);
+
+
+if (continueGameButton) {
+
+    continueGameButton.addEventListener(
+        "click",
+        () => {
+
+            const lastGame =
+                extraSetting(
+                    "lastGame"
+                );
+
+
+            if (
+                lastGame?.url
+            ) {
+
+                launchGame(
+                    lastGame.url
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* Wrap the existing launcher with confirmation,
+   last-played tracking, and a visual launch animation. */
+
+const rofOriginalLaunchGame =
+    launchGame;
+
+
+launchGame = function(
+    gameUrl
+) {
+
+    const card =
+        Array.from(
+            document.querySelectorAll(
+                ".game-card[data-game-url]"
+            )
+        ).find(
+            element =>
+                element.dataset.gameUrl ===
+                gameUrl
+        );
+
+
+    const gameName =
+
+        card?.dataset.gameName ||
+
+        card
+            ?.querySelector(
+                ".game-title"
+            )
+            ?.textContent
+            .trim() ||
+
+        "Game";
+
+
+    if (
+        extraSetting(
+            "confirmLaunch"
+        )
+    ) {
+
+        const confirmed =
+            window.confirm(
+                `Launch ${gameName}?`
+            );
+
+
+        if (!confirmed)
+            return;
+
+    }
+
+
+    saveExtraSetting(
+        "lastGame",
+        {
+            name:
+                gameName,
+
+            url:
+                gameUrl
+        }
+    );
+
+
+    updateContinueButton();
+
+
+    const animation =
+        extraSetting(
+            "launchAnimation"
+        );
+
+
+    const reduced =
+        extraSetting(
+            "reduceMotion"
+        );
+
+
+    if (
+        reduced ||
+        animation === "none"
+    ) {
+
+        rofOriginalLaunchGame(
+            gameUrl
+        );
+
+        return;
+
+    }
+
+
+    let overlay =
+        document.getElementById(
+            "gameLaunchOverlay"
+        );
+
+
+    if (!overlay) {
+
+        overlay =
+            document.createElement(
+                "div"
+            );
+
+
+        overlay.id =
+            "gameLaunchOverlay";
+
+
+        overlay.innerHTML =
+            `<div class="launch-text">Launching...</div>`;
+
+
+        document.body.appendChild(
+            overlay
+        );
+
+    }
+
+
+    overlay.className =
+        "";
+
+
+    overlay.id =
+        "gameLaunchOverlay";
+
+
+    overlay.classList.add(
+        `launch-${animation}`,
+        "active"
+    );
+
+
+    window.setTimeout(
+        () => {
+
+            rofOriginalLaunchGame(
+                gameUrl
+            );
+
+        },
+        280
+    );
+
+};
+
+
+document
+    .querySelectorAll(
+        ".setting-reset"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const key =
+                        button.dataset.reset;
+
+
+                    const extraKey =
+                        EXTRA_KEYS[key];
+
+
+                    if (!extraKey)
+                        return;
+
+
+                    saveExtraSetting(
+                        key,
+                        EXTRA_SETTINGS[key]
+                    );
+
+
+                    applyExtraSettings();
+
+                }
+            );
+
+        }
+    );
+
+
+applyExtraSettings();
