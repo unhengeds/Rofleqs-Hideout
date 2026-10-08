@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Rofleq's Hideout</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="logo-container">
+
+                <img
+                    src="assets/logo.png"
+                    alt="Rofleq's Hideout"
+                    class="logo"
+                    id="siteLogo"
+                    title="Click to change theme"
+                >
+
+            </div>
+
+
+            <div class="version">
+                Github Version
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <a
+                    href="#favorites"
+                    class="nav-item"
+                    id="favoritesNav"
+                >
+
+                    <div class="nav-icon">
+                        ★
+                    </div>
+
+                    <span>
+                        Favorites
+                    </span>
+
+                    <span
+                        class="favorite-count"
+                        id="favoriteCount"
+                    >
+                        0
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#games"
+                    class="nav-item active"
+                    id="gamesNav"
+                >
+
+                    <div class="nav-icon">
+                        🎮
+                    </div>
+
+                    <span>
+                        Games
+                    </span>
+
+                </a>
+
+
+                <button
+                    type="button"
+                    class="nav-item continue-nav-item"
+                    id="continueGameButton"
+                    hidden
+                >
+
+                    <div class="nav-icon">
+                        ▶
+                    </div>
+
+                    <span>
+                        Continue
+                    </span>
+
+                </button>
+
+            </nav>
+
+        </div>
+
+
+        <div class="sidebar-footer">
+
+            <span class="brand-green">
+                Rofleq's
+            </span>
+
+            <span class="brand-red">
+                Hideout
+            </span>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+        <div class="topbar-title">
+
+            <span class="brand-green">
+                Rofleq's
+            </span>
+
+            <span class="brand-red">
+                Hideout
+            </span>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="online-status">
+
+                <span class="online-dot"></span>
+
+                Online
+
+            </div>
+
+
+            <button
+                type="button"
+                class="settings-button"
+                id="settingsButton"
+                aria-label="Open settings"
+            >
+                ⚙
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- THEME NOTIFICATION -->
+    <div
+        class="theme-notification"
+        id="themeNotification"
+    >
+
+        <div class="theme-notification-icon">
+            ✓
+        </div>
+
+        <div>
+
+            <strong>
+                Theme changes now unlocked!
+            </strong>
+
+            <span>
+                Check the Theme Color option in Settings.
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SETTINGS PANEL -->
+    <div
+        class="settings-panel"
+        id="settingsPanel"
+    >
+
+        <div class="settings-header">
+
+            <div>
+
+                <div class="settings-kicker">
+                    OPTIONS
+                </div>
+
+                <h2>
+                    Settings
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="settings-close"
+                id="closeSettings"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <!-- ABOUT BLANK -->
+        <div class="setting-box">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="openInBlank"
+                title="Reset to default"
+                aria-label="Reset Open games in about blank to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-row">
+
+                <div class="setting-text">
+
+                    <strong>
+                        Open games in about:blank
+                    </strong>
+
+                    <span id="aboutBlankHint">
+                        Games open in a new
+                        about:blank window.
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="openInBlankToggle"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ANIMATED BACKGROUND -->
+        <div class="setting-box">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="animatedBackground"
+                title="Reset to default"
+                aria-label="Reset animated background to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-row">
+
+                <div class="setting-text">
+
+                    <strong>
+                        Animated background
+                    </strong>
+
+                    <span>
+                        Show the moving
+                        theme-colored checkerboard.
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="animatedBackgroundToggle"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BACKGROUND SPEED -->
+        <div
+            class="setting-box"
+            id="backgroundSpeedBox"
+        >
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="backgroundSpeed"
+                title="Reset to default"
+                aria-label="Reset background speed to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-heading">
+
+                <strong>
+                    Background speed
+                </strong>
+
+                <span id="backgroundSpeedValue">
+                    6
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="backgroundSpeed"
+                min="0"
+                max="20"
+                value="6"
+                step="1"
+            >
+
+        </div>
+
+
+
+        <!-- TRANSPARENCY -->
+        <div
+            class="setting-box"
+            id="backgroundTransparencyBox"
+        >
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="backgroundTransparency"
+                title="Reset to default"
+                aria-label="Reset background transparency to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-heading">
+
+                <strong>
+                    Background transparency
+                </strong>
+
+                <span id="backgroundTransparencyValue">
+                    8%
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="backgroundTransparency"
+                min="0"
+                max="100"
+                value="8"
+                step="0.1"
+            >
+
+        </div>
+
+
+
+
+        <!-- BACKGROUND STYLE -->
+        <div class="setting-box">
+            <button type="button" class="setting-reset" data-reset="backgroundStyle" title="Reset to default" aria-label="Reset background style to default">↶</button>
+            <div class="setting-heading">
+                <strong>Background style</strong>
+            </div>
+            <select id="backgroundStyle" class="setting-select">
+                <option value="checkerboard">Checkerboard</option>
+                <option value="grid">Grid</option>
+                <option value="dots">Dots</option>
+                <option value="scanlines">Scanlines</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+
+        <!-- GLOW EFFECTS -->
+        <div class="setting-box">
+            <button type="button" class="setting-reset" data-reset="glowEffects" title="Reset to default" aria-label="Reset glow effects to default">↶</button>
+            <div class="setting-row">
+                <div class="setting-text">
+                    <strong>Glow effects</strong>
+                    <span>Show glowing borders, buttons, and accents.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="glowEffectsToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- CARD ANIMATIONS -->
+        <div class="setting-box">
+            <button type="button" class="setting-reset" data-reset="cardAnimations" title="Reset to default" aria-label="Reset card animations to default">↶</button>
+            <div class="setting-row">
+                <div class="setting-text">
+                    <strong>Card animations</strong>
+                    <span>Animate game cards when they appear.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="cardAnimationsToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- REDUCE MOTION -->
+        <div class="setting-box">
+            <button type="button" class="setting-reset" data-reset="reduceMotion" title="Reset to default" aria-label="Reset reduce motion to default">↶</button>
+            <div class="setting-row">
+                <div class="setting-text">
+                    <strong>Reduce motion</strong>
+                    <span>Minimize animations and movement across the site.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="reduceMotionToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- CONFIRM GAME LAUNCH -->
+        <div class="setting-box">
+            <button type="button" class="setting-reset" data-reset="confirmLaunch" title="Reset to default" aria-label="Reset confirm game launch to default">↶</button>
+            <div class="setting-row">
+                <div class="setting-text">
+                    <strong>Confirm game launch</strong>
+                    <span>Ask before opening a game.</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="confirmLaunchToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- GAME CARD SIZE -->
+        <div class="setting-box">
+            <button type="button" class="setting-reset" data-reset="cardSize" title="Reset to default" aria-label="Reset game card size to default">↶</button>
+            <div class="setting-heading">
+                <strong>Game card size</strong>
+            </div>
+            <select id="cardSize" class="setting-select">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+        </div>
+
+        <!-- THEME COLOR -->
+        <div class="setting-box theme-setting">
+
+            <button
+                type="button"
+                class="setting-reset"
+                data-reset="theme"
+                title="Reset theme to default"
+                aria-label="Reset theme to default"
+            >
+                ↶
+            </button>
+
+
+            <div class="setting-heading">
+
+                <strong>
+                    Theme Color
+                </strong>
+
+                <span id="themeName">
+                    Red
+                </span>
+
+            </div>
+
+
+            <div class="theme-options">
+
+                <button
+                    type="button"
+                    class="theme-option theme-red"
+                    data-theme-index="0"
+                    title="Red"
+                    aria-label="Red theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-green"
+                    data-theme-index="1"
+                    title="Green"
+                    aria-label="Green theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-purple"
+                    data-theme-index="2"
+                    title="Purple"
+                    aria-label="Purple theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-blue"
+                    data-theme-index="3"
+                    title="Blue"
+                    aria-label="Blue theme"
+                ></button>
+
+
+                <button
+                    type="button"
+                    class="theme-option theme-orange"
+                    data-theme-index="4"
+                    title="Orange"
+                    aria-label="Orange theme"
+                ></button>
+
+
+                <!-- CUSTOM COLOR -->
+                <label
+                    class="custom-color-option"
+                    title="Custom color"
+                >
+
+                    <input
+                        type="color"
+                        id="customThemeColor"
+                        value="#e3262e"
+                    >
+
+                    <span>
+                        🎨
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <div
+                class="custom-color-label"
+                id="customColorLabel"
+            >
+                Custom color
+            </div>
+
+        </div>
+        
+    </div>
+
+               
+
+
+
+    <!-- MAIN PAGE -->
+    <main class="main-content">
+
+
+        <!-- WELCOME -->
+        <section class="welcome-section">
+
+            <h1>
+
+                <span class="brand-green">
+                    Rofleq's
+                </span>
+
+                <span class="brand-red">
+                    Hideout
+                </span>
+
+            </h1>
+
+
+            <p>
+                Presented to you by Rofleq.
+            </p>
+
+
+            <details class="about-dropdown">
+
+                <summary>
+                    <span>About</span>
+                    <span class="about-arrow">⌄</span>
+                </summary>
+
+                <div class="about-content">
+                    <div class="about-content-inner">
+                        <p>
+                            Welcome to the Hideout! You can learn more about us in the About section! Thanks for coming!
+                        </p>
+
+                        <p>
+                            Do NOT blame ANYONE for anything that happens if you get in trouble! You are using this site at your OWN RISK. If you get caught it is not our fault. Thank you.
+                        </p>
+
+                        <p>
+                            Rofleq's Hideout is a collection of a multitude of things made by (mostly) Rofleq. With games, Movies, TV Shows, Music websites, and more to come!
+                        </p>
+                    </div>
+                </div>
+
+            </details>
+
+        </section>
+
+
+
+        <!-- FAVORITES -->
+        <section
+            class="game-section"
+            id="favorites"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-kicker">
+                        YOUR PICKS
+                    </div>
+
+                    <h2>
+                        Favorites
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="games-grid"
+                id="favoritesGrid"
+            >
+
+                <div
+                    class="empty-favorites"
+                    id="emptyFavorites"
+                >
+
+                    <div class="empty-favorites-icon">
+                        ☆
+                    </div>
+
+                    <h3>
+                        No favorites yet
+                    </h3>
+
+                    <p>
+                        Click the star on a game
+                        to add it here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- GAMES -->
+        <section
+            class="game-section"
+            id="games"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-kicker">
+                        LIBRARY
+                    </div>
+
+                    <h2>
+                        Games
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="games-grid"
+                id="gamesGrid"
+            >
+
+                <!-- MINECRAFT -->
+                <article
+                    class="game-card"
+                    data-game-id="minecraft-1.9.4"
+                    data-game-name="Minecraft"
+                    data-game-version="1.9.4"
+                    data-game-url="games/eaglercraft-1.9.4/index.html"
+                    onclick="launchGame('games/eaglercraft-1.9.4/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/minecraft1.9.4"
+                            alt="Minecraft 1.9.4"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Minecraft to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'minecraft-1.9.4'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Minecraft
+                        </div>
+
+
+                        <div class="game-meta">
+                            1.9.4
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/eaglercraft-1.9.4/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                <!-- RETROBOWL -->
+<article
+    class="game-card"
+    data-game-id="retrobowl"
+    data-game-name="retrobowl"
+    data-game-version=""
+    data-game-url="games/retrobowl/index.html"
+    onclick="launchGame('games/retrobowl/index.html')"
+>
+
+    <div class="game-image">
+
+        <img
+            src="assets/retrobowl"
+            alt="retrobowl"
+            class="minecraft-thumbnail"
+        >
+
+
+        <button
+            type="button"
+            class="favorite-button"
+            aria-label="Add retrobowl to favorites"
+            title="Add to favorites"
+            onclick="
+                event.stopPropagation();
+                toggleFavorite('retrobowl');
+            "
+        >
+            ☆
+        </button>
+
+
+
+    </div>
+
+
+    <div class="game-info">
+
+        <div class="game-title">
+            Retrobowl
+        </div>
+
+
+        <div class="game-meta">
+            &nbsp;
+        </div>
+
+
+        <button
+            type="button"
+            class="play-small"
+            onclick="
+                event.stopPropagation();
+                launchGame('games/retrobowl/index.html');
+            "
+        >
+            ▶ PLAY
+        </button>
+
+    </div>
+
+</article>
+
+                <!-- BASKETBROS -->
+                <article
+                    class="game-card"
+                    data-game-id="Basketbros"
+                    data-game-name="Basketbros"
+                    data-game-version=""
+                    data-game-url="games/Basketbros/index.html"
+                    onclick="launchGame('games/Basketbros/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/basketbros"
+                            alt="basketbros"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Basketbros to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'Basketbros'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Basket Bros
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/Basketbros/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                <!-- COOKIECLICKER -->
+                <article
+                    class="game-card"
+                    data-game-id="cookie"
+                    data-game-name="cookie"
+                    data-game-version=""
+                    data-game-url="games/cookie/index.html"
+                    onclick="launchGame('games/cookie/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/cookie"
+                            alt="cookie"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add CookieClicker to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'cookie'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Cookie Clicker
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/cookie/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                  <!-- DELTARUNE -->
+                <article
+                    class="game-card"
+                    data-game-id="deltarune"
+                    data-game-name="deltarune"
+                    data-game-version=""
+                    data-game-url="games/deltarune/index.html"
+                    onclick="launchGame('games/deltarune/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/deltarune"
+                            alt="deltarune"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Deltarune to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'deltarune'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Deltarune
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/deltarune/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                  <!-- HALF-LIFE -->
+                <article
+                    class="game-card"
+                    data-game-id="half-life"
+                    data-game-name="half-life"
+                    data-game-version=""
+                    data-game-url="games/half-life/index.html"
+                    onclick="launchGame('games/half-life/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/halflife"
+                            alt="halflife"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Half Life to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'half-life'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Half Life
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/half-life/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                <!-- SUPERHOT -->
+                <article
+                    class="game-card"
+                    data-game-id="superhot"
+                    data-game-name="superhot"
+                    data-game-version=""
+                    data-game-url="games/superhot/index.html"
+                    onclick="launchGame('games/superhot/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/hot"
+                            alt="superhot"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add SUPERHOT to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'superhot'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            SUPERHOT
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/superhot/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                 <!-- ALIEN-HOMINID -->
+                <article
+                    class="game-card"
+                    data-game-id="alienh"
+                    data-game-name="alienh"
+                    data-game-version=""
+                    data-game-url="games/alienh/index.html"
+                    onclick="launchGame('games/alienh/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/alienh"
+                            alt="alien-hominid"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Alien Hominid to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'alienh'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Alien Hominid
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/alienh/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                 <!-- MY-FRIEND-PEDRO -->
+                <article
+                    class="game-card"
+                    data-game-id="Pedro"
+                    data-game-name="Pedro"
+                    data-game-version=""
+                    data-game-url="games/Pedro/index.html"
+                    onclick="launchGame('games/Pedro/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/Pedro"
+                            alt="Pedro"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add My Friend Pedro to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'Pedro'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            My Friend Pedro
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/Pedro/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                 <!-- MINESWEEPER -->
+                <article
+                    class="game-card"
+                    data-game-id="mine"
+                    data-game-name="mine"
+                    data-game-version=""
+                    data-game-url="games/mine/index.html"
+                    onclick="launchGame('games/mine/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/mine"
+                            alt="Minesweeper"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Minesweeper to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'mine'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Minesweeper
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/mine/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
+                 <!-- BASKETRANDOM -->
+                <article
+                    class="game-card"
+                    data-game-id="basket"
+                    data-game-name="basket"
+                    data-game-version=""
+                    data-game-url="games/basket/index.html"
+                    onclick="launchGame('games/basket/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/basket"
+                            alt="Basket Random"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add Basket Random to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'basket'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Basket Random
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/basket/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+                
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+        <footer class="main-footer">
+
+            <div>
+
+                <span class="brand-green">
+                    Rofleq's
+                </span>
+
+                <span class="brand-red">
+                    Hideout
+                </span>
+
+            </div>
+
+
+            <div>
+                Doug the GOAT
+            </div>
+
+        </footer>
+
+    </main>
+
+
+
+    <script src="js/settings.js"></script>
+
+</body>
+
+</html>
