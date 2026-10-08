@@ -2623,171 +2623,113 @@ input[type="range"] {
 
 .about-dropdown {
 
-    width:
-        min(100%, 760px);
+    width: min(100%, 760px);
 
-    margin-top:
-        16px;
+    margin: 14px auto 0;
+
+    text-align: left;
 }
 
 
 .about-dropdown summary {
 
-    display:
-        flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    gap: 8px;
 
-    width:
-        fit-content;
+    color: var(--muted);
 
-    min-width:
-        120px;
+    cursor: pointer;
 
-    padding:
-        10px 16px;
+    font-weight: 700;
 
-    border:
-        1px solid var(--theme);
+    list-style: none;
 
-    border-radius:
-        10px;
-
-    background:
-        var(--panel);
-
-    color:
-        var(--text);
-
-    cursor:
-        pointer;
-
-    font-weight:
-        700;
-
-    list-style:
-        none;
+    user-select: none;
 
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+        color 0.25s ease;
 }
 
 
 .about-dropdown summary::-webkit-details-marker {
 
-    display:
-        none;
+    display: none;
 }
 
 
 .about-dropdown summary:hover {
 
-    background:
-        var(--panel2);
-
-    border-color:
-        var(--theme2);
+    color: var(--text);
 }
 
 
 .about-arrow {
 
-    margin-left:
-        12px;
+    display: inline-block;
 
-    color:
-        var(--theme2);
+    color: var(--theme);
 
-    font-size:
-        16px;
+    font-size: 16px;
+
+    line-height: 1;
 
     transition:
-        transform 0.2s ease;
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
 .about-dropdown[open] .about-arrow {
 
-    transform:
-        rotate(180deg);
+    transform: rotate(180deg);
 }
 
 
 .about-content {
 
-    margin-top:
-        10px;
+    max-height: 0;
 
-    padding:
-        18px 20px;
+    opacity: 0;
 
-    border:
-        1px solid var(--theme);
+    overflow: hidden;
 
-    border-radius:
-        12px;
+    transform: translateY(-8px);
 
-    background:
-        var(--panel);
+    padding-top: 0;
 
-    color:
-        var(--text);
+    transition:
+        max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease,
+        transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        padding-top 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.2);
 
-    animation:
-        aboutDropIn 0.2s ease;
+.about-dropdown[open] .about-content {
+
+    max-height: 400px;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    padding-top: 14px;
 }
 
 
 .about-content p {
 
-    margin:
-        0 0 14px;
+    margin: 0 0 12px;
 
-    color:
-        var(--text);
+    color: var(--muted);
 
-    line-height:
-        1.7;
+    line-height: 1.7;
 }
 
 
 .about-content p:last-child {
 
-    margin-bottom:
-        0;
+    margin-bottom: 0;
 }
-
-
-@keyframes aboutDropIn {
-
-    from {
-
-        opacity:
-            0;
-
-        transform:
-            translateY(-5px);
-
-    }
-
-    to {
-
-        opacity:
-            1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
