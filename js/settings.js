@@ -3402,3 +3402,326 @@ document.addEventListener(
 
     }
 );
+
+/* =========================================================
+   BACKGROUND STYLE SETTINGS
+========================================================= */
+
+
+/* =========================
+   CHECKERBOARD
+========================= */
+
+body.bg-style-checkerboard::before {
+
+    background:
+
+        linear-gradient(
+            45deg,
+
+            var(--theme)
+            25%,
+
+            transparent 25%,
+
+            transparent 75%,
+
+            var(--theme) 75%
+        ),
+
+        linear-gradient(
+            45deg,
+
+            var(--theme)
+            25%,
+
+            transparent 25%,
+
+            transparent 75%,
+
+            var(--theme) 75%
+        );
+
+    background-size:
+        80px 80px;
+
+    background-position:
+        0 0,
+        40px 40px;
+
+    animation:
+        checkerMove
+        var(--checker-speed)
+        linear
+        infinite;
+
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+body.bg-style-grid::before {
+
+    background:
+
+        linear-gradient(
+            to right,
+
+            var(--theme)
+            1px,
+
+            transparent 1px
+        ),
+
+        linear-gradient(
+            to bottom,
+
+            var(--theme)
+            1px,
+
+            transparent 1px
+        );
+
+    background-size:
+        40px 40px;
+
+    background-position:
+        0 0,
+        0 0;
+
+    animation:
+        gridMove
+        var(--checker-speed)
+        linear
+        infinite;
+
+}
+
+
+/* =========================
+   DOTS
+========================= */
+
+body.bg-style-dots::before {
+
+    background:
+
+        radial-gradient(
+            circle,
+
+            var(--theme)
+            2px,
+
+            transparent 2px
+        );
+
+    background-size:
+        30px 30px;
+
+    background-position:
+        0 0;
+
+    animation:
+        dotsMove
+        var(--checker-speed)
+        linear
+        infinite;
+
+}
+
+
+/* =========================
+   SCANLINES
+========================= */
+
+body.bg-style-scanlines::before {
+
+    background:
+
+        repeating-linear-gradient(
+            to bottom,
+
+            var(--theme)
+            0px,
+
+            var(--theme)
+            2px,
+
+            transparent
+            2px,
+
+            transparent
+            8px
+        );
+
+    background-size:
+        100% 8px;
+
+    background-position:
+        0 0;
+
+    animation:
+        scanlinesMove
+        var(--checker-speed)
+        linear
+        infinite;
+
+}
+
+
+/* =========================
+   NONE
+========================= */
+
+body.bg-style-none::before {
+
+    background:
+        none !important;
+
+    animation:
+        none !important;
+
+    opacity:
+        0 !important;
+
+}
+
+
+/* =========================
+   BACKGROUND DISABLED
+========================= */
+
+body.background-disabled::before {
+
+    animation:
+        none !important;
+
+    opacity:
+        0 !important;
+
+}
+
+
+/* =========================
+   GRID ANIMATION
+========================= */
+
+@keyframes gridMove {
+
+    from {
+
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            );
+
+    }
+
+    to {
+
+        transform:
+            translate3d(
+                40px,
+                40px,
+                0
+            );
+
+    }
+
+}
+
+
+/* =========================
+   DOT ANIMATION
+========================= */
+
+@keyframes dotsMove {
+
+    from {
+
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            );
+
+    }
+
+    to {
+
+        transform:
+            translate3d(
+                30px,
+                30px,
+                0
+            );
+
+    }
+
+}
+
+
+/* =========================
+   SCANLINE ANIMATION
+========================= */
+
+@keyframes scanlinesMove {
+
+    from {
+
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            );
+
+    }
+
+    to {
+
+        transform:
+            translate3d(
+                0,
+                8px,
+                0
+            );
+
+    }
+
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+body.reduce-motion::before {
+
+    animation:
+        none !important;
+
+}
+
+
+/* =========================
+   MAKE PATTERNS USE
+   THE TRANSPARENCY SETTING
+========================= */
+
+body.bg-style-grid::before,
+body.bg-style-dots::before,
+body.bg-style-scanlines::before {
+
+    opacity:
+        var(--checker-opacity);
+
+    transition:
+        opacity 0.3s ease;
+
+}
