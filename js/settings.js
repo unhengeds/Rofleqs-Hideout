@@ -2207,3 +2207,80 @@ document.addEventListener(
 
     }
 );
+
+const konamiCode = [
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight"
+];
+
+if (!window.dougKeySequence) {
+    window.dougKeySequence = [];
+}
+
+window.dougKeySequence.push(event.key);
+
+// Keep only the most recent keys
+if (window.dougKeySequence.length > konamiCode.length) {
+    window.dougKeySequence.shift();
+}
+
+// Check for the full code
+if (
+    window.dougKeySequence.length === konamiCode.length &&
+    window.dougKeySequence.every(
+        (key, index) => key === konamiCode[index]
+    )
+) {
+
+    window.dougKeySequence = [];
+
+    const doug = document.createElement("img");
+
+    doug.src = "assets/doug.png";
+
+    doug.style.position = "fixed";
+    doug.style.width = "100px";
+    doug.style.height = "100px";
+    doug.style.objectFit = "contain";
+    doug.style.pointerEvents = "none";
+    doug.style.zIndex = "999999";
+    doug.style.left = "0px";
+    doug.style.top = "0px";
+
+    document.body.appendChild(doug);
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    let dougX = mouseX;
+    let dougY = mouseY;
+
+    document.addEventListener("mousemove", (event) => {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+    });
+
+    function followCursor() {
+
+        // Lower number = more lag
+        dougX += (mouseX - dougX) * 0.08;
+        dougY += (mouseY - dougY) * 0.08;
+
+        doug.style.transform =
+            `translate(${dougX - 50}px, ${dougY - 50}px)`;
+
+        requestAnimationFrame(followCursor);
+
+    }
+
+    followCursor();
+
+}
