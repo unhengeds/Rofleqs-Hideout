@@ -1491,6 +1491,75 @@
                     </div>
 
                 </article>
+
+                <!-- FNAFWORLD -->
+                <article
+                    class="game-card"
+                    data-game-id="world"
+                    data-game-name="world"
+                    data-game-version=""
+                    data-game-url="games/world/index.html"
+                    onclick="launchGame('games/world/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/world"
+                            alt="Fnaf World"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add World to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'world'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            FNAF World
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/world/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
                 
             </div>
 
