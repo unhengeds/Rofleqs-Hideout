@@ -3015,3 +3015,389 @@ document
 
 
 applyExtraSettings();
+
+/* =========================================================
+   DOUG / KONAMI CODE
+   ↑ ↑ ↓ ↓ ← → ← →
+========================================================= */
+
+const dougKonamiCode = [
+
+    "ArrowUp",
+    "ArrowUp",
+
+    "ArrowDown",
+    "ArrowDown",
+
+    "ArrowLeft",
+    "ArrowRight",
+
+    "ArrowLeft",
+    "ArrowRight"
+
+];
+
+
+let dougKonamiIndex = 0;
+
+let doug = null;
+
+
+/* =========================================================
+   DOUG POSITION
+========================================================= */
+
+let dougTargetX = 0;
+let dougTargetY = 0;
+
+let dougX = 0;
+let dougY = 0;
+
+
+/* =========================================================
+   CURSOR TRACKING
+========================================================= */
+
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        dougTargetX =
+            event.clientX;
+
+        dougTargetY =
+            event.clientY;
+
+    }
+);
+
+
+/* =========================================================
+   CREATE DOUG
+========================================================= */
+
+function createDoug() {
+
+    /*
+        Don't create multiple Dougs
+        if the code is entered again.
+    */
+
+    if (doug) {
+        return;
+    }
+
+
+    doug =
+        document.createElement(
+            "img"
+        );
+
+
+    /*
+        Doug's image.
+        
+        Your file is:
+        
+        assets/doug.png
+    */
+
+    doug.src =
+        "assets/doug.png";
+
+
+    doug.alt =
+        "";
+
+
+    doug.id =
+        "doug";
+
+
+    doug.draggable =
+        false;
+
+
+    /* =====================================================
+       DOUG STYLE
+    ===================================================== */
+
+    doug.style.position =
+        "fixed";
+
+
+    doug.style.left =
+        "0px";
+
+
+    doug.style.top =
+        "0px";
+
+
+    doug.style.width =
+        "80px";
+
+
+    doug.style.height =
+        "80px";
+
+
+    doug.style.objectFit =
+        "contain";
+
+
+    /*
+        Doug shouldn't block
+        buttons or other elements.
+    */
+
+    doug.style.pointerEvents =
+        "none";
+
+
+    /*
+        Put Doug above everything.
+    */
+
+    doug.style.zIndex =
+        "999999";
+
+
+    doug.style.userSelect =
+        "none";
+
+
+    doug.style.webkitUserDrag =
+        "none";
+
+
+    /*
+        Let the browser optimize
+        the smooth movement.
+    */
+
+    doug.style.willChange =
+        "transform";
+
+
+    /*
+        Make sure Doug doesn't
+        have an accidental border.
+    */
+
+    doug.style.border =
+        "none";
+
+
+    /*
+        Prevent the image from
+        creating weird inline spacing.
+    */
+
+    doug.style.display =
+        "block";
+
+
+    document.body.appendChild(
+        doug
+    );
+
+
+    /* =====================================================
+       INITIAL POSITION
+    ===================================================== */
+
+    dougX =
+        dougTargetX;
+
+
+    dougY =
+        dougTargetY;
+
+
+    updateDougPosition();
+
+
+    /*
+        Start the smooth following
+        animation.
+    */
+
+    requestAnimationFrame(
+        dougFollowLoop
+    );
+
+}
+
+
+/* =========================================================
+   SMOOTH DOUG FOLLOWING
+========================================================= */
+
+function dougFollowLoop() {
+
+    /*
+        Stop if Doug somehow
+        doesn't exist anymore.
+    */
+
+    if (!doug) {
+        return;
+    }
+
+
+    /*
+        How smoothly Doug follows.
+
+        Smaller:
+            More delayed / floaty.
+
+        Larger:
+            Faster / tighter.
+
+        0.075 gives Doug a noticeable
+        smooth delay behind the cursor.
+    */
+
+    const smoothness =
+        0.075;
+
+
+    dougX +=
+        (
+            dougTargetX -
+            dougX
+        ) *
+        smoothness;
+
+
+    dougY +=
+        (
+            dougTargetY -
+            dougY
+        ) *
+        smoothness;
+
+
+    updateDougPosition();
+
+
+    requestAnimationFrame(
+        dougFollowLoop
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE DOUG POSITION
+========================================================= */
+
+function updateDougPosition() {
+
+    if (!doug) {
+        return;
+    }
+
+
+    /*
+        Doug sits slightly down/right
+        from the actual cursor.
+    */
+
+    const offsetX =
+        18;
+
+
+    const offsetY =
+        18;
+
+
+    doug.style.transform =
+        `translate3d(
+            ${dougX + offsetX}px,
+            ${dougY + offsetY}px,
+            0
+        )`;
+
+}
+
+
+/* =========================================================
+   KONAMI CODE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        /*
+            Only arrow keys count.
+        */
+
+        if (
+            event.key !== "ArrowUp" &&
+            event.key !== "ArrowDown" &&
+            event.key !== "ArrowLeft" &&
+            event.key !== "ArrowRight"
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+            Correct next key.
+        */
+
+        if (
+            event.key ===
+            dougKonamiCode[
+                dougKonamiIndex
+            ]
+        ) {
+
+            dougKonamiIndex++;
+
+
+            /*
+                The entire code has
+                been entered.
+
+                ↑ ↑ ↓ ↓ ← → ← →
+            */
+
+            if (
+                dougKonamiIndex ===
+                dougKonamiCode.length
+            ) {
+
+                /*
+                    Reset so the code can
+                    be entered again later.
+                */
+
+                dougKonamiIndex =
+                    0;
+
+
+                createDoug();
+
+            }
+
+        } else {
+
+            /*
+                Wrong arrow.
+
+                Start the sequence over.
+            */
+
+            dougKonamiIndex =
+                0;
+
+        }
+
+    }
+);
