@@ -1,1 +1,65 @@
-<!DOCTYPE html> <html> <head> <meta charset="UTF-8"> <title>Soccer Random</title> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"> <meta name="generator" content="Construct 3"> <link rel="stylesheet" href="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/style.css" type="text/css"> <script> window.addEventListener("keydown", function(e) { // space and arrow keys if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) { e.preventDefault(); } }, false); </script> </head> <body> <div id="fb-root"></div> <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/box2d.wasm.js"></script> <noscript> <div id="notSupportedWrap"> <h2 id="notSupportedTitle">This content requires JavaScript</h2> <p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p> </div> </noscript> <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/supportcheck.js"></script> <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/offlineclient.js" type="module"></script> <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/main.js" type="module"></script> <script src="https://471058263-725410472258601738.preview.editmysite.com/uploads/b/139890129-510930859892590631/files/scripts/register-sw.js" type="module"></script> <script src="https://s3.amazonaws.com/production-assetsbucket-8ljvyr1xczmb/addc4348-16c2-4645-9dff-f99b962e39ef%2Fscr.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="shortcut icon" href="soccer random.jpg">
+    <title>soccer random | Alexx743</title>
+</head>
+<body>
+
+    <h2>Soccer random</h2>
+
+    <div class="topnav">
+      <a href="games.html">
+      <button title="Games" id="Games" class="divbutton"> Games </button> 
+    </a> 
+  
+      <a href="Apps.html">
+      <button title="Apps" id="Apps" class="divbutton"> Apps</button>
+      </a>
+  
+    <a href="index.html">
+      <button title="home" id="home" class="divbutton">home</button>
+    </a>
+
+    <a href="shooter.html">
+      <button title="shooter" class="divbutton">shooter</button>
+    </a>
+
+    <a href="sports.html">
+      <button title="sports" class="divbutton">Sports</button>
+    </a>
+
+    <a href="cars.html">
+      <button title="cars" class="divbutton">Cars</button>
+    </a>
+    </div>
+
+      <iframe src="https://soccer-random-five.vercel.app"></iframe>
+
+      <button 
+      onclick="iffs('https://soccer-random-five.vercel.app')"
+       class="fullscreen"></button>
+      
+       <script>
+        function iffs(href) {
+      const iframe = document.querySelector("iframe");
+      const stl = iframe.style;
+      stl.border = stl.outline = 'none';
+      stl.width = '100vw';
+      stl.height = '100vh';
+      stl.position = 'fixed';
+      stl.left = stl.right = stl.top = stl.bottom = '0';
+      iframe.src = href;
+      }
+      </script>
+   
+   <script>
+    document.addEventListener("keydown", 
+    async (e) => { if ("`" == e.key) window.parent.window.location.replace("https://google.com/") });
+  </script>
+    
+</body>
+</html>
