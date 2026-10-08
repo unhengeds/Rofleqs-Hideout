@@ -2794,3 +2794,176 @@ input[type="range"] {
 .game-image::before {
     display: none !important;
 }
+
+    /* =========================================================
+       COLLAPSED SIDEBAR
+    ========================================================= */
+
+    .sidebar,
+    .main-content,
+    .topbar {
+
+        transition:
+            width 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+            margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+            left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+
+    body.sidebar-collapsed .sidebar {
+
+        width: 78px;
+    }
+
+
+    body.sidebar-collapsed .sidebar-top {
+
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    body.sidebar-collapsed .logo {
+
+        max-width: 52px;
+        max-height: 52px;
+    }
+
+
+    body.sidebar-collapsed .version,
+    body.sidebar-collapsed .nav-item > span:not(.favorite-count),
+    body.sidebar-collapsed .sidebar-footer {
+
+        display: none;
+    }
+
+
+    body.sidebar-collapsed .logo-container {
+
+        margin-bottom: 24px;
+    }
+
+
+    body.sidebar-collapsed .nav-item {
+
+        justify-content: center;
+        padding: 0;
+    }
+
+
+    body.sidebar-collapsed .nav-icon {
+
+        width: auto;
+    }
+
+
+    body.sidebar-collapsed .favorite-count {
+
+        position: absolute;
+
+        top: 4px;
+        right: 4px;
+
+        min-width: 16px;
+
+        width: 16px;
+        height: 16px;
+
+        padding: 0;
+
+        font-size: 8px;
+    }
+
+
+    body.sidebar-collapsed .main-content {
+
+        margin-left: 78px;
+    }
+
+
+    body.sidebar-collapsed .topbar {
+
+        left: 78px;
+    }
+
+
+    /* =========================================================
+       FAVORITE SORTING
+    ========================================================= */
+
+    .setting-select {
+
+        width: 100%;
+
+        margin-top: 10px;
+
+        padding:
+            9px 34px 9px 11px;
+
+        border:
+            1px solid
+            var(--theme-border);
+
+        border-radius: 7px;
+
+        background:
+            var(--panel2);
+
+        color:
+            var(--text);
+
+        font:
+            inherit;
+
+        font-size:
+            12px;
+
+        cursor:
+            pointer;
+
+        outline:
+            none;
+    }
+
+
+    .setting-select:focus {
+
+        border-color:
+            var(--theme);
+
+        box-shadow:
+            0 0 0 2px
+            var(--theme-soft);
+    }
+
+
+    .setting-select option {
+
+        background:
+            var(--panel);
+
+        color:
+            var(--text);
+    }
+
+
+    @media (max-width: 700px) {
+
+        body.sidebar-collapsed .sidebar {
+
+            width: 100%;
+        }
+
+
+        body.sidebar-collapsed .main-content {
+
+            margin-left: 0;
+        }
+
+
+        body.sidebar-collapsed .topbar {
+
+            left: 0;
+        }
+
+    }
