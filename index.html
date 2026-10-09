@@ -1957,41 +1957,33 @@
     >
 
         <!-- SORA -->
-        <article
-            class="game-card media-card"
-            data-media-id="sora"
-            data-media-name="Sora"
-            data-media-url="media/sora/index.html"
-            onclick="launchMedia('media/sora/index.html')"
+<article
+    class="game-card media-card"
+    data-media-id="sora"
+    data-media-name="Sora"
+    data-media-url="https://sora.com/"
+    onclick="launchMedia('https://sora.com/')"
+>
+    <div class="game-image media-image">
+        <img src="assets/sora" alt="Sora">
+
+    </div>
+
+    <div class="game-info">
+        <div class="game-title">Sora</div>
+
+        <div class="game-meta">Media</div>
+
+        <button
+            type="button"
+            class="play-small"
+            onclick="event.stopPropagation(); launchMedia('https://sora.com/')"
         >
-
-            <div class="game-image media-image">
-                <img
-                    src="assets/sora"
-                    alt="Sora"
-                >
-            </div>
-
-            <div class="game-info">
-                <div class="game-title">
-                    Sora
-                </div>
-
-                <div class="game-meta">
-                    Media
-                </div>
-
-                <button
-                    type="button"
-                    class="play-small"
-                    onclick="event.stopPropagation(); launchMedia('media/sora/index.html')"
-                >
-                    ▶ OPEN
-                </button>
-            </div>
-
-        </article>
-
+            ▶ OPEN
+        </button>
+    </div>
+</article>
+        
     </div>
 </section>
 
