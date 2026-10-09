@@ -730,7 +730,28 @@
                 </div>
 
             </div>
+            
+            <!-- Games Search Bar -->
+<div class="games-search">
+    <span class="search-icon">⌕</span>
+    <input
+        type="search"
+        id="gamesSearch"
+        placeholder="Search games..."
+        autocomplete="off"
+        aria-label="Search games"
+    >
+    <button
+        type="button"
+        id="clearGamesSearch"
+        aria-label="Clear search"
+        title="Clear search"
+    >×</button>
+</div>
 
+<p id="gamesSearchEmpty" hidden>
+    No games found. Try another search.
+</p>
 
             <div
                 class="games-grid"
