@@ -2967,3 +2967,85 @@ input[type="range"] {
         }
 
     }
+
+/* =========================================================
+   GAMES SEARCH BAR
+========================================================= */
+
+.games-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 0 24px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    background: var(--panel, #100606);
+    border: 1px solid var(--theme-border, #392020);
+    border-radius: 10px;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.games-search:focus-within {
+    border-color: var(--theme, #e3262e);
+    box-shadow: 0 0 0 3px
+        var(--theme-soft, rgba(227, 38, 46, 0.12));
+}
+
+.games-search .search-icon {
+    color: var(--muted, #9a8585);
+    font-size: 25px;
+    line-height: 1;
+}
+
+.games-search input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 0;
+
+    color: var(--text, #ffffff);
+    background: transparent;
+    border: none;
+    outline: none;
+
+    font: inherit;
+    font-size: 14px;
+}
+
+.games-search input::placeholder {
+    color: var(--muted, #9a8585);
+}
+
+.games-search button {
+    display: none;
+    padding: 4px 6px;
+
+    color: var(--muted, #9a8585);
+    background: transparent;
+    border: none;
+
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.games-search button.visible {
+    display: block;
+}
+
+.games-search button:hover {
+    color: var(--text, #ffffff);
+}
+
+#gamesSearchEmpty {
+    margin: 0 0 20px;
+    color: var(--muted, #9a8585);
+    font-size: 14px;
+}
+
+#gamesSearchEmpty[hidden] {
+    display: none;
+}
