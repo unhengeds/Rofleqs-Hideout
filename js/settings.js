@@ -3467,3 +3467,35 @@ document.addEventListener(
         initializeGamesSearch();
     }
 })();
+
+/* =========================================================
+   MEDIA LAUNCHER
+========================================================= */
+
+function launchMedia(mediaUrl) {
+    const openInBlank =
+        typeof getSetting === "function"
+            ? getSetting("rofleqHideoutOpenInBlank", true)
+            : true;
+
+    if (openInBlank) {
+        const tab = window.open("about:blank", "_blank");
+
+        if (tab) {
+            const iframe = tab.document.createElement("iframe");
+
+            iframe.src = new URL(mediaUrl, window.location.href).href;
+            iframe.style.cssText =
+                "position:fixed;inset:0;width:100%;height:100%;border:0;";
+
+            tab.document.body.style.cssText =
+                "margin:0;overflow:hidden;background:#000;";
+
+            tab.document.body.appendChild(iframe);
+        } else {
+            window.location.href = mediaUrl;
+        }
+    } else {
+        window.location.href = mediaUrl;
+    }
+}
