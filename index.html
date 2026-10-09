@@ -1561,6 +1561,75 @@
 
                 </article>
 
+                <!-- FNAF1 -->
+                <article
+                    class="game-card"
+                    data-game-id="fnaf1"
+                    data-game-name="fnaf1"
+                    data-game-version=""
+                    data-game-url="games/fnaf1/index.html"
+                    onclick="launchGame('games/fnaf1/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/fnaf1"
+                            alt="fnaf1"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add FNAF 1 to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'fnaf1'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            FNAF 1
+                        </div>
+
+
+                        <div class="game-meta">
+                            
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/fnaf1/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
                 <!-- FNAF2 -->
                 <article
                     class="game-card"
