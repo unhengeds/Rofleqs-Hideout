@@ -3401,3 +3401,69 @@ document.addEventListener(
 
     }
 );
+
+/* =========================================================
+   GAMES-ONLY SEARCH
+========================================================= */
+
+(function () {
+    function initializeGamesSearch() {
+        const searchInput = document.getElementById("gamesSearch");
+        const clearButton = document.getElementById("clearGamesSearch");
+        const gamesGrid = document.getElementById("gamesGrid");
+        const emptyMessage = document.getElementById("gamesSearchEmpty");
+
+        if (!searchInput || !gamesGrid) return;
+
+        function filterGames() {
+            const query = searchInput.value.trim().toLowerCase();
+
+            const gameCards = gamesGrid.querySelectorAll(".game-card");
+            let visibleCount = 0;
+
+            gameCards.forEach(function (card) {
+                const name = (
+                    card.dataset.gameName ||
+                    card.querySelector(".game-title")?.textContent ||
+                    ""
+                ).toLowerCase();
+
+                const matches = name.includes(query);
+
+                card.hidden = !matches;
+
+                if (matches) visibleCount++;
+            });
+
+            if (emptyMessage) {
+                emptyMessage.hidden = visibleCount !== 0;
+            }
+
+            if (clearButton) {
+                clearButton.classList.toggle(
+                    "visible",
+                    searchInput.value.length > 0
+                );
+            }
+        }
+
+        searchInput.addEventListener("input", filterGames);
+
+        if (clearButton) {
+            clearButton.addEventListener("click", function () {
+                searchInput.value = "";
+                filterGames();
+                searchInput.focus();
+            });
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeGamesSearch
+        );
+    } else {
+        initializeGamesSearch();
+    }
+})();
