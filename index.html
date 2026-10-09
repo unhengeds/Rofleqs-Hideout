@@ -827,6 +827,75 @@
 
                 </article>
 
+                 <!-- TUFFCLIENT -->
+                <article
+                    class="game-card"
+                    data-game-id="tuff"
+                    data-game-name="tuff"
+                    data-game-version="tuff"
+                    data-game-url="games/tuff/index.html"
+                    onclick="launchGame('games/tuff-1.9.4/index.html')"
+                >
+
+                    <div class="game-image">
+
+                        <img
+                            src="assets/tuff"
+                            alt="tuff"
+                            class="minecraft-thumbnail"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            aria-label="Add tuff to favorites"
+                            title="Add to favorites"
+                            onclick="
+                                event.stopPropagation();
+                                toggleFavorite(
+                                    'tuff'
+                                );
+                            "
+                        >
+                            ☆
+                        </button>
+
+
+                        <div class="red-accent"></div>
+
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <div class="game-title">
+                            Tuff Client
+                        </div>
+
+
+                        <div class="game-meta">
+                            1.12.2
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="play-small"
+                            onclick="
+                                event.stopPropagation();
+                                launchGame(
+                                    'games/tuff/index.html'
+                                );
+                            "
+                        >
+                            ▶ PLAY
+                        </button>
+
+                    </div>
+
+                </article>
+
                 <!-- RETROBOWL -->
 <article
     class="game-card"
