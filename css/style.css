@@ -3049,3 +3049,10 @@ input[type="range"] {
 #gamesSearchEmpty[hidden] {
     display: none;
 }
+
+/* Hide the browser's default search clear button */
+#gamesSearch::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
